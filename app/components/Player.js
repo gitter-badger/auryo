@@ -2,13 +2,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+class Player extends React.Component {
 
-class Player extends Component {
-  render() {
-    return (
-      <h5>Player comes here</h5>
-    );
+  render(){
+      return (
+          <h1>Player will come here</h1>
+      );
   }
+
 }
 
 export default Player;

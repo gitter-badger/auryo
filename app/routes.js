@@ -10,9 +10,9 @@ import PlaylistPage from './containers/PlaylistPage';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={FeedPage} />
-    <Route path="/chart" component={ChartPage} />
-    <Route path="/likes" component={LikesPage} />
-    <Route path="/playlists" component={PlaylistPage} />
+    <IndexRoute name="feed" component={FeedPage} />
+    <Route name="chart" path="/chart" component={ChartPage} />
+    <Route name="likes" path="/likes" component={LikesPage} />
+    <Route name="playlists" path="/playlists" component={PlaylistPage} />
   </Route>
 );

@@ -24,9 +24,6 @@ config.get('access_token', function(err, token) {
 
     soundcloud.initialize(token);
 
-    console.log(soundcloud.makeRequest("/me"));
-
-
     render(
         <Provider store={store}>
             <Router history={history} routes={routes} />

@@ -1,4 +1,5 @@
 import {app, BrowserWindow, Menu, shell, protocol} from 'electron';
+import {CLIENT_ID} from './constants/Config';
 var config = require('./utils/config');
 
 
@@ -57,7 +58,7 @@ function doLogin() {
     });
 
     loginWindow.on('close', app.quit);
-    loginWindow.loadURL('https://soundcloud.com/connect?client_id=f17c1d67b83c86194fad2b1948061c9e&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
+    loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
 }
 
 function init() {
