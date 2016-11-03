@@ -1,42 +1,46 @@
 import {CLIENT_ID} from '../constants/Config';
-var rp = 'request-promise';
-import SC from 'soundcloud';
+import {CHART_SORT_TYPE} from '../constants/Soundcloud';
 import React from 'react';
 
-var SoundCloud = React.createClass({
-    _endpoint: 'http://api.soundcloud.com/',
-    _token: undefined,
-    _clientId: undefined,
+var SoundCloud = function () {
 
-    _init: function (token) {
-        this._token = token;
-        this._clientId = CLIENT_ID;
-    }
-});
+    this._endpoint = 'http://api.soundcloud.com/';
+    this._v2_endpoint = "https://api-v2.soundcloud.com/";
+    this._token = undefined;
+    this._clientId = undefined;
 
-
-SoundCloud.prototype.makeRequest = function (url, options) {
-    var self = this;
-    options = options || {};
-
-    if (typeof url === 'object')
-        options = url;
-    else if (typeof url === 'string' && url.indexOf('://') === -1)
-        options.url = this._endpoint + url;
-    else if (typeof url === 'string' && url.indexOf('://') !== -1)
-        options.url = url;
-
-    var defaults = {
-        'method': 'GET',
-        'json': true,
-        'qs': _.defaults(options.qs || {}, {
-            'client_id': self._clientId,
-            'oauth_token': self._token,
-            'limit': 50
-        })
-    };
-
-    options = _.defaults(options, defaults);
-
-    return rp(options)
 };
+
+SoundCloud.prototype.initialize = function (token) {
+    this._token = token;
+    this._clientId = CLIENT_ID;
+};
+
+SoundCloud.prototype.getChartsUrl = function (genre, sort = "top") {
+    return this._v2_endpoint + "charts?kind=" + sort + "&genre=soundcloud:genres:" + genre + "&client_id=" + this._clientId
+};
+
+SoundCloud.prototype.getFeedUrl = function (limit = 25) {
+    return this._endpoint + "me/activities?limit=" + limit + "&oauth_token=" + this._token
+};
+
+SoundCloud.prototype.getLikesUrl = function () {
+    return this._endpoint + "me/favorites?oauth_token=" + this._token;
+};
+
+SoundCloud.prototype.getPlaylistUrl = function () {
+    return this._endpoint + "me/playlists?oauth_token=" + this._token;
+};
+
+SoundCloud.prototype.getRelatedUrl = function (trackID) {
+    return this._endpoint + "tracks/" + trackID + "/related?client_id=" + this._clientId;
+};
+
+/*
+ SoundCloud.prototype.toggleLikeTrack = function(track) {
+ var method = track.user_favorite ? 'DELETE' : 'PUT';
+ return this.makeRequest('me/favorites/' + track.id, { method : method });
+ }
+ */
+
+module.exports = new SoundCloud();

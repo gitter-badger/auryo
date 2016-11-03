@@ -1,41 +1,45 @@
 'use strict';
 
-var app = require('electron').app;
-var fs  = require('fs');
+import {app} from 'electron';
+var fs = require('fs');
 
 var CONFIG_FILE = app.getPath('userData') + '/config.json';
 
-exports.set = function(key, value, callback) {
+class Config {
 
-    var data = {};
-    data[key] = value;
+    static set = function (key, value, callback) {
 
-    fs.writeFile(CONFIG_FILE, JSON.stringify(data), function(err) {
-        if (err)
-            return callback(err);
+        var data = {};
+        data[key] = value;
 
-        callback(null);
-    });
+        fs.writeFile(CONFIG_FILE, JSON.stringify(data), function (err) {
+            if (err)
+                return callback(err);
 
-};
+            callback(null);
+        });
 
-exports.get = function(key, callback) {
+    };
+    static get = function (key, callback) {
 
-    fs.readFile(CONFIG_FILE, function(err, data) {
+        fs.readFile(CONFIG_FILE, function (err, data) {
 
-        if (err) {
-            switch (err.code) {
-                // if the config file doesn't exist, we asssume undefined for the key value
-                case 'ENOENT':
-                    return callback(null, undefined);
-                default:
-                    return callback(err);
+            if (err) {
+                switch (err.code) {
+                    // if the config file doesn't exist, we asssume undefined for the key value
+                    case 'ENOENT':
+                        return callback(null, undefined);
+                    default:
+                        return callback(err);
+                }
             }
-        }
 
-        data = JSON.parse(data);
+            data = JSON.parse(data);
 
-        return callback(null, data[key]);
-    })
+            return callback(null, data[key]);
+        })
 
+    }
 }
+
+export default Config;
