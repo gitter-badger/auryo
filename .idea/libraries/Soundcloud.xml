@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Soundcloud" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="node_modules" />
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/app/node_modules/soundcloud" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/node_modules/soundcloud" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
