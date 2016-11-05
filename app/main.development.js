@@ -291,8 +291,8 @@ function init() {
                 }
             }]
         }];
-        menu = Menu.buildFromTemplate(template);
-        mainWindow.setMenu(menu);
+        /*menu = Menu.buildFromTemplate(template);*/
+        mainWindow.setMenu(null);
     }
 }
 

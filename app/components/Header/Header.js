@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 class Header extends Component {
     render() {
         return (
-            <nav className="navbar navbar-dark">
+            <nav className="navbar navbar-dark navbar-fixed-top">
                 <button className="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
                     ☰
                 </button>
