@@ -15,18 +15,18 @@ class App extends Component {
 
 
     render() {
-        const {auth} = this.props;
+        const {user} = this.props;
         return (
             <div>
                 <Header />
                 <div id="main">
-                    <SideBar auth={auth}/>
+                    <SideBar user={user}/>
                     <div className="main clearfix">
                         {this.props.children}
                     </div>
 
                 </div>
-                <footer className="container-fluid navbar-fixed-bottom">
+                <footer className="navbar-fixed-bottom">
                     <PlayerContainer/>
                 </footer>
             </div>
@@ -37,14 +37,14 @@ class App extends Component {
 
 App.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    children: PropTypes.element.isRequired,
-    auth: PropTypes.object.isRequired
+    children: PropTypes.element.isRequired
 };
 
 function mapStateToProps(state) {
     const {auth} = state;
+    const {user} = auth;
     return {
-        auth
+        user
     }
 }
 

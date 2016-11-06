@@ -29,6 +29,7 @@ class User extends Component {
 
     render() {
         const {user} = this.props;
+
         return (
             <div className="user">
                 <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>

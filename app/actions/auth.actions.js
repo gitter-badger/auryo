@@ -51,7 +51,7 @@ export function fetchUser() {
 
 export function fetchSongsIfNeeded(playlist) {
     return (dispatch, getState) => {
-        const { playlists } = getState();
+        const {playlists} = getState();
         if (shouldFetchSongs(playlists, playlist)) {
             const nextUrl = playlists[playlist].nextUrl;
             return dispatch(fetchSongs(nextUrl, playlist));
@@ -63,7 +63,7 @@ export function fetchSongsIfNeeded(playlist) {
 
 function shouldFetchSongs(playlists, playlist) {
     const activePlaylist = playlists[playlist];
-    if (!activePlaylist || !activePlaylist.isFetching && (activePlaylist.nextUrl !== null)) {
+    if (activePlaylist && (activePlaylist.nextUrl !== null) && !activePlaylist.isFetching) {
         return true;
     }
 
@@ -154,13 +154,27 @@ export function fetchSongs(url, playlist) {
                 if (json.future_href) {
                     futureUrl = SC.appendToken(json.future_href);
                 }
-
                 const collection = json.collection
-                    .filter(song => (song.track && song.track.kind === 'track') && song.track.streamable);
+                    .map(song => {
+                        var track = song.track;
+                        if(track){
+                            track.from = song.user;
+                            track.activity_type = song.type;
+
+                            return track;
+                        }
+
+                        return null;
+
+                    })
+                    .filter(track => (track && track.kind === 'track') && track.streamable);
 
                 const normalized = normalize(collection, arrayOf(trackInfoSchema));
 
-                dispatch(recievePlaylist(normalized.entities, normalized.result, playlist, nextUrl, futureUrl));
+                dispatch(recievePlaylist({
+                    tracks: normalized.entities.track_info,
+                    users: normalized.entities.users,
+                }, normalized.result, playlist, nextUrl, futureUrl));
 
             }).catch(err => {
                 throw err;
@@ -226,6 +240,7 @@ function fetchPlaylists() {
         fetch(SC.getPlaylistUrl())
             .then(response => response.json())
             .then(json => {
+
                 const normalized = normalize(json, arrayOf(playlistSchema));
                 dispatch(receivePlaylists(normalized.result, normalized.entities));
 

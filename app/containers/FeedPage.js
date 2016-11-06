@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader/PageHeader';
 import {PLAYLISTS} from '../constants/playlist'
 import { connect } from 'react-redux';
 import {fetchSongsIfNeeded} from '../actions/auth.actions';
+import {getPlayingSongId} from '../utils/PlayerUtils';
 
 
 class FeedPage extends Component {
@@ -21,15 +22,17 @@ class FeedPage extends Component {
 }
 
 function mapStateToProps(state) {
-    const {auth,entities,playlists,environment} = state;
+    const {auth,entities,playlists,environment,player} = state;
     const playlist = PLAYLISTS.STREAM;
-    const {tracks, track_info, users} = entities;
+    const {tracks, users} = entities;
     const { height } = environment;
+    const playingSongId = getPlayingSongId(player, playlists);
+
     return {
         auth,
         height,
         tracks,
-        track_info,
+        playingSongId,
         users,
         playlist,
         playlists,

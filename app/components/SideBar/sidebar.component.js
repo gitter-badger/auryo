@@ -9,8 +9,7 @@ import User from './User/user.component';
 
 class SideBar extends Component {
     render() {
-        const {auth} = this.props;
-        const {user} = auth;
+        const {user} = this.props;
         return (
             <aside className="sidebar-offcanvas" id="sidebar" role="navigation">
                 <User user={user}/>
@@ -21,7 +20,7 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
-    auth: PropTypes.object.isRequired
+    user: PropTypes.object.isRequired
 };
 
 export default SideBar;

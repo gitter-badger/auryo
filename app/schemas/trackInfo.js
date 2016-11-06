@@ -1,12 +1,11 @@
 import { Schema } from 'normalizr';
 import userSchema from './user';
-import trackSchema from './track';
 
-const trackInfoSchema = new Schema('track_info', { idAttribute: 'uuid' });
+const trackInfoSchema = new Schema('track_info');
 
 trackInfoSchema.define({
     user: userSchema,
-    track: trackSchema
+    from: userSchema
 });
 
 export default trackInfoSchema;

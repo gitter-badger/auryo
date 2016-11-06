@@ -1,7 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
 
 const initialState = {
-    user: null,
+    user: {},
     following: {},
     likes: {},
     playlists: [],

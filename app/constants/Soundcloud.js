@@ -38,6 +38,9 @@ export const CHART_SORT_TYPE = [
 ];
 
 export const IMAGE_SIZES = {
+    XSMALL: 't50x50',
+    SMALL: 'large',
+    MEDIUM:'t200x200',
     LARGE: 't300x300',
     XLARGE: 't500x500',
 };

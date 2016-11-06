@@ -16,6 +16,8 @@
     "electron-cookies": "^1.1.0",
     "lodash": "^4.16.6",
     "normalizr": "^2.2.1",
+    "react-addons-pure-render-mixin": "^15.3.2",
+    "react-blur": "^0.5.1",
     "react-lazyload": "^2.1.6",
     "redux-logger": "^2.7.4",
     "source-map-support": "^0.4.3"

@@ -5,11 +5,13 @@ import auth from './auth.reducer';
 import playlists from './playlist.reducer';
 import entities from './entities.reducer';
 import environment from './environment.reducer';
+import player from './player.reducer';
 
 export default combineReducers({
     auth,
     playlists,
     entities,
     environment,
+    player,
     routing
 });

@@ -1,9 +1,12 @@
 import {initAuth} from './auth.actions';
-import {playTrack} from './player.actions';
+import {playTrack, toggleIsPlaying, changeCurrentTime, changeSong} from './player.actions';
 import {initEnvironment} from './environment.actions';
 
 export {
-    initAuth,
-    playTrack,
-    initEnvironment
+  initAuth,
+  playTrack,
+  initEnvironment,
+  toggleIsPlaying,
+  changeCurrentTime,
+  changeSong
 };

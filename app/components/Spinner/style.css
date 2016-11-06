@@ -1,22 +1,40 @@
 .loadingWrapper{
     display: block;
-    width: 100%;
+    max-width: 100%;
     padding: 20px;
     position: relative;
 }
+.loadingWrapper.loading_box{
+    margin-bottom: 20px;
+}
+.loading_box{
+    box-sizing:border-box;
+}
+.loading_box .loading_inner{
 
+    background: #f7f7f7;
+    height: 260px;
+    width: 260px;
+    position: relative;
+    margin: 0 auto;
+}
+.loading_box .loading li{
+    animation: none;
+}
 .loading {
-    top: 50%;
-    left: 50%;
-    width: 51px;
-    height: 15px;
+    width: 50px;
+    height: 50%;
     position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: 50% auto auto calc(50% - 25px);
 }
 
 .loading:last-child{
-    -webkit-transform: rotate(180deg);
-    margin-top: -15px;
-    margin-left: 2px;
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+    margin-top:0;
+    margin-left: calc(50% - 22px);
+
 }
 
 @keyframes loading {

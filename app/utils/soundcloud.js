@@ -16,8 +16,8 @@ export function getChartsUrl(genre, sort = "top") {
     return _v2_endpoint + "charts?kind=" + sort + "&genre=soundcloud:genres:" + genre + "&client_id=" + CLIENT_ID
 }
 
-export function getFeedUrl(limit = 25) {
-  return  _endpoint + "e1/me/stream.json?&limit=" + limit + "&oauth_token=" + _token;
+export function getFeedUrl(limit = 50) {
+  return  _endpoint + "e1/me/stream.json?limit=" + limit + "&oauth_token=" + _token;
     //return _v2_endpoint + "stream?limit=" + limit + "&oauth_token=" + _token;
     //return _endpoint + "me/activities?limit=" + limit + "&oauth_token=" + _token
 }
@@ -46,6 +46,10 @@ export function appendToken(url){
     return url + "&oauth_token=" + _token;
 }
 
+export function appendClientId(url){
+    return url + "?client_id=" + CLIENT_ID;
+}
+
 export function getImageUrl(s, size = null) {
     let str = s;
     if (!str) {
@@ -59,6 +63,12 @@ export function getImageUrl(s, size = null) {
             return str.replace('large', IMAGE_SIZES.LARGE);
         case IMAGE_SIZES.XLARGE:
             return str.replace('large', IMAGE_SIZES.XLARGE);
+        case IMAGE_SIZES.MEDIUM:
+            return str.replace('large', IMAGE_SIZES.MEDIUM);
+        case IMAGE_SIZES.XSMALL:
+            return str.replace('large', IMAGE_SIZES.XSMALL);
+        case IMAGE_SIZES.SMALL:
+            return str;
         default:
             return str;
     }
