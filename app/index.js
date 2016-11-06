@@ -7,25 +7,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 import configureStore from './store/configureStore';
 import './assets/css/app.global.css';
-import {remote} from 'electron';
-var config = remote.require('./utils/config');
-import {initialize} from './utils/soundcloud';
+
 
 const store = configureStore();
 
 const history = syncHistoryWithStore(hashHistory, store);
-
-config.get('access_token', function(err, token) {
-
-    if (err)
-        throw err;
-
-    if (!token)
-        throw new Error('Refusing to initialize application, authentication token not found.')
-
-    initialize(token,store);
-
-});
 
 render(
     <Provider store={store}>

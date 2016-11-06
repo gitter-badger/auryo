@@ -1,22 +1,40 @@
 // @flow
-import React, {Component} from 'react';
-import classNames from 'classnames';
-import Soundcloud from '../utils/soundcloud';
+import React, {Component,PropTypes} from 'react';
 import Feed from '../components/Feed';
 import PageHeader from '../components/PageHeader/PageHeader';
-import configureStore from '../store/configureStore';
-import * as actions from '../actions';
+import {PLAYLISTS} from '../constants/playlist'
+import { connect } from 'react-redux';
+import {fetchSongsIfNeeded} from '../actions/auth.actions';
 
 
-export default class FeedPage extends Component {
+class FeedPage extends Component {
 
     render() {
 
         return (
             <div>
                 <PageHeader title="Stream"/>
-                <Feed />
+                <Feed {...this.props}/>
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    const {auth,entities,playlists,environment} = state;
+    const playlist = PLAYLISTS.STREAM;
+    const {tracks, track_info, users} = entities;
+    const { height } = environment;
+    return {
+        auth,
+        height,
+        tracks,
+        track_info,
+        users,
+        playlist,
+        playlists,
+        scrollFunc: fetchSongsIfNeeded.bind(null, playlist)
+    }
+}
+
+export default connect(mapStateToProps)(FeedPage);

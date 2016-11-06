@@ -1,8 +1,9 @@
-import {auth} from './AuthActions';
-import {setTracks, playTrack} from './track';
+import {initAuth} from './auth.actions';
+import {playTrack} from './player.actions';
+import {initEnvironment} from './environment.actions';
 
 export {
-    auth,
-    setTracks,
-    playTrack
+    initAuth,
+    playTrack,
+    initEnvironment
 };

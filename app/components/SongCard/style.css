@@ -1,5 +1,7 @@
 .track {
     padding: 0 20px 25px 0;
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 .playButton {
@@ -60,6 +62,7 @@
     transform: translateY(-5px);
     -webkit-transform: translateY(-5px);
     max-width: 100%;
+    min-height: 200px;
 }
 
 .imageWrapper {
@@ -89,6 +92,25 @@
 
 .trackTitle {
     font-weight: 500;
+}
+.trackTitle a {
+    color:#000;
+}
+.trackArtist{
+    font-size: 0.96em;
+}
+.trackArtist a{
+    color: #6e727d;
+}
+.repost{
+
+    opacity: 0.7;
+}
+.trackArtist i{
+    padding: 5px;
+}
+.trackArtist *{
+    vertical-align: middle;
 }
 
 .trackGenre {
@@ -147,21 +169,4 @@
     text-transform: uppercase;
     border-radius: 8px;
     float: right;
-}
-
-.trackHeader {
-    padding: 5px 5px 5px 0;
-}
-
-.trackHeader i {
-    padding: 5px;
-}
-
-.trackHeader .typeTrack a {
-    padding-right: 5px;
-}
-
-.trackHeader * {
-    display: inline-block;
-    vertical-align: middle;
 }

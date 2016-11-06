@@ -1,69 +1,43 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
-import {CLIENT_ID} from '../../constants/Config';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as actions from '../../actions';
-import SongCard from '../../components/SongCard';
+import SongCards from '../../components/SongCards';
+import Spinner from '../../components/Spinner';
 
 class Feed extends Component {
 
+    /*componentWillMount() {
+     const { dispatch, playlist, playlists } = this.props;
+     if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
+     dispatch(fetchSongsIfNeeded(playlist));
+     }
+     }
+
+     componentWillReceiveProps(nextProps) {
+     const { dispatch, playlist, playlists } = this.props;
+     if (playlist !== nextProps.playlist) {
+     if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
+     dispatch(fetchSongsIfNeeded(nextProps.playlist));
+     }
+     }
+     }*/
+
     render() {
 
-        const {publisher_metadata, track, track_info, users, trackIds, activeTrackId, playSong} = this.props;
-
         return (
-            <div className="row">
-                {
-                    trackIds.map((key) => {
-
-                        const info = track_info[key];
-                        const t = track[info.track];
-                        info.from = users[info.user];
-                        const publisher = publisher_metadata[t.urn];
-
-                        t.t_info = info;
-                        t.user = users[t.user_id];
-                        t.publisher_metadata = publisher;
-
-                        const playing = ((activeTrackId != null) && (activeTrackId.id == t.id));
-                        return (
-                            <SongCard key={key} track={t} isPlaying={playing}
-                                      playSong={playSong}/>
-                        );
-                    })
-                }
-            </div>
+            <SongCards {...this.props} />
         );
     }
 }
 
 Feed.propTypes = {
-    publisher_metadata: PropTypes.object,
-    track: PropTypes.object,
-    track_info: PropTypes.object,
-    users: PropTypes.object,
-    trackIds: PropTypes.array,
-    activeTrack: PropTypes.object,
-    onPlay: PropTypes.func
+    auth: PropTypes.object.isRequired,
+    height: PropTypes.number,
+    dispatch: PropTypes.func.isRequired,
+    tracks: PropTypes.object.isRequired,
+    track_info: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired,
+    playlist: PropTypes.object.isRequired,
+    playlists: PropTypes.object.isRequired,
+    scrollFunc: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-    const {trackEntities, trackIds, activeTrackId} = state.track;
-    const publisher_metadata = trackEntities.publisher_metadata;
-    const track = trackEntities.track;
-    const track_info = trackEntities.track_info;
-    const users = trackEntities.users;
-    return {
-        publisher_metadata, track, track_info, users,
-        trackIds,
-        activeTrackId
-    }
-}
-function mapDispatchToProps(dispatch) {
-    return {
-        playSong: bindActionCreators(actions.playTrack, dispatch),
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default Feed;

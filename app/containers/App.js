@@ -3,11 +3,16 @@ import React, {Component, PropTypes} from 'react';
 import Player from '../components/Player';
 import SideBar from '../components/SideBar/SideBar';
 import Header from '../components/Header/Header';
+import * as actions from '../actions';
+import { connect } from 'react-redux';
 
-export default class App extends Component {
-    static propTypes = {
-        children: PropTypes.element.isRequired
-    };
+class App extends Component {
+    componentDidMount(){
+        const { dispatch } = this.props;
+        dispatch(actions.initAuth());
+        dispatch(actions.initEnvironment());
+    }
+
 
     render() {
         return (
@@ -27,3 +32,11 @@ export default class App extends Component {
         );
     }
 }
+
+
+App.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired
+};
+
+export default connect()(App);
