@@ -1,17 +1,15 @@
 // @flow
-import {combineReducers} from 'redux';
-import {routerReducer as routing} from 'react-router-redux';
-import auth from './auth.reducer';
-import playlists from './playlist.reducer';
-import entities from './entities.reducer';
-import environment from './environment.reducer';
-import player from './player.reducer';
+import {combineReducers} from "redux";
+import {routerReducer as routing} from "react-router-redux";
+import user from "./userReducer";
+import playlists from "./playlistReducer";
+import entities from "./entitiesReducer";
+import player from "./playerReducer";
 
 export default combineReducers({
-    auth,
-    playlists,
-    entities,
-    environment,
-    player,
-    routing
+  user,
+  playlists,
+  entities,
+  player,
+  routing
 });

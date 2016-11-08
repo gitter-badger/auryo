@@ -1,172 +1,179 @@
 .track {
-    padding: 0 20px 25px 0;
-    max-width: 280px;
-    margin: 0 auto;
+  padding: 0 20px 25px 0;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
 .playButton {
-    background: #fff;
-    border-radius: 50px;
-    height: 50px;
-    position: absolute;
-    width: 50px;
-    right: 0;
-    bottom: 0;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    text-align: center;
-    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-    transform: scale(0, 0);
-    -webkit-transform: scale(0, 0);
-    opacity: 0;
-    z-index: 4;
+  background: #fff;
+  border-radius: 50px;
+  height: 50px;
+  position: absolute;
+  width: 50px;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  text-align: center;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+  transform: scale(0, 0);
+  -webkit-transform: scale(0, 0);
+  opacity: 0;
+  z-index: 4;
+  cursor: pointer;
 }
 
 .track:hover .playButton, .track.isPlaying .playButton {
-    opacity: 1;
-    transform: scale(1, 1);
-    -webkit-transform: scale(1, 1);
-    transition: 0.2s opacity ease-out, 0.2s transform ease-out;
-    transition-delay: .1s;
+  opacity: 1;
+  transform: scale(1, 1);
+  -webkit-transform: scale(1, 1);
+  transition: 0.2s opacity ease-out, 0.2s transform ease-out;
+  transition-delay: .1s;
 }
 
 .track:hover .trackStats, .track.isPlaying .trackStats {
-    transform: translateY(0);
-    -webkit-transform: translateY(0);
-    transition: 0.1s opacity ease-out, 0.1s transform ease-out;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transition: 0.1s opacity ease-out, 0.1s transform ease-out;
 }
 
 .playButton i {
-    color: #ff3a00;
-    font-size: 25px;
+  color: #ff3a00;
+  font-size: 25px;
 
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
 
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .playButton i.icon-controller-play:before {
-    padding-left: 5px;
-    font-size: 30px;
+  padding-left: 5px;
+  font-size: 30px;
 }
 
 .trackImage {
-    position: relative;
+  position: relative;
 }
 
 .trackImage img {
-    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-    transform: translateY(-5px);
-    -webkit-transform: translateY(-5px);
-    max-width: 100%;
-    min-height: 200px;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+  transform: translateY(-5px);
+  -webkit-transform: translateY(-5px);
+  max-width: 100%;
+  min-height: 200px;
 }
 
 .imageWrapper {
-    overflow: hidden;
-    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-    position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+  position: relative;
 }
 
 .track .imageWrapper:after {
-    content: '';
-    background: black;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    position: absolute;
-    opacity: 0;
-    transition: 0.5s ease;
+  content: '';
+  background: black;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  position: absolute;
+  opacity: 0;
+  transition: 0.5s ease;
 }
 
 .track:hover .imageWrapper:after {
-    opacity: .05;
-    transition: 0.5s ease;
+  opacity: .05;
+  transition: 0.5s ease;
 }
 
 .trackTitle {
-    font-weight: 500;
+  font-weight: 500;
 }
-.trackTitle a {
-    color:#000;
-}
-.trackArtist{
-    font-size: 0.96em;
-}
-.trackArtist a{
-    color: #6e727d;
-}
-.repost{
 
-    opacity: 0.7;
+.trackTitle a {
+  color: #000;
 }
-.trackArtist i{
-    padding: 5px;
+
+.trackArtist {
+  font-size: 0.96em;
 }
-.trackArtist *{
-    vertical-align: middle;
+
+.trackArtist a {
+  color: #6e727d;
+}
+
+.repost {
+
+  opacity: 0.7;
+}
+
+.trackArtist i {
+  padding: 5px;
+}
+
+.trackArtist * {
+  vertical-align: middle;
 }
 
 .trackGenre {
-    position: absolute;
-    left: 0;
-    top: -5px;
-    background: #222326;
-    color: #fff !important;
-    display: inline-block;
-    padding: 6px 10px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-left: -20px;
-    margin-top: 10px;
+  position: absolute;
+  left: 0;
+  top: -5px;
+  background: #222326;
+  color: #fff !important;
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: -20px;
+  margin-top: 10px;
 }
 
 .trackStats {
-    color: #6e727d;
-    font-size: 15px;
-    position: absolute;
-    bottom: 0;
-    background: #fff;
-    width: 100%;
-    z-index: 2;
-    padding: 15px 10px;
-    overflow: hidden;
-    -webkit-transform: translateY(60px);
-    transform: translateY(60px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.105);
-    transition: 0.2s opacity ease-in, 0.2s transform ease-in;
+  color: #6e727d;
+  font-size: 15px;
+  position: absolute;
+  bottom: 0;
+  background: #fff;
+  width: 100%;
+  z-index: 2;
+  padding: 15px 10px;
+  overflow: hidden;
+  -webkit-transform: translateY(60px);
+  transform: translateY(60px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.105);
+  transition: 0.2s opacity ease-in, 0.2s transform ease-in;
 }
 
 .trackStats .stat {
-    display: inline-block;
-    padding-right: 6px;
+  display: inline-block;
+  padding-right: 6px;
 }
 
 .trackStats i {
-    padding-right: 2px;
+  padding-right: 2px;
 }
 
 .trackStats span, .trackStats i {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .trackInfo {
-    padding: 5px 0;
+  padding: 5px 0;
 }
 
 .explicit {
-    background: #f55a57;
-    color: #fff;
-    font-size: 10px;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    border-radius: 8px;
-    float: right;
+  background: #f55a57;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  float: right;
 }

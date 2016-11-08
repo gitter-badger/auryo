@@ -1,3 +1,3 @@
-export const CLIENT_ID = 'f4323c6f7c0cd73d2d786a2b1cdae80c';
+export const CLIENT_ID = 'f17c1d67b83c86194fad2b1948061c9e';
 
 export const STREAM_CHECK_INTERVAL = 60000;

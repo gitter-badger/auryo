@@ -2,6 +2,7 @@
 import React, {Component, PropTypes} from 'react';
 import cn from 'classnames';
 import './user.global.css';
+import {logout} from '../../../actions';
 
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem,Button} from 'reactstrap';
 
@@ -23,12 +24,8 @@ class User extends Component {
         });
     }
 
-    Logout(){
-        console.log("Logout");
-    }
-
     render() {
-        const {user} = this.props;
+        const {me} = this.props;
 
         return (
             <div className="user">
@@ -37,16 +34,16 @@ class User extends Component {
                         <i className="icon-chevron-thin-down"/>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-right">
-                        <DropdownItem onClick={this.Logout}>Logout</DropdownItem>
+                        <DropdownItem onClick={logout}>Logout</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
 
                 <div className="flex">
                     <div className="userImage">
-                        <img src={user.avatar_url}/>
+                        <img src={me.avatar_url}/>
                     </div>
                     <div className="userName">
-                        {user.username}
+                        {me.username}
                     </div>
                 </div>
             </div>
@@ -55,7 +52,7 @@ class User extends Component {
 }
 
 User.propTypes = {
-    user: PropTypes.object.isRequired
+  me: PropTypes.object.isRequired
 };
 
 export default User;

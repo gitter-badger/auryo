@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { hashHistory } from 'react-router';
-import { routerMiddleware, push } from 'react-router-redux';
-import createLogger from 'redux-logger';
-import rootReducer from '../reducers';
-
-import * as actions from '../actions';
+import {createStore, applyMiddleware, compose} from "redux";
+import thunk from "redux-thunk";
+import {hashHistory} from "react-router";
+import {routerMiddleware, push} from "react-router-redux";
+import createLogger from "redux-logger";
+import rootReducer from "../reducers";
+import * as actions from "../actions";
 
 const actionCreators = {
   ...actions,
@@ -32,7 +31,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunk, router, logger)
 );
 
-export default function configureStore(initialState: Object) {
+export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {

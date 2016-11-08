@@ -1,12 +1,14 @@
-import {initAuth} from './auth.actions';
-import {playTrack, toggleIsPlaying, changeCurrentTime, changeSong} from './player.actions';
-import {initEnvironment} from './environment.actions';
+import {initUser, logout} from "./userActions";
+import {fetchMore} from "./playlistActions";
+import {playTrack, toggleStatus, changeTrack, setCurrentTime} from "./playerActions";
+
 
 export {
-  initAuth,
+  initUser,
   playTrack,
-  initEnvironment,
-  toggleIsPlaying,
-  changeCurrentTime,
-  changeSong
+  toggleStatus,
+  setCurrentTime,
+  changeTrack,
+  fetchMore,
+  logout
 };

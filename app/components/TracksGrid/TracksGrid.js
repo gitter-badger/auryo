@@ -1,85 +1,79 @@
-import React, {Component, PropTypes} from 'react';
-import TrackGridItem from '../../components/TrackGridItem/TrackGridItem';
-import {fetchSongsIfNeeded} from '../../actions/auth.actions';
-import {playTrack} from '../../actions';
-import infiniteScroll from '../../components/InfiniteScroll';
-import Spinner from '../Spinner/index';
-import LazyLoad from 'react-lazyload';
+import React, {Component, PropTypes} from "react";
+import TrackGridItem from "../../components/TrackGridItem/TrackGridItem";
+import {fetchMore, playTrack} from "../../actions";
+import infiniteScroll from "../../components/InfiniteScroll";
+import Spinner from "../Spinner/index";
 
 
 class TracksGrid extends Component {
 
-    playTrack(i, e) {
-        e.preventDefault();
-        const {playlist, dispatch} = this.props;
-        dispatch(playTrack(playlist, i));
-    }
+  playTrack(i, e) {
+    e.preventDefault();
+    const {current_playlist, dispatch} = this.props;
+    dispatch(playTrack(i, current_playlist));
+  }
 
-    render() {
+  render() {
 
-        const {
-            auth,
-            dispatch,
-            tracks,
-            users,
-            playlist,
-            playlists,
-            scrollFunc,
-            playingSongId
-        } = this.props;
+    const {
+      user,
+      feedInfo,
+      tracks,
+      playingSongId,
+      users,
+      current_playlist,
+      playlists,
+      dispatch
+    } = this.props;
+    const items = current_playlist in playlists ? playlists[current_playlist].items : [];
+    const isFetching = playlists[current_playlist].isFetching;
+    const scrollFunc = fetchMore.bind(null, current_playlist);
 
-        const items = playlist in playlists ? playlists[playlist].items : [];
-        const isFetching = playlists[playlist].isFetching;
-        // TODO find a good way for lazy loading
+    // TODO find a good way for lazy loading
 
-        return (
-            <div className="songs">
-                <div className="row">
-                    {
+    return (
+      <div className="songs">
+        <div className="row">
+          {
 
-                        items.map((songId, i) => {
+            items.map((uuid, i) => {
+              const info = feedInfo[uuid];
+              const track = tracks[info.track];
+              track.user = users[track.user_id];
+              track.from_user = users[info.user];
+              track.activity_type = info.type;
 
-                            const track = tracks[songId];
+              const playTrackFunc = this.playTrack.bind(this, i);
 
-                            const scrollFunc = fetchSongsIfNeeded.bind(null, playlist);
-                            track.user = users[track.user_id];
-                            track.from_user = users[track.from];
-                            const playTrackFunc = this.playTrack.bind(this, i);
+              return (
 
-                            return (
-                                <LazyLoad
-                                    key={songId + '-' + i}
-                                    height={280}
-                                    offset={280}
-                                    placeholder={<Spinner card={true}/>}>
-                                    <TrackGridItem
-                                        playTrackFunc={playTrackFunc}
-                                        auth={auth}
-                                        dispatch={dispatch}
-                                        isPlaying={track.id === playingSongId}
-                                        scrollFunc={scrollFunc}
+                <TrackGridItem key={track.id + '-' + i}
+                               playTrackFunc={playTrackFunc}
+                               user={user}
+                               dispatch={dispatch}
+                               isPlaying={track.id === playingSongId}
+                               scrollFunc={scrollFunc}
+                               track={track}/>
 
-                                        track={track} />
-                                </LazyLoad>
-                            );
-                        })
-                    }
-                </div>
-                {isFetching ? <Spinner /> : null}
-            </div>
-        );
-    }
+              );
+            })
+          }
+        </div>
+        {isFetching ? <Spinner /> : null}
+      </div>
+    );
+  }
 }
 
 TracksGrid.propTypes = {
-    auth: PropTypes.object.isRequired,
-    height: PropTypes.number,
-    tracks: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    playingSongId: PropTypes.number,
-    users: PropTypes.object.isRequired,
-    playlist: PropTypes.string.isRequired,
-    playlists: PropTypes.object.isRequired,
-    scrollFunc: PropTypes.func.isRequired
+  user: PropTypes.object.isRequired,
+  feedInfo: PropTypes.object.isRequired,
+  tracks: PropTypes.object.isRequired,
+  playingSongId: PropTypes.number,
+  users: PropTypes.object.isRequired,
+  current_playlist: PropTypes.string.isRequired,
+  playlists: PropTypes.object.isRequired,
+  scrollFunc: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 export default infiniteScroll(TracksGrid);

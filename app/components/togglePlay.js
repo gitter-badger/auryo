@@ -1,4 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from "react";
+import Sound from "react-sound";
+import {toggleStatus} from "../actions"
+import {connect} from "react-redux";
 
 class TogglePlayButton extends Component {
   constructor() {
@@ -7,23 +10,20 @@ class TogglePlayButton extends Component {
   }
 
   togglePlay() {
-    const { isPlaying } = this.props;
-    const audioElement = document.getElementById('audio');
-    if (!audioElement) {
-      return;
+    const {status,dispatch} = this.props;
+
+    if(status !== Sound.status.PLAYING){
+      dispatch(toggleStatus(Sound.status.PLAYING));
+    } else if(status == Sound.status.PLAYING){
+      dispatch(toggleStatus(Sound.status.PAUSED));
     }
 
-    if (isPlaying) {
-      audioElement.pause();
-    } else {
-      audioElement.play();
-    }
   }
 
   render() {
-    const { isPlaying } = this.props;
+    const {status} = this.props;
 
-    const icon = isPlaying ? 'icon-controller-paus' : 'icon-controller-play';
+    const icon = (status == Sound.status.PLAYING) ? 'icon-controller-paus' : 'icon-controller-play';
 
     return (
 
@@ -35,7 +35,17 @@ class TogglePlayButton extends Component {
 }
 
 TogglePlayButton.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
+  status: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
-export default TogglePlayButton;
+function mapStateToProps(state) {
+  const {player} = state;
+  const {status} = player;
+
+  return {
+    status,
+  };
+}
+
+export default connect(mapStateToProps)(TogglePlayButton);

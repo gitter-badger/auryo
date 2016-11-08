@@ -1,7 +1,7 @@
 
 #player {
   background: #272829;
-  padding: 10px;
+  padding: 8px 10px;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -18,14 +18,16 @@
 }
 
 #playerControls i {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 #playerControls a {
   color: #fff;
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.playerAlbum {
+.playerAlbum img {
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
 }
 
@@ -55,26 +57,59 @@
 }
 
 #playerTimeLine {
-  position: relative;
-  max-width: 500px;
+
+}
+
+#playerTimeLine .time {
+  font-size: 12px;
+  float: left;
+  display: block;
+}
+#playerTimeLine .time:nth-child(2) {
+  float: right;
+}
+
+#playerTimeLine .wrapper{
+
+  padding: 0 50px;
+}
+
+#playerTimeLine .inner{
   width: 100%;
-  height: 2px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+#playerTimeLine .player-progress {
+  position: relative;
+  height: 3px;
   background: #fff;
 }
 
-#playerTimeLine .currentTime{
-  height: 2px;
+#playerTimeLine .currentTime {
+  height: 3px;
   background: #ff3a00;
   position: relative;
 }
 
-#playerTimeLine .currentTime .handle{
+#playerTimeLine .currentTime .handle {
   position: absolute;
   right: 0;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background: white;
-  top: 0;
-  margin-top: -4px;
+  bottom: 0;
+  margin-bottom: -3px;
   border-radius: 100%;
+  margin-right: -4px;
+  cursor: pointer;
+  opacity: .5;
+  -webkit-transform: scale(0);
+  transition: 0.3s transform,opacity;
+}
+#playerTimeLine .wrapper:hover .handle{
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transition: 0.3s transform,opacity;
+
 }

@@ -18,13 +18,13 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    .col-xl-s-5 {
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 0 20%;
-        -ms-flex: 0 0 20%;
-        flex: 0 0 20%;
-        max-width: 20%;
-    }
+  .col-xl-s-5 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 20%;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
 }
 
 /* Extra small devices (portrait phones, less than 544px)*/

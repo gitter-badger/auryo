@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from 'react';
-import {IMAGE_SIZES} from '../../constants/Soundcloud';
-import {getImageUrl} from '../../utils/soundcloud';
-import classnames from 'classnames';
-import {truncate, abbreviate_number} from '../../utils/AppUtils';
-import TogglePlayButtonContainer from '../../containers/TogglePlayButtonContainer';
+import React, {Component, PropTypes} from "react";
+import {IMAGE_SIZES} from "../../constants/Soundcloud";
+import {getImageUrl} from "../../utils/soundcloudUtils";
+import classnames from "classnames";
+import {truncate, abbreviate_number} from "../../utils/appUtils";
+import TogglePlayButtonfrom from "../../components/togglePlay";
 
 class TrackGridItem extends Component {
 
-  static renderArtist(track) {
+  renderArtist(track) {
     if (track.activity_type && track.activity_type == "track-repost") {
       return (
         <div className="trackArtist">
@@ -40,7 +40,7 @@ class TrackGridItem extends Component {
     const {isPlaying, playTrackFunc} = this.props;
 
     if (isPlaying) {
-      return <TogglePlayButtonContainer />;
+      return <TogglePlayButtonfrom />;
     }
 
     const icon = isPlaying ? 'icon-controller-paus' : 'icon-controller-play';
@@ -58,7 +58,7 @@ class TrackGridItem extends Component {
 
     const {
       playTrackFunc,
-      auth,
+      user,
       dispatch,
       isPlaying,
       scrollFunc,
@@ -113,7 +113,7 @@ class TrackGridItem extends Component {
 
 
             {
-              TrackGridItem.renderArtist(track)
+              this.renderArtist(track)
             }
             {
               //track.publisher_metadata.explicit ? <span className="explicit">explicit</span> : null
@@ -128,7 +128,7 @@ class TrackGridItem extends Component {
 
 TrackGridItem.propTypes = {
   playTrackFunc: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   scrollFunc: PropTypes.func.isRequired,

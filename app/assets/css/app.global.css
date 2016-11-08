@@ -1,39 +1,50 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css";
-@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../../node_modules/bootstrap/dist/css/bootstrap-flex.min.css";
 @import "responsive.css";
 @import "sidebar.css";
 @import "../../components/TrackGridItem/style.css";
 
-body{
-    font-family: 'Roboto', sans-serif;
+body {
+  font-family: 'Roboto', sans-serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Source Code Pro', sans-serif;
-    font-weight: 400;
+  font-family: 'Source Code Pro', sans-serif;
+  font-weight: 400;
 }
 
 .main {
-    margin-left: 230px;
-    margin-top: 54px;
-    padding: 15px 30px;
-    position: relative;
+  margin-left: 230px;
+  margin-top: 54px;
+  padding: 15px 30px;
+  position: relative;
 }
 
 .navbar-dark {
-    background: #2f343f;
+  background: #2f343f;
 }
 
 #sidebar {
-    background: #222326;
+  background: #222326;
 }
 
 #sidebar a {
-    color: #BAC3CF;
+  color: #BAC3CF;
 }
 
 /** -------- */
 
-.flex{
-    display: flex;
+.flex {
+  display: flex;
+}
+
+.material-icons{
+  vertical-align: middle;
 }

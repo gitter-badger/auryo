@@ -1,111 +1,119 @@
-.loadingWrapper{
-    display: block;
-    max-width: 100%;
-    padding: 20px;
-    position: relative;
+.loadingWrapper {
+  display: block;
+  max-width: 100%;
+  padding: 20px;
+  position: relative;
 }
-.loadingWrapper.loading_box{
-    margin-bottom: 20px;
-}
-.loading_box{
-    box-sizing:border-box;
-}
-.loading_box .loading_inner{
 
-    background: #f7f7f7;
-    height: 260px;
-    width: 260px;
-    position: relative;
-    margin: 0 auto;
+.loadingWrapper.loading_box {
+  margin-bottom: 20px;
 }
-.loading_box .loading li{
-    animation: none;
+
+.loading_box {
+  box-sizing: border-box;
 }
+
+.loading_box .loading_inner {
+
+  background: #f7f7f7;
+  height: 260px;
+  width: 260px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.loading_box .loading li {
+  animation: none;
+}
+
 .loading {
-    width: 50px;
-    height: 50%;
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    margin: 50% auto auto calc(50% - 25px);
+  width: 50px;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 50% auto auto calc(50% - 25px);
 }
 
-.loading:last-child{
-    -webkit-transform: scale(-1, -1);
-    transform: scale(-1, -1);
-    margin-top:0;
-    margin-left: calc(50% - 22px);
+.loading:last-child {
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  margin-top: 0;
+  margin-left: calc(50% - 22px);
 
 }
 
 @keyframes loading {
-    0% {
-        opacity: 0.35;
-        height: 3px;
-    }
+  0% {
+    opacity: 0.35;
+    height: 3px;
+  }
 
-    100% {
-        opacity: 1;
-        height: 15px;
-    }
+  100% {
+    opacity: 1;
+    height: 15px;
+  }
 }
 
 .loading li {
-    position: absolute;
-    height: 3px;
-    width: 4px;
-    background: #ff3a00;
-    animation: loading 0ms -800ms linear infinite alternate;
-    margin-left: 1px;
-    display: inline-block;
-    border-radius: 0 0 5px 5px ;
+  position: absolute;
+  height: 3px;
+  width: 4px;
+  background: #ff3a00;
+  animation: loading 0ms -800ms linear infinite alternate;
+  margin-left: 1px;
+  display: inline-block;
+  border-radius: 0 0 5px 5px;
 }
 
 .loading li:nth-child(1) {
-    left: 1px;
-    animation-duration: 405ms;
+  left: 1px;
+  animation-duration: 405ms;
 }
 
 .loading li:nth-child(2) {
-    left: 6px;
-    animation-duration: 477ms;
+  left: 6px;
+  animation-duration: 477ms;
 }
 
 .loading li:nth-child(3) {
-    left: 11px;
-    animation-duration: 456ms;
+  left: 11px;
+  animation-duration: 456ms;
 }
 
 .loading li:nth-child(4) {
-    left: 16px;
-    animation-duration: 402ms;
+  left: 16px;
+  animation-duration: 402ms;
 }
 
 .loading li:nth-child(5) {
-    left: 21px;
-    animation-duration: 472ms;
+  left: 21px;
+  animation-duration: 472ms;
 }
 
 .loading li:nth-child(6) {
-    left: 26px;
-    animation-duration: 452ms;
+  left: 26px;
+  animation-duration: 452ms;
 }
 
 .loading li:nth-child(7) {
-    left: 31px;
-    animation-duration: 415ms;
+  left: 31px;
+  animation-duration: 415ms;
 }
 
 .loading li:nth-child(8) {
-    left: 36px;
-    animation-duration: 456ms;
+  left: 36px;
+  animation-duration: 456ms;
 }
 
 .loading li:nth-child(9) {
-    left: 41px;
-    animation-duration: 497ms;
+  left: 41px;
+  animation-duration: 497ms;
 }
 
 .loading li:nth-child(10) {
-    left: 46px;
-    animation-duration: 440ms;
+  left: 46px;
+  animation-duration: 440ms;
 }

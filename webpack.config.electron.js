@@ -2,10 +2,10 @@
  * Build config for electron 'Main Process' file
  */
 
-import webpack from 'webpack';
-import validate from 'webpack-validator';
-import merge from 'webpack-merge';
-import baseConfig from './webpack.config.base';
+import webpack from "webpack";
+import validate from "webpack-validator";
+import merge from "webpack-merge";
+import baseConfig from "./webpack.config.base";
 
 export default validate(merge(baseConfig, {
   devtool: 'source-map',
@@ -55,6 +55,27 @@ export default validate(merge(baseConfig, {
   },
 
   externals: [
-    // 'source-map-support'
+    "bootstrap",
+    "classnames",
+    "electron-cookies",
+    "electron-debug",
+    "font-awesome",
+    "lodash",
+    "normalizr",
+    "react",
+    "react-addons-css-transition-group",
+    "react-addons-pure-render-mixin",
+    "react-addons-transition-group",
+    "react-dom",
+    "react-lazyload",
+    "react-redux",
+    "react-router",
+    "react-router-redux",
+    "react-sound",
+    "reactstrap",
+    "redux",
+    "redux-logger",
+    "redux-thunk",
+    "source-map-support"
   ]
 }));

@@ -1,21 +1,21 @@
 // @flow
-import React, {Component} from 'react';
-import {Link} from 'react-router';
+import React, {Component} from "react";
 
 
 class Header extends Component {
-    render() {
-        return (
-            <nav className="navbar navbar-dark navbar-fixed-top">
-                <button className="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-                    ☰
-                </button>
-                <a className="navbar-brand" href="#">Soundtop</a>
-                <div className="collapse navbar-toggleable-xs" id="collapsingNavbar">
-                </div>
-            </nav>
-        );
-    }
+  render() {
+    return (
+      <nav className="navbar navbar-dark navbar-fixed-top">
+        <button className="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse"
+                data-target="#collapsingNavbar">
+          ☰
+        </button>
+        <a className="navbar-brand" href="#">Soundtop</a>
+        <div className="collapse navbar-toggleable-xs" id="collapsingNavbar">
+        </div>
+      </nav>
+    );
+  }
 }
 
 export default Header;

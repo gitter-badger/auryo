@@ -1,25 +1,15 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "SoundTop",
+  "productName": "SoundTop",
+  "version": "0.0.1",
+  "description": "Beautiful soundcloud desktop app.",
   "main": "./main.js",
   "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
+    "name": "Jonas Snellinckx",
+    "email": "jonas.snellinckx@gmail.com",
+    "url": "https://github.com/Superjo149"
   },
-  "license": "MIT",
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.5",
-    "classnames": "^2.2.5",
-    "electron-cookies": "^1.1.0",
-    "lodash": "^4.16.6",
-    "normalizr": "^2.2.1",
-    "react-addons-pure-render-mixin": "^15.3.2",
-    "react-blur": "^0.5.1",
-    "react-lazyload": "^2.1.6",
-    "redux-logger": "^2.7.4",
     "source-map-support": "^0.4.3"
   }
 }
