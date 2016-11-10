@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/actionTypes";
 import {CHANGE_TYPES} from "../constants/playlist";
-import Sound from "react-sound";
+import Sound from "../components/common/Sound-React";
 
 /**
  * Set player time to 0 and check if playlist is already in the queue and if it's selected

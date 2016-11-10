@@ -32,7 +32,7 @@ Feed.propTypes = {
   user: PropTypes.object.isRequired,
   feedInfo: PropTypes.object.isRequired,
   tracks: PropTypes.object.isRequired,
-  playingSongId: PropTypes.number,
+  playingSongId: PropTypes.string,
   users: PropTypes.object.isRequired,
   current_playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,

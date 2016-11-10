@@ -83,18 +83,25 @@ function _fetchPlaylist(url, name) {
         const futureUrl = (json.future_href) ? SC.appendToken(json.future_href) : null;
 
         const collection = json.collection //Todo: Also show playlists in feed?
-          .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable);
+          .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
+          .map(info => {
+            info.track.track_id = info.track.id;
+            info.track.id = info.uuid;
+
+            return info;
+          });
 
         const tracks = collection.map(info => info.track);
 
         const n = normalize(tracks, arrayOf(trackSchema));
+        console.log(n);
 
         const info = normalize(collection, arrayOf(trackInfoSchema));
 
         dispatch(setPlaylist(name, {
-          tracks:n.entities.tracks,
-          feedInfo:info.entities.feedInfo,
-          users:_.assign({}, n.entities.users, info.entities.users),
+          tracks: n.entities.tracks,
+          feedInfo: info.entities.feedInfo,
+          users: _.assign({}, n.entities.users, info.entities.users),
         }, info.result, nextUrl, futureUrl));
 
       }).catch(err => {

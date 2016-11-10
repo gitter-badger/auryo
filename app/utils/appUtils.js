@@ -51,3 +51,15 @@ export function getReadableTime(milliseconds){
 
   return str;
 }
+
+
+export function getPos(e,el){
+  if(!el){
+    el = e.currentTarget;
+  }
+
+  var box = el.getBoundingClientRect();
+  const start = box.left;
+
+  return (e.clientX - start ) / box.width;
+}

@@ -113,3 +113,55 @@
   transition: 0.3s transform,opacity;
 
 }
+
+#playerVolume{
+  align-items: center;
+}
+
+#playerVolume i{
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#playerVolume .wrapper{
+  flex-grow: 1;
+}
+#playerVolume .inner{
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+#playerVolume .player-progress {
+  position: relative;
+  height: 3px;
+  background: #fff;
+}
+
+#playerVolume .currentTime {
+  height: 3px;
+  background: #ff3a00;
+  position: relative;
+}
+
+#playerVolume .currentTime .handle {
+  position: absolute;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  background: white;
+  bottom: 0;
+  margin-bottom: -3px;
+  border-radius: 100%;
+  margin-right: -4px;
+  cursor: pointer;
+  opacity: .5;
+  -webkit-transform: scale(0);
+  transition: 0.3s transform,opacity;
+}
+#playerVolume .wrapper:hover .handle{
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transition: 0.3s transform,opacity;
+
+}

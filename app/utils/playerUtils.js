@@ -13,7 +13,7 @@ export function getPlayingTrackId(player, playlists, feedInfo) {
       id = feedInfo[id].track;
     }
 
-    return id;
+    return id.toString();
   }
 
   return null;
