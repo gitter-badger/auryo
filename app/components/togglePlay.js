@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from "react";
-import Sound from "react-sound";
+import Sound from "../components/common/Sound-React";
 import {toggleStatus} from "../actions"
 import {connect} from "react-redux";
 

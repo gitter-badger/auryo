@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from "react";
 import TrackGridItem from "../../components/TrackGridItem/TrackGridItem";
-import {fetchMore, playTrack} from "../../actions";
+import {fetchMore, playTrack,setCurrentTime} from "../../actions";
 import infiniteScroll from "../../components/InfiniteScroll";
 import Spinner from "../Spinner/index";
+import Sound from "../common/Sound-React";
 
 
 class TracksGrid extends Component {
@@ -69,7 +70,7 @@ TracksGrid.propTypes = {
   user: PropTypes.object.isRequired,
   feedInfo: PropTypes.object.isRequired,
   tracks: PropTypes.object.isRequired,
-  playingSongId: PropTypes.number,
+  playingSongId: PropTypes.string,
   users: PropTypes.object.isRequired,
   current_playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,

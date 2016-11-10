@@ -1,5 +1,5 @@
 import * as actionTypes from "../constants/actionTypes";
-import Sound from "react-sound";
+import Sound from "../components/common/Sound-React";
 
 const initialState = {
   status: Sound.status.STOPPED,
