@@ -2,12 +2,12 @@
 import React, {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
 import {appendClientId, getImageUrl} from "../../utils/soundcloudUtils";
-import {getReadableTime, offsetLeft} from "../../utils/appUtils";
+import {getReadableTime, getPos} from "../../utils/appUtils";
 import {IMAGE_SIZES} from "../../constants/Soundcloud";
 import "./player.global.css";
 import {CHANGE_TYPES} from "../../constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../actions";
-import Sound from "react-sound";
+import Sound from "../common/Sound-React";
 
 class Player extends React.Component {
 
@@ -17,7 +17,7 @@ class Player extends React.Component {
     const previousVolumeLevel = Number.parseFloat(1); // TODO get volume
     this.state = {
       currentTime: 0,
-      updateTime:0,
+      updateTime: 0,
       duration: 0,
       isSeeking: false,
       muted: false,
@@ -27,7 +27,7 @@ class Player extends React.Component {
     };
 
     this.changeSong = this.changeSong.bind(this);
-    this.changeVolume = this.changeVolume.bind(this);
+    this.volumeClick = this.volumeClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleSeekMouseDown = this.handleSeekMouseDown.bind(this);
     this.handleSeekMouseMove = this.handleSeekMouseMove.bind(this);
@@ -53,50 +53,14 @@ class Player extends React.Component {
     // TODO get volume from config
   }
 
-  componentDidUpdate(prevProps) {
-    /*if (prevProps.playingSongId && prevProps.playingSongId === this.props.playingSongId) {
-     return;
-     }
-
-     ReactDOM.findDOMNode(this.refs.audio).play();*/
-  }
-
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown, false);
   }
 
-  onTimeUpdate(e) {
-    if (this.state.isSeeking) {
-      return;
-    }
 
-    const {dispatch, player} = this.props;
-    const audioElement = e.currentTarget;
-    const currentTime = Math.floor(audioElement.currentTime);
-
-    if (currentTime === player.currentTime) {
-      return;
-    }
-
-    dispatch(setCurrentTime(currentTime));
-  }
-
-  onVolumeChange(e) {
-    if (this.state.isSeeking) {
-      return;
-    }
-
-    const volume = e.currentTarget.volume;
-    // Todo Write to config
-    this.setState({
-      volume,
-    });
-  }
-
-
-  bindVolumeMouseEvents() {
-    document.addEventListener('mousemove', this.handleVolumeMouseMove);
-    document.addEventListener('mouseup', this.handleVolumeMouseUp);
+  handleMouseClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   changeSong(changeType) {
@@ -105,17 +69,65 @@ class Player extends React.Component {
     dispatch(changeTrack(changeType));
   }
 
-  changeVolume(e) {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-    audioElement.volume = (e.clientX - offsetLeft(e.currentTarget)) / e.currentTarget.offsetWidth;
+
+  handleKeyDown(e) {
+    const key = e.keyCode || e.which;
+    const matchInput = e.target.tagName.toLowerCase().match(/textarea|input/);
+    if (matchInput) {
+      return;
+    }
+
+    if (key === 32) {
+      e.preventDefault();
+      this.togglePlay();
+    } else if (key === 37 || keyCode === 74) {
+      e.preventDefault();
+      this.changeSong(CHANGE_TYPES.PREV);
+    } else if (key === 39 || keyCode === 75) {
+      e.preventDefault();
+      this.changeSong(CHANGE_TYPES.NEXT);
+    }
   }
 
-  handleMouseClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
+  togglePlay() {
+    const {player, dispatch} = this.props;
+    const {status} = player;
+
+    if (status !== Sound.status.PLAYING) {
+      dispatch(toggleStatus(Sound.status.PLAYING));
+    } else if (status == Sound.status.PLAYING) {
+      dispatch(toggleStatus(Sound.status.PAUSED));
+    }
   }
 
-  // SEEK
+  toggleShuffle() {
+    this.setState({
+      shuffle: !this.state.shuffle
+    });
+
+  }
+
+  toggleRepeat() {
+    this.setState({
+      repeat: !this.state.repeat
+    });
+  }
+
+  toggleMute() {
+    if (!this.state.muted && this.state.volume == 0) {
+
+      this.setState({
+        volume: .5
+      });
+      return;
+    }
+    this.setState({
+      muted: !this.state.muted
+    });
+  }
+
+  // PROGRESS SEEK
+
   bindSeekMouseEvents() {
     document.addEventListener('mousemove', this.handleSeekMouseMove);
     document.addEventListener('mouseup', this.handleSeekMouseUp);
@@ -132,17 +144,15 @@ class Player extends React.Component {
     const {dispatch, player} = this.props;
     const seekBar = ReactDOM.findDOMNode(this.refs.seekBar);
 
-    var box = seekBar.getBoundingClientRect();
-    const start = box.left;
+    let percent = getPos(e, seekBar);
 
-    let percent = (e.clientX - start ) / box.width;
     percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
 
     let currentTime = Math.floor(percent * this.state.duration);
 
     this.setState({
       currentTime: currentTime
-    })
+    });
 
   }
 
@@ -155,7 +165,7 @@ class Player extends React.Component {
     document.removeEventListener('mouseup', this.handleSeekMouseUp);
     const {dispatch, player} = this.props;
 
-    //dispatch(setCurrentTime(this.state.currentTime));
+    dispatch(setCurrentTime(this.state.currentTime));
 
     this.setState({
       isSeeking: false,
@@ -163,6 +173,33 @@ class Player extends React.Component {
     });
   }
 
+  progressClick(e) {
+    const {dispatch} = this.props;
+
+    const percent = getPos(e);
+
+    let currentTime = Math.floor(percent * this.state.duration);
+
+    if (currentTime > this.state.duration) {
+      currentTime = this.state.duration;
+    }
+
+    this.setState({
+      updateTime: currentTime,
+      currentTime: currentTime
+    });
+
+    dispatch(setCurrentTime(currentTime));
+  }
+
+
+  // VOLUME SEEK
+
+
+  bindVolumeMouseEvents() {
+    document.addEventListener('mousemove', this.handleVolumeMouseMove);
+    document.addEventListener('mouseup', this.handleVolumeMouseUp);
+  }
 
   handleVolumeMouseDown() {
     this.bindVolumeMouseEvents();
@@ -173,15 +210,13 @@ class Player extends React.Component {
 
   handleVolumeMouseMove(e) {
     const volumeBar = ReactDOM.findDOMNode(this.refs.volumeBar);
-    const diff = e.clientX - offsetLeft(volumeBar);
-    const pos = diff < 0 ? 0 : diff;
-    let percent = pos / volumeBar.offsetWidth;
-    percent = percent > 1 ? 1 : percent;
 
+    let percent = getPos(e, volumeBar);
+
+    percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
     this.setState({
       volume: percent,
     });
-    ReactDOM.findDOMNode(this.refs.audio).volume = percent;
   }
 
   handleVolumeMouseUp() {
@@ -198,92 +233,36 @@ class Player extends React.Component {
     // Todo write to config
   }
 
-  handleKeyDown(e) {
-    const keyCode = e.keyCode || e.which;
-    const isInsideInput = e.target.tagName.toLowerCase().match(/input|textarea/);
-    if (isInsideInput) {
-      return;
-    }
-
-    if (keyCode === 32) {
-      e.preventDefault();
-      this.togglePlay();
-    } else if (keyCode === 37 || keyCode === 74) {
-      e.preventDefault();
-      this.changeSong(CHANGE_TYPES.PREV);
-    } else if (keyCode === 39 || keyCode === 75) {
-      e.preventDefault();
-      this.changeSong(CHANGE_TYPES.NEXT);
-    }
-  }
-
-  progressClick(e) {
-    const {dispatch} = this.props;
-    let el = e.currentTarget;
-
-    var box = el.getBoundingClientRect();
-    const start = box.left;
-
-    const percent = (e.clientX - start ) / box.width;
-    let currentTime = Math.floor(percent * this.state.duration);
-
-    if (currentTime > this.state.duration) {
-      currentTime = this.state.duration;
-    }
-
+  volumeClick(e) {
     this.setState({
-      updateTime: currentTime,
-      currentTime: currentTime
+      muted: false
     });
 
-    //dispatch(setCurrentTime(currentTime));
+    let percent = getPos(e);
+
+    percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
+
+    this.setState({
+      volume: percent
+    })
   }
 
-  toggleMute() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-    if (this.state.muted) {
-      audioElement.muted = false;
-    } else {
-      audioElement.muted = true;
-    }
+  // RENDER
 
-    this.setState({muted: !this.state.muted});
-  }
+  renderProgressBar() {
+    const {player} = this.props;
+    const {duration, currentTime} = this.state;
 
-  togglePlay() {
-    const {player, dispatch} = this.props;
-    const {status} = player;
-
-    if (status !== Sound.status.PLAYING) {
-      dispatch(toggleStatus(Sound.status.PLAYING));
-    } else if (status == Sound.status.PLAYING) {
-      dispatch(toggleStatus(Sound.status.PAUSED));
-    }
-  }
-
-  toggleRepeat() {
-    this.setState({repeat: !this.state.repeat});
-  }
-
-  toggleShuffle() {
-    this.setState({shuffle: !this.state.shuffle});
-  }
-
-  renderProgress() {
-    const {} = this.props.player;
-    const {duration,currentTime} = this.state;
+    const time = (this.state.isSeeking) ? currentTime : player.currentTime;
 
     if (duration !== 0) {
-      const width = currentTime / duration * 100;
+      const width = time / duration * 100;
       return (
         <div
           className="currentTime"
-          style={{width: `${width}%`}}
-        >
+          style={{width: `${width}%`}}>
           <div
             className="handle"
-            onClick={this.handleMouseClick}
-            onMouseDown={this.handleSeekMouseDown}
           />
         </div>
       );
@@ -297,11 +276,10 @@ class Player extends React.Component {
     const width = muted ? 0 : volume * 100;
     return (
       <div
-        className="player-seek-duration-bar"
-        style={{width: `${width}%`}}
-      >
+        className="currentTime"
+        style={{width: `${width}%`}}>
         <div
-          className="player-seek-handle"
+          className="handle"
           onClick={this.handleMouseClick}
           onMouseDown={this.handleVolumeMouseDown}
         />
@@ -309,49 +287,24 @@ class Player extends React.Component {
     );
   }
 
-  renderVolumeIcon() {
-    const {muted, volume} = this.state;
-
-    if (muted) {
-      return <i className="icon ion-android-volume-off"/>;
-    }
-
-    if (volume === 0) {
-      return <i className="icon ion-android-volume-mute"/>;
-    } else if (volume === 1) {
-      return (
-        <div className="player-volume-button-wrap">
-          <i className="icon ion-android-volume-up"/>
-          <i className="icon ion-android-volume-mute"/>
-        </div>
-      );
-    }
-
-    return (
-      <div className="player-volume-button-wrap">
-        <i className="icon ion-android-volume-down"/>
-        <i className="icon ion-android-volume-mute"/>
-      </div>
-    );
-  }
+  // PLAYER LISTENERS
 
   onLoad(obj) {
-    console.log("load");
     this.setState({
-      currentTime:0
-    });
-
-    this.setState({
+      currentTime: 0,
+      updateTime: 0,
       duration: obj.duration
     });
   }
 
   onPlaying(obj) {
-    if(this.state.isSeeking) return;
+    if (this.state.isSeeking) return;
     const {dispatch} = this.props;
     this.setState({
-      currentTime:obj.position
+      currentTime: obj.position
     });
+
+    dispatch(setCurrentTime(obj.position));
   }
 
   onFinishedPlaying(obj) {
@@ -359,6 +312,8 @@ class Player extends React.Component {
 
     dispatch(changeTrack(this.state.shuffle ? CHANGE_TYPES.SHUFFLE : CHANGE_TYPES.NEXT));
   }
+
+  // ====
 
   render() {
     const {player, users, playingSongId, playlists, tracks} = this.props;
@@ -373,7 +328,8 @@ class Player extends React.Component {
     const image = (track.artwork_url != null) ? getImageUrl(track.artwork_url, IMAGE_SIZES.SMALL) : getImageUrl(track.user.avatar_url, IMAGE_SIZES.SMALL);
     let overlay_image = (track.artwork_url != null) ? getImageUrl(track.artwork_url, IMAGE_SIZES.XLARGE) : getImageUrl(track.user.avatar_url, IMAGE_SIZES.XLARGE);
 
-    const icon = status == Sound.status.PLAYING ? 'pause' : 'play_arrow';
+    const toggle_play_icon = status == Sound.status.PLAYING ? 'pause' : 'play_arrow';
+    const volume_icon = this.state.muted || this.state.volume == 0 ? "volume_off" : (this.state.volume == 1) ? "volume_up" : "volume_down";
 
     return (
       <div id="player">
@@ -384,8 +340,10 @@ class Player extends React.Component {
         <Sound
           url={appendClientId(track.stream_url)}
           playStatus={status}
-          volume={10}
+          volume={this.state.volume * 100}
           playFromPosition={this.state.updateTime}
+          muted={this.state.muted}
+          id={playingSongId}
 
           onLoading={this.onLoad}
           onPlaying={this.onPlaying}
@@ -398,31 +356,41 @@ class Player extends React.Component {
           <div id="playerControls">
             <a href="javascript:void(0)" onClick={prevFunc}><i className="material-icons">skip_previous</i></a>
 
-            <a href="javascript:void(0)" onClick={this.togglePlay}><i className="material-icons">{icon}</i></a>
+            <a href="javascript:void(0)" onClick={this.togglePlay}><i className="material-icons">{toggle_play_icon}</i></a>
 
             <a href="javascript:void(0)" onClick={nextFunc}><i className="material-icons">skip_next</i></a>
           </div>
           <div id="playerTimeLine" className="col-xs-5">
-            <div className="time">{getReadableTime(this.state.currentTime)}</div>
+            <div
+              className="time">{getReadableTime(this.state.currentTime)}</div>
             <div className="time">{getReadableTime(this.state.duration)}</div>
 
             <div className="wrapper">
-              <div className="inner" onClick={this.progressClick}>
+              <div className="inner"
+                   onClick={this.progressClick}
+                   onMouseDown={this.handleSeekMouseDown}>
                 <div className="player-progress" ref="seekBar">
                   {
-                    this.renderProgress()
+                    this.renderProgressBar()
                   }
                 </div>
               </div>
             </div>
 
           </div>
-          <div id="playerVolume">
-            <div ref="volumeBar" className="inner" onClick={this.changeVolume}>
-              {
-                this.renderVolumeBar()
-              }
+          <div id="playerVolume" className="col-xs-1 flex">
+            <i className="material-icons" onClick={this.toggleMute}>{volume_icon}</i>
+            <div className="wrapper">
+              <div className="inner" onClick={this.volumeClick}
+                   onMouseDown={this.handleVolumeMouseDown}>
+                <div className="player-progress" ref="volumeBar">
+                  {
+                    this.renderVolumeBar()
+                  }
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -435,7 +403,7 @@ class Player extends React.Component {
 Player.propTypes = {
   dispatch: PropTypes.func.isRequired,
   player: PropTypes.object.isRequired,
-  playingSongId: PropTypes.number,
+  playingSongId: PropTypes.string,
   playlists: PropTypes.object.isRequired,
   song: PropTypes.object,
   tracks: PropTypes.object.isRequired,
