@@ -94,7 +94,7 @@ function init() {
       }]).popup(mainWindow);
     });
   }
-
+/*
   if (process.platform === 'darwin') {
     template = [{
       label: 'Electron',
@@ -293,7 +293,7 @@ function init() {
     }];
     /*menu = Menu.buildFromTemplate(template);*/
     mainWindow.setMenu(null);
-  }
+  //}
 }
 
 app.on('ready', () => {

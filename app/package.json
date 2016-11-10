@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "description": "Beautiful soundcloud desktop app.",
   "main": "./main.js",
+  "private": true,
   "author": {
     "name": "Jonas Snellinckx",
     "email": "jonas.snellinckx@gmail.com",
