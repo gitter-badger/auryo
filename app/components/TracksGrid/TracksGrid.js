@@ -31,7 +31,6 @@ class TracksGrid extends Component {
       dispatch
     } = this.props;
     const items = current_playlist in playlists ? playlists[current_playlist].items : [];
-    const isFetching = playlists[current_playlist].isFetching;
     const scrollFunc = fetchMore.bind(null, current_playlist);
 
     const uuid = items[index];
@@ -57,44 +56,12 @@ class TracksGrid extends Component {
     );
   }
 
-  renderItems(items, ref) {
+  renderWrapper(items, ref) {
     return React.createElement(
       'div',
       {ref: ref, className: "row"},
       items
     );
-  }
-
-  /*
-
-   {
-
-   items.map((uuid, i) => {
-   const info = feedInfo[uuid];
-   const track = tracks[info.track];
-   track.user = users[track.user_id];
-   track.from_user = users[info.user];
-   track.activity_type = info.type;
-
-   const playTrackFunc = this.playTrack.bind(this, i);
-
-   return (
-
-   <TrackGridItem key={track.id + '-' + i}
-   playTrackFunc={playTrackFunc}
-   user={user}
-   dispatch={dispatch}
-   isPlaying={track.id === playingSongId}
-   scrollFunc={scrollFunc}
-   track={track}/>
-
-   );
-   })
-   }
-   */
-
-  sizeEst(index, cache) {
-    console.log(cache);
   }
 
   render() {
@@ -106,8 +73,6 @@ class TracksGrid extends Component {
     const items = current_playlist in playlists ? playlists[current_playlist].items : [];
     const isFetching = playlists[current_playlist].isFetching;
 
-    // TODO find a good way for lazy loading
-
     return (
       <div className="songs">
         <ReactList
@@ -116,7 +81,7 @@ class TracksGrid extends Component {
           pageSize={15}
           threshold={150}
 
-          itemsRenderer={this.renderItems}
+          itemsRenderer={this.renderWrapper}
           itemRenderer={this.renderVariableHeightItem}
           useStaticSize={true}
           useTranslate3d={true}

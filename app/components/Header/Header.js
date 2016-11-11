@@ -1,5 +1,6 @@
 // @flow
 import React, {Component} from "react";
+import {close, maximize, minimize} from "../../actions/windowActions";
 
 
 class Header extends Component {
@@ -10,8 +11,20 @@ class Header extends Component {
                 data-target="#collapsingNavbar">
           ☰
         </button>
-        <a className="navbar-brand" href="#">Soundtop</a>
-        <div className="collapse navbar-toggleable-xs" id="collapsingNavbar">
+        <div className="flex flex-items-xs-between">
+          <a className="navbar-brand" href="#">Soundtop</a>
+          <ul className="nav window-controls flex">
+
+            <a className="control control-minimize" onClick={minimize} href="javascript:void(0)">
+              <i className="material-icons">remove</i>
+            </a>
+            <a className="control control-maximize" onClick={maximize} href="javascript:void(0)">
+              <i className="material-icons">fullscreen</i>
+            </a>
+            <a className="control control-close" onClick={close} href="javascript:void(0)">
+              <i className="material-icons">close</i>
+            </a>
+          </ul>
         </div>
       </nav>
     );

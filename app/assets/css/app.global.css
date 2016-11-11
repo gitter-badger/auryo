@@ -30,25 +30,22 @@ h1, h2, h3, h4, h5, h6 {
   overflow-y: overlay;
 }
 
-.main::-webkit-scrollbar-track
-{
-  background-color: rgba(0,0,0,0.2);
+.main::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-.main::-webkit-scrollbar
-{
+.main::-webkit-scrollbar {
   width: 8px;
   background-color: #F5F5F5;
 }
 
-.main::-webkit-scrollbar-thumb
-{
+.main::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #555;
 }
 
-.main.playing{
+.main.playing {
   height: calc(100vh - 120px);
 }
 
@@ -64,12 +61,61 @@ h1, h2, h3, h4, h5, h6 {
   color: #BAC3CF;
 }
 
+.navbar {
+  -webkit-app-region: drag
+}
+
+.navbar .window-controls {
+  -webkit-app-region: no-drag;
+  align-items: center;
+}
+
+.navbar .window-controls .control {
+  display: inline-block;
+  border-radius: 100%;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.navbar .window-controls .control i {
+  font-size: 13px;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 1px;
+  color:#2f343f;
+  opacity: 0;
+  transition: .5s opacity;
+}
+.navbar .window-controls .control:hover i{
+  opacity: 1;
+  transition: .5s opacity;
+
+}
+.control.control-close {
+  background: #EE5C55;
+}
+
+.control.control-minimize {
+  background: #62CB43;
+}
+
+.control.control-maximize {
+  background: #F8BC32;
+}
+
 /** -------- */
 
 .flex {
   display: flex;
 }
 
-.material-icons{
+.material-icons {
   vertical-align: middle;
 }
