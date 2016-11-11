@@ -76,7 +76,7 @@ class TrackGridItem extends Component {
     );
 
     return (
-      <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-s-5">
+      <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-s-5" style={{height:"360px"}}>
         <div className={playing}>
 
           <div className="trackImage">
