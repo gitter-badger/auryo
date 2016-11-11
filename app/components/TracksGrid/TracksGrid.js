@@ -77,4 +77,4 @@ TracksGrid.propTypes = {
   scrollFunc: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 };
-export default infiniteScroll(TracksGrid);
+export default TracksGrid;

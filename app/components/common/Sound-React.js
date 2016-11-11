@@ -120,7 +120,6 @@ export default class Sound extends React.Component {
     if (this.props.url !== prevProps.url || this.props.id != prevProps.id) {
       this.createSound(withSound);
     } else {
-      console.log(this.sound);
       withSound(this.sound);
     }
   }

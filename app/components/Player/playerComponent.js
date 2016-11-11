@@ -80,10 +80,10 @@ class Player extends React.Component {
     if (key === 32) {
       e.preventDefault();
       this.togglePlay();
-    } else if (key === 37 || keyCode === 74) {
+    } else if (key === 37 || key === 74) {
       e.preventDefault();
       this.changeSong(CHANGE_TYPES.PREV);
-    } else if (key === 39 || keyCode === 75) {
+    } else if (key === 39 || key === 75) {
       e.preventDefault();
       this.changeSong(CHANGE_TYPES.NEXT);
     }

@@ -5,10 +5,10 @@ import SideBar from "../components/SideBar/sidebar.component";
 import Header from "../components/Header/Header";
 import * as actions from "../actions";
 import {connect} from "react-redux";
-import {ipcRenderer} from 'electron';
+import {ipcRenderer} from "electron";
 
 class App extends Component {
-  componentDidMount(){
+  componentDidMount() {
     const {dispatch} = this.props;
     dispatch(actions.initUser());
   }
@@ -21,9 +21,7 @@ class App extends Component {
         <Header />
         <div id="main">
           <SideBar me={me}/>
-          <div className="main clearfix">
-            {this.props.children}
-          </div>
+          {this.props.children}
 
         </div>
         <footer className="navbar-fixed-bottom">

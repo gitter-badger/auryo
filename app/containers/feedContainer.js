@@ -6,16 +6,22 @@ import {PLAYLISTS} from "../constants/playlist";
 import {connect} from "react-redux";
 import {fetchMore} from "../actions/";
 import {getPlayingTrackId} from "../utils/playerUtils";
+import infiniteScroll from "../components/InfiniteScroll";
+import cn from "classnames";
 
 
 class FeedContainer extends Component {
 
   render() {
+      const {playingSongId} = this.props;
 
+    const c = cn("main","clearfix",{
+      playing: playingSongId != null
+    });
     return (
-      <div>
-        <PageHeader title="Stream"/>
-        <Feed {...this.props}/>
+      <div className={c}>
+          <PageHeader title="Stream"/>
+          <Feed {...this.props}/>
       </div>
     );
   }
@@ -24,8 +30,8 @@ class FeedContainer extends Component {
 function mapStateToProps(state) {
   const {user, entities, playlists, player} = state;
   const current_playlist = PLAYLISTS.STREAM;
-  const {tracks, users,feedInfo} = entities;
-  const playingSongId = getPlayingTrackId(player, playlists,feedInfo);
+  const {tracks, users, feedInfo} = entities;
+  const playingSongId = getPlayingTrackId(player, playlists, feedInfo);
 
   return {
     user,
@@ -35,8 +41,8 @@ function mapStateToProps(state) {
     users,
     current_playlist,
     playlists,
-    scrollFunc: fetchMore.bind(null, current_playlist)
+    scrollFunc: fetchMore.bind(this, current_playlist)
   }
 }
 
-export default connect(mapStateToProps)(FeedContainer);
+export default connect(mapStateToProps)(infiniteScroll(FeedContainer));

@@ -1,6 +1,7 @@
 import * as actionTypes from "../constants/actionTypes";
 import {CHANGE_TYPES} from "../constants/playlist";
 import Sound from "../components/common/Sound-React";
+import {fetchMore} from "./playlistActions";
 
 /**
  * Set player time to 0 and check if playlist is already in the queue and if it's selected
@@ -101,8 +102,10 @@ export function changeTrack(change_type) {
     }
 
     if (index < 0) {
-      //dispatch(fetchMore(currentPlaylist));
       return null;
+    }
+    if (index + 5 > playlists[currentPlaylist].items.length) {
+      dispatch(fetchMore(currentPlaylist));
     }
 
     return dispatch(setPlayingTrack(index));

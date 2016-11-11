@@ -1,29 +1,41 @@
 import React, {Component, PropTypes} from "react";
+import ReactDOM from "react-dom";
 
 export default function (InnerComponent) {
   class InfiniteScrollComponent extends Component {
     constructor(props) {
       super(props);
       this.onScroll = this.onScroll.bind(this);
+      this.state = {
+        el: null
+      }
     }
 
     componentDidMount() {
-      window.addEventListener('scroll', this.onScroll, false);
+      ReactDOM.findDOMNode(this.refs.scroll).addEventListener('scroll', this.onScroll, false);
     }
 
     componentWillUnmount() {
-      window.removeEventListener('scroll', this.onScroll, false);
+      ReactDOM.findDOMNode(this.refs.scroll).removeEventListener('scroll', this.onScroll, false);
     }
 
     onScroll() {
-      if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+      var el = ReactDOM.findDOMNode(this.refs.scroll);
+      const box = el.getBoundingClientRect();
+      const scroll_height = (el.scrollHeight - box.bottom) + box.top;
+      console.log(el.scrollTop >= (scroll_height - 400));
+      if (el.scrollTop >= (scroll_height - 400)) {
         const {dispatch, scrollFunc} = this.props;
         dispatch(scrollFunc());
       }
     }
 
     render() {
-      return <InnerComponent {...this.props} />;
+      return (
+        <div>
+          <InnerComponent  ref="scroll" {...this.props} />
+        </div>
+        )
     }
   }
 
