@@ -360,7 +360,7 @@ class Player extends React.Component {
 
             <a href="javascript:void(0)" onClick={nextFunc}><i className="material-icons">skip_next</i></a>
           </div>
-          <div id="playerTimeLine" className="col-xs-5">
+          <div id="playerTimeLine" className="col-xs-5 col-lg-6 col-xl-8">
             <div
               className="time">{getReadableTime(this.state.currentTime)}</div>
             <div className="time">{getReadableTime(this.state.duration)}</div>

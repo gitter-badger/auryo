@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-dark navbar-fixed-top">
         <div className="flex flex-items-xs-between">
-          <a className="navbar-brand" href="#">Soundtop</a>
+          <a className="navbar-brand" href="javascript:void(0)">Auryo</a>
           <ul className="nav window-controls flex">
 
             <a className="control control-minimize" onClick={minimize} href="javascript:void(0)">

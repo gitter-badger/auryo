@@ -1,4 +1,4 @@
-import {app, BrowserWindow, Menu, shell, protocol, ipcMain} from "electron";
+import {app, BrowserWindow, Menu, shell, protocol, ipcMain,screen} from "electron";
 import {CLIENT_ID} from "./constants/Config";
 const settings = require('electron-settings');
 
@@ -7,7 +7,7 @@ var url = require('url');
 var querystring = require('querystring');
 
 let menu;
-let template;
+let loginWindow = null;
 let mainWindow = null;
 
 if (process.env.NODE_ENV === 'production') {
@@ -46,11 +46,53 @@ const installExtensions = async() => {
 };
 
 function doLogin() {
-  mainWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
+  let options = {
+    width: 400,
+    height: 500,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: false,
+      webSecurity: false
+    }
+  };
+
+  options = posCenter(options);
+
+  loginWindow = new BrowserWindow(options);
+
+  loginWindow.on('close', app.quit);
+  loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
 }
 
 function init() {
   installExtensions();
+
+  let options = {
+    show: false,
+    width: 1190,
+    height: 728,
+    frame:false,
+    webPreferences: {
+      webSecurity: false
+    }
+  };
+
+  options = posCenter(options);
+
+  mainWindow = new BrowserWindow(options);
+  mainWindow.maximize();
+  mainWindow.setMenu(null);
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+
+  mainWindow.on('close', app.quit);
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
@@ -86,29 +128,16 @@ app.on('ready', () => {
         var token = querystring.parse(hash).access_token;
 
         settings.setSync("access_token", token);
-
+        if (loginWindow) {
+          loginWindow.removeListener('close', app.quit);
+          loginWindow = null
+        }
         init();
 
         break;
     }
 
   });
-
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 728,
-    frame:false,
-    webPreferences: {
-      webSecurity: false
-    }
-  });
-  mainWindow.setMenu(null);
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
-  mainWindow.on('close', app.quit);
 
   if (settings.hasSync("access_token")) {
     init();
@@ -123,6 +152,10 @@ ipcMain.on('ping', (event, arg) => {
 
 ipcMain.on('logout', (event, arg) => {
   settings.deleteSync("access_token");
+  if (mainWindow) {
+    mainWindow.removeListener('close', app.quit);
+    mainWindow.close()
+  }
   doLogin();
 });
 
@@ -142,6 +175,20 @@ ipcMain.on('close', (event, arg) => {
   if (process.platform !== "darwin") {
     app.quit();
   } else {
-    mainWindow.hide();
+    mainWindow = null;
   }
 });
+
+function posCenter(options){
+
+  const displays = screen.getAllDisplays();
+
+  if(displays.length > 1){
+    const x = (displays[0].workArea.width - options.width) / 2;
+    const y = (displays[0].workArea.height - options.height) / 2;
+    options.x = x + displays[0].workArea.x;
+    options.y = y + displays[0].workArea.y;
+  }
+
+  return options;
+}

@@ -1,8 +1,8 @@
 {
-  "name": "SoundTop",
-  "productName": "SoundTop",
-  "version": "0.0.1",
-  "description": "Beautiful soundcloud desktop app.",
+  "name": "auryo",
+  "productName": "auryo",
+  "version": "1.0.0",
+  "description": "A beautiful soundcloud desktop app",
   "main": "./main.js",
   "private": true,
   "author": {
