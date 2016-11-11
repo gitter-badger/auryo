@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="829f322d-7539-4241-91c0-fdb22ab7ad6b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/components/Stickify.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/InfiniteScroll.js" afterPath="$PROJECT_DIR$/app/components/InfiniteScroll.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js" afterPath="$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" afterPath="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="soundtop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,16 +29,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="appUtils.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/utils/appUtils.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="playerUtils.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/utils/playerUtils.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -67,7 +54,7 @@
       <file leaf-file-name="playerActions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/actions/playerActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
+            <state relative-caret-position="1890">
               <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
@@ -113,8 +100,8 @@
       <file leaf-file-name="TracksGrid.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1242">
-              <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
+            <state relative-caret-position="525">
+              <caret line="121" column="31" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -122,11 +109,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="responsive.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/css/responsive.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="TrackGridItem.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1476">
-              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+            <state relative-caret-position="198">
+              <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -169,7 +166,6 @@
         <option value="$PROJECT_DIR$/app/utils/AppUtils.js" />
         <option value="$PROJECT_DIR$/app/components/TrackGridItem/style.css" />
         <option value="$PROJECT_DIR$/app/containers/TogglePlayButtonContainer.js" />
-        <option value="$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js" />
         <option value="$PROJECT_DIR$/app/reducers/playlistReducer.js" />
         <option value="$PROJECT_DIR$/app/actions/index.js" />
         <option value="$PROJECT_DIR$/app/components/SideBar/User/user.component.js" />
@@ -198,6 +194,7 @@
         <option value="$PROJECT_DIR$/app/actions/playerActions.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/components/InfiniteScroll.js" />
+        <option value="$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js" />
         <option value="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" />
       </list>
     </option>
@@ -573,8 +570,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -708,11 +705,12 @@
       <workItem from="1478807804210" duration="14229000" />
       <workItem from="1478856221181" duration="6105000" />
       <workItem from="1478866656626" duration="3717000" />
+      <workItem from="1478873818631" duration="1351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228015000" />
+    <option name="totallyTimeSpent" value="229366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="35" width="1920" height="1050" extended-state="6" />
@@ -757,13 +755,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/constants/Soundcloud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -968,21 +959,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
           <caret line="136" column="14" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/css/app.global.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/utils/appUtils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="1008">
           <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
@@ -1022,20 +1004,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/actions/playerActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
+        <state relative-caret-position="1890">
           <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="e#9#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1060,7 +1032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1074,18 +1045,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/css/responsive.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/css/app.global.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#9#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1476">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        <state relative-caret-position="198">
+          <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
+        <state relative-caret-position="525">
+          <caret line="121" column="31" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

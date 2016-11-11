@@ -52,7 +52,7 @@ class TracksGrid extends Component {
                      dispatch={dispatch}
                      isPlaying={track.id === playingSongId}
                      scrollFunc={scrollFunc}
-                     track={track}/>
+                     track={track} />
 
     );
   }
@@ -119,6 +119,7 @@ class TracksGrid extends Component {
           itemsRenderer={this.renderItems}
           itemRenderer={this.renderVariableHeightItem}
           useStaticSize={true}
+          useTranslate3d={true}
         />
         {isFetching ? <Spinner /> : null}
       </div>
