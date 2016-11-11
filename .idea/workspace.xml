@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="829f322d-7539-4241-91c0-fdb22ab7ad6b" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/components/Stickify.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/actions/playerActions.js" afterPath="$PROJECT_DIR$/app/actions/playerActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/css/app.global.css" afterPath="$PROJECT_DIR$/app/assets/css/app.global.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/InfiniteScroll.js" afterPath="$PROJECT_DIR$/app/components/InfiniteScroll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/Player/playerComponent.js" afterPath="$PROJECT_DIR$/app/components/Player/playerComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" afterPath="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/components/common/Sound-React.js" afterPath="$PROJECT_DIR$/app/components/common/Sound-React.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/containers/App.js" afterPath="$PROJECT_DIR$/app/containers/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/containers/feedContainer.js" afterPath="$PROJECT_DIR$/app/containers/feedContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/utils/playerUtils.js" afterPath="$PROJECT_DIR$/app/utils/playerUtils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="soundtop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,7 +35,7 @@
       <file leaf-file-name="appUtils.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/utils/appUtils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
+            <state relative-caret-position="0">
               <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
               <folding />
             </state>
@@ -72,7 +67,7 @@
       <file leaf-file-name="playerActions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/actions/playerActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
+            <state relative-caret-position="1836">
               <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
@@ -81,21 +76,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="player.global.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/components/Player/player.global.css">
+      <file leaf-file-name="feedContainer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="136" column="14" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="363">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+              <folding>
+                <element signature="e#9#59#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.global.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/css/app.global.css">
+      <file leaf-file-name="feedComponent.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/components/Feed/feedComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="414">
+              <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -105,22 +102,9 @@
         <entry file="file://$PROJECT_DIR$/app/components/InfiniteScroll.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+              <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
-                <marker date="1478862431058" expanded="true" signature="179:1121" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="feedContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-              <folding>
-                <element signature="e#9#59#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,11 +113,21 @@
       <file leaf-file-name="TracksGrid.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+            <state relative-caret-position="1242">
+              <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrackGridItem.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1476">
+              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -194,16 +188,16 @@
         <option value="$PROJECT_DIR$/app/reducers/playerReducer.js" />
         <option value="$PROJECT_DIR$/app/utils/appUtils.js" />
         <option value="$PROJECT_DIR$/app/components/Player/player.global.css" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app/components/common/Sound-React.js" />
         <option value="$PROJECT_DIR$/app/components/Player/playerComponent.js" />
         <option value="$PROJECT_DIR$/app/components/Feed/feedComponent.js" />
         <option value="$PROJECT_DIR$/app/containers/App.js" />
         <option value="$PROJECT_DIR$/app/containers/feedContainer.js" />
-        <option value="$PROJECT_DIR$/app/components/InfiniteScroll.js" />
         <option value="$PROJECT_DIR$/app/assets/css/app.global.css" />
         <option value="$PROJECT_DIR$/app/utils/playerUtils.js" />
         <option value="$PROJECT_DIR$/app/actions/playerActions.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/app/components/InfiniteScroll.js" />
         <option value="$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js" />
       </list>
     </option>
@@ -712,12 +706,13 @@
       <workItem from="1478802946375" duration="742000" />
       <workItem from="1478803847836" duration="702000" />
       <workItem from="1478807804210" duration="14229000" />
-      <workItem from="1478856221181" duration="5520000" />
+      <workItem from="1478856221181" duration="6105000" />
+      <workItem from="1478866656626" duration="3717000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223713000" />
+    <option name="totallyTimeSpent" value="228015000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="35" width="1920" height="1050" extended-state="6" />
@@ -776,13 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Stickify.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/containers/TogglePlayButtonContainer.js" />
     <entry file="file://$PROJECT_DIR$/app/constants/actionTypes.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -827,13 +815,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/main.js.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/main.development-copy.js" />
@@ -931,7 +919,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -939,7 +926,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,9 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#56#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -957,23 +940,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="53" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2862">
-          <caret line="159" column="35" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -981,17 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="135" column="27" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/Feed/feedComponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,18 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2772">
           <caret line="210" column="28" selection-start-line="210" selection-start-column="28" selection-end-line="211" selection-end-column="64" />
-          <folding>
-            <element signature="e#9#59#0" expanded="true" />
-            <element signature="n#!!block;n#handleKeyDown#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#togglePlay#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#bindSeekMouseEvents#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#handleSeekMouseDown#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#handleSeekMouseMove#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#bindVolumeMouseEvents#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#handleVolumeMouseDown#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#handleVolumeMouseUp#0;n#Player#0" expanded="false" />
-            <element signature="n#!!block;n#renderVolumeBar#0;n#Player#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1018,44 +961,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="309">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-          <folding>
-            <element signature="e#9#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding>
-            <element signature="e#9#59#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/components/Player/player.global.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="2448">
           <caret line="136" column="14" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/InfiniteScroll.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="57" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-            <marker date="1478862431058" expanded="true" signature="179:1121" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/css/app.global.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
+        <state relative-caret-position="522">
           <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
           <folding />
         </state>
@@ -1063,7 +982,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/utils/appUtils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
+        <state relative-caret-position="0">
           <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
@@ -1091,9 +1010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
           <caret line="264" column="24" selection-start-line="264" selection-start-column="16" selection-end-line="264" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1101,13 +1017,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/actions/playerActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
+        <state relative-caret-position="1836">
           <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
           <folding>
             <element signature="e#0#56#0" expanded="true" />
@@ -1115,10 +1030,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/containers/feedContainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="e#9#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Feed/feedComponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="157" column="27" selection-start-line="157" selection-start-column="27" selection-end-line="157" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/Stickify.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/InfiniteScroll.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/TrackGridItem/TrackGridItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1476">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/TracksGrid/TracksGrid.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+        <state relative-caret-position="1242">
+          <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>

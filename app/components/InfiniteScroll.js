@@ -23,7 +23,6 @@ export default function (InnerComponent) {
       var el = ReactDOM.findDOMNode(this.refs.scroll);
       const box = el.getBoundingClientRect();
       const scroll_height = (el.scrollHeight - box.bottom) + box.top;
-      console.log(el.scrollTop >= (scroll_height - 400));
       if (el.scrollTop >= (scroll_height - 400)) {
         const {dispatch, scrollFunc} = this.props;
         dispatch(scrollFunc());
