@@ -7,10 +7,6 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark navbar-fixed-top">
-        <button className="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse"
-                data-target="#collapsingNavbar">
-          ☰
-        </button>
         <div className="flex flex-items-xs-between">
           <a className="navbar-brand" href="#">Soundtop</a>
           <ul className="nav window-controls flex">

@@ -378,7 +378,7 @@ class Player extends React.Component {
             </div>
 
           </div>
-          <div id="playerVolume" className="col-xs-1 flex">
+          <div id="playerVolume" className="col-xs-2 col-lg-2 col-xl-1 flex">
             <i className="material-icons" onClick={this.toggleMute}>{volume_icon}</i>
             <div className="wrapper">
               <div className="inner" onClick={this.volumeClick}

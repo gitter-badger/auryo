@@ -67,15 +67,16 @@ export default validate(merge(baseConfig, {
     "react-addons-pure-render-mixin",
     "react-addons-transition-group",
     "react-dom",
-    "react-lazyload",
+    "react-lazy",
+    "react-list",
     "react-redux",
     "react-router",
     "react-router-redux",
-    "react-sound",
     "reactstrap",
     "redux",
     "redux-logger",
     "redux-thunk",
+    "soundmanager2",
     "source-map-support"
   ]
 }));
