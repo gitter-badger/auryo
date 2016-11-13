@@ -1,5 +1,5 @@
 
-#player {
+.player {
   background: #272829;
   padding: 8px 10px;
   color: #fff;
@@ -13,19 +13,23 @@
   align-items: center;
 }
 
-#playerControls {
+.playerControls {
   padding: 0 30px;
 }
 
-#playerControls i {
+.playerControls i {
   font-size: 35px;
 }
 
-#playerControls a {
+.playerControls a {
   color: #fff;
   display: inline-block;
   vertical-align: middle;
 }
+.playerControls a:hover {
+  color: #fff;
+}
+
 
 .playerAlbum img {
   box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
@@ -38,9 +42,9 @@
   left: 0;
 
   filter: blur(10px);
-  -webkit-filter: blur(10px); /* support appears limited http://caniuse.com/#search=css%20filter%20effects */
-  margin-left: -10px; /* move the image negative x-blur distance */
-  margin-top: -10px; /* move the image negative y-blur distance */
+  -webkit-filter: blur(10px);
+  margin-left: -10px;
+  margin-top: -10px;
 
 }
 
@@ -55,44 +59,42 @@
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
-
-#playerTimeLine {
-
+.playerTimeLine{
+  margin-top: -10px;
 }
-
-#playerTimeLine .time {
+.playerTimeLine .time {
   font-size: 12px;
-  float: left;
   display: block;
+  padding: 0 15px;
 }
-#playerTimeLine .time:nth-child(2) {
+.playerTimeLine .time:nth-child(2) {
   float: right;
 }
 
-#playerTimeLine .wrapper{
-
+.playerTimeLine .wrapper{
+  flex-wrap: nowrap;
   padding: 0 50px;
 }
 
-#playerTimeLine .inner{
+.playerTimeLine .inner{
   width: 100%;
   cursor: pointer;
   padding: 8px 0;
 }
 
-#playerTimeLine .player-progress {
+.playerProgress {
   position: relative;
   height: 3px;
   background: #fff;
 }
 
-#playerTimeLine .currentTime {
+.currentTime {
   height: 3px;
   background: #2980b9;
   position: relative;
 }
 
-#playerTimeLine .currentTime .handle {
+.currentTime .handle {
   position: absolute;
   right: 0;
   width: 9px;
@@ -107,61 +109,35 @@
   -webkit-transform: scale(0);
   transition: 0.3s transform,opacity;
 }
-#playerTimeLine .wrapper:hover .handle{
+.wrapper:hover .handle{
   opacity: 1;
   -webkit-transform: scale(1);
   transition: 0.3s transform,opacity;
 
 }
 
-#playerVolume{
+.playerVolume{
   align-items: center;
 }
 
-#playerVolume i{
+.playerVolume i{
   margin-right: 10px;
   cursor: pointer;
 }
 
-#playerVolume .wrapper{
+.playerVolume .wrapper{
   flex-grow: 1;
 }
-#playerVolume .inner{
+.playerVolume .inner{
   width: 100%;
   cursor: pointer;
   padding: 8px 0;
 }
 
-#playerVolume .player-progress {
-  position: relative;
-  height: 3px;
-  background: #fff;
+#player .trackInfo{
+  padding-left: 10px;
 }
-
-#playerVolume .currentTime {
-  height: 3px;
-  background: #2980b9;
-  position: relative;
-}
-
-#playerVolume .currentTime .handle {
-  position: absolute;
-  right: 0;
-  width: 9px;
-  height: 9px;
-  background: white;
-  bottom: 0;
-  margin-bottom: -3px;
-  border-radius: 100%;
-  margin-right: -4px;
-  cursor: pointer;
-  opacity: .5;
-  -webkit-transform: scale(0);
-  transition: 0.3s transform,opacity;
-}
-#playerVolume .wrapper:hover .handle{
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transition: 0.3s transform,opacity;
-
+.trackTitle{
+  font-size: 13px;
+  text-align: center;
 }

@@ -2,9 +2,9 @@
 import React, {Component, PropTypes} from "react";
 import ReactDOM from "react-dom";
 import {appendClientId, getImageUrl} from "../../utils/soundcloudUtils";
-import {getReadableTime, getPos} from "../../utils/appUtils";
+import {getReadableTime, getPos,truncate} from "../../utils/appUtils";
 import {IMAGE_SIZES} from "../../constants/Soundcloud";
-import "./player.global.css";
+import styles from "./player.css";
 import {CHANGE_TYPES} from "../../constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../actions";
 import Sound from "../common/Sound-React";
@@ -259,10 +259,10 @@ class Player extends React.Component {
       const width = time / duration * 100;
       return (
         <div
-          className="currentTime"
+          className={styles.currentTime}
           style={{width: `${width}%`}}>
           <div
-            className="handle"
+            className={styles.handle}
           />
         </div>
       );
@@ -276,10 +276,10 @@ class Player extends React.Component {
     const width = muted ? 0 : volume * 100;
     return (
       <div
-        className="currentTime"
+        className={styles.currentTime}
         style={{width: `${width}%`}}>
         <div
-          className="handle"
+          className={styles.handle}
           onClick={this.handleMouseClick}
           onMouseDown={this.handleVolumeMouseDown}
         />
@@ -332,8 +332,8 @@ class Player extends React.Component {
     const volume_icon = this.state.muted || this.state.volume == 0 ? "volume_off" : (this.state.volume == 1) ? "volume_up" : "volume_down";
 
     return (
-      <div id="player">
-        <div className="imgOverlay">
+      <div className={styles.player}>
+        <div className={styles.imgOverlay}>
           <img src={overlay_image}/>
         </div>
 
@@ -349,41 +349,44 @@ class Player extends React.Component {
           onPlaying={this.onPlaying}
           onFinishedPlaying={this.onFinishedPlaying}/>
 
-        <div className="flex playerInner">
-          <div className="playerAlbum">
+        <div className={`flex ${styles.playerInner}`}>
+          <div className={`${styles.playerAlbum}`}>
             <img width={50} height={50} src={image}/>
           </div>
-          <div id="playerControls">
+          <div className={`flex flex-xs-middle ${styles.playerControls}`}>
             <a href="javascript:void(0)" onClick={prevFunc}><i className="material-icons">skip_previous</i></a>
 
             <a href="javascript:void(0)" onClick={this.togglePlay}><i className="material-icons">{toggle_play_icon}</i></a>
 
             <a href="javascript:void(0)" onClick={nextFunc}><i className="material-icons">skip_next</i></a>
           </div>
-          <div id="playerTimeLine" className="col-xs-5 col-lg-6 col-xl-8">
-            <div
-              className="time">{getReadableTime(this.state.currentTime)}</div>
-            <div className="time">{getReadableTime(this.state.duration)}</div>
 
-            <div className="wrapper">
-              <div className="inner"
+          <div className={`col-xs-6 col-lg-6 col-xl-8 ${styles.playerTimeLine}`}>
+
+            <div className={styles.trackTitle}>{truncate(track.title,100)}</div>
+            <div className={`row ${styles.wrapper}`}>
+
+              <div className={styles.time}>{getReadableTime(this.state.currentTime)}</div>
+
+              <div className={styles.inner}
                    onClick={this.progressClick}
                    onMouseDown={this.handleSeekMouseDown}>
-                <div className="player-progress" ref="seekBar">
+                <div className={styles.playerProgress} ref="seekBar">
                   {
                     this.renderProgressBar()
                   }
                 </div>
               </div>
+              <div className={styles.time}>{getReadableTime(this.state.duration)}</div>
             </div>
 
           </div>
-          <div id="playerVolume" className="col-xs-2 col-lg-2 col-xl-1 flex">
+          <div className={`col-xs-2 col-lg-2 col-xl-1 flex ${styles.playerVolume}`}>
             <i className="material-icons" onClick={this.toggleMute}>{volume_icon}</i>
-            <div className="wrapper">
-              <div className="inner" onClick={this.volumeClick}
+            <div className={styles.wrapper}>
+              <div className={styles.inner} onClick={this.volumeClick}
                    onMouseDown={this.handleVolumeMouseDown}>
-                <div className="player-progress" ref="volumeBar">
+                <div className={styles.playerProgress} ref="volumeBar">
                   {
                     this.renderVolumeBar()
                   }
