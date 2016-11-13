@@ -115,12 +115,9 @@ main .offline:after{
   margin-left: 230px;
   position: relative;
 
-  height: 100vh;
+  height: calc(100vh - 54px);
   overflow-y: overlay;
-}
-
-.main-inner{
-  padding: 15px 30px;
+  padding: 15px 30px 0 30px;
 }
 
 .main::-webkit-scrollbar-track {

@@ -1,12 +1,14 @@
 // @flow
 import React, {Component, PropTypes} from "react";
 import PlayerContainer from "./playerContainer";
-import OfflineContainer from "./offlineContainer";
+import isOffline from "../components/offlineComponent";
 import SideBar from "../components/SideBar/sidebar.component";
 import Header from "../components/Header/Header";
 import * as actions from "../actions";
 import {connect} from "react-redux";
 import {ipcRenderer} from "electron";
+import {STATUS} from "../constants/playlist"
+import cn from "classnames";
 
 class App extends Component {
   constructor(props) {
@@ -46,25 +48,22 @@ class App extends Component {
     const {online} = this.state;
 
     if (!online) {
-      return <OfflineContainer />;
+      return <isOffline />;
     }
 
-    return (
-      <div className="main-inner">
-        {this.props.children}
-      </div>
-    );
+    return this.props.children;
   }
 
   render() {
-    const {me} = this.props;
+    const {me,isPlaying} = this.props;
+
 
     return (
       <div>
         <Header />
         <main>
           <SideBar me={me}/>
-          <div className="main">
+          <div>
             {
               this.renderMain()
             }
@@ -86,10 +85,11 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const {user} = state;
+  const {user,player} = state;
   const {me} = user;
   return {
-    me
+    me,
+    isPlaying: player.currentSong != null
   }
 }
 
