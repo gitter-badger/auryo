@@ -88,7 +88,7 @@
 
 #playerTimeLine .currentTime {
   height: 3px;
-  background: #ff3a00;
+  background: #2980b9;
   position: relative;
 }
 
@@ -140,7 +140,7 @@
 
 #playerVolume .currentTime {
   height: 3px;
-  background: #ff3a00;
+  background: #2980b9;
   position: relative;
 }
 

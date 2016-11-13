@@ -31,7 +31,7 @@ class User extends Component {
             <div className="user">
                 <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle tag="a" className="btn-link">
-                        <i className="icon-chevron-thin-down"/>
+                        <i className="material-icons">keyboard_arrow_down</i>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-right">
                         <DropdownItem onClick={logout}>Logout</DropdownItem>

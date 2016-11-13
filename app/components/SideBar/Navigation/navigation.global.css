@@ -14,7 +14,7 @@
 .navItem .navLink.active{
     color:#fff !important;
     background: #2c2d2f;
-    border-left:4px solid #ff3a00;
+    border-left:4px solid #16a085;
 }
 .navLink *{
     vertical-align: middle;

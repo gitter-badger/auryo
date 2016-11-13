@@ -23,12 +23,12 @@ class TogglePlayButton extends Component {
   render() {
     const {status} = this.props;
 
-    const icon = (status == Sound.status.PLAYING) ? 'icon-controller-paus' : 'icon-controller-play';
+    const icon = (status == Sound.status.PLAYING) ? 'pause' : 'play_arrow';
 
     return (
 
       <a className="playButton" onClick={this.togglePlay}>
-        <i className={icon}/>
+        <i className="material-icons">{icon}</i>
       </a>
     );
   }
