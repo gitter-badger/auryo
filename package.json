@@ -24,8 +24,9 @@
     "cleanup": "mop -v"
   },
   "build": {
-    "appId": "org.develar.ElectronReact",
-    "category": "public.app-category.tools",
+    "appId": "obe.sneljo.auryo",
+    "category": "public.app-category.music",
+    "homepage":"https://github.com/Superjo149/auryo",
     "dmg": {
       "contents": [
         {
@@ -60,7 +61,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chentsulin/electron-react-boilerplate.git"
+    "url": "git+https://github.com/Superjo149/auryo.git"
   },
   "author": {
     "name": "C. T. Lin",
@@ -69,7 +70,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chentsulin/electron-react-boilerplate/issues"
+    "url": "https://github.com/Superjo149/auryo/issues"
   },
   "keywords": [
     "electron",
