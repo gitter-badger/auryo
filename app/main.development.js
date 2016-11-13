@@ -59,14 +59,17 @@ function doLogin() {
 
   loginWindow = new BrowserWindow(options);
 
+  loginWindow.setMenu(null);
+
   loginWindow.on('close', app.quit);
   loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
 
-  /*loginWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+  loginWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
     if (errorDescription === 'ERR_INTERNET_DISCONNECTED') {
-      // your code
+      loginWindow.loadURL(`file://${__dirname}/no_internet.html`)
+
     }
-  });*/
+  });
 }
 
 function init() {
@@ -96,8 +99,6 @@ function init() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  mainWindow.on('close', app.quit);
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
