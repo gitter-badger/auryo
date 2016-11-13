@@ -43,12 +43,12 @@ class TrackGridItem extends Component {
       return <TogglePlayButtonfrom />;
     }
 
-    const icon = isPlaying ? 'icon-controller-paus' : 'icon-controller-play';
+    const icon = isPlaying ? 'pause' : 'play_arrow';
 
     return (
 
       <a className="playButton" onClick={playTrackFunc}>
-        <i className={icon}/>
+        <i className="material-icons">{icon}</i>
       </a>
     );
   }
@@ -87,12 +87,12 @@ class TrackGridItem extends Component {
               }
               <div className="trackStats">
                 <div className="stat">
-                  <i className="icon-heart-outlined"/>
+                  <i className="material-icons">favorite_border</i>
                   <span>{abbreviate_number(track.likes_count)}</span>
                 </div>
                 <div className="stat">
-                  <i className="icon-controller-play"/>
-                  <span>{abbreviate_number(track.playback_count)}</span>
+                  <i className="material-icons">repeat</i>
+                  <span>{abbreviate_number(track.reposts_count)}</span>
                 </div>
               </div>
             </div>

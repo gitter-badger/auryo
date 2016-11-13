@@ -15,7 +15,7 @@ class FeedContainer extends Component {
   render() {
       const {playingSongId} = this.props;
 
-    const c = cn("main","clearfix",{
+    const c = cn("clearfix",{
       playing: playingSongId != null
     });
     return (

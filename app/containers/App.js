@@ -1,6 +1,7 @@
 // @flow
 import React, {Component, PropTypes} from "react";
 import PlayerContainer from "./playerContainer";
+import OfflineContainer from "./offlineContainer";
 import SideBar from "../components/SideBar/sidebar.component";
 import Header from "../components/Header/Header";
 import * as actions from "../actions";
@@ -8,9 +9,51 @@ import {connect} from "react-redux";
 import {ipcRenderer} from "electron";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderMain = this.renderMain.bind(this);
+    this.setOnlineStatus = this.setOnlineStatus.bind(this);
+
+    this.state = {
+      online: navigator.onLine
+    };
+
+    window.addEventListener('online', this.setOnlineStatus);
+    window.addEventListener('offline', this.setOnlineStatus);
+
+  }
+
+  setOnlineStatus() {
+    const {dispatch} = this.props;
+
+    this.setState({
+      online: navigator.onLine
+    });
+
+    if (navigator.onLine == true) {
+      dispatch(actions.initUser());
+      this.forceUpdate();
+    }
+  }
+
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(actions.initUser());
+  }
+
+  renderMain() {
+    const {online} = this.state;
+
+    if (!online) {
+      return <OfflineContainer />;
+    }
+
+    return (
+      <div className="main-inner">
+        {this.props.children}
+      </div>
+    );
   }
 
   render() {
@@ -19,11 +62,15 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <div id="main">
+        <main>
           <SideBar me={me}/>
-          {this.props.children}
+          <div className="main">
+            {
+              this.renderMain()
+            }
+          </div>
 
-        </div>
+        </main>
         <footer className="navbar-fixed-bottom">
           <PlayerContainer/>
         </footer>

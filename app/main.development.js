@@ -2,7 +2,6 @@ import {app, BrowserWindow, Menu, shell, protocol, ipcMain,screen} from "electro
 import {CLIENT_ID} from "./constants/Config";
 const settings = require('electron-settings');
 
-
 var url = require('url');
 var querystring = require('querystring');
 
@@ -62,6 +61,12 @@ function doLogin() {
 
   loginWindow.on('close', app.quit);
   loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
+
+  /*loginWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+    if (errorDescription === 'ERR_INTERNET_DISCONNECTED') {
+      // your code
+    }
+  });*/
 }
 
 function init() {

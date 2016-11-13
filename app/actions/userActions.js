@@ -10,7 +10,7 @@ import {ipcRenderer} from "electron";
  *
  * @returns {function(*)}
  */
-export function initUser(token) {
+export function initUser() {
   return dispatch => {
 
     const token = ipcRenderer.sendSync('ping');

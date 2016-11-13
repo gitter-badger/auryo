@@ -28,18 +28,6 @@ class Spinner extends React.Component {
             <li/>
             <li/>
           </ul>
-          <ul className={styles.loading}>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-            <li/>
-          </ul>
         </div>
       </div>
     );
