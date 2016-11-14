@@ -1,27 +1,43 @@
 // @flow
 import React, {Component, PropTypes} from "react";
-import Feed from "../components/Feed/feedComponent";
-import PageHeader from "../components/PageHeader/PageHeader";
+import PageHeader from "../components/common/Pageheader/PageHeader";
 import {PLAYLISTS} from "../constants/playlist";
 import {connect} from "react-redux";
 import {fetchMore} from "../actions/";
 import {getPlayingTrackId} from "../utils/playerUtils";
 import infiniteScroll from "../components/InfiniteScroll";
 import cn from "classnames";
+import TracksGrid from "../components/TracksGrid/TracksGrid";
 
 
 class FeedContainer extends Component {
 
-  render() {
-      const {playingSongId} = this.props;
+  componentWillMount() {
+    const {dispatch, playlist, playlists} = this.props;
+    if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
+      dispatch(fetchMore(playlist));
+    }
+  }
 
-    const c = cn("main clearfix",{
+  componentWillReceiveProps(nextProps) {
+    const {dispatch, playlist, playlists} = this.props;
+    if (playlist !== nextProps.playlist) {
+      if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
+        dispatch(fetchMore(nextProps.playlist));
+      }
+    }
+  }
+
+  render() {
+    const {playingSongId} = this.props;
+
+    const c = cn("main scroll clearfix", {
       playing: playingSongId != null
     });
     return (
       <div className={c}>
-          <PageHeader title="Stream"/>
-          <Feed {...this.props}/>
+        <PageHeader title="Stream"/>
+        <TracksGrid {...this.props} />
       </div>
     );
   }

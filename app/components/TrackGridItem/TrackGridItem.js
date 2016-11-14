@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from "react";
+import {Link} from "react-router";
 import {IMAGE_SIZES} from "../../constants/Soundcloud";
 import {getImageUrl} from "../../utils/soundcloudUtils";
 import classnames from "classnames";
 import {truncate, abbreviate_number} from "../../utils/appUtils";
-import TogglePlayButtonfrom from "../../components/togglePlay";
+import togglePlay from "../../components/togglePlay";
+import "./trackgriditem.global.css"
 
 class TrackGridItem extends Component {
 
@@ -16,7 +18,7 @@ class TrackGridItem extends Component {
               track.user.username
             }
           </a>
-          <i className="icon-retweet2"></i>
+          <i className="material-icons">repeat</i>
           <a className="repost" href="javascript:void(0)"
              title="Go to user page">{track.from_user.username}</a>
 
@@ -40,7 +42,7 @@ class TrackGridItem extends Component {
     const {isPlaying, playTrackFunc} = this.props;
 
     if (isPlaying) {
-      return <TogglePlayButtonfrom />;
+      return <togglePlay />;
     }
 
     const icon = isPlaying ? 'pause' : 'play_arrow';
@@ -65,8 +67,8 @@ class TrackGridItem extends Component {
       track,
     } = this.props;
 
-    let image = (track.artwork_url != null) ? getImageUrl(track.artwork_url, IMAGE_SIZES.LARGE) : getImageUrl(track.user.avatar_url, IMAGE_SIZES.LARGE);
 
+    const image = getImageUrl(track, IMAGE_SIZES.LARGE);
 
     const playing = classnames(
       "track", track.id,
@@ -76,7 +78,7 @@ class TrackGridItem extends Component {
     );
 
     return (
-      <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-s-5" style={{height:"360px"}}>
+      <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-s-5" style={{height: "360px"}}>
         <div className={playing}>
 
           <div className="trackImage">
@@ -104,11 +106,11 @@ class TrackGridItem extends Component {
 
           <div className="trackInfo">
             <div className="trackTitle">
-              <a href="javascript:void(0)" title="Go to track page">
+              <Link to={`/song/${(track.track_id) ? track.track_id : track.id}`}>
                 {
                   truncate(track.title, 35)
                 }
-              </a>
+              </Link>
             </div>
 
 

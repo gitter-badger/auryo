@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from "react";
-import Sound from "../components/common/Sound-React";
+import Sound from "./Sound-React";
 import {toggleStatus} from "../actions"
 import {connect} from "react-redux";
 
@@ -27,7 +27,7 @@ class TogglePlayButton extends Component {
 
     return (
 
-      <a className="playButton" onClick={this.togglePlay}>
+      <a className={styles.playButton} onClick={this.togglePlay}>
         <i className="material-icons">{icon}</i>
       </a>
     );

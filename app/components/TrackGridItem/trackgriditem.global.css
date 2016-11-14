@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-.playButton {
+.trackImage .playButton {
   background: #fff;
   border-radius: 50px;
   height: 50px;
@@ -37,7 +37,7 @@
   transition: 0.1s opacity ease-out, 0.1s transform ease-out;
 }
 
-.playButton i {
+.trackImage .playButton i {
   color: #2980b9;
   font-size: 30px;
 
@@ -109,6 +109,8 @@
 
 .trackArtist i {
   padding: 5px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .trackArtist * {

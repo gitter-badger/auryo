@@ -7,7 +7,7 @@ import {IMAGE_SIZES} from "../../constants/Soundcloud";
 import styles from "./player.css";
 import {CHANGE_TYPES} from "../../constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../actions";
-import Sound from "../common/Sound-React";
+import Sound from "../Sound-React";
 
 class Player extends React.Component {
 
@@ -325,8 +325,8 @@ class Player extends React.Component {
       this.state.shuffle ? CHANGE_TYPES.SHUFFLE : CHANGE_TYPES.NEXT
     );
 
-    const image = (track.artwork_url != null) ? getImageUrl(track.artwork_url, IMAGE_SIZES.SMALL) : getImageUrl(track.user.avatar_url, IMAGE_SIZES.SMALL);
-    let overlay_image = (track.artwork_url != null) ? getImageUrl(track.artwork_url, IMAGE_SIZES.XLARGE) : getImageUrl(track.user.avatar_url, IMAGE_SIZES.XLARGE);
+    const image = getImageUrl(track, IMAGE_SIZES.SMALL);
+    let overlay_image = getImageUrl(track, IMAGE_SIZES.XLARGE);
 
     const toggle_play_icon = status == Sound.status.PLAYING ? 'pause' : 'play_arrow';
     const volume_icon = this.state.muted || this.state.volume == 0 ? "volume_off" : (this.state.volume == 1) ? "volume_up" : "volume_down";

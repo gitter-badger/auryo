@@ -1,9 +1,9 @@
 import * as actionTypes from "../constants/actionTypes";
 import * as SC from "../utils/soundcloudUtils";
 import {playlistSchema, trackSchema, trackInfoSchema} from "../schemas/";
+import {arrayOf, normalize} from "normalizr";
 import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
 import {STREAM_CHECK_INTERVAL} from "../constants/Config";
-import {arrayOf, normalize} from "normalizr";
 import _ from "lodash";
 let updaterInterval;
 
@@ -94,7 +94,6 @@ function _fetchPlaylist(url, name) {
         const tracks = collection.map(info => info.track);
 
         const n = normalize(tracks, arrayOf(trackSchema));
-        console.log(n);
 
         const info = normalize(collection, arrayOf(trackInfoSchema));
 
@@ -262,6 +261,12 @@ function setPlaylists(playlists, entities) {
   };
 }
 
+/**
+ * Check if there is more to fetch, if so, fetch more
+ *
+ * @param playlist
+ * @returns {function(*, *)}
+ */
 export function fetchMore(playlist) {
   return (dispatch, getState) => {
     const {playlists} = getState();
@@ -273,6 +278,14 @@ export function fetchMore(playlist) {
     return null;
   };
 }
+
+/**
+ * Check if the current playlist isn't fetching & has a next Url
+ *
+ * @param playlists
+ * @param playlist
+ * @returns {*|boolean}
+ */
 function canFetchMore(playlists, playlist) {
   const current = playlists[playlist];
 

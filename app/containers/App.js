@@ -2,13 +2,11 @@
 import React, {Component, PropTypes} from "react";
 import PlayerContainer from "./playerContainer";
 import isOffline from "../components/offlineComponent";
-import SideBar from "../components/SideBar/sidebar.component";
-import Header from "../components/Header/Header";
+import SideBar from "../components/common/Sidebar/sidebarComponent";
+import Header from "../components/common/Header/Header";
 import * as actions from "../actions";
 import {connect} from "react-redux";
 import {ipcRenderer} from "electron";
-import {STATUS} from "../constants/playlist"
-import cn from "classnames";
 
 class App extends Component {
   constructor(props) {
@@ -34,8 +32,7 @@ class App extends Component {
     });
 
     if (navigator.onLine == true) {
-      dispatch(actions.initUser());
-      this.forceUpdate();
+      // TODO refetch everything
     }
   }
 
@@ -55,14 +52,14 @@ class App extends Component {
   }
 
   render() {
-    const {me,isPlaying} = this.props;
+    const {me} = this.props;
 
 
     return (
       <div>
         <Header />
+        <SideBar me={me}/>
         <main>
-          <SideBar me={me}/>
           <div>
             {
               this.renderMain()
@@ -85,11 +82,10 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const {user,player} = state;
+  const {user} = state;
   const {me} = user;
   return {
-    me,
-    isPlaying: player.currentSong != null
+    me
   }
 }
 

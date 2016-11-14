@@ -15,18 +15,18 @@ class Navigation extends Component {
             <IndexLink to="/" className="navLink" activeClassName="active"><i className="material-icons">home</i> <span>Feed</span></IndexLink>
           </li>
           <li className="navItem">
-            <Link to="chart" className="navLink" activeClassName="active"><i className="material-icons">insert_chart</i>
+            <Link to="/chart" className="navLink" activeClassName="active"><i className="material-icons">insert_chart</i>
               <span>Charts</span></Link>
           </li>
         </ul>
         <h2>Me</h2>
         <ul className="nav">
           <li className="navItem">
-            <Link to="likes" className="navLink" activeClassName="active"><i className="material-icons">favorite</i>
+            <Link to="/likes" className="navLink" activeClassName="active"><i className="material-icons">favorite</i>
               <span>Likes</span></Link>
           </li>
           <li className="navItem">
-            <Link to="playlists" className="navLink" activeClassName="active"><i className="material-icons">album</i>
+            <Link to="/playlists" className="navLink" activeClassName="active"><i className="material-icons">album</i>
               <span>Playlists</span></Link>
           </li>
         </ul>

@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from "react";
-import {close, maximize, minimize} from "../../actions/windowActions";
+import {close, maximize, minimize} from "../../../actions/windowActions";
 
 
 class Header extends Component {

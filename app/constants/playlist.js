@@ -11,3 +11,10 @@ export const CHANGE_TYPES = {
   REPEAT: 'REPEAT',
   PREV: 'PREV'
 };
+
+
+export const STATUS = {
+  PLAYING: 'PLAYING',
+  STOPPED: 'STOPPED',
+  PAUSED: 'PAUSED'
+};

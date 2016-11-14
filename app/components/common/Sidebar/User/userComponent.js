@@ -2,7 +2,7 @@
 import React, {Component, PropTypes} from 'react';
 import cn from 'classnames';
 import './user.global.css';
-import {logout} from '../../../actions';
+import {logout} from '../../../../actions';
 
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem,Button} from 'reactstrap';
 

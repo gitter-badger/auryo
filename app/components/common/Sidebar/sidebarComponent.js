@@ -1,7 +1,7 @@
 // @flow
 import React, {Component, PropTypes} from "react";
-import Navigation from "./Navigation/navigation.component";
-import User from "./User/user.component";
+import Navigation from "./Navigation/navigationComponent";
+import User from "./User/userComponent";
 
 
 class SideBar extends Component {
