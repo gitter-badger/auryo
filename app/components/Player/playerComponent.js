@@ -354,11 +354,11 @@ class Player extends React.Component {
             <img width={50} height={50} src={image}/>
           </div>
           <div className={`flex flex-xs-middle ${styles.playerControls}`}>
-            <a href="javascript:void(0)" onClick={prevFunc}><i className="material-icons">skip_previous</i></a>
+            <a href="javascript:void(0)" onClick={prevFunc}><i className="icon-skip_previous" /></a>
 
-            <a href="javascript:void(0)" onClick={this.togglePlay}><i className="material-icons">{toggle_play_icon}</i></a>
+            <a href="javascript:void(0)" onClick={this.togglePlay}><i className={`icon-${toggle_play_icon}`} /></a>
 
-            <a href="javascript:void(0)" onClick={nextFunc}><i className="material-icons">skip_next</i></a>
+            <a href="javascript:void(0)" onClick={nextFunc}><i className="icon-skip_next" /></a>
           </div>
 
           <div className={`col-xs-6 col-lg-6 col-xl-8 ${styles.playerTimeLine}`}>
@@ -382,7 +382,7 @@ class Player extends React.Component {
 
           </div>
           <div className={`col-xs-2 col-lg-2 col-xl-1 flex ${styles.playerVolume}`}>
-            <i className="material-icons" onClick={this.toggleMute}>{volume_icon}</i>
+            <i className={`icon-${volume_icon}`} onClick={this.toggleMute} />
             <div className={styles.wrapper}>
               <div className={styles.inner} onClick={this.volumeClick}
                    onMouseDown={this.handleVolumeMouseDown}>

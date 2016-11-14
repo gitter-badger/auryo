@@ -25,6 +25,7 @@
   color: #fff;
   display: inline-block;
   vertical-align: middle;
+  text-decoration: none !important;
 }
 .playerControls a:hover {
   color: #fff;
@@ -123,6 +124,7 @@
 .playerVolume i{
   margin-right: 10px;
   cursor: pointer;
+  font-size: 25px;
 }
 
 .playerVolume .wrapper{

@@ -18,7 +18,7 @@ class TrackGridItem extends Component {
               track.user.username
             }
           </a>
-          <i className="material-icons">repeat</i>
+          <i className="icon-retweet" />
           <a className="repost" href="javascript:void(0)"
              title="Go to user page">{track.from_user.username}</a>
 
@@ -50,7 +50,7 @@ class TrackGridItem extends Component {
     return (
 
       <a className="playButton" onClick={playTrackFunc}>
-        <i className="material-icons">{icon}</i>
+        <i className={`icon-${icon}`}/>
       </a>
     );
   }
@@ -89,11 +89,11 @@ class TrackGridItem extends Component {
               }
               <div className="trackStats">
                 <div className="stat">
-                  <i className="material-icons">favorite_border</i>
+                  <i className="icon-favorite_border" />
                   <span>{abbreviate_number(track.likes_count)}</span>
                 </div>
                 <div className="stat">
-                  <i className="material-icons">repeat</i>
+                  <i className="icon-retweet" />
                   <span>{abbreviate_number(track.reposts_count)}</span>
                 </div>
               </div>

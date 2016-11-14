@@ -20,7 +20,10 @@
     vertical-align: middle;
 }
 .navLink i{
-    width: 40px;
+  width: 30px;
+  display: inline-block;
+  font-size: 18px;
+  vertical-align: top;
 }
 
 .nav{

@@ -28,7 +28,7 @@ class TogglePlayButton extends Component {
     return (
 
       <a className={styles.playButton} onClick={this.togglePlay}>
-        <i className="material-icons">{icon}</i>
+        <i className={"icon-" + {icon}} />
       </a>
     );
   }

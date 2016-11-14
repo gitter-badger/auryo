@@ -12,13 +12,13 @@ class Header extends Component {
           <ul className="nav window-controls flex">
 
             <a className="control control-minimize" onClick={minimize} href="javascript:void(0)">
-              <i className="material-icons">remove</i>
+              <i className="icon-remove" />
             </a>
             <a className="control control-maximize" onClick={maximize} href="javascript:void(0)">
-              <i className="material-icons">fullscreen</i>
+              <i className="icon-fullscreen_exit" />
             </a>
             <a className="control control-close" onClick={close} href="javascript:void(0)">
-              <i className="material-icons">close</i>
+              <i className="icon-close" />
             </a>
           </ul>
         </div>

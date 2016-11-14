@@ -2,8 +2,7 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap-flex.min.css";
 @import "responsive.css";
 @import "sidebar.css";
-@import "../../components/TrackGridItem/style.css";
-@import "../fonts/iconfont/material-icons.css";
+@import "../fonts/iconmoon/style.css";
 
 
 body {
@@ -18,13 +17,14 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Source Code Pro', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }
 
 main {
   margin-top: 54px;
   position: relative;
+  margin-left: 230px;
 }
 
 main .offline {
@@ -112,12 +112,14 @@ main .offline:after{
 
 
 .main {
-  margin-left: 230px;
   position: relative;
-
-  height: calc(100vh - 54px);
-  overflow-y: overlay;
   padding: 15px 30px 0 30px;
+}
+
+.scroll{
+  position: relative;
+  overflow-y: overlay;
+  height: calc(100vh - 54px);
 }
 
 .main::-webkit-scrollbar-track {
