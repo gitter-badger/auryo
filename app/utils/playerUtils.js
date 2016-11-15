@@ -1,12 +1,13 @@
-export function getPlayingTrackId(player, playlists, feedInfo) {
+export function getPlayingTrackId(player, playlists, feedInfo = null) {
   if (player.currentSong !== null) {
     const playingPlaylistKey = player.queuedPlaylists[player.queuedPlaylists.length - 1];
     const playlist = playlists[playingPlaylistKey];
+    if(!playlist) return null;
 
     var id = playlist.items[player.currentSong];
 
     if (id) {
-      if (id.length == 36) {
+      if (id.length == 36 && feedInfo) {
         id = feedInfo[id].track;
       }
       return id.toString();

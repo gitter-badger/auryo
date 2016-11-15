@@ -36,11 +36,20 @@
 .icon-reload:before {
   content: "\e900";
 }
+.icon-add:before {
+  content: "\e145";
+}
+.icon-add_box:before {
+  content: "\e146";
+}
 .icon-album:before {
   content: "\e019";
 }
 .icon-poll:before {
   content: "\e801";
+}
+.icon-chat_bubble:before {
+  content: "\e0ca";
 }
 .icon-close:before {
   content: "\e5cd";

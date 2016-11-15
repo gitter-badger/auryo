@@ -5,7 +5,7 @@ const initialState = {
   followings: {},
   likes: {},
   playlists: [],
-  newFeedItems:[]
+  newFeedItems: []
 };
 
 export default function (state = initialState, action) {
@@ -30,6 +30,22 @@ export default function (state = initialState, action) {
       return {
         ...state,
         playlists: action.playlists
+      };
+    case actionTypes.USER_SET_LIKE:
+      return {
+        ...state,
+        likes: {
+          ...state.likes,
+          [action.trackID]: action.liked
+        }
+      };
+    case actionTypes.USER_ADD_LIKE:
+      return {
+        ...state,
+        likes: {
+          ...state.likes,
+          [action.trackID]: 1
+        }
       }
   }
   return state;

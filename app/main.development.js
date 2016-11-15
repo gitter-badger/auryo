@@ -61,8 +61,8 @@ function doLogin() {
 
   loginWindow.setMenu(null);
 
-  loginWindow.on('close', app.quit);
-  loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback')
+  loginWindow.on('close', app.quit); // http://localhost:3716/oauth/callback
+  loginWindow.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=cumulus://oauth/callback');
 
   loginWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
     if (errorDescription === 'ERR_INTERNET_DISCONNECTED') {
@@ -70,6 +70,30 @@ function doLogin() {
 
     }
   });
+  loginWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+    handleCallback(newUrl);
+  });
+}
+
+function handleCallback (u) {
+  var uri = url.parse(u);
+
+  var raw_code = /access_token=([^&]*)/.exec(u) || null;
+  var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
+
+  if(uri.hash && code){
+
+    var hash = uri.hash.substr(1);
+    var token = querystring.parse(hash).access_token;
+
+    settings.setSync("access_token", token);
+    if (loginWindow) {
+      loginWindow.removeListener('close', app.quit);
+      loginWindow.close();
+    }
+    init();
+
+  }
 }
 
 function init() {
@@ -119,31 +143,6 @@ function init() {
 }
 
 app.on('ready', () => {
-  /**
-   * register Cumulus protocol
-   */
-  protocol.registerHttpProtocol('cumulus', function (req) {
-    var uri = url.parse(req.url);
-
-    switch (uri.host) {
-      case 'oauth':
-        if (uri.pathname !== '/callback') return;
-
-        // parse access token
-        var hash = uri.hash.substr(1);
-        var token = querystring.parse(hash).access_token;
-
-        settings.setSync("access_token", token);
-        if (loginWindow) {
-          loginWindow.removeListener('close', app.quit);
-          loginWindow = null
-        }
-        init();
-
-        break;
-    }
-
-  });
 
   if (settings.hasSync("access_token")) {
     init();
@@ -159,8 +158,7 @@ ipcMain.on('ping', (event, arg) => {
 ipcMain.on('logout', (event, arg) => {
   settings.deleteSync("access_token");
   if (mainWindow) {
-    mainWindow.removeListener('close', app.quit);
-    mainWindow.close()
+    mainWindow.hide();
   }
   doLogin();
 });

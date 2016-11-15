@@ -21,22 +21,23 @@ class TogglePlayButton extends Component {
   }
 
   render() {
-    const {status} = this.props;
+    const {status,classname} = this.props;
 
     const icon = (status == Sound.status.PLAYING) ? 'pause' : 'play_arrow';
 
     return (
 
-      <a className={styles.playButton} onClick={this.togglePlay}>
-        <i className={"icon-" + {icon}} />
+      <a className={classname} onClick={this.togglePlay}>
+        <i className={`icon-${icon}`} />
       </a>
     );
   }
 }
 
 TogglePlayButton.propTypes = {
-  status: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired
+  status: PropTypes.string,
+  dispatch: PropTypes.func,
+  classname: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

@@ -113,7 +113,7 @@ main .offline:after{
 
 .main {
   position: relative;
-  padding: 15px 30px 0 30px;
+  padding: 30px 30px 0 30px;
 }
 
 .scroll{
@@ -122,16 +122,16 @@ main .offline:after{
   height: calc(100vh - 54px);
 }
 
-.main::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.main::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
   background-color: #F5F5F5;
 }
 
-.main::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border-radius: 8px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #555;
@@ -210,6 +210,47 @@ main .offline:after{
   display: flex;
 }
 
-.material-icons {
-  vertical-align: middle;
+i {
+  font-size: 1.4rem;
+  vertical-align: sub;
 }
+
+.header{
+  overflow: hidden;
+  position: relative;
+}
+.header h2{
+  padding: 60px 30px;
+  text-transform: uppercase;
+  font-weight:700;
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+.header .overlay{
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.header .overlay:after{
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(47, 52, 63,0.5)
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+

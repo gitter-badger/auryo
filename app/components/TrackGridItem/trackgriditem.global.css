@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-.trackImage .playButton {
+.toggleButton {
   background: #fff;
   border-radius: 50px;
   height: 50px;
@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-.track:hover .playButton, .track.isPlaying .playButton {
+.track:hover .toggleButton, .track.isPlaying .toggleButton {
   opacity: 1;
   transform: scale(1, 1);
   -webkit-transform: scale(1, 1);
@@ -37,7 +37,7 @@
   transition: 0.1s opacity ease-out, 0.1s transform ease-out;
 }
 
-.trackImage .playButton i {
+.toggleButton i {
   color: #2980b9;
   font-size: 30px;
 

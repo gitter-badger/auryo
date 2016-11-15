@@ -132,7 +132,7 @@ function isFetching(name) {
  * @param futureUrl
  * @returns {{type: *, name: *, entities: *, result: *, nextUrl: *, futureUrl: *}}
  */
-function setPlaylist(name, entities, result, nextUrl = null, futureUrl = null) {
+export function setPlaylist(name, entities, result, nextUrl = null, futureUrl = null) {
   return {
     type: actionTypes.PLAYLIST_SET,
     name,

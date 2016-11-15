@@ -26,7 +26,7 @@
   "build": {
     "appId": "obe.sneljo.auryo",
     "category": "public.app-category.music",
-    "homepage":"https://github.com/Superjo149/auryo",
+    "homepage": "https://github.com/Superjo149/auryo",
     "dmg": {
       "contents": [
         {
@@ -105,17 +105,17 @@
     "css-loader": "^0.25.0",
     "devtron": "^1.4.0",
     "electron": "^1.4.4",
-    "electron-settings": "^2.2.2",
     "electron-builder": "^7.15.2",
     "electron-devtools-installer": "^2.0.1",
+    "electron-settings": "^2.2.2",
     "enzyme": "^2.5.1",
     "eslint": "^3.9.0",
-    "eslint-plugin-import": "^2.0.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-formatter-pretty": "^1.1.0",
     "eslint-import-resolver-webpack": "^0.6.0",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-flowtype-errors": "^1.5.0",
+    "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-promise": "^3.3.0",
@@ -125,6 +125,7 @@
     "fbjs-scripts": "^0.7.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.24.0",
+    "image-webpack-loader": "^3.0.0",
     "jsdom": "^9.8.3",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
@@ -142,8 +143,7 @@
     "webpack-merge": "^0.15.0",
     "webpack-validator": "^2.2.9"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devEngines": {
     "node": ">=6.x",
     "npm": ">=3.x"

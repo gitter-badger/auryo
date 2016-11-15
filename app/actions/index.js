@@ -1,6 +1,7 @@
 import {initUser, logout} from "./userActions";
 import {fetchMore} from "./playlistActions";
 import {playTrack, toggleStatus, changeTrack, setCurrentTime} from "./playerActions";
+import {fetchTrackIfNeeded,toggleLike} from "./trackActions";
 
 
 export {
@@ -10,5 +11,7 @@ export {
   setCurrentTime,
   changeTrack,
   fetchMore,
-  logout
+  logout,
+  fetchTrackIfNeeded,
+  toggleLike
 };

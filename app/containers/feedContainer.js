@@ -31,13 +31,15 @@ class FeedContainer extends Component {
   render() {
     const {playingSongId} = this.props;
 
-    const c = cn("main scroll clearfix", {
+    const c = cn("main clearfix", {
       playing: playingSongId != null
     });
     return (
-      <div className={c}>
-        <PageHeader title="Stream"/>
-        <TracksGrid {...this.props} />
+      <div className="scroll">
+        <PageHeader title="Stream" img="./assets/img/party.jpg"/>
+        <div className={c}>
+          <TracksGrid {...this.props} />
+        </div>
       </div>
     );
   }

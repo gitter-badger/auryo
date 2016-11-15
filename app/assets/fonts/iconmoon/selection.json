@@ -36,6 +36,60 @@
     {
       "icon": {
         "paths": [
+          "M810 554h-256v256h-84v-256h-256v-84h256v-256h84v256h256v84z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "add"
+        ],
+        "defaultCode": 57669,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 732,
+        "ligatures": "add",
+        "id": 12,
+        "prevSize": 24,
+        "code": 57669,
+        "name": "add"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 12
+    },
+    {
+      "icon": {
+        "paths": [
+          "M726 554v-84h-172v-172h-84v172h-172v84h172v172h84v-172h172zM810 128c46 0 86 40 86 86v596c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h596z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "add_box"
+        ],
+        "defaultCode": 57670,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 733,
+        "ligatures": "add_box",
+        "id": 16,
+        "prevSize": 24,
+        "code": 57670,
+        "name": "add_box"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 16
+    },
+    {
+      "icon": {
+        "paths": [
           "M512 470c24 0 42 18 42 42s-18 42-42 42-42-18-42-42 18-42 42-42zM512 704c106 0 192-86 192-192s-86-192-192-192-192 86-192 192 86 192 192 192zM512 86c236 0 426 190 426 426s-190 426-426 426-426-190-426-426 190-426 426-426z"
         ],
         "attrs": [],
@@ -86,6 +140,33 @@
       "setIdx": 3,
       "setId": 8,
       "iconIdx": 54
+    },
+    {
+      "icon": {
+        "paths": [
+          "M854 86c46 0 84 38 84 84v512c0 46-38 86-84 86h-598l-170 170v-768c0-46 38-84 84-84h684z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "chat_bubble"
+        ],
+        "defaultCode": 57546,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 731,
+        "ligatures": "chat_bubble",
+        "id": 146,
+        "prevSize": 24,
+        "code": 57546,
+        "name": "chat_bubble"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 146
     },
     {
       "icon": {

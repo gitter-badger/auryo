@@ -1,6 +1,8 @@
 import {CLIENT_ID} from "../constants/Config";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 import React from "react";
+import * as linkify from 'linkifyjs';;
+import linkifyHtml from 'linkifyjs/html';
 
 const _endpoint = 'http://api.soundcloud.com/';
 const _v2_endpoint = "https://api-v2.soundcloud.com/";
@@ -10,6 +12,10 @@ var _token = undefined;
 export function initialize(token) {
   _token = token;
 
+}
+
+export function getTrackUrl(trackID){
+  return _endpoint + "tracks/" + trackID + "?client_id=" + CLIENT_ID;
 }
 
 export function getChartsUrl(genre, sort = "top") {
@@ -50,7 +56,16 @@ export function appendClientId(url) {
   return url + "?client_id=" + CLIENT_ID;
 }
 
-export function getImageUrl(s, size = null) {
+export function updateLikeUrl(trackID) {
+  return _endpoint + "me/favorites/" + trackID + "?oauth_token=" + _token;
+}
+
+export function getImageUrl(track, size = null) {
+  let s = track.artwork_url;
+  if(track.artwork_url == null){
+    s = track.user.avatar_url;
+  }
+
   let str = s;
   if (!str) {
     return '';
@@ -73,4 +88,11 @@ export function getImageUrl(s, size = null) {
       return str;
   }
 }
+
+export function formatDescription(input) {
+  return {
+    __html: linkifyHtml(input.replace(/(\r\n|\n|\r)/gm, "<br>"))
+  };
+}
+
 

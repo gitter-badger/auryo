@@ -12,6 +12,8 @@ import SongPage from "./containers/songContainer";
 export default (
   <Route path="/" component={App}>
     <IndexRoute name="feed" component={FeedPage}/>
+    <Route path="/song/:songId" component={SongPage}/>
+
     <Route path="/chart" component={ChartPage}/>
     <Route path="/likes" component={LikesPage}/>
     <Route path="/playlists" component={PlaylistPage}/>

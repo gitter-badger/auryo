@@ -4,7 +4,7 @@ import {IMAGE_SIZES} from "../../constants/Soundcloud";
 import {getImageUrl} from "../../utils/soundcloudUtils";
 import classnames from "classnames";
 import {truncate, abbreviate_number} from "../../utils/appUtils";
-import togglePlay from "../../components/togglePlay";
+import TogglePlayButton from "../../components/togglePlay";
 import "./trackgriditem.global.css"
 
 class TrackGridItem extends Component {
@@ -42,14 +42,14 @@ class TrackGridItem extends Component {
     const {isPlaying, playTrackFunc} = this.props;
 
     if (isPlaying) {
-      return <togglePlay />;
+      return <TogglePlayButton classname={"toggleButton"} />;
     }
 
     const icon = isPlaying ? 'pause' : 'play_arrow';
 
     return (
 
-      <a className="playButton" onClick={playTrackFunc}>
+      <a className="toggleButton" onClick={playTrackFunc}>
         <i className={`icon-${icon}`}/>
       </a>
     );

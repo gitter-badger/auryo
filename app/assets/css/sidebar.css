@@ -12,28 +12,58 @@
  * --------------------------------------------------
  */
 @media screen and (max-width: 48em) {
-
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
+  .sidebar-offcanvas:not(:hover) .nav .navLink i + span {
+    opacity: 0;
   }
 
-  .row-offcanvas-left
+  .sidebar-offcanvas:not(:hover) .dropdown, .sidebar-offcanvas:not(:hover) .userName {
+    display: none;
+  }
+
+  .sidebar-offcanvas:not(:hover) .user {
+    padding: 0;
+  }
+  .sidebar-offcanvas:not(:hover) .userImage{
+    padding: 8px;
+  }
+  .sidebar-offcanvas:not(:hover) .userImage img{
+    width:32px;
+  }
+  .sidebar-offcanvas:not(:hover) .nav{
+    margin-bottom: 0 !important;
+  }
+
+  .sidebar-offcanvas:not(:hover) #sidebar-menu h2 {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s all;
+  }
+
+  .sidebar-offcanvas:hover #sidebar-menu h2 {
+    transition: 0.5s all;
+
+  }
+
   .sidebar-offcanvas {
-    left: -33%;
+    max-width: 50px;
+    overflow: hidden;
+    transition: 0.5s all;
   }
 
-  .row-offcanvas-left.active {
-    left: 33%;
+  .sidebar-offcanvas > * {
+    width: 230px;
   }
 
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%;
+  .sidebar-offcanvas:hover {
+    max-width: 230px;
+    transition: 0.5s all;
+  }
+
+  main {
+    margin-left: 50px !important;
   }
 }
 
@@ -42,7 +72,6 @@
  * --------------------------------------------------
  */
 @media screen and (max-width: 34em) {
-  .row-offcanvas-left
   .sidebar-offcanvas {
     left: -45%;
   }
