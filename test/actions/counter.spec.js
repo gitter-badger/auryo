@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import { spy } from 'sinon';
-import * as actions from '../../app/actions/counter';
+import * as actions from '../../app/_Features/common/actions/counter';
 
 
 describe('actions', () => {

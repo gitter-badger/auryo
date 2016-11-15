@@ -1,5 +1,5 @@
 import {app, BrowserWindow, Menu, shell, protocol, ipcMain,screen} from "electron";
-import {CLIENT_ID} from "./constants/Config";
+import {CLIENT_ID} from "../app/common/constants/config";
 const settings = require('electron-settings');
 
 var url = require('url');
