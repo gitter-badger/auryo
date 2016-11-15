@@ -19,28 +19,16 @@ const config = validate(merge(baseConfig, {
   ],
 
   output: {
-    path: path.join(__dirname, 'app/dist'),
-    publicPath: '../dist/'
+    path: path.join(__dirname, 'app/assets/dist'),
+    publicPath: '../assets/dist/'
   },
 
   module: {
     loaders: [
-      // Extract all .global.css to style.css as is
+      // Extract all .global.css to style.scss as is
       {
-        test: /\.global\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader'
-        )
-      },
-
-      // Pipe other styles through css modules and apend to style.css
-      {
-        test: /^((?!\.global).)*\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-        )
+        test: /\.scss$/,
+        loaders: ["style", "css?sourceMap", "sass?sourceMap"]
       },
 
       { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },

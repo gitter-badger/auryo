@@ -1,10 +1,10 @@
 // @flow
 import React,{Component, PropTypes} from "react";
-import PlayerContainer from "./Player/playerContainer";
-import isOffline from "./common/components/offlineComponent";
-import SideBar from "./common/components/Sidebar/sidebarComponent";
-import Header from "./common/components/Header/Header";
-import * as actions from "./common/actions";
+import PlayerContainer from "./_Player/playerContainer";
+import IsOffline from "./_common/components/Offline/offlineComponent";
+import SideBar from "./_common/components/Sidebar/sidebarComponent";
+import Header from "./_common/components/Header/Header";
+import * as actions from "./_common/actions";
 import {connect} from "react-redux";
 
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
     const {online} = this.state;
 
     if (!online) {
-      return <isOffline />;
+      return <IsOffline />;
     }
 
     return this.props.children;

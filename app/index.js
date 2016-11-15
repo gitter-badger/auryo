@@ -4,11 +4,11 @@ import {render} from "react-dom";
 import {Provider} from "react-redux";
 import {Router, hashHistory, Route, IndexRoute} from "react-router";
 import {syncHistoryWithStore} from "react-router-redux";
-import configureStore from "./common/store/configureStore";
-import "./assets/css/app.global.css";
+import configureStore from "./_common/store/configureStore";
+import "./assets/css/app.scss";
 import App from "./App";
-import Feed from "./Feed/feedContainer";
-import SongDetails from "./SongDetails/songContainer";
+import Feed from "./_Feed/feedContainer";
+import SongDetails from "./_SongDetails/songContainer";
 
 
 const store = configureStore();

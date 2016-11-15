@@ -1,0 +1,105 @@
+@import "../../../assets/css/vars";
+
+#sidebar {
+  width: 230px;
+  position: fixed;
+  top: 54px;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  background: $sidebar_bg;
+}
+
+/*
+ * Off Canvas at medium breakpoint
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 48em) {
+  .sidebar-offcanvas:not(:hover) .nav .navLink i + span {
+    opacity: 0;
+  }
+
+  .sidebar-offcanvas:not(:hover) .dropdown, .sidebar-offcanvas:not(:hover) .userName {
+    display: none;
+  }
+
+  .sidebar-offcanvas:not(:hover) .user {
+    padding: 0;
+  }
+  .sidebar-offcanvas:not(:hover) .userImage{
+    padding: 8px;
+  }
+  .sidebar-offcanvas:not(:hover) .userImage img{
+    width:32px;
+  }
+  .sidebar-offcanvas:not(:hover) .nav{
+    margin-bottom: 0 !important;
+  }
+
+  .sidebar-offcanvas:not(:hover) #sidebar-menu h2 {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transition: 0.5s all;
+  }
+
+  .sidebar-offcanvas:hover #sidebar-menu h2 {
+    transition: 0.5s all;
+
+  }
+
+  .sidebar-offcanvas {
+    max-width: 50px;
+    overflow: hidden;
+    transition: 0.5s all;
+  }
+
+  .sidebar-offcanvas > * {
+    width: 230px;
+  }
+
+  .sidebar-offcanvas:hover {
+    max-width: 230px;
+    transition: 0.5s all;
+  }
+
+  main {
+    margin-left: 50px !important;
+  }
+}
+
+/*
+ * Off Canvas wider at sm breakpoint
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 34em) {
+  .sidebar-offcanvas {
+    left: -45%;
+  }
+
+  .row-offcanvas-left.active {
+    left: 45%;
+  }
+
+  .sidebar-offcanvas {
+    width: 45%;
+  }
+}
+
+/* responsive nav stacked liked 3.x */
+@media (max-width: 34em) {
+  .navbar .navbar-brand {
+    float: none;
+  }
+
+  .navbar .navbar-nav > .nav-item {
+    float: none;
+    margin-left: .1rem;
+  }
+
+  .navbar .navbar-nav {
+    float: none !important;
+  }
+}
