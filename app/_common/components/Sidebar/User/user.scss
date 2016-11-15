@@ -1,0 +1,31 @@
+.user {
+  padding: 20px 15px;
+  color: #BAC3CF;
+
+  .flex {
+	align-items: baseline;
+  }
+
+  .userImage img {
+	border-radius: 100%;
+	width: 40px;
+  }
+
+  .userName {
+	padding-left: 5px;
+	font-size: 15px;
+  }
+
+  .dropdown a {
+	border-left: 1px solid #696969 !important;
+	float: right;
+	margin: 6px 4px;
+	padding-left: 5px;
+	cursor: pointer;
+  }
+
+  .dropdown .dropdown-menu {
+	margin-top: 40px;
+  }
+
+}

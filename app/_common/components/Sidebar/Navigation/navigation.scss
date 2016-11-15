@@ -1,0 +1,46 @@
+@import "../../../../assets/css/vars";
+
+#sidebar-menu{
+  .navLink {
+	text-decoration: none !important;
+	display: block;
+	padding:10px 12px;
+	font-size: 15px;
+	font-weight: 500;
+	transition: 0.5s background;
+	border-left:4px solid transparent;
+  }
+  .navLink:hover {
+	background: lighten($sidebar_bg,2%);
+	transition: 0.5s background;
+  }
+  .navItem .navLink.active{
+	color:#fff !important;
+	background: lighten($sidebar_bg,5%);
+	border-left:4px solid $accent;
+  }
+  .navLink *{
+	vertical-align: middle;
+  }
+  .navLink i{
+	width: 30px;
+	display: inline-block;
+	font-size: 18px;
+	vertical-align: top;
+  }
+
+  .nav{
+	list-style-type: none;
+	padding-left: 0;
+  }
+  h2{
+	font-size: .9rem;
+	text-transform: uppercase;
+	padding: 10px 15px 10px;
+	color: #858585;
+	font-family: 'Roboto', sans-serif;
+  }
+  .nav{
+	margin-bottom: 20px;
+  }
+}
