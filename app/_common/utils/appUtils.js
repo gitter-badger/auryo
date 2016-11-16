@@ -28,7 +28,7 @@ export function getReadableTime(milliseconds){
   if(!milliseconds) return "00:00";
 
   //Get hours from milliseconds
-  var hours = milliseconds / (1000*60*60);
+  var hours = milliseconds / (60*60);
   var absoluteHours = Math.floor(hours);
   var h = absoluteHours > 9 ? absoluteHours : '0' + absoluteHours;
 
