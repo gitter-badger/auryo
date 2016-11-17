@@ -7,7 +7,7 @@ import {IMAGE_SIZES} from "../../../_common/constants/Soundcloud";
 import {CHANGE_TYPES,STATUS} from "../../../_common/constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../../_common/actions";
 import Audio from "../../../_common/components/Audio";
-import "./player.scss";
+import {Row,Container,Col} from "reactstrap";
 
 class Player extends React.Component {
 
@@ -211,7 +211,10 @@ class Player extends React.Component {
   handleVolumeMouseMove(e) {
     const volumeBar = ReactDOM.findDOMNode(this.refs.volumeBar);
 
-    let percent = getPos(e, volumeBar);
+    var box = volumeBar.getBoundingClientRect();
+    const start = box.bottom;
+
+    let percent = (start  - e.clientY) / box.height;
 
     percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
     this.setState({
@@ -238,7 +241,11 @@ class Player extends React.Component {
       muted: false
     });
 
-    let percent = getPos(e);
+
+    var box = e.currentTarget.getBoundingClientRect();
+    const start = box.bottom;
+
+    let percent = (start  - e.clientY) / box.height;
 
     percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
 
@@ -273,11 +280,11 @@ class Player extends React.Component {
 
   renderVolumeBar() {
     const {muted, volume} = this.state;
-    const width = muted ? 0 : volume * 100;
+    const height = muted ? 0 : volume * 100;
     return (
       <div
         className="currentTime"
-        style={{width: `${width}%`}}>
+        style={{height: `${height}%`}}>
         <div
           className="handle"
           onClick={this.handleMouseClick}
@@ -319,6 +326,9 @@ class Player extends React.Component {
     const {player, users, playingSongId, playlists, tracks} = this.props;
     const {status} = player;
     const track = tracks[playingSongId];
+
+    track.user = users[(track.user_id) ? track.user_id : track.user];
+
     const prevFunc = this.changeSong.bind(this, CHANGE_TYPES.PREV);
     const nextFunc = this.changeSong.bind(
       this,
@@ -349,52 +359,59 @@ class Player extends React.Component {
           onPlaying={this.onPlaying}
           onFinishedPlaying={this.onFinishedPlaying}/>
 
-        <div className="flex playerInner">
-          <div className="playerAlbum">
-            <img width={50} height={50} src={image}/>
-          </div>
-
-          <div className="flex flex-xs-middle playerControls">
-            <a href="javascript:void(0)" onClick={prevFunc}><i className="icon-skip_previous"/></a>
-
-            <a href="javascript:void(0)" onClick={this.togglePlay}><i className={`icon-${toggle_play_icon}`}/></a>
-
-            <a href="javascript:void(0)" onClick={nextFunc}><i className="icon-skip_next"/></a>
-          </div>
-
-          <div className="col-xs-6 col-lg-6 col-xl-8 playerTimeLine">
-
-            <div className="trackTitle">{truncate(track.title, 100)}</div>
-            <div className="row progressWrapper">
-
-              <div className="time">{getReadableTime(this.state.currentTime)}</div>
-
-              <div className="progressInner"
-                   onClick={this.progressClick}
-                   onMouseDown={this.handleSeekMouseDown}>
-                <div className="playerProgress" ref="seekBar">
-                  {
-                    this.renderProgressBar()
-                  }
-                </div>
-              </div>
-              <div className="time">{getReadableTime(this.state.duration)}</div>
+        <div className=" flex playerInner">
+          <div className="flex">
+            <div className="playerAlbum">
+              <img width={50} height={50} src={image}/>
+            </div>
+            <div className="trackInfo">
+              <div className="trackTitle" title={track.title}>{truncate(track.title, 40,"...",true)}</div>
+              <div className="trackArtist">{truncate(track.user.username, 50)}</div>
             </div>
 
+            <div className="flex flex-xs-middle playerControls">
+              <a href="javascript:void(0)" onClick={prevFunc}><i className="icon-skip_previous"/></a>
+
+              <a href="javascript:void(0)" onClick={this.togglePlay}><i className={`icon-${toggle_play_icon}`}/></a>
+
+              <a href="javascript:void(0)" onClick={nextFunc}><i className="icon-skip_next"/></a>
+            </div>
           </div>
-          <div className="col-xs-2 col-lg-2 col-xl-1 flex playerVolume">
-            <i className={`icon-${volume_icon}`} onClick={this.toggleMute}/>
-            <div className="progressWrapper">
-              <div className="progressInner" onClick={this.volumeClick}
-                   onMouseDown={this.handleVolumeMouseDown}>
-                <div className="playerProgress" ref="volumeBar">
-                  {
-                    this.renderVolumeBar()
-                  }
+
+          <div className="flex" style={{flexGrow:1}}>
+            <div className="playerTimeLine">
+
+              <div className="row progressWrapper">
+
+                <div className="time">{getReadableTime(this.state.currentTime)}</div>
+
+                <div className="progressInner"
+                     onClick={this.progressClick}
+                     onMouseDown={this.handleSeekMouseDown}>
+                  <div className="playerProgress" ref="seekBar">
+                    {
+                      this.renderProgressBar()
+                    }
+                  </div>
+                </div>
+                <div className="time">{getReadableTime(this.state.duration)}</div>
+              </div>
+
+            </div>
+            <div className="flex playerVolume">
+              <i className={`icon-${volume_icon}`} onClick={this.toggleMute}/>
+              <div className="progressWrapper">
+                <div className="progressInner" onClick={this.volumeClick}
+                     onMouseDown={this.handleVolumeMouseDown}>
+                  <div className="playerProgress" ref="volumeBar">
+                    {
+                      this.renderVolumeBar()
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
