@@ -1,7 +1,6 @@
 // @flow
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import "./offline.scss";
 
 class offlineContainer extends Component {
   render() {

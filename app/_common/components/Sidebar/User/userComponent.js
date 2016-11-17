@@ -1,7 +1,6 @@
 // @flow
 import React, {Component, PropTypes} from 'react';
 import {logout} from '../../../actions';
-import "./user.scss";
 
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 

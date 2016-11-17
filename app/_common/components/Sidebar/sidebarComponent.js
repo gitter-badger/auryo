@@ -2,7 +2,6 @@
 import React, {Component, PropTypes} from "react";
 import Navigation from "./Navigation/navigationComponent";
 import User from "./User/userComponent";
-import "./sidebar.scss";
 
 class SideBar extends Component {
   render() {
