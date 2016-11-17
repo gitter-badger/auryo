@@ -1,8 +1,8 @@
 import * as actionTypes from "../../_common/constants/actionTypes";
-import Sound from "../../_common/components/Sound-React";
+import {STATUS} from "../../_common/constants/playlist";
 
 const initialState = {
-  status: Sound.status.STOPPED,
+  status: STATUS.STOPPED,
   queuedPlaylists: [],
   currentSong: null,
   currentTime: 0,

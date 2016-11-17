@@ -7,10 +7,15 @@ import {RELATED_PLAYLIST} from "../constants/playlist";
 
 export function fetchTrackIfNeeded(trackID) {
   return (dispatch, getState) => {
-    const {tracks} = getState().entities;
+    const {entities,playlists} = getState();
+    const {tracks} = entities;
+    const current_playlist = String(trackID + RELATED_PLAYLIST);
 
     if (!(trackID in tracks)) {
       dispatch(fetchTrack(trackID));
+    }
+
+    if(!(current_playlist in playlists)){
       dispatch(fetchRelated(trackID));
     }
 

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from "react";
-import Sound from "./Sound-React";
+import {STATUS} from "../constants/playlist";
 import {toggleStatus} from "../actions"
 import {connect} from "react-redux";
 
@@ -12,10 +12,10 @@ class TogglePlayButton extends Component {
   togglePlay() {
     const {status,dispatch} = this.props;
 
-    if(status !== Sound.status.PLAYING){
-      dispatch(toggleStatus(Sound.status.PLAYING));
-    } else if(status == Sound.status.PLAYING){
-      dispatch(toggleStatus(Sound.status.PAUSED));
+    if(status !== STATUS.PLAYING){
+      dispatch(toggleStatus(STATUS.PLAYING));
+    } else if(status == STATUS.PLAYING){
+      dispatch(toggleStatus(STATUS.PAUSED));
     }
 
   }
@@ -23,7 +23,7 @@ class TogglePlayButton extends Component {
   render() {
     const {status,classname} = this.props;
 
-    const icon = (status == Sound.status.PLAYING) ? 'pause' : 'play_arrow';
+    const icon = (status == STATUS.PLAYING) ? 'pause' : 'play_arrow';
 
     return (
 

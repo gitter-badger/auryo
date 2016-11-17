@@ -25,7 +25,7 @@ const config = validate(merge(baseConfig, {
 
   module: {
     loaders: [
-      // Extract all .global.css to style.scss as is
+      // Extract all .global.css to spinner.scss as is
       {
         test: /\.scss$/,
         loaders: ["style", "css?sourceMap", "sass?sourceMap"]

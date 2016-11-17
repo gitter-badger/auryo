@@ -1,8 +1,20 @@
 @import "../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css";
-@import "../../node_modules/bootstrap/dist/css/bootstrap-flex.min.css";
+$enable-flex:true;
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../fonts/iconmoon/style.css";
 @import "vars";
 @import "responsive";
+@import "./common/navigation";
+@import "./common/offline";
+@import "./common/sidebar";
+@import "./common/spinner";
+@import "./common/user";
+@import "./Feed/trackgriditem";
+@import "./Player/player";
+@import "./songDetails/songDetails";
+@import "./songDetails/trackListItem";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -13,6 +25,35 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none;
   overflow: hidden;
+}
+
+body:before {
+  @include media-breakpoint-only(xs) {
+	content: "xs";
+  }
+  @include media-breakpoint-only(sm) {
+	content: "sm";
+  }
+  @include media-breakpoint-only(md) {
+	content: "md";
+  }
+  @include media-breakpoint-only(lg) {
+	content: "lg";
+  }
+  @include media-breakpoint-only(xl) {
+	content: "xl";
+  }
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+  display: block;
+  z-index: 9999;
+  padding: 10px;
+  font-size: 20px;
+  background: black;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,14 +67,12 @@ main {
   margin-left: 230px;
 }
 
-
-
 .main {
   position: relative;
   padding: 30px 30px 0 30px;
 }
 
-.scroll{
+.scroll {
   position: relative;
   overflow-y: overlay;
   height: calc(100vh - 54px);
@@ -128,22 +167,23 @@ i {
   vertical-align: sub;
 }
 
-.header{
+.header {
   overflow: hidden;
   position: relative;
 }
-.header h2{
+
+.header h2 {
   padding: 60px 30px;
   text-transform: uppercase;
-  font-weight:700;
+  font-weight: 700;
   color: #fff;
   font-size: 2.5rem;
 }
 
-.header .overlay{
+.header .overlay {
   position: absolute;
   z-index: -1;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -151,18 +191,18 @@ i {
   background-position: center center;
 }
 
-.header .overlay:after{
+.header .overlay:after {
   content: '';
   position: absolute;
   z-index: -1;
-  top:0;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(47, 52, 63,0.5)
+  background: rgba(47, 52, 63, 0.5)
 }
 
-.flex-wrap{
+.flex-wrap {
   flex-wrap: wrap;
 }
 

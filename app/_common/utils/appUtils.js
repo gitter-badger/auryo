@@ -1,10 +1,21 @@
-export function truncate(str, length = 50, append = "...") {
+export function truncate(str, length = 50, append = "...",f) {
+
+  if(f){
+    str = filter(str);
+  }
+
   if (str.length > length) {
     str = str.substr(0, length - append.length);
     if (append) {
       str += append;
     }
   }
+
+  return str;
+}
+
+export function filter(str) {
+  str = str.replace(/\[.*\]/gi,"");
   return str;
 }
 

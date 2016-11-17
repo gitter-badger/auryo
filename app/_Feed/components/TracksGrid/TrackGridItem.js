@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from "react";
 import {Link} from "react-router";
-import {IMAGE_SIZES} from "../../../../_common/constants/Soundcloud";
-import {getImageUrl} from "../../../../_common/utils/soundcloudUtils";
+import {IMAGE_SIZES} from "../../../_common/constants/Soundcloud";
+import {getImageUrl} from "../../../_common/utils/soundcloudUtils";
 import classnames from "classnames";
-import {truncate, abbreviate_number} from "../../../../_common/utils/appUtils";
-import TogglePlayButton from "../../../../_common/components/togglePlay";
-import "./trackgriditem.scss";
+import {truncate, abbreviate_number} from "../../../_common/utils/appUtils";
+import TogglePlayButton from "../../../_common/components/togglePlay";
+
+import { Col } from 'reactstrap';
 
 class TrackGridItem extends Component {
 
@@ -63,7 +64,6 @@ class TrackGridItem extends Component {
       user,
       dispatch,
       isPlaying,
-      scrollFunc,
       track,
     } = this.props;
 
@@ -78,7 +78,7 @@ class TrackGridItem extends Component {
     );
 
     return (
-      <div className="col-xs-12 col-sm-6 col-lg-4 col-xl-s-5" style={{height: "360px"}}>
+      <Col xs="12" sm="6" lg="4" className="trackWrapper">
         <div className={playing}>
 
           <div className="trackImage">
@@ -123,7 +123,7 @@ class TrackGridItem extends Component {
 
           </div>
         </div>
-      </div>
+      </Col>
     );
   }
 }
@@ -133,7 +133,6 @@ TrackGridItem.propTypes = {
   user: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  scrollFunc: PropTypes.func.isRequired,
   track: PropTypes.object.isRequired,
 };
 

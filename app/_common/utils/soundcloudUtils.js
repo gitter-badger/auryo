@@ -62,7 +62,8 @@ export function updateLikeUrl(trackID) {
 
 export function getImageUrl(track, size = null) {
   let s = track.artwork_url;
-  if(track.artwork_url == null){
+
+  if(!track.artwork_url  || track.artwork_url == null && track.user){
     s = track.user.avatar_url;
   }
 
@@ -94,5 +95,3 @@ export function formatDescription(input) {
     __html: linkifyHtml(input.replace(/(\r\n|\n|\r)/gm, "<br>"))
   };
 }
-
-

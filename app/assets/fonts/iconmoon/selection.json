@@ -144,6 +144,33 @@
     {
       "icon": {
         "paths": [
+          "M512 128h298v128h-170v470h-2c-10 96-92 170-190 170-106 0-192-86-192-192s86-192 192-192c22 0 44 4 64 12v-396z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "audiotrack"
+        ],
+        "defaultCode": 58273,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 734,
+        "ligatures": "audiotrack",
+        "id": 66,
+        "prevSize": 24,
+        "code": 58273,
+        "name": "audiotrack"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 66
+    },
+    {
+      "icon": {
+        "paths": [
           "M854 86c46 0 84 38 84 84v512c0 46-38 86-84 86h-598l-170 170v-768c0-46 38-84 84-84h684z"
         ],
         "attrs": [],
@@ -383,6 +410,33 @@
       "setIdx": 3,
       "setId": 8,
       "iconIdx": 587
+    },
+    {
+      "icon": {
+        "paths": [
+          "M86 682v-84h340v84h-340zM768 598h170v84h-170v172h-86v-172h-170v-84h170v-172h86v172zM598 256v86h-512v-86h512zM598 426v86h-512v-86h512z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "playlist_add"
+        ],
+        "defaultCode": 57403,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 735,
+        "ligatures": "playlist_add",
+        "id": 591,
+        "prevSize": 24,
+        "code": 57403,
+        "name": "playlist_add"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 591
     },
     {
       "icon": {

@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/actionTypes";
 import {CHANGE_TYPES} from "../constants/playlist";
-import Sound from "../components/Sound-React";
+import {STATUS} from "../constants/playlist";
 import {fetchMore} from "./playlistActions";
 
 /**
@@ -119,7 +119,7 @@ export function changeTrack(change_type) {
  * @returns {{type, index: *, status: string}}
  */
 function setPlayingTrack(index) {
-  const status = Sound.status.PLAYING;
+  const status = STATUS.PLAYING;
   return {
     type: actionTypes.PLAYER_SET_TRACK,
     index,

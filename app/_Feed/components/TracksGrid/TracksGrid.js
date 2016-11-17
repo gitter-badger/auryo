@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from "react";
-import TrackGridItem from "./TrackGridItem/TrackGridItem";
+import TrackGridItem from "./TrackGridItem";
 import {fetchMore, playTrack} from "../../../_common/actions";
 import Spinner from "../../../_common/components/Spinner";
 import ReactList from "react-list";
 
+import { Container, Row } from 'reactstrap';
 
 class TracksGrid extends Component {
   constructor(props) {
@@ -61,9 +62,10 @@ class TracksGrid extends Component {
   renderWrapper(items, ref) {
     return React.createElement(
       'div',
-      {ref: ref, className: "row"},
+      {ref: ref, className: "row tracks flex-items-xs-center"},
       items
     );
+    return <Row ref={ref}>{items}</Row>
   }
 
   render() {
