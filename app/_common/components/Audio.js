@@ -50,7 +50,7 @@ class Audio extends React.Component {
     const audio = this.audio = ReactDOM.findDOMNode(this.refs.audio);
     audio.preload = 'metadata';
     audio.addEventListener('ended', this.props.onFinishedPlaying);
-    audio.addEventListener('playing', () => {
+    audio.addEventListener('timeupdate', () => {
       if (this.audio) {
         this.props.onPlaying(this.audio.currentTime);
       }
