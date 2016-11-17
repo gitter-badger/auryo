@@ -1,16 +1,16 @@
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {fetchTrackIfNeeded, playTrack, toggleLike} from "../_common/actions";
 import Spinner from "../_common/components/Spinner/index";
 import {IMAGE_SIZES} from "../_common/constants/Soundcloud";
-import {getImageUrl, formatDescription} from "../_common/utils/soundcloudUtils";
+import {getImageUrl, formatDescription, getVisual} from "../_common/utils/soundcloudUtils";
 import {abbreviate_number} from "../_common/utils/appUtils";
 import {getPlayingTrackId} from "../_Player/playerUtils";
 import TogglePlay from "../_common/components/togglePlay";
 import cn from "classnames";
 import {RELATED_PLAYLIST} from "../_common/constants/playlist";
-import "./song.scss";
-
+import TrackListComponent from "./components/trackListComponent";
+import {Col, Row, Container} from "reactstrap";
 
 class songContainer extends Component {
 
@@ -26,6 +26,13 @@ class songContainer extends Component {
   componentWillMount() {
     const {dispatch, params} = this.props;
     dispatch(fetchTrackIfNeeded(params.songId));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {dispatch,params} = this.props;
+    if (params.songId != nextProps.params.songId) {
+      dispatch(fetchTrackIfNeeded(nextProps.params.songId));
+    }
   }
 
 
@@ -67,42 +74,48 @@ class songContainer extends Component {
   }
 
   render() {
-    const {tracks, params, users, likes} = this.props;
+    const {tracks, params, users, likes, playlists, player, dispatch} = this.props;
 
-    const track = tracks[params.songId];
+    let track = tracks[params.songId];
 
     if (!track) {
       return <Spinner />
     }
+    const playlist = params.songId + RELATED_PLAYLIST;
+
+    const user = users[track.user_id];
+    track.user = user;
 
     const img_url = getImageUrl(track, IMAGE_SIZES.LARGE);
-    const user = users[track.user_id];
 
     const likeFunc = this.toggleLike.bind(this, track.id);
     const liked = (track.id in likes) && likes[track.id] == 1;
 
     return (
       <div className="scroll trackDetails">
-        <div className="container-fluid">
-          <div className="row trackHeader">
+        <Container fluid={true}>
+          <Row className="trackHeader">
 
             <div className="overlayWrapper">
               <img className="overlayImg" src={img_url}/>
             </div>
 
-            <div className="col-xs-12 col-md-4 col-lg-4">
+            <Col xs="12" md="3">
               <div className="imageWrapper">
                 <img src={img_url}/>
                 <img className="imgShadow" src={img_url}/>
               </div>
-            </div>
-            <div className="col-xs-12 col-md-8 col-lg-8 trackInfo">
+            </Col>
+
+            <Col xs="12" md="9" className="trackInfo">
               <div className="trackTitle">{track.title}</div>
               <div className="trackArtist">{user.username}</div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-12 col-md-4">
+            </Col>
+
+          </Row>
+
+          <Row>
+            <Col xs="12" md="3">
               <div className="flex flex-items-xs-center trackStats">
                 <div className="stat">
                   <i className="icon-favorite_border"/>
@@ -117,14 +130,15 @@ class songContainer extends Component {
                   <span>{abbreviate_number(track.comment_count)}</span>
                 </div>
               </div>
-            </div>
-            <div className="col-xs-12 col-md-8">
+            </Col>
+
+            <Col xs="12" md="9">
               <div className="flex trackActions">
                 {
                   this.renderToggleButton()
                 }
                 <a className={cn("c_btn", {liked: liked})} onClick={likeFunc}>
-                  <i className={ liked ? "icon-favorite" : "icon-favorite_border" }/>
+                  <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
                   <span>Like</span>
                 </a>
                 <a className="c_btn">
@@ -144,9 +158,17 @@ class songContainer extends Component {
                     <a onClick={this.toggleOpen}>read more</a>
                 }
               </div>
-            </div>
-          </div>
-        </div>
+
+              <TrackListComponent
+                player={player}
+                playlist={playlist}
+                playlists={playlists}
+                tracks={tracks}
+                dispatch={dispatch}
+                users={users}/>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
@@ -162,7 +184,8 @@ function mapStateToProps(state) {
     users,
     player,
     playingSongId,
-    likes
+    likes,
+    playlists
   }
 }
 
