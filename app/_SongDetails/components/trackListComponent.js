@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from "react";
 import TrackListItem from "./trackListItemComponent";
 import {getPlayingTrackId} from "../../_Player/playerUtils";
 import {playTrack} from "../../_common/actions/index";
+import {isLiked} from "../../_common/utils/soundcloudUtils";
 
 
 class trackList extends Component {
@@ -15,7 +16,16 @@ class trackList extends Component {
 
 
   render() {
-    const {playlists, playlist, tracks, users, player, dispatch} = this.props;
+    const {
+      playlists,
+      playlist,
+      tracks,
+      users,
+      player,
+      dispatch,
+      likes,
+      likeFunc
+    } = this.props;
 
     const p = playlists[playlist];
 
@@ -31,9 +41,10 @@ class trackList extends Component {
           items.map(function (trackId, i) {
             if (i == 0) return;
             const track = tracks[trackId];
-            const user = users[track.user];
-
             const playTrackFunc = _this.playTrack.bind(_this, i);
+
+            const like = likeFunc.bind(null, track.id);
+            const liked = isLiked(track.id,likes);
 
             return (
               <TrackListItem
@@ -42,7 +53,10 @@ class trackList extends Component {
                 isPlaying={playingTrackId == track.id }
                 playTrackFunc={playTrackFunc}
                 dispatch={dispatch}
-                user={user}/>
+                users={users}
+                likeFunc={like}
+                liked={liked}
+              />
             );
           })
         }
@@ -57,7 +71,9 @@ trackList.propTypes = {
   tracks: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  player: PropTypes.object.isRequired
+  player: PropTypes.object.isRequired,
+  likes: PropTypes.object.isRequired,
+  likeFunc: PropTypes.func.isRequired
 };
 
 

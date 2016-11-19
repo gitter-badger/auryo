@@ -6,7 +6,7 @@ class offlineContainer extends Component {
   render() {
 
     return (
-      <div className="offline" style={{backgroundImage:'url(assets/img/mountains.jpg)'}}>
+      <div className="offline" style={{backgroundImage:'url(assets/img/party2.jpg)'}}>
         <div>
           <h2>You seem to be offline</h2>
           <p>But we got this, you just have to reconnect.</p>

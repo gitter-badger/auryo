@@ -5,7 +5,8 @@
 	z-index: 2;
 	position: relative;
 	color: #fff;
-	padding-top: 20px;
+	padding: 25px 20px;
+	align-items: center;
 
 	.overlayWrapper {
 	  position: absolute;
@@ -30,23 +31,24 @@
 	  }
 
 	  .overlayImg {
-		position: absolute;
 		width: 120%;
+		margin-left: -10%;
+		position: absolute;
 		z-index: -1;
 		-webkit-filter: blur(30px);
 		filter: blur(30px);
 		top: -200px;
-		margin-left: -80px;
 		margin-top: -10px;
 	  }
 	}
 
 	.imageWrapper {
-	  position: relative;
 	  text-align: center;
 	  left: 0;
 	  right: 0;
-	  margin: 0 20px -100px;
+	  position: relative;
+	  max-width: 250px;
+	  margin: 20px 0;
 
 	  img {
 		width: 100%;
@@ -65,25 +67,57 @@
 	}
 
 	.trackInfo {
-	  height: 235px;
 	  position: relative;
-	  padding: 70px 25px 50px;
+	  margin-top: -20px;
 	}
 
 	.trackTitle {
 	  font-weight: 500;
-	  font-family: "Source Sans Pro", sans-serif;
+	  font-family: "Bitter", sans-serif;
 	  font-size: 1.8rem;
 	}
 
 	.trackArtist {
 	  font-weight: 300;
-	  font-family: "Source Sans Pro", sans-serif;
+	  font-family: "Bitter", sans-serif;
 	  font-size: 1.5rem;
 	}
   }
 
   .trackActions {
+	margin: 20px 20px 20px 0;
+	position: relative;
+	z-index: 2;
+
+	.c_btn {
+	  margin-right: 10px;
+	  margin-bottom: 15px;
+
+	  border-radius: 20px;
+	  padding: 8px 16px;
+
+	  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+	  color: #3f4144 !important;
+	  background: #fff;
+	  transition: 0.3s box-shadow;
+	  text-decoration: none;
+
+	  &.liked {
+		color: $accent !important;
+	  }
+
+	  &:hover {
+		background: #fff;
+		box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08), 0 6px 50px rgba(0, 0, 0, 0.18);
+		transition: 0.3s box-shadow;
+	  }
+
+	  i {
+		padding-right: 5px;
+	  }
+
+	}
+
 	.playButton {
 	  background: #fff;
 	  border-radius: 50px;
@@ -118,7 +152,6 @@
   .trackStats {
 	padding: 10px 0;
 	color: #3f4144;
-	margin-top: 70px;
 	& .stat {
 	  padding: 10px 15px 10px 0;
 	  i {
@@ -130,49 +163,62 @@
 	  }
 	}
   }
+  .trackMain {
+	padding: 20px 40px 0 40px;
+  }
 
   .trackDescription {
 	color: #3a3e43;
-	margin-top: 20px;
-	max-height: 200px;
-	overflow: hidden;
+
+	.descriptionInner.cut {
+	  max-height: 200px;
+	  overflow: hidden;
+	}
+
+	&.isOpen {
+	  max-height: 500px;
+	}
   }
+  .tracktabs {
+	padding: 0 15px 0 15px;
+	border-bottom: 2px solid #ccc;
+	background: #f0f0f0;
 
-  .trackActions.isOpen {
-	max-height: 500px;
-  }
+	a {
+	  padding: 14px 20px 14px 20px;
+	  text-decoration: none;
+	  margin-bottom: -2px;
+	  color: #3a3e43;
+	  font-weight: 400;
+	  font-family: "Source Sans Pro", sans-serif;
+	  border-bottom: 2px solid transparent;
+	  position: relative;
 
-  .trackActions {
-	padding: 0 0 15px;
-	margin-top: -22px;
-	position: relative;
-	z-index: 2;
-	.c_btn {
-	  margin-right: 10px;
-
-	  border-radius: 20px;
-	  padding: 8px 16px;
-
-	  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-	  color: #3f4144;
-	  background: #fff;
-	  transition: 0.3s box-shadow;
-
-	  &.liked {
-		color: $accent !important;
+	  &.active {
+		border-bottom: 2px solid $accent;
+		color:$accent;
 	  }
-
-	  &:hover {
-		background: #fff;
-		box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08), 0 6px 50px rgba(0, 0, 0, 0.18);
-		transition: 0.3s box-shadow;
+	  & span{
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 5px;
+		color: $accent;
+		animation: ping infinite 5s;
 	  }
-
-	  i {
-		padding-right: 5px;
-	  }
-
 	}
   }
 
+}
+
+@keyframes ping {
+  0% {
+	opacity: 0;
+  }
+  50%{
+	opacity: 1;
+  }
+  100%{
+	opacity: 0;
+  }
 }

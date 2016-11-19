@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from "react";
 import TogglePlayButton from "../../_common/components/togglePlay";
 import {Link} from "react-router";
-import {truncate,filter} from "../../_common/utils/appUtils";
-
-import {Row,Container,Col} from "reactstrap";
+import {truncate} from "../../_common/utils/appUtils";
+import cn from "classnames";
+import {Row, Col} from "reactstrap";
 
 
 class trackListItem extends Component {
@@ -31,11 +31,13 @@ class trackListItem extends Component {
   }
 
   render() {
-    const {track, user, isPlaying} = this.props;
+    const {track, users, isPlaying, liked, likeFunc} = this.props;
 
+
+    const user = users[track.user_id];
 
     return (
-      <Row className="trackItem flex">
+      <Row className={cn("trackItem flex", {isPlaying: isPlaying})}>
         <Col xs="6" className="flex">
           {
             this.renderToggleButton()
@@ -43,18 +45,20 @@ class trackListItem extends Component {
           <div className="trackTitle">
             <Link to={`/song/${track.id}`}>
               {
-                filter(truncate(track.title,80))
+                truncate(track.title, 80, "...", true)
               }
             </Link>
           </div>
         </Col>
         <Col xs="4" className="trackArtist">
-          {track.user.username}
+          {user.username}
         </Col>
-        <Col xs="2">
-          <i className="icon-favorite_border"/>
-          <i className="icon-retweet" />
-          <i className="icon-playlist_add" />
+        <Col xs="2" className="trackitemActions">
+          <a className={cn({liked: liked})} href="javascript:void(0)" onClick={likeFunc}>
+            <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
+          </a>
+          {/*<i className="icon-retweet"/>
+           <i className="icon-playlist_add"/>*/}
         </Col>
       </Row>
     );
@@ -66,6 +70,9 @@ trackListItem.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   track: PropTypes.object.isRequired,
+  users: PropTypes.object.isRequired,
+  likeFunc: PropTypes.func.isRequired,
+  liked: PropTypes.bool.isRequired
 };
 
 
