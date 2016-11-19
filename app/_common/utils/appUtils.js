@@ -15,7 +15,7 @@ export function truncate(str, length = 50, append = "...",f) {
 }
 
 export function filter(str) {
-  str = str.replace(/\[.*\]/gi,"");
+  str = str.replace(/\[(.*?)\]/g,"");
   return str;
 }
 
