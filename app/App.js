@@ -50,6 +50,20 @@ class App extends Component {
     return this.props.children;
   }
 
+  renderFooter(){
+    const {online} = this.state;
+
+    if (!online) {
+      return null;
+    }
+
+    return (
+      <footer className="navbar-fixed-bottom">
+        <PlayerContainer/>
+      </footer>
+    )
+  }
+
   render() {
     const {me} = this.props;
 
@@ -63,9 +77,9 @@ class App extends Component {
             this.renderMain()
           }
         </main>
-        <footer className="navbar-fixed-bottom">
-          <PlayerContainer/>
-        </footer>
+        {
+          this.renderFooter()
+        }
       </div>
     );
   }
