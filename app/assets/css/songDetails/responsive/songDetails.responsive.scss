@@ -1,0 +1,79 @@
+@import "~bootstrap/scss/mixins";
+
+// XTRA LARGE
+
+@include media-breakpoint-up(xl) {
+  .trackDetails .trackStats{
+	//margin-top: 70px;
+  }
+
+  .trackDetails .trackHeader .imageWrapper{
+	position: absolute;
+  }
+}
+// LARGE
+
+@include media-breakpoint-up(lg) {
+
+  .trackDetails .trackHeader .imageWrapper{
+	 position: absolute;
+   }
+ }
+
+// MEDIUM
+
+@include media-breakpoint-down(md) {
+
+  .trackDetails .trackHeader .imageWrapper{
+	position: relative;
+  }
+}
+
+// SMALL
+
+@include media-breakpoint-down(sm) {
+
+  .trackDetails .trackHeader .overlayWrapper .overlayImg{
+	margin-left: -40%;
+	width: 180%;
+  }
+  .trackDetails .trackStats{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  }
+  .trackInfo{
+	padding: 2rem 1rem;
+	margin-bottom: 1rem;
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+
+  .trackDetails .trackHeader .overlayWrapper .overlayImg{
+	margin-left: -10%;
+	width: 120%;
+  }
+  .trackInfo{
+	height: 235px;
+	padding: 70px 25px 50px;
+  }
+}
+
+
+@include media-breakpoint-only(lg) {
+
+  .trackDetails .trackHeader .imageWrapper{
+	margin-top: 2vw !important;
+  }
+}
+
+
+@include media-breakpoint-only(xl) {
+
+  .trackDetails .trackHeader .imageWrapper{
+	margin-top: .6vw !important;
+  }
+}

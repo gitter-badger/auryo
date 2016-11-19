@@ -117,14 +117,28 @@ class songContainer extends Component {
               <img className="overlayImg" src={img_url}/>
             </div>
 
-            <Col xs="12" md="3">
+            <Col xs="12" md="4" xl="3">
               <div className="imageWrapper">
                 <img src={img_url}/>
                 <img className="imgShadow" src={img_url}/>
+                <div className="flex flex-items-xs-center trackStats">
+                  <div className="stat">
+                    <i className="icon-favorite_border"/>
+                    <span>{abbreviate_number(track.favoritings_count)}</span>
+                  </div>
+                  <div className="stat">
+                    <i className="icon-play_arrow"/>
+                    <span>{abbreviate_number(track.playback_count)}</span>
+                  </div>
+                  <div className="stat">
+                    <i className="icon-chat_bubble"/>
+                    <span>{abbreviate_number(track.comment_count)}</span>
+                  </div>
+                </div>
               </div>
             </Col>
 
-            <Col xs="12" md="9" className="trackInfo">
+            <Col xs="12" md="8" xl="9" className="trackInfo text-md-left text-sm-center">
               <div className="trackTitle">{track.title}</div>
               <div className="trackArtist">{user.username}</div>
             </Col>
@@ -132,25 +146,11 @@ class songContainer extends Component {
           </Row>
 
           <Row>
-            <Col xs="12" md="3">
-              <div className="flex flex-items-xs-center trackStats">
-                <div className="stat">
-                  <i className="icon-favorite_border"/>
-                  <span>{abbreviate_number(track.favoritings_count)}</span>
-                </div>
-                <div className="stat">
-                  <i className="icon-play_arrow"/>
-                  <span>{abbreviate_number(track.playback_count)}</span>
-                </div>
-                <div className="stat">
-                  <i className="icon-chat_bubble"/>
-                  <span>{abbreviate_number(track.comment_count)}</span>
-                </div>
-              </div>
+            <Col xs="12" md="4" xl="3">
             </Col>
 
-            <Col xs="12" lg="9" className="trackInfoRight">
-              <div className="flex trackActions">
+            <Col xs="12" md="8" xl="9" className="trackInfoRight flex-xs-first flex-lg-last">
+              <div className="flex trackActions flex-wrap flex-items-xs-center flex-items-lg-left">
                 {
                   this.renderToggleButton()
                 }
@@ -167,6 +167,10 @@ class songContainer extends Component {
                   <span>Add to playlist</span>
                 </a>
               </div>
+            </Col>
+          </Row>
+          <Row  className="flex-items-lg-right">
+            <Col  xs="12" md="8" xl="9">
 
               <div className={cn("trackDescription", {isOpen: this.state.open})}>
                 <div className={cn("descriptionInner",{cut:this.state.cut})} ref="descr"
@@ -176,10 +180,6 @@ class songContainer extends Component {
                     <a onClick={this.toggleOpen}>read more</a>
                 }
               </div>
-            </Col>
-          </Row>
-          <Row  className="flex-items-lg-right">
-            <Col xs="12" lg="9">
 
 
               <TrackListComponent

@@ -1,5 +1,7 @@
 @import "../vars";
 
+@import "responsive/songDetails.responsive";
+
 .trackDetails {
   .trackHeader {
 	z-index: 2;
@@ -31,22 +33,19 @@
 
 	  .overlayImg {
 		position: absolute;
-		width: 120%;
 		z-index: -1;
 		-webkit-filter: blur(30px);
 		filter: blur(30px);
 		top: -200px;
-		margin-left: -80px;
 		margin-top: -10px;
 	  }
 	}
 
 	.imageWrapper {
-	  position: relative;
 	  text-align: center;
 	  left: 0;
 	  right: 0;
-	  margin: 0 20px -100px;
+	  margin: 0 20px;
 
 	  img {
 		width: 100%;
@@ -65,9 +64,7 @@
 	}
 
 	.trackInfo {
-	  height: 235px;
 	  position: relative;
-	  padding: 70px 25px 50px;
 	}
 
 	.trackTitle {
@@ -118,7 +115,6 @@
   .trackStats {
 	padding: 10px 0;
 	color: #3f4144;
-	margin-top: 70px;
 	& .stat {
 	  padding: 10px 15px 10px 0;
 	  i {
@@ -131,7 +127,7 @@
 	}
   }
   .trackInfoRight{
-	padding: 0 80px 0 0;
+	//padding: 0 80px 0 0;
   }
 
   .trackDescription {
