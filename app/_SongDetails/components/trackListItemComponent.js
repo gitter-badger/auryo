@@ -57,8 +57,8 @@ class trackListItem extends Component {
           <a className={cn({liked: liked})} href="javascript:void(0)" onClick={likeFunc}>
             <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
           </a>
-          <i className="icon-retweet"/>
-          <i className="icon-playlist_add"/>
+          {/*<i className="icon-retweet"/>
+           <i className="icon-playlist_add"/>*/}
         </Col>
       </Row>
     );

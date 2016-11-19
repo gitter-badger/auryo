@@ -19,3 +19,11 @@ export function getPlayingTrackId(player, playlists, feedInfo = null) {
 
   return null;
 }
+
+export function getCurrentPlaylist(player) {
+  if(player && player.queuedPlaylists && player.queuedPlaylists .length > 0){
+    return player.queuedPlaylists[player.queuedPlaylists.length - 1];
+  }
+
+  return null;
+}
