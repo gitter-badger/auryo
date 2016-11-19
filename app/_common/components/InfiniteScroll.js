@@ -24,7 +24,7 @@ export default function (InnerComponent) {
       const box = el.getBoundingClientRect();
       const scroll_height = (el.scrollHeight - box.bottom) + box.top;
 
-      if (el.scrollTop >= (scroll_height - 400)) {
+      if (el.scrollTop >= (scroll_height - 450)) {
         const {dispatch, scrollFunc} = this.props;
         dispatch(scrollFunc());
       }

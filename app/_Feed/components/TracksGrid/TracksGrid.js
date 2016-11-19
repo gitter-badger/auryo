@@ -2,9 +2,8 @@ import React, {Component, PropTypes} from "react";
 import TrackGridItem from "./TrackGridItem";
 import {fetchMore, playTrack} from "../../../_common/actions";
 import Spinner from "../../../_common/components/Spinner";
-import ReactList from "react-list";
-
-import { Container, Row } from 'reactstrap';
+import ReactList from "./reactlist";
+//import ReactList from "react-list";
 
 class TracksGrid extends Component {
   constructor(props) {
@@ -54,18 +53,13 @@ class TracksGrid extends Component {
                      dispatch={dispatch}
                      isPlaying={track.id === playingSongId}
                      scrollFunc={scrollFunc}
-                     track={track} />
+                     track={track}/>
 
     );
   }
 
   renderWrapper(items, ref) {
-    return React.createElement(
-      'div',
-      {ref: ref, className: "row tracks flex-items-xs-center"},
-      items
-    );
-    return <Row ref={ref}>{items}</Row>
+    return <div className="row" ref={ref}>{items}</div>
   }
 
   render() {
@@ -82,13 +76,10 @@ class TracksGrid extends Component {
         <ReactList
           type="uniform"
           length={items.length}
-          pageSize={15}
-          threshold={150}
-
           itemsRenderer={this.renderWrapper}
           itemRenderer={this.renderItem}
           useStaticSize={true}
-          useTranslate3d={true}
+          threshold={150}
         />
         {isFetching ? <Spinner /> : null}
       </div>
