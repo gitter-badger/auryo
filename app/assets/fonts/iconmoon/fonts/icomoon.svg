@@ -11,6 +11,7 @@
 <glyph unicode="&#xe034;" glyph-name="pause" d="M598 724.667h170v-596h-170v596zM256 128.667v596h170v-596h-170z" />
 <glyph unicode="&#xe037;" glyph-name="play_arrow" d="M342 724.667l468-298-468-298v596z" />
 <glyph unicode="&#xe03b;" glyph-name="playlist_add" d="M86 256.667v84h340v-84h-340zM768 340.667h170v-84h-170v-172h-86v172h-170v84h170v172h86v-172zM598 682.667v-86h-512v86h512zM598 512.667v-86h-512v86h512z" />
+<glyph unicode="&#xe040;" glyph-name="repeat" d="M726 212.667v172h84v-256h-512v-128l-170 170 170 170v-128h428zM298 640.667v-172h-84v256h512v128l170-170-170-170v128h-428z" />
 <glyph unicode="&#xe041;" glyph-name="repeat_one" d="M554 298.667h-64v170h-64v44l86 42h42v-256zM726 212.667v172h84v-256h-512v-128l-170 170 170 170v-128h428zM298 640.667v-172h-84v256h512v128l170-170-170-170v128h-428z" />
 <glyph unicode="&#xe044;" glyph-name="skip_next" d="M682 682.667h86v-512h-86v512zM256 170.667v512l362-256z" />
 <glyph unicode="&#xe045;" glyph-name="skip_previous" d="M406 426.667l362 256v-512zM256 682.667h86v-512h-86v512z" />
@@ -23,6 +24,8 @@
 <glyph unicode="&#xe146;" glyph-name="add_box" d="M726 384.667v84h-172v172h-84v-172h-172v-84h172v-172h84v172h172zM810 810.667c46 0 86-40 86-86v-596c0-46-40-86-86-86h-596c-48 0-86 40-86 86v596c0 46 38 86 86 86h596z" />
 <glyph unicode="&#xe15b;" glyph-name="remove" d="M810 384.667h-596v84h596v-84z" />
 <glyph unicode="&#xe313;" glyph-name="keyboard_arrow_down" d="M316 604.667l196-196 196 196 60-60-256-256-256 256z" />
+<glyph unicode="&#xe314;" glyph-name="keyboard_arrow_left" d="M658 252.667l-60-60-256 256 256 256 60-60-196-196z" />
+<glyph unicode="&#xe315;" glyph-name="keyboard_arrow_right" d="M366 240.667l196 196-196 196 60 60 256-256-256-256z" />
 <glyph unicode="&#xe3a1;" glyph-name="audiotrack" d="M512 810.667h298v-128h-170v-470h-2c-10-96-92-170-190-170-106 0-192 86-192 192s86 192 192 192c22 0 44-4 64-12v396z" />
 <glyph unicode="&#xe5cd;" glyph-name="close" d="M810 664.667l-238-238 238-238-60-60-238 238-238-238-60 60 238 238-238 238 60 60 238-238 238 238z" />
 <glyph unicode="&#xe5d1;" glyph-name="fullscreen_exit" d="M682 596.667h128v-84h-212v212h84v-128zM598 128.667v212h212v-84h-128v-128h-84zM342 596.667v128h84v-212h-212v84h128zM214 256.667v84h212v-212h-84v128h-128z" />

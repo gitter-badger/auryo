@@ -72,6 +72,12 @@
 .icon-keyboard_arrow_down:before {
   content: "\e313";
 }
+.icon-keyboard_arrow_left:before {
+  content: "\e314";
+}
+.icon-keyboard_arrow_right:before {
+  content: "\e315";
+}
 .icon-pause:before {
   content: "\e034";
 }
@@ -83,6 +89,9 @@
 }
 .icon-remove:before {
   content: "\e15b";
+}
+.icon-repeat:before {
+  content: "\e040";
 }
 .icon-repeat_one:before {
   content: "\e041";

@@ -15,6 +15,7 @@ $enable-flex:true;
 @import "./Player/player";
 @import "./songDetails/songDetails";
 @import "./songDetails/trackListItem";
+@import "./common/header";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -45,7 +46,7 @@ body:before {
   }
 
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   color: red;
   display: block;
@@ -74,8 +75,12 @@ main {
 
 .scroll {
   position: relative;
-  overflow-y: overlay;
+  overflow-y: auto;
   height: calc(100vh - 54px);
+
+  &.playing {
+	height: calc(100vh - 120px);
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -93,67 +98,8 @@ main {
   background-color: #555;
 }
 
-.main.playing {
-  height: calc(100vh - 120px);
-}
-
-.navbar-dark {
-  background: #2f343f;
-}
-
 #sidebar a {
   color: #BAC3CF;
-}
-
-.navbar {
-  -webkit-app-region: drag
-}
-
-.navbar .window-controls {
-  -webkit-app-region: no-drag;
-  align-items: center;
-}
-
-.navbar .window-controls .control {
-  display: inline-block;
-  border-radius: 100%;
-  height: 15px;
-  width: 15px;
-  margin-right: 10px;
-  position: relative;
-}
-
-.navbar .window-controls .control i {
-  font-size: 13px;
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: 1px;
-  color: #2f343f;
-  opacity: 0;
-  transition: .5s opacity;
-}
-
-.navbar .window-controls .control:hover i {
-  opacity: 1;
-  transition: .5s opacity;
-
-}
-
-.control.control-close {
-  background: #EE5C55;
-}
-
-.control.control-minimize {
-  background: #62CB43;
-}
-
-.control.control-maximize {
-  background: #F8BC32;
 }
 
 /** -------- */

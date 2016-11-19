@@ -1,0 +1,109 @@
+@import "../vars";
+
+.navbar-dark {
+  background: $navbar_bg;
+}
+.navbar {
+  -webkit-app-region: drag;
+  padding: 5px 10px;
+}
+
+.navbar .window-controls {
+  -webkit-app-region: no-drag;
+  align-items: center;
+}
+
+.navbar .control-nav {
+  -webkit-app-region: no-drag;
+  align-items: center;
+  color: #fff;
+  padding: 6px 20px;
+  .control-nav-inner{
+	border:1px solid darken($navbar_bg,2.5%);
+	border-radius: 20px;
+	position: relative;
+
+	&:after{
+	  content: "";
+	  position: absolute;
+	  height: 80%;
+	  width: 1px;
+	  background: darken($navbar_bg,2.5%);
+
+	  overflow: auto;
+	  margin: auto;
+	  top: 0; left: 0; bottom: 0; right: 0;
+
+	}
+  }
+  a {
+	display: inline-block;
+	padding: 2px 4px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 0 20px 20px 0;
+	transition: .4s background;
+	&:not(.disabled):hover{
+
+	  background: darken($navbar_bg,2%);
+	  transition: .4s background;
+	}
+
+	&.disabled{
+	  opacity: .3;
+	  cursor: default;
+	}
+
+	&:first-child{
+	  border-right: none;
+	  margin-left: 1px;
+	  border-radius: 20px 0 0 20px;
+	}
+	i{
+
+	  font-size: 1.7em;
+	}
+  }
+}
+
+.navbar .window-controls .control {
+  display: inline-block;
+  border-radius: 100%;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.navbar .window-controls .control i {
+  font-size: 13px;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 1px;
+  color: #2f343f;
+  opacity: 0;
+  transition: .5s opacity;
+}
+
+.navbar .window-controls .control:hover i {
+  opacity: 1;
+  transition: .5s opacity;
+
+}
+
+.control.control-close {
+  background: #EE5C55;
+}
+
+.control.control-minimize {
+  background: #62CB43;
+}
+
+.control.control-maximize {
+  background: #F8BC32;
+}

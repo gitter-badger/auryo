@@ -360,6 +360,60 @@
     {
       "icon": {
         "paths": [
+          "M658 686l-60 60-256-256 256-256 60 60-196 196z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "keyboard_arrow_left"
+        ],
+        "defaultCode": 58132,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 736,
+        "ligatures": "keyboard_arrow_left",
+        "id": 412,
+        "prevSize": 24,
+        "code": 58132,
+        "name": "keyboard_arrow_left"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 412
+    },
+    {
+      "icon": {
+        "paths": [
+          "M366 698l196-196-196-196 60-60 256 256-256 256z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "keyboard_arrow_right"
+        ],
+        "defaultCode": 58133,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 737,
+        "ligatures": "keyboard_arrow_right",
+        "id": 413,
+        "prevSize": 24,
+        "code": 58133,
+        "name": "keyboard_arrow_right"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 413
+    },
+    {
+      "icon": {
+        "paths": [
           "M598 214h170v596h-170v-596zM256 810v-596h170v596h-170z"
         ],
         "attrs": [],
@@ -464,6 +518,33 @@
       "setIdx": 3,
       "setId": 8,
       "iconIdx": 617
+    },
+    {
+      "icon": {
+        "paths": [
+          "M726 726v-172h84v256h-512v128l-170-170 170-170v128h428zM298 298v172h-84v-256h512v-128l170 170-170 170v-128h-428z"
+        ],
+        "attrs": [],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "tags": [
+          "repeat"
+        ],
+        "defaultCode": 57408,
+        "grid": 24
+      },
+      "attrs": [],
+      "properties": {
+        "order": 738,
+        "ligatures": "repeat",
+        "id": 623,
+        "prevSize": 24,
+        "code": 57408,
+        "name": "repeat"
+      },
+      "setIdx": 3,
+      "setId": 8,
+      "iconIdx": 623
     },
     {
       "icon": {
