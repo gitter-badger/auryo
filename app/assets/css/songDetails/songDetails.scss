@@ -130,16 +130,22 @@
 	  }
 	}
   }
+  .trackInfoRight{
+	padding: 0 80px 0 0;
+  }
 
   .trackDescription {
 	color: #3a3e43;
 	margin-top: 20px;
-	max-height: 200px;
-	overflow: hidden;
-  }
 
-  .trackActions.isOpen {
-	max-height: 500px;
+	.descriptionInner.cut{
+	  max-height: 200px;
+	  overflow: hidden;
+	}
+
+	&.isOpen {
+	  max-height: 500px;
+	}
   }
 
   .trackActions {

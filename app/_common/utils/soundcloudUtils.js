@@ -90,8 +90,16 @@ export function getImageUrl(track, size = null) {
   }
 }
 
+/*
+ * Util functions
+ */
+
 export function formatDescription(input) {
   return {
     __html: linkifyHtml(input.replace(/(\r\n|\n|\r)/gm, "<br>"))
   };
+}
+
+export function isLiked(trackID,likes) {
+  return (trackID in likes) && likes[trackID] == 1;
 }

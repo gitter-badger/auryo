@@ -4,10 +4,10 @@ import ReactDOM from "react-dom";
 import {appendClientId, getImageUrl} from "../../../_common/utils/soundcloudUtils";
 import {getReadableTime, getPos, truncate} from "../../../_common/utils/appUtils";
 import {IMAGE_SIZES} from "../../../_common/constants/Soundcloud";
-import {CHANGE_TYPES,STATUS} from "../../../_common/constants/playlist";
+import {CHANGE_TYPES, STATUS} from "../../../_common/constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../../_common/actions";
 import Audio from "../../../_common/components/Audio";
-import {Row,Container,Col} from "reactstrap";
+import cn from "classnames";
 
 class Player extends React.Component {
 
@@ -20,6 +20,7 @@ class Player extends React.Component {
       updateTime: 0,
       duration: 0,
       isSeeking: false,
+      isVolumeSeeking: false,
       muted: false,
       repeat: false,
       shuffle: false,
@@ -204,7 +205,7 @@ class Player extends React.Component {
   handleVolumeMouseDown() {
     this.bindVolumeMouseEvents();
     this.setState({
-      isSeeking: true,
+      isVolumeSeeking: true,
     });
   }
 
@@ -214,7 +215,7 @@ class Player extends React.Component {
     var box = volumeBar.getBoundingClientRect();
     const start = box.bottom;
 
-    let percent = (start  - e.clientY) / box.height;
+    let percent = (start - e.clientY) / box.height;
 
     percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
     this.setState({
@@ -223,7 +224,7 @@ class Player extends React.Component {
   }
 
   handleVolumeMouseUp() {
-    if (!this.state.isSeeking) {
+    if (!this.state.isVolumeSeeking) {
       return;
     }
 
@@ -231,7 +232,7 @@ class Player extends React.Component {
     document.removeEventListener('mouseup', this.handleVolumeMouseUp);
 
     this.setState({
-      isSeeking: false,
+      isVolumeSeeking: false,
     });
     // Todo write to config
   }
@@ -245,7 +246,7 @@ class Player extends React.Component {
     var box = e.currentTarget.getBoundingClientRect();
     const start = box.bottom;
 
-    let percent = (start  - e.clientY) / box.height;
+    let percent = (start - e.clientY) / box.height;
 
     percent = percent > 1 ? 1 : percent < 0 ? 0 : percent;
 
@@ -327,7 +328,7 @@ class Player extends React.Component {
     const {status} = player;
     const track = tracks[playingSongId];
 
-    track.user = users[(track.user_id) ? track.user_id : track.user];
+    track.user = users[track.user_id];
 
     const prevFunc = this.changeSong.bind(this, CHANGE_TYPES.PREV);
     const nextFunc = this.changeSong.bind(
@@ -365,7 +366,7 @@ class Player extends React.Component {
               <img width={50} height={50} src={image}/>
             </div>
             <div className="trackInfo">
-              <div className="trackTitle" title={track.title}>{truncate(track.title, 40,"...",true)}</div>
+              <div className="trackTitle" title={track.title}>{truncate(track.title, 40, "...", true)}</div>
               <div className="trackArtist">{truncate(track.user.username, 50)}</div>
             </div>
 
@@ -378,7 +379,7 @@ class Player extends React.Component {
             </div>
           </div>
 
-          <div className="flex" style={{flexGrow:1}}>
+          <div className="flex" style={{flexGrow: 1}}>
             <div className="playerTimeLine">
 
               <div className="row progressWrapper">
@@ -398,7 +399,7 @@ class Player extends React.Component {
               </div>
 
             </div>
-            <div className="flex playerVolume">
+            <div className={cn("flex playerVolume", {hover: this.state.isVolumeSeeking})}>
               <i className={`icon-${volume_icon}`} onClick={this.toggleMute}/>
               <div className="progressWrapper">
                 <div className="progressInner" onClick={this.volumeClick}

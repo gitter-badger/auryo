@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {fetchTrackIfNeeded, playTrack, toggleLike} from "../_common/actions";
 import Spinner from "../_common/components/Spinner/index";
 import {IMAGE_SIZES} from "../_common/constants/Soundcloud";
-import {getImageUrl, formatDescription, getVisual} from "../_common/utils/soundcloudUtils";
+import {getImageUrl, formatDescription, isLiked} from "../_common/utils/soundcloudUtils";
 import {abbreviate_number} from "../_common/utils/appUtils";
 import {getPlayingTrackId} from "../_Player/playerUtils";
 import TogglePlay from "../_common/components/togglePlay";
@@ -11,6 +11,8 @@ import cn from "classnames";
 import {RELATED_PLAYLIST} from "../_common/constants/playlist";
 import TrackListComponent from "./components/trackListComponent";
 import {Col, Row, Container} from "reactstrap";
+import ReactDOM from "react-dom";
+import {History} from 'react-router'
 
 class songContainer extends Component {
 
@@ -18,9 +20,12 @@ class songContainer extends Component {
     super(props);
 
     this.toggleOpen = this.toggleOpen.bind(this);
+
     this.state = {
-      open: false
+      open: false,
+      cut: false
     };
+    console.log(History);
   }
 
   componentWillMount() {
@@ -28,8 +33,20 @@ class songContainer extends Component {
     dispatch(fetchTrackIfNeeded(params.songId));
   }
 
+  componentDidMount() {/*
+    const description = ReactDOM.findDOMNode(this.refs.descr);
+
+    const box = description.getBoundingClientRect();
+
+    if (box.height > 200) {
+      this.setState({
+        cut: true
+      })
+    }*/
+  }
+
   componentWillReceiveProps(nextProps) {
-    const {dispatch,params} = this.props;
+    const {dispatch, params} = this.props;
     if (params.songId != nextProps.params.songId) {
       dispatch(fetchTrackIfNeeded(nextProps.params.songId));
     }
@@ -76,7 +93,7 @@ class songContainer extends Component {
   render() {
     const {tracks, params, users, likes, playlists, player, dispatch} = this.props;
 
-    let track = tracks[params.songId];
+    const track = tracks[params.songId];
 
     if (!track) {
       return <Spinner />
@@ -89,10 +106,10 @@ class songContainer extends Component {
     const img_url = getImageUrl(track, IMAGE_SIZES.LARGE);
 
     const likeFunc = this.toggleLike.bind(this, track.id);
-    const liked = (track.id in likes) && likes[track.id] == 1;
+    const liked = isLiked(track.id,likes);
 
     return (
-      <div className="scroll trackDetails">
+      <div className={cn("scroll trackDetails", {playing: player.currentSong != null})}>
         <Container fluid={true}>
           <Row className="trackHeader">
 
@@ -132,7 +149,7 @@ class songContainer extends Component {
               </div>
             </Col>
 
-            <Col xs="12" md="9">
+            <Col xs="12" lg="9" className="trackInfoRight">
               <div className="flex trackActions">
                 {
                   this.renderToggleButton()
@@ -152,12 +169,18 @@ class songContainer extends Component {
               </div>
 
               <div className={cn("trackDescription", {isOpen: this.state.open})}>
-                <div dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                <div className={cn("descriptionInner",{cut:this.state.cut})} ref="descr"
+                     dangerouslySetInnerHTML={formatDescription(track.description)}></div>
                 {
                   (this.state.open) ? <a onClick={this.toggleOpen}>read less</a> :
                     <a onClick={this.toggleOpen}>read more</a>
                 }
               </div>
+            </Col>
+          </Row>
+          <Row  className="flex-items-lg-right">
+            <Col xs="12" lg="9">
+
 
               <TrackListComponent
                 player={player}
@@ -165,7 +188,9 @@ class songContainer extends Component {
                 playlists={playlists}
                 tracks={tracks}
                 dispatch={dispatch}
-                users={users}/>
+                users={users}
+                likes={likes}
+                likeFunc={this.toggleLike.bind(this)}/>
             </Col>
           </Row>
         </Container>
