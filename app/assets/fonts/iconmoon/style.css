@@ -4,7 +4,7 @@
   src:  url('fonts/icomoon.eot#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf') format('truetype'),
     url('fonts/icomoon.woff') format('woff'),
-    url('fonts/icomoon.svg') format('svg');
+    url('fonts/icomoon.svg#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -53,6 +53,9 @@
 }
 .icon-chat_bubble:before {
   content: "\e0ca";
+}
+.icon-check:before {
+  content: "\e5ca";
 }
 .icon-close:before {
   content: "\e5cd";
