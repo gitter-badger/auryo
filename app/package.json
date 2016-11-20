@@ -4,7 +4,6 @@
   "version": "1.2.0",
   "description": "A beautiful soundcloud desktop app",
   "main": "./main.js",
-  "private": true,
   "author": {
     "name": "Jonas Snellinckx",
     "email": "jonas.snellinckx@gmail.com",
@@ -37,7 +36,6 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
-    "soundmanager2": "^2.97.20150601-a",
     "source-map-support": "^0.4.6"
   }
 }

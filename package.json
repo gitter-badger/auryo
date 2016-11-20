@@ -24,7 +24,7 @@
     "cleanup": "mop -v"
   },
   "build": {
-    "appId": "obe.sneljo.auryo",
+    "appId": "be.sneljo.auryo",
     "category": "public.app-category.music",
     "homepage": "https://github.com/Superjo149/auryo",
     "dmg": {
@@ -81,7 +81,7 @@
     "webpack",
     "react-hot"
   ],
-  "homepage": "https://github.com/chentsulin/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/Superjo149/auryo",
   "devDependencies": {
     "asar": "^0.12.3",
     "babel-core": "^6.18.0",

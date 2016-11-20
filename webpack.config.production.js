@@ -19,25 +19,15 @@ const config = validate(merge(baseConfig, {
   ],
 
   output: {
-    path: path.join(__dirname, 'app/assets/dist'),
-    publicPath: '../assets/dist/'
+    path: path.join(__dirname, 'app/dist'),
+    publicPath: '../dist/'
   },
 
   module: {
     loaders: [
-      // Extract all .global.css to spinner.scss as is
+      { test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=.]+)?$/, loader: 'url-loader?limit=100000' },
       {
-        test: /\.scss$/,
-        loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-      },
-
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      {
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
+        test: /.*\.(gif|png|jpe?g)$/i,
         loaders: [
           'file-loader',
           {
@@ -54,6 +44,10 @@ const config = validate(merge(baseConfig, {
           }
         ]
       },
+      {
+        test: /(\.scss$|\.css)$/,
+        loaders: [ 'style', 'css', 'sass' ],
+      }
     ]
   },
 

@@ -20,7 +20,7 @@
       if (!process.env.HOT) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = './assets/dist/style.css';
+        link.href = './dist/style.css';
         document.write(link.outerHTML);
       }
     }());
@@ -33,7 +33,7 @@
     const script = document.createElement('script');
     const port = process.env.PORT || 3000;
     script.src = (process.env.HOT)
-      ? 'http://localhost:' + port + '/assets/dist/bundle.js'
+      ? 'http://localhost:' + port + '/dist/bundle.js'
       : './dist/bundle.js';
     document.write(script.outerHTML);
   }

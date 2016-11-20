@@ -55,13 +55,18 @@ export default validate(merge(baseConfig, {
   },
 
   externals: [
+    "back-forward-history",
     "bootstrap",
     "classnames",
     "electron-cookies",
     "electron-debug",
     "font-awesome",
+    "is-online",
+    "linkifyjs",
     "lodash",
+    "material-design-icons",
     "normalizr",
+    "offline-js",
     "react",
     "react-addons-css-transition-group",
     "react-addons-pure-render-mixin",
@@ -76,7 +81,6 @@ export default validate(merge(baseConfig, {
     "redux",
     "redux-logger",
     "redux-thunk",
-    "soundmanager2",
     "source-map-support"
   ]
 }));

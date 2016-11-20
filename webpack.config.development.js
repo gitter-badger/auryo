@@ -24,7 +24,7 @@ export default validate(merge(baseConfig, {
   ],
 
   output: {
-    publicPath: `http://localhost:${port}/assets/dist/`
+    publicPath: `http://localhost:${port}/dist/`
   },
 
   module: {
@@ -36,6 +36,13 @@ export default validate(merge(baseConfig, {
     //   }
     // ],
     loaders: [
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader?sourceMap'
+        ]
+      },
       {
         test: /\.scss$/,
         loaders: ["style", "css?sourceMap", "sass?sourceMap"]
