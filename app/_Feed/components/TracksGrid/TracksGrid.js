@@ -2,8 +2,7 @@ import React, {Component, PropTypes} from "react";
 import TrackGridItem from "./TrackGridItem";
 import {fetchMore, playTrack} from "../../../_common/actions";
 import Spinner from "../../../_common/components/Spinner";
-import ReactList from "./reactlist";
-//import ReactList from "react-list";
+import ReactList from "react-list";
 
 class TracksGrid extends Component {
   constructor(props) {
@@ -78,7 +77,6 @@ class TracksGrid extends Component {
           length={items.length}
           itemsRenderer={this.renderWrapper}
           itemRenderer={this.renderItem}
-          useStaticSize={true}
           threshold={150}
         />
         {isFetching ? <Spinner /> : null}
