@@ -1,4 +1,4 @@
-import {initUser, logout} from "./userActions";
+import {initUser, logout, toggleFollowing} from "./userActions";
 import {fetchMore} from "./playlistActions";
 import {playTrack, toggleStatus, changeTrack, setCurrentTime} from "./playerActions";
 import {fetchTrackIfNeeded,toggleLike} from "./trackActions";
@@ -13,5 +13,6 @@ export {
   fetchMore,
   logout,
   fetchTrackIfNeeded,
-  toggleLike
+  toggleLike,
+  toggleFollowing
 };

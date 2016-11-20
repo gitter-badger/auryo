@@ -1,8 +1,7 @@
 import {CLIENT_ID} from "../constants/config";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 import React from "react";
-import * as linkify from 'linkifyjs';
-import linkifyHtml from 'linkifyjs/html';
+import linkifyHtml from "linkifyjs/html";
 
 const _endpoint = 'http://api.soundcloud.com/';
 const _v2_endpoint = "https://api-v2.soundcloud.com/";
@@ -14,7 +13,7 @@ export function initialize(token) {
 
 }
 
-export function getTrackUrl(trackID){
+export function getTrackUrl(trackID) {
   return _endpoint + "tracks/" + trackID + "?client_id=" + CLIENT_ID;
 }
 
@@ -59,13 +58,22 @@ export function appendClientId(url) {
 export function updateLikeUrl(trackID) {
   return _endpoint + "me/favorites/" + trackID + "?oauth_token=" + _token;
 }
+export function updateFollowingUrl(userID) {
+  return _endpoint + "me/followings/" + userID + "?oauth_token=" + _token;
+}
 
 export function getImageUrl(track, size = null) {
-  let s = track.artwork_url;
+  let s;
+  if (typeof track == "object") {
+    s = track.artwork_url;
 
-  if(!track.artwork_url  || track.artwork_url == null && track.user){
-    s = track.user.avatar_url;
+    if (!track.artwork_url || track.artwork_url == null && track.user) {
+      s = track.user.avatar_url;
+    }
+  } else {
+    s = track;
   }
+
 
   let str = s;
   if (!str) {
@@ -100,6 +108,10 @@ export function formatDescription(input) {
   };
 }
 
-export function isLiked(trackID,likes) {
+export function isLiked(trackID, likes) {
   return (trackID in likes) && likes[trackID] == 1;
+}
+
+export function isFollowing(userID, followings) {
+  return (userID in followings) && followings[userID] == 1;
 }

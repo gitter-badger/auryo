@@ -58,7 +58,6 @@ class Audio extends React.Component {
 
     audio.addEventListener('loadedmetadata', () => {
       if(this.audio){
-        console.log(this.audio.duration);
         this.props.onLoading(this.audio.duration);
       }
     });
@@ -92,7 +91,7 @@ class Audio extends React.Component {
       this.audio.currentTime = nextProps.playFromPosition;
     }
 
-    if(this.props.url != nextProps.url){
+    if(this.props.url != nextProps.url || this.props.id != nextProps.id){
       this.audio.pause();
       this.audio.src = nextProps.url;
       this.audio.play();

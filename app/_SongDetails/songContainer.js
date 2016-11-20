@@ -5,11 +5,13 @@ import Spinner from "../_common/components/Spinner/index";
 import {IMAGE_SIZES} from "../_common/constants/Soundcloud";
 import {getImageUrl, formatDescription, isLiked} from "../_common/utils/soundcloudUtils";
 import {getPlayingTrackId, getCurrentPlaylist} from "../_Player/playerUtils";
+import {abbreviate_number} from "../_common/utils/appUtils";
 import TogglePlay from "../_common/components/togglePlay";
 import cn from "classnames";
-import {RELATED_PLAYLIST,STATUS} from "../_common/constants/playlist";
+import {RELATED_PLAYLIST, STATUS} from "../_common/constants/playlist";
 import TrackListComponent from "./components/trackListComponent";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
+import UserCard from "../_common/components/User/UserCard";
 
 
 class songContainer extends Component {
@@ -17,13 +19,10 @@ class songContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleOpen = this.toggleOpen.bind(this);
-
     this.state = {
-      open: false,
-      cut: false,
       activeTab: '1'
     };
+
     this.toggle = this.toggle.bind(this);
   }
 
@@ -38,18 +37,6 @@ class songContainer extends Component {
   componentWillMount() {
     const {dispatch, params} = this.props;
     dispatch(fetchTrackIfNeeded(params.songId));
-  }
-
-  componentDidMount() {/*
-   const description = ReactDOM.findDOMNode(this.refs.descr);
-
-   const box = description.getBoundingClientRect();
-
-   if (box.height > 200) {
-   this.setState({
-   cut: true
-   })
-   }*/
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,12 +73,6 @@ class songContainer extends Component {
     );
   }
 
-  toggleOpen() {
-    this.setState({
-      open: !this.state.open
-    })
-  }
-
   toggleLike(trackID, e) {
     e.preventDefault();
     const {dispatch} = this.props;
@@ -101,7 +82,7 @@ class songContainer extends Component {
 
 
   isCurrentPlaylist() {
-    const {params,player} = this.props;
+    const {params, player} = this.props;
     const current_playlist = params.songId + RELATED_PLAYLIST;
 
     return getCurrentPlaylist(player) == current_playlist && (player.status == STATUS.PLAYING);
@@ -109,7 +90,7 @@ class songContainer extends Component {
   }
 
   render() {
-    const {tracks, params, users, likes, playlists, player, dispatch} = this.props;
+    const {tracks, params, users, likes, playlists, player, dispatch, followings} = this.props;
 
     const track = tracks[params.songId];
 
@@ -119,7 +100,6 @@ class songContainer extends Component {
     const playlist = params.songId + RELATED_PLAYLIST;
 
     const user = users[track.user_id];
-    track.user = user;
 
     const img_url = getImageUrl(track, IMAGE_SIZES.LARGE);
 
@@ -141,20 +121,20 @@ class songContainer extends Component {
               <div className="imageWrapper">
                 <img src={img_url}/>
                 <img className="imgShadow" src={img_url}/>
-                {/*<div className="flex flex-items-xs-center trackStats">
-                 <div className="stat">
-                 <i className="icon-favorite_border"/>
-                 <span>{abbreviate_number(track.favoritings_count)}</span>
-                 </div>
-                 <div className="stat">
-                 <i className="icon-play_arrow"/>
-                 <span>{abbreviate_number(track.playback_count)}</span>
-                 </div>
-                 <div className="stat">
-                 <i className="icon-chat_bubble"/>
-                 <span>{abbreviate_number(track.comment_count)}</span>
-                 </div>
-                 </div>*/}
+                <div className="row flex-items-xs-center trackStats">
+                  <div className="stat col-xs">
+                    <i className="icon-favorite_border"/>
+                    <span>{abbreviate_number(track.favoritings_count)}</span>
+                  </div>
+                  <div className="stat col-xs">
+                    <i className="icon-play_arrow"/>
+                    <span>{abbreviate_number(track.playback_count)}</span>
+                  </div>
+                  <div className="stat col-xs">
+                    <i className="icon-chat_bubble"/>
+                    <span>{abbreviate_number(track.comment_count)}</span>
+                  </div>
+                </div>
               </div>
             </Col>
 
@@ -162,7 +142,7 @@ class songContainer extends Component {
               <h1 className="trackTitle">{track.title}</h1>
               <h2 className="trackArtist">{user.username}</h2>
 
-              <div className="flex trackActions flex-wrap flex-items-xs-center flex-items-lg-left">
+              <div className="flex trackActions flex-wrap flex-items-xs-center flex-items-md-left">
                 {
                   this.renderToggleButton()
                 }
@@ -178,7 +158,7 @@ class songContainer extends Component {
                  <i className="icon-add"/>
                  <span>Add to playlist</span>
                  </a>*/
-                  }
+                }
               </div>
             </Col>
 
@@ -207,14 +187,17 @@ class songContainer extends Component {
               </div>
               <TabContent activeTab={this.state.activeTab} className="trackMain">
                 <TabPane tabId="1">
-                  <div className={cn("trackDescription", {isOpen: this.state.open})}>
-                    <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
-                         dangerouslySetInnerHTML={formatDescription(track.description)}></div>
-                    {/*
-                     (this.state.open) ? <a onClick={this.toggleOpen}>read less</a> :
-                     <a onClick={this.toggleOpen}>read more</a>
-                     */}
-                  </div>
+                  <Row>
+                    <Col xs="12" className="col-md user_card_wrap">
+                      <UserCard user={user} dispatch={dispatch} followings={followings} />
+                    </Col>
+                    <Col xs="12" md="7">
+                      <div className={cn("trackDescription", {isOpen: this.state.open})}>
+                        <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
+                             dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                      </div>
+                    </Col>
+                  </Row>
                 </TabPane>
                 <TabPane tabId="2">
                   <TrackListComponent
@@ -242,7 +225,7 @@ class songContainer extends Component {
 function mapStateToProps(state) {
   const {entities, player, playlists, user} = state;
   const {tracks, users} = entities;
-  const {likes} = user;
+  const {likes,followings} = user;
   const playingSongId = getPlayingTrackId(player, playlists);
   return {
     tracks,
@@ -250,7 +233,8 @@ function mapStateToProps(state) {
     player,
     playingSongId,
     likes,
-    playlists
+    playlists,
+    followings
   }
 }
 

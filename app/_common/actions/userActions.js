@@ -83,7 +83,12 @@ function fetchFollowings() {
       .then(response => response.json())
       .then(json => {
         const n = normalize(json.collection, arrayOf(userSchema));
-        dispatch(setFollowings(n.entities, n.result));
+
+        const result = _.reduce(n.result, (obj, t) => {
+          return Object.assign({}, obj, {[t]: 1})
+        }, {});
+
+        dispatch(setFollowings(n.entities, result));
       })
       .catch(err => {
         throw err;
@@ -103,4 +108,43 @@ function setFollowings(entities, result) {
     entities,
     result,
   };
+}
+
+export function toggleFollowing(userID) {
+  return (dispatch, getState) => {
+    const {user} = getState();
+    const {followings} = user;
+
+    const following = (userID in followings) && followings[userID] == 1;
+
+    if (!(userID in followings)) {
+      dispatch(addFollowing(userID));
+    } else {
+      dispatch(setFollowing(userID,(!following == false) ? 0 : 1));
+    }
+
+    updateFollowing(userID,!following);
+
+  }
+}
+
+function updateFollowing(userID,following){
+  fetch(SC.updateFollowingUrl(userID),{
+    method: (following == 1) ? "PUT" : "DELETE"
+  })
+}
+
+function setFollowing(userID, following) {
+  return {
+    type: actionTypes.USER_SET_FOLLOWING,
+    userID,
+    following
+  }
+}
+
+function addFollowing(userID) {
+  return {
+    type: actionTypes.USER_ADD_FOLLOWING,
+    userID
+  }
 }

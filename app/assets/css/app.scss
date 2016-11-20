@@ -16,6 +16,7 @@ $enable-flex: true;
 @import "./songDetails/songDetails";
 @import "./songDetails/trackListItem";
 @import "./common/header";
+@import "./common/user_card";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -60,7 +61,7 @@ body:before {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Arimo', sans-serif;
   font-weight: 400;
 }
 

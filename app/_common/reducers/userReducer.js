@@ -46,6 +46,22 @@ export default function (state = initialState, action) {
           ...state.likes,
           [action.trackID]: 1
         }
+      };
+    case actionTypes.USER_SET_FOLLOWING:
+      return {
+        ...state,
+        followings: {
+          ...state.followings,
+          [action.userID]: action.following
+        }
+      };
+    case actionTypes.USER_ADD_FOLLOWING:
+      return {
+        ...state,
+        followings: {
+          ...state.followings,
+          [action.userID]: 1
+        }
       }
   }
   return state;

@@ -1,4 +1,5 @@
 @import "../vars";
+@import "~bootstrap/scss/mixins";
 
 .trackDetails {
   .trackHeader {
@@ -37,8 +38,8 @@
 		z-index: -1;
 		-webkit-filter: blur(30px);
 		filter: blur(30px);
-		top: -200px;
-		margin-top: -10px;
+		top: 0;
+		margin-top: -50%;
 	  }
 	}
 
@@ -49,6 +50,9 @@
 	  position: relative;
 	  max-width: 250px;
 	  margin: 20px 0;
+	  @include media-breakpoint-down(sm) {
+		margin: 0 auto;
+	  }
 
 	  img {
 		width: 100%;
@@ -68,54 +72,27 @@
 
 	.trackInfo {
 	  position: relative;
-	  margin-top: -20px;
+	  margin-top: 20px;
 	}
 
 	.trackTitle {
-	  font-weight: 500;
-	  font-family: "Bitter", sans-serif;
+	  font-weight: 400;
 	  font-size: 1.8rem;
 	}
 
 	.trackArtist {
 	  font-weight: 300;
-	  font-family: "Bitter", sans-serif;
 	  font-size: 1.5rem;
 	}
   }
 
   .trackActions {
-	margin: 20px 20px 20px 0;
+	margin: 20px;
 	position: relative;
 	z-index: 2;
 
-	.c_btn {
-	  margin-right: 10px;
-	  margin-bottom: 15px;
-
-	  border-radius: 20px;
-	  padding: 8px 16px;
-
-	  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-	  color: #3f4144 !important;
-	  background: #fff;
-	  transition: 0.3s box-shadow;
-	  text-decoration: none;
-
-	  &.liked {
-		color: $accent !important;
-	  }
-
-	  &:hover {
-		background: #fff;
-		box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08), 0 6px 50px rgba(0, 0, 0, 0.18);
-		transition: 0.3s box-shadow;
-	  }
-
-	  i {
-		padding-right: 5px;
-	  }
-
+	@include media-breakpoint-up(md) {
+	  margin: 20px 20px 20px 0;
 	}
 
 	.playButton {
@@ -150,10 +127,17 @@
   }
 
   .trackStats {
-	padding: 10px 0;
-	color: #3f4144;
+	padding: 10px 5px;
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	left:0;
+	right:0;
+	margin: 0;
+	background: rgba(0,0,0,0.6);
+
 	& .stat {
-	  padding: 10px 15px 10px 0;
+	  padding: 0;
 	  i {
 		padding-right: 5px;
 	  }
@@ -164,7 +148,7 @@
 	}
   }
   .trackMain {
-	padding: 20px 40px 0 40px;
+	padding: 20px 40px;
   }
 
   .trackDescription {
@@ -183,6 +167,7 @@
 	padding: 0 15px 0 15px;
 	border-bottom: 2px solid #ccc;
 	background: #f0f0f0;
+	font-family: 'Arimo', sans-serif;
 
 	a {
 	  padding: 14px 20px 14px 20px;
@@ -190,7 +175,6 @@
 	  margin-bottom: -2px;
 	  color: #3a3e43;
 	  font-weight: 400;
-	  font-family: "Source Sans Pro", sans-serif;
 	  border-bottom: 2px solid transparent;
 	  position: relative;
 
@@ -198,6 +182,7 @@
 		border-bottom: 2px solid $accent;
 		color:$accent;
 	  }
+
 	  & span{
 		position: absolute;
 		top: 0;
@@ -207,6 +192,55 @@
 		animation: ping infinite 5s;
 	  }
 	}
+  }
+  .user_card_wrap{
+	flex-grow: 0;
+  }
+
+}
+
+
+
+.c_btn {
+  margin-right: 10px;
+  margin-bottom: 15px;
+
+  border-radius: 20px;
+  padding: 8px 16px;
+
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+  color: #3f4144 !important;
+  background: #fff;
+  transition: 0.3s box-shadow;
+  text-decoration: none;
+  display: inline-block;
+
+  &.outline{
+	box-shadow: none;
+	border: 1px solid;
+	&:hover{
+	  box-shadow: none;
+	}
+  }
+
+
+  &.liked {
+	color: $accent !important;
+  }
+
+  &:hover {
+	background: #fff;
+	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.08), 0 6px 50px rgba(0, 0, 0, 0.18);
+	transition: 0.3s box-shadow;
+	text-decoration: none;
+  }
+
+  &:focus {
+	text-decoration: none;
+  }
+
+  i {
+	padding-right: 5px;
   }
 
 }

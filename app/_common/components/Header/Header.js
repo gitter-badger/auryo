@@ -20,8 +20,6 @@ class Header extends Component {
 
   render() {
 
-    console.log(HistoryTracker);
-
     return (
       <nav className="navbar navbar-dark navbar-fixed-top">
         <div className="flex flex-items-xs-between">

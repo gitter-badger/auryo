@@ -1,0 +1,68 @@
+@import "~bootstrap/scss/mixins";
+
+.user_card {
+  position: relative;
+  @include media-breakpoint-down(sm) {
+	display: flex;
+	justify-content: center;
+	margin: 0 20px 20px;
+  }
+  .user_img {
+	position: relative;
+	max-width: 190px;
+	min-width: 190px;
+	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+
+	&:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  height: 100%;
+	  width: 1px;
+	  margin-right: -35px;
+
+	}
+	img {
+	  width: 100%;
+	}
+  }
+  .user_info {
+	padding-top: 40px;
+	text-align: center;
+	position: relative;
+
+
+	@include media-breakpoint-down(sm) {
+	  margin-left: 20px;
+	}
+
+	.c_btn {
+
+	  transition: .5s background !important;
+	}
+	.c_btn.following {
+
+	  background: #2980b9;
+	  color: #fff !important;
+	  border: none;
+	}
+  }
+
+  .user_username {
+	padding: 10px;
+	color: #fff;
+	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+	background: #3f4144;
+	margin-bottom: 10px;
+
+	@include media-breakpoint-up(md) {
+	  position: absolute;
+	  margin-top: -30px;
+	  margin-left: -20px;
+	  top: 0;
+	  left: 0;
+	}
+  }
+
+}
