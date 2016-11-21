@@ -9,8 +9,7 @@
   }
   .user_img {
 	position: relative;
-	max-width: 190px;
-	min-width: 190px;
+	width: 170px;
 	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
 
 	&:after {
@@ -28,7 +27,7 @@
 	}
   }
   .user_info {
-	padding-top: 40px;
+	padding-top: 30px;
 	text-align: center;
 	position: relative;
 

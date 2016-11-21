@@ -49,7 +49,7 @@
 	  right: 0;
 	  position: relative;
 	  max-width: 250px;
-	  margin: 20px 0;
+	  margin: 20px 0 5px 0;
 	  @include media-breakpoint-down(sm) {
 		margin: 0 auto;
 	  }
@@ -127,14 +127,12 @@
   }
 
   .trackStats {
-	padding: 10px 5px;
+	padding: 10px 5px 0 5px;
 	color: #fff;
-	position: absolute;
 	bottom: 0;
 	left:0;
 	right:0;
 	margin: 0;
-	background: rgba(0,0,0,0.6);
 
 	& .stat {
 	  padding: 0;
