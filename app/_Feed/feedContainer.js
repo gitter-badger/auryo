@@ -49,7 +49,7 @@ function mapStateToProps(state) {
   const {user, entities, playlists, player} = state;
   const current_playlist = PLAYLISTS.STREAM;
   const {tracks, users, feedInfo} = entities;
-  const playingSongId = getPlayingTrackId(player, playlists, feedInfo);
+  const playingSongId = getPlayingTrackId(player, playlists);
 
   return {
     user,

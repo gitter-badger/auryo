@@ -34,13 +34,13 @@ class TracksGrid extends Component {
     const items = current_playlist in playlists ? playlists[current_playlist].items : [];
     const scrollFunc = fetchMore.bind(null, current_playlist);
 
-    const uuid = items[index];
+    const id = items[index];
 
-    const info = feedInfo[uuid];
-    const track = tracks[info.track];
+    const info = feedInfo[id];
+    const track = tracks[id];
     track.user = users[track.user_id];
-    track.from_user = users[info.user];
-    track.activity_type = info.type;
+    track.from_user = users[info.from_user];
+    track.activity_type = info.activity_type;
 
     const playTrackFunc = this.playTrack.bind(this, index);
 
@@ -89,7 +89,7 @@ TracksGrid.propTypes = {
   user: PropTypes.object.isRequired,
   feedInfo: PropTypes.object.isRequired,
   tracks: PropTypes.object.isRequired,
-  playingSongId: PropTypes.string,
+  playingSongId: PropTypes.number,
   users: PropTypes.object.isRequired,
   current_playlist: PropTypes.string.isRequired,
   playlists: PropTypes.object.isRequired,

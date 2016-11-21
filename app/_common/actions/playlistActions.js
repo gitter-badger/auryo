@@ -85,23 +85,33 @@ function _fetchPlaylist(url, name) {
         const collection = json.collection //Todo: Also show playlists in feed?
           .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
           .map(info => {
-            info.track.track_id = info.track.id;
-            info.track.id = info.uuid;
+            info.info = {};
+
+            info.info.id = info.track.id;
+            info.info.from_user = info.user;
+            info.info.activity_type = info.type;
 
             return info;
           });
 
-        const tracks = collection.map(info => info.track);
+        const t = collection.map(info => info.track);
+        const i = collection.map(info => info.info);
 
-        const n = normalize(tracks, arrayOf(trackSchema));
+        const tracks = normalize(t, arrayOf(trackSchema));
 
-        const info = normalize(collection, arrayOf(trackInfoSchema));
+        const info = normalize(i, arrayOf(trackInfoSchema));
+
+        function onlyUnique(value, index, self) {
+          return self.indexOf(value) === index;
+        }
+
+
 
         dispatch(setPlaylist(name, {
-          tracks: n.entities.tracks,
+          tracks: tracks.entities.tracks,
           feedInfo: info.entities.feedInfo,
-          users: _.assign({}, n.entities.users, info.entities.users),
-        }, info.result, nextUrl, futureUrl));
+          users: _.assign({}, tracks.entities.users, info.entities.users),
+        }, info.result.filter( onlyUnique ), nextUrl, futureUrl));
 
       }).catch(err => {
         throw err;

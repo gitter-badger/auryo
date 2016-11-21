@@ -425,7 +425,7 @@ class Player extends React.Component {
 Player.propTypes = {
   dispatch: PropTypes.func.isRequired,
   player: PropTypes.object.isRequired,
-  playingSongId: PropTypes.string,
+  playingSongId: PropTypes.number,
   playlists: PropTypes.object.isRequired,
   song: PropTypes.object,
   tracks: PropTypes.object.isRequired,

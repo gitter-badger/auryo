@@ -154,7 +154,7 @@ Audio.propTypes = {
   volume: PropTypes.number.isRequired,
   playFromPosition: PropTypes.number.isRequired,
   muted: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 
   onLoading: PropTypes.func.isRequired,
   onPlaying: PropTypes.func.isRequired,

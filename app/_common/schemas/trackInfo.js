@@ -2,11 +2,12 @@ import {Schema,arrayOf} from "normalizr";
 import userSchema from "./user";
 import trackSchema from "./track";
 
-const trackInfoSchema = new Schema('feedInfo', {idAttribute: "uuid"});
+const trackInfoSchema = new Schema('feedInfo', { assignEntity: function (output, key, value, input) {
+  return output;
+}});
 
 trackInfoSchema.define({
-  user: userSchema,
-  track: trackSchema
+  from_user: userSchema
 });
 
 export default trackInfoSchema;

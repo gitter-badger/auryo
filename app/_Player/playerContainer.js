@@ -21,8 +21,8 @@ class PlayerContainer extends Component {
 
 function mapStateToProps(state) {
   const {entities, player, playlists} = state;
-  const {tracks, users, feedInfo} = entities;
-  const playingSongId = getPlayingTrackId(player, playlists, feedInfo);
+  const {tracks, users} = entities;
+  const playingSongId = getPlayingTrackId(player, playlists);
 
   return {
     player,
