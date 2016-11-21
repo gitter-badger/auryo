@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from "react";
 import TogglePlayButton from "../../_common/components/togglePlay";
 import {Link} from "react-router";
-import {truncate,getReadableTime} from "../../_common/utils/appUtils";
+import {truncate, getReadableTime} from "../../_common/utils/appUtils";
 import cn from "classnames";
-import {Row, Col} from "reactstrap";
 
 
 class trackListItem extends Component {
@@ -24,24 +23,26 @@ class trackListItem extends Component {
 
     return (
 
-      <a className="toggleButton" onClick={playTrackFunc}>
+      <a href="javascript:void(0)" className="toggleButton" onClick={playTrackFunc}>
         <i className={`icon-${icon}`}/>
       </a>
     );
   }
 
   render() {
-    const {track, users, isPlaying, liked, likeFunc} = this.props;
+    const {track, users, isPlaying, liked, likeFunc,playTrackFunc} = this.props;
 
 
     const user = users[track.user_id];
 
     return (
-      <Row className={cn("trackItem", {isPlaying: isPlaying})}>
-        <Col xs="6" className="flex">
+      <tr className={cn("trackItem", {isPlaying: isPlaying})} onDoubleClick={playTrackFunc}>
+        <td>
           {
             this.renderToggleButton()
           }
+        </td>
+        <td className="flex">
           <div className="trackTitle">
             <Link to={`/song/${track.id}`}>
               {
@@ -49,21 +50,22 @@ class trackListItem extends Component {
               }
             </Link>
           </div>
-        </Col>
-        <Col xs="4" className="trackArtist">
+        </td>
+
+        <td className="trackArtist">
           {user.username}
-        </Col>
-        <div className="col-xs">
-          {getReadableTime(track.duration,true)}
-        </div>
-        <div className="trackitemActions col-xs">
+        </td>
+        <td className="text-xs-center">
+          {getReadableTime(track.duration, true)}
+        </td>
+        <td className="trackitemActions">
           <a className={cn({liked: liked})} href="javascript:void(0)" onClick={likeFunc}>
             <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
           </a>
           {/*<i className="icon-retweet"/>
            <i className="icon-playlist_add"/>*/}
-        </div>
-      </Row>
+        </td>
+      </tr>
     );
   }
 }
