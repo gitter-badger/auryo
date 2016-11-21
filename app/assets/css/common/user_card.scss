@@ -10,8 +10,13 @@
   .user_img {
 	position: relative;
 	width: 170px;
+	height: 170px;
 	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
 
+	@include media-breakpoint-down(sm) {
+	  width: 120px;
+	  height: 120px;
+	}
 	&:after {
 	  content: '';
 	  position: absolute;
@@ -34,11 +39,12 @@
 
 	@include media-breakpoint-down(sm) {
 	  margin-left: 20px;
+	  padding-top: 0;
 	}
 
 	.c_btn {
-
 	  transition: .5s background !important;
+	  background: transparent;
 	}
 	.c_btn.following {
 

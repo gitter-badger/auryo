@@ -185,21 +185,23 @@ class songContainer extends Component {
                  Comments
                  </a>*/}
               </div>
-              <TabContent activeTab={this.state.activeTab} className="trackMain">
+              <TabContent activeTab={this.state.activeTab}>
                 <TabPane tabId="1">
-                  <Row>
-                    <Col xs="12" className="col-md user_card_wrap">
-                      <UserCard user={user} dispatch={dispatch} followings={followings} />
-                    </Col>
-                    <Col xs="12" md="7">
-                      <div className={cn("trackDescription", {isOpen: this.state.open})}>
-                        <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
-                             dangerouslySetInnerHTML={formatDescription(track.description)}></div>
-                      </div>
-                    </Col>
-                  </Row>
+                  <Container fluid>
+                    <Row>
+                      <Col xs="12" className="col-md user_card_wrap trackMain">
+                        <UserCard user={user} dispatch={dispatch} followings={followings}/>
+                      </Col>
+                      <Col xs="12" md="7" className="trackMain">
+                        <div className={cn("trackDescription", {isOpen: this.state.open})}>
+                          <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
+                               dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
                 </TabPane>
-                <TabPane tabId="2">
+                <TabPane tabId="2" className="trackMain">
                   <TrackListComponent
                     player={player}
                     playlist={playlist}
@@ -225,7 +227,7 @@ class songContainer extends Component {
 function mapStateToProps(state) {
   const {entities, player, playlists, user} = state;
   const {tracks, users} = entities;
-  const {likes,followings} = user;
+  const {likes, followings} = user;
   const playingSongId = getPlayingTrackId(player, playlists);
   return {
     tracks,
