@@ -38,6 +38,9 @@ export function getPlaylistUrl() {
 export function getRelatedUrl(trackID) {
   return _endpoint + "tracks/" + trackID + "/related?client_id=" + CLIENT_ID;
 }
+export function getCommentsUrl(trackID) {
+  return _endpoint + "tracks/" + trackID + "/comments?client_id=" + CLIENT_ID;
+}
 
 export function getMeUrl() {
   return _endpoint + "me?oauth_token=" + _token;

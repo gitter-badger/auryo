@@ -3,6 +3,7 @@ import TrackListItem from "./trackListItemComponent";
 import {getPlayingTrackId} from "../../_Player/playerUtils";
 import {playTrack} from "../../_common/actions/index";
 import {isLiked} from "../../_common/utils/soundcloudUtils";
+import {Container,Row,Col} from "reactstrap";
 
 
 class trackList extends Component {
@@ -36,7 +37,21 @@ class trackList extends Component {
     const _this = this;
 
     return (
-      <div className="trackList">
+      <Container fluid className="trackList">
+        <Row className="trackListHeader">
+          <Col xs="6" className="flex">
+            Title
+          </Col>
+          <Col xs="3" className="trackArtist">
+            Artist
+          </Col>
+          <div className="col-xs-1">
+            Duration
+          </div>
+          <div className="trackitemActions col-xs-2">
+            Actions
+          </div>
+        </Row>
         {
           items.map(function (trackId, i) {
             if (i == 0) return;
@@ -60,7 +75,7 @@ class trackList extends Component {
             );
           })
         }
-      </div>
+      </Container>
     );
   }
 }

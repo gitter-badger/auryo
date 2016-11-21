@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Soundcloud, react-DefinitelyTyped, redux-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{Soundcloud, Soundtop node_modules, electron-DefinitelyTyped, react-DefinitelyTyped, react-redux-DefinitelyTyped}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
-    <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

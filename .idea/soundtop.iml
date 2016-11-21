@@ -11,5 +11,8 @@
     <orderEntry type="library" name="react-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="Soundcloud" level="project" />
     <orderEntry type="library" name="redux-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="electron-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="react-redux-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="Soundtop node_modules" level="project" />
   </component>
 </module>

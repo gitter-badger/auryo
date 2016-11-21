@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import TogglePlayButton from "../../_common/components/togglePlay";
 import {Link} from "react-router";
-import {truncate} from "../../_common/utils/appUtils";
+import {truncate,getReadableTime} from "../../_common/utils/appUtils";
 import cn from "classnames";
 import {Row, Col} from "reactstrap";
 
@@ -37,7 +37,7 @@ class trackListItem extends Component {
     const user = users[track.user_id];
 
     return (
-      <Row className={cn("trackItem flex", {isPlaying: isPlaying})}>
+      <Row className={cn("trackItem", {isPlaying: isPlaying})}>
         <Col xs="6" className="flex">
           {
             this.renderToggleButton()
@@ -53,13 +53,16 @@ class trackListItem extends Component {
         <Col xs="4" className="trackArtist">
           {user.username}
         </Col>
-        <Col xs="2" className="trackitemActions">
+        <div className="col-xs">
+          {getReadableTime(track.duration,true)}
+        </div>
+        <div className="trackitemActions col-xs">
           <a className={cn({liked: liked})} href="javascript:void(0)" onClick={likeFunc}>
             <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
           </a>
           {/*<i className="icon-retweet"/>
            <i className="icon-playlist_add"/>*/}
-        </Col>
+        </div>
       </Row>
     );
   }

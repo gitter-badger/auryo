@@ -35,11 +35,14 @@ export function abbreviate_number(num, fixed) {
   return e;
 }
 
-export function getReadableTime(milliseconds){
-  if(!milliseconds) return "00:00";
+export function getReadableTime(sec,ms){
+  if(!sec) return "00:00";
 
   //Get hours from milliseconds
-  var hours = milliseconds / (60*60);
+  var hours = sec / (60*60);
+  if(ms){
+    hours = sec / (60*60*1000);
+  }
   var absoluteHours = Math.floor(hours);
   var h = absoluteHours > 9 ? absoluteHours : '0' + absoluteHours;
 

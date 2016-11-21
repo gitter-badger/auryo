@@ -2,7 +2,7 @@
 
 .user_card {
   position: relative;
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
 	display: flex;
 	justify-content: center;
 	margin: 0 20px 20px;
@@ -13,7 +13,7 @@
 	height: 170px;
 	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
 
-	@include media-breakpoint-down(sm) {
+	@include media-breakpoint-down(md) {
 	  width: 120px;
 	  height: 120px;
 	}
@@ -37,7 +37,7 @@
 	position: relative;
 
 
-	@include media-breakpoint-down(sm) {
+	@include media-breakpoint-down(md) {
 	  margin-left: 20px;
 	  padding-top: 0;
 	}
@@ -61,7 +61,7 @@
 	background: #3f4144;
 	margin-bottom: 10px;
 
-	@include media-breakpoint-up(md) {
+	@include media-breakpoint-up(lg) {
 	  position: absolute;
 	  margin-top: -30px;
 	  margin-left: -20px;

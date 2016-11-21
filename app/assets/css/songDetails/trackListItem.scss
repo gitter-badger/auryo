@@ -2,6 +2,13 @@
 
 .trackList {
 
+  .trackListHeader {
+
+	border-bottom: 1px solid #d7d7d7;
+	color: #9a9a9a;
+	padding: 0 10px 10px;
+  }
+
   .trackItem {
 	padding: 15px 0;
 	align-items: center;
@@ -24,10 +31,6 @@
 
 	&:not(:last-child) {
 	  border-bottom: 1px solid #d7d7d7;
-	}
-
-	.trackitemActions {
-	  text-align: center;
 	}
   }
 }

@@ -107,6 +107,7 @@ class songContainer extends Component {
     const liked = isLiked(track.id, likes);
 
     const playlist_playing = this.isCurrentPlaylist();
+    const comments = track.comments ||[];
 
     return (
       <div className={cn("scroll trackDetails", {playing: player.currentSong != null})}>
@@ -138,7 +139,7 @@ class songContainer extends Component {
               </div>
             </Col>
 
-            <Col xs="12" md="8" xl="" className="trackInfo text-md-left text-sm-center">
+            <Col xs="12" md="8" xl="" className="trackInfo text-md-left text-xs-center">
               <h1 className="trackTitle">{track.title}</h1>
               <h2 className="trackArtist">{user.username}</h2>
 
@@ -176,46 +177,50 @@ class songContainer extends Component {
                   this.toggle('2');
                 }}>
                   Related tracks
-                  { playlist_playing ? <span className="icon-volume_up"></span> : null}
+                  { playlist_playing ? <span className="icon-volume_up up blink"></span> : null}
 
                 </a>
-                {/*<a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})} onClick={() => {
+                {<a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})} onClick={() => {
                  this.toggle('3');
                  }}>
-                 Comments
-                 </a>*/}
+                  <span className="text">Comments</span>
+                  <span className="tag tag-pill tag-default">{comments.length}</span>
+                 </a>}
               </div>
-              <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                  <Container fluid>
-                    <Row>
-                      <Col xs="12" className="col-md user_card_wrap trackMain">
-                        <UserCard user={user} dispatch={dispatch} followings={followings}/>
-                      </Col>
-                      <Col xs="12" md="7" className="trackMain">
+
+              <Container fluid>
+                <Row>
+                  <Col xs="12" className="col-lg user_card_wrap trackMain">
+                    <UserCard user={user} dispatch={dispatch} followings={followings}/>
+                  </Col>
+                  <Col xs="12" lg="8" className="trackMain">
+
+                    <TabContent activeTab={this.state.activeTab}>
+                      <TabPane tabId="1">
                         <div className={cn("trackDescription", {isOpen: this.state.open})}>
                           <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
                                dangerouslySetInnerHTML={formatDescription(track.description)}></div>
                         </div>
-                      </Col>
-                    </Row>
-                  </Container>
-                </TabPane>
-                <TabPane tabId="2" className="trackMain">
-                  <TrackListComponent
-                    player={player}
-                    playlist={playlist}
-                    playlists={playlists}
-                    tracks={tracks}
-                    dispatch={dispatch}
-                    users={users}
-                    likes={likes}
-                    likeFunc={this.toggleLike.bind(this)}/>
-                </TabPane>
-                <TabPane tabId="3">
-                  Comments
-                </TabPane>
-              </TabContent>
+                      </TabPane>
+                      <TabPane tabId="2">
+                        <TrackListComponent
+                          player={player}
+                          playlist={playlist}
+                          playlists={playlists}
+                          tracks={tracks}
+                          dispatch={dispatch}
+                          users={users}
+                          likes={likes}
+                          likeFunc={this.toggleLike.bind(this)}/>
+                      </TabPane>
+                      <TabPane tabId="3">
+                        Comments
+                      </TabPane>
+                    </TabContent>
+
+                  </Col>
+                </Row>
+              </Container>
             </Col>
           </Row>
         </Container>

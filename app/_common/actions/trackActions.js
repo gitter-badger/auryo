@@ -7,16 +7,21 @@ import {RELATED_PLAYLIST} from "../constants/playlist";
 
 export function fetchTrackIfNeeded(trackID) {
   return (dispatch, getState) => {
-    const {entities,playlists} = getState();
+    const {entities, playlists} = getState();
     const {tracks} = entities;
     const current_playlist = String(trackID + RELATED_PLAYLIST);
 
     if (!(trackID in tracks)) {
       dispatch(fetchTrack(trackID));
-    }
+    } else {
 
-    if(!(current_playlist in playlists)){
-      dispatch(fetchRelated(trackID));
+      if (!(current_playlist in playlists)) {
+        dispatch(fetchRelated(trackID));
+      }
+
+      if (!("comments" in tracks[trackID])) {
+        dispatch(fetchComments(trackID));
+      }
     }
 
   }
@@ -24,16 +29,25 @@ export function fetchTrackIfNeeded(trackID) {
 
 function fetchTrack(trackID) {
   return dispatch => {
+
     fetch(SC.getTrackUrl(trackID))
       .then((response) => response.json())
       .then(json => {
         const n = normalize(json, trackSchema);
 
-        dispatch(addSong(n.entities, n.result));
+        dispatch(fetchSongData(trackID, n.entities));
       })
       .catch(err => {
         throw err;
       });
+  }
+}
+
+function fetchSongData(trackID, entities) {
+  return dispatch => {
+    dispatch(addSong(entities));
+    dispatch(fetchRelated(trackID));
+    dispatch(fetchComments(trackID));
   }
 }
 
@@ -46,14 +60,38 @@ function fetchRelated(trackID) {
         n.result.unshift(trackID);
 
         dispatch(setPlaylist(trackID + RELATED_PLAYLIST, n.entities, n.result));
+      })
+      .catch(err => {
+        throw err;
       });
   }
 }
 
 function fetchComments(trackID) {
   return dispatch => {
-
+    fetch(SC.getCommentsUrl(trackID))
+      .then(response => response.json())
+      .then(json => {
+        dispatch(setComments(trackID, json));
+      })
+      .catch(err => {
+        throw err;
+      });
   }
+}
+
+function setComments(trackID, comments) {
+  return {
+    type: actionTypes.TRACK_ADD_COMMENTS,
+    entities: {
+      tracks:{
+        [trackID]: {
+          comments
+        }
+      }
+    }
+  }
+
 }
 
 export function toggleLike(trackID) {
@@ -66,16 +104,16 @@ export function toggleLike(trackID) {
     if (!(trackID in likes)) {
       dispatch(addLike(trackID));
     } else {
-      dispatch(setLike(trackID,(!liked == false) ? 0 : 1));
+      dispatch(setLike(trackID, (!liked == false) ? 0 : 1));
     }
 
-    updateLike(trackID,!liked);
+    updateLike(trackID, !liked);
 
   }
 }
 
-function updateLike(trackID,liked){
-  fetch(SC.updateLikeUrl(trackID),{
+function updateLike(trackID, liked) {
+  fetch(SC.updateLikeUrl(trackID), {
     method: (liked == 1) ? "PUT" : "DELETE"
   })
 }
@@ -96,10 +134,9 @@ function addLike(trackID) {
 }
 
 
-function addSong(entities, result) {
+function addSong(entities) {
   return {
     type: actionTypes.TRACK_ADD,
-    entities,
-    result
+    entities
   };
 }

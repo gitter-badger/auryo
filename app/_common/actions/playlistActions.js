@@ -99,13 +99,11 @@ function _fetchPlaylist(url, name) {
 
         const tracks = normalize(t, arrayOf(trackSchema));
 
-        const info = normalize(i, arrayOf(trackInfoSchema));
+        const info = normalize(_.uniqBy(i, 'id'), arrayOf(trackInfoSchema));
 
         function onlyUnique(value, index, self) {
           return self.indexOf(value) === index;
         }
-
-
 
         dispatch(setPlaylist(name, {
           tracks: tracks.entities.tracks,
