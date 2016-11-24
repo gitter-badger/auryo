@@ -72,7 +72,8 @@ function fetchComments(trackID) {
     fetch(SC.getCommentsUrl(trackID))
       .then(response => response.json())
       .then(json => {
-        dispatch(setComments(trackID, json));
+        const collection = json.collection;
+        dispatch(setComments(trackID, collection));
       })
       .catch(err => {
         throw err;

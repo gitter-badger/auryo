@@ -17,6 +17,7 @@ $enable-flex: true;
 @import "./songDetails/trackListItem";
 @import "./common/header";
 @import "./common/user_card";
+@import "./songDetails/commentList";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -157,6 +158,9 @@ i {
 
 .p-a-0 {
   padding: 0;
+}
+.no-grow{
+  flex-grow: 0;
 }
 
 

@@ -12,6 +12,7 @@ import {RELATED_PLAYLIST, STATUS} from "../_common/constants/playlist";
 import TrackListComponent from "./components/trackListComponent";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
 import UserCard from "../_common/components/User/UserCard";
+import CommentList from "./components/commentListComponent"
 
 
 class songContainer extends Component {
@@ -154,8 +155,8 @@ class songContainer extends Component {
                     <span>{abbreviate_number(track.playback_count)}</span>
                   </div>
                   <div className="stat col-xs">
-                    <i className="icon-chat_bubble"/>
-                    <span>{abbreviate_number(track.comment_count)}</span>
+                    <i className="icon-retweet"/>
+                    <span>{abbreviate_number(track.reposts_count)}</span>
                   </div>
                 </div>
               </div>
@@ -210,7 +211,7 @@ class songContainer extends Component {
                   this.toggle('3');
                 }}>
                   <span className="text">Comments</span>
-                  <span className="tag tag-pill tag-default">{comments.length}</span>
+                  <span className="tag tag-pill tag-default">{track.comment_count}</span>
                 </a>
               </div>
 
@@ -242,7 +243,7 @@ class songContainer extends Component {
                           likeFunc={this.toggleLike.bind(this)}/>
                       </TabPane>
                       <TabPane tabId="3">
-                        Comments
+                        <CommentList comments={comments} />
                       </TabPane>
                     </TabContent>
 
