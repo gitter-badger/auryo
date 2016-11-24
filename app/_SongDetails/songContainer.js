@@ -12,6 +12,7 @@ import {RELATED_PLAYLIST, STATUS} from "../_common/constants/playlist";
 import TrackListComponent from "./components/trackListComponent";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
 import UserCard from "../_common/components/User/UserCard";
+import CommentList from "./components/commentListComponent"
 
 
 class songContainer extends Component {
@@ -24,6 +25,7 @@ class songContainer extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
+    this.hasDescription = this.hasDescription.bind(this);
   }
 
   toggle(tab) {
@@ -39,11 +41,29 @@ class songContainer extends Component {
     dispatch(fetchTrackIfNeeded(params.songId));
   }
 
+  componentDidMount() {
+    const {params} = this.props;
+    if (!this.hasDescription(params.songId)) {
+      this.toggle('2');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     const {dispatch, params} = this.props;
     if (params.songId != nextProps.params.songId) {
       dispatch(fetchTrackIfNeeded(nextProps.params.songId));
+      this.setState({
+        activeTab: this.hasDescription(nextProps.params.songId) ? "1" : "2"
+      })
     }
+  }
+
+  hasDescription(songId){
+    const {tracks} = this.props;
+
+    const track = tracks[songId];
+    return track.description.length > 0;
+
   }
 
 
@@ -57,7 +77,7 @@ class songContainer extends Component {
   renderToggleButton() {
     const {params, playingSongId} = this.props;
 
-    if (playingSongId == params.songId) {
+    if (playingSongId != null && (playingSongId == params.songId)) {
       return <TogglePlay classname="playButton"/>;
     }
 
@@ -107,7 +127,10 @@ class songContainer extends Component {
     const liked = isLiked(track.id, likes);
 
     const playlist_playing = this.isCurrentPlaylist();
-    const comments = track.comments ||[];
+    const comments = track.comments || [];
+
+    const hasDesc = track.description.length > 0;
+
 
     return (
       <div className={cn("scroll trackDetails", {playing: player.currentSong != null})}>
@@ -132,8 +155,8 @@ class songContainer extends Component {
                     <span>{abbreviate_number(track.playback_count)}</span>
                   </div>
                   <div className="stat col-xs">
-                    <i className="icon-chat_bubble"/>
-                    <span>{abbreviate_number(track.comment_count)}</span>
+                    <i className="icon-retweet"/>
+                    <span>{abbreviate_number(track.reposts_count)}</span>
                   </div>
                 </div>
               </div>
@@ -167,11 +190,15 @@ class songContainer extends Component {
           <Row>
             <Col xs="12" className="p-a-0">
               <div className="flex tracktabs">
-                <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '1'})} onClick={() => {
-                  this.toggle('1');
-                }}>
-                  Info
-                </a>
+                {
+                  hasDesc ?
+                    <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '1'})} onClick={() => {
+                      this.toggle('1');
+                    }}>
+                      Info
+                    </a> : null
+                }
+
                 <a href="javascript:void(0)"
                    className={cn({active: this.state.activeTab === '2', playing: playlist_playing})} onClick={() => {
                   this.toggle('2');
@@ -180,12 +207,12 @@ class songContainer extends Component {
                   { playlist_playing ? <span className="icon-volume_up up blink"></span> : null}
 
                 </a>
-                {<a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})} onClick={() => {
-                 this.toggle('3');
-                 }}>
+                <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})} onClick={() => {
+                  this.toggle('3');
+                }}>
                   <span className="text">Comments</span>
-                  <span className="tag tag-pill tag-default">{comments.length}</span>
-                 </a>}
+                  <span className="tag tag-pill tag-default">{track.comment_count}</span>
+                </a>
               </div>
 
               <Container fluid>
@@ -193,15 +220,17 @@ class songContainer extends Component {
                   <Col xs="12" className="col-lg user_card_wrap trackMain">
                     <UserCard user={user} dispatch={dispatch} followings={followings}/>
                   </Col>
-                  <Col xs="12" lg="8" className="trackMain">
+                  <Col xs="12" className="trackMain col-lg">
 
                     <TabContent activeTab={this.state.activeTab}>
-                      <TabPane tabId="1">
-                        <div className={cn("trackDescription", {isOpen: this.state.open})}>
-                          <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
-                               dangerouslySetInnerHTML={formatDescription(track.description)}></div>
-                        </div>
-                      </TabPane>
+                      {
+                        hasDesc ? <TabPane tabId="1">
+                          <div className={cn("trackDescription", {isOpen: this.state.open})}>
+                            <div className={cn("descriptionInner", {cut: this.state.cut})} ref="descr"
+                                 dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                          </div>
+                        </TabPane> : null
+                      }
                       <TabPane tabId="2">
                         <TrackListComponent
                           player={player}
@@ -214,7 +243,7 @@ class songContainer extends Component {
                           likeFunc={this.toggleLike.bind(this)}/>
                       </TabPane>
                       <TabPane tabId="3">
-                        Comments
+                        <CommentList comments={comments} />
                       </TabPane>
                     </TabContent>
 

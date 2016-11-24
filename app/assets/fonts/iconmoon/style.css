@@ -105,6 +105,9 @@
 .icon-skip_previous:before {
   content: "\e045";
 }
+.icon-timer:before {
+  content: "\e425";
+}
 .icon-video_library:before {
   content: "\e04a";
 }

@@ -9,7 +9,10 @@ class TogglePlayButton extends Component {
     this.togglePlay = this.togglePlay.bind(this);
   }
 
-  togglePlay() {
+  togglePlay(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     const {status,dispatch} = this.props;
 
     if(status !== STATUS.PLAYING){
@@ -27,7 +30,7 @@ class TogglePlayButton extends Component {
 
     return (
 
-      <a className={classname} onClick={this.togglePlay}>
+      <a href="javascript:void(0)" className={classname} onClick={this.togglePlay}>
         <i className={`icon-${icon}`} />
       </a>
     );

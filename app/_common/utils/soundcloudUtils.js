@@ -2,6 +2,7 @@ import {CLIENT_ID} from "../constants/config";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 import React from "react";
 import linkifyHtml from "linkifyjs/html";
+import escape from "escape-html"
 
 const _endpoint = 'http://api.soundcloud.com/';
 const _v2_endpoint = "https://api-v2.soundcloud.com/";
@@ -38,8 +39,8 @@ export function getPlaylistUrl() {
 export function getRelatedUrl(trackID) {
   return _endpoint + "tracks/" + trackID + "/related?client_id=" + CLIENT_ID;
 }
-export function getCommentsUrl(trackID) {
-  return _endpoint + "tracks/" + trackID + "/comments?client_id=" + CLIENT_ID;
+export function getCommentsUrl(trackID,limit = 50) {
+  return _endpoint + "tracks/" + trackID + "/comments?client_id=" + CLIENT_ID + "&linked_partitioning=1&limit=" + limit;
 }
 
 export function getMeUrl() {
@@ -82,8 +83,12 @@ export function getImageUrl(track, size = null) {
   if (!str) {
     return '';
   }
+  if(str.indexOf("default_avatar") > -1){
+    return str
+  }
 
   str = str.replace('http:', '');
+
 
   switch (size) {
     case IMAGE_SIZES.LARGE:
@@ -104,10 +109,10 @@ export function getImageUrl(track, size = null) {
 /*
  * Util functions
  */
-
+// TODO link usernames with @
 export function formatDescription(input) {
   return {
-    __html: linkifyHtml(input.replace(/(\r\n|\n|\r)/gm, "<br>"))
+    __html: linkifyHtml(escape(input).replace(/(\r\n|\n|\r)/gm, "<br>"))
   };
 }
 
