@@ -18,25 +18,24 @@ class trackListItem extends Component {
     if (isPlaying) {
       return <TogglePlayButton classname={"toggleButton"}/>;
     }
-
     const icon = isPlaying ? 'pause' : 'play_arrow';
 
     return (
 
-      <a href="javascript:void(0)" className="toggleButton" onClick={playTrackFunc}>
+      <a href="javascript:void(0)" className="toggleButton" onClick={playTrackFunc.bind(null, true)}>
         <i className={`icon-${icon}`}/>
       </a>
     );
   }
 
   render() {
-    const {track, users, isPlaying, liked, likeFunc,playTrackFunc} = this.props;
+    const {track, users, isPlaying, liked, likeFunc, playTrackFunc} = this.props;
 
 
     const user = users[track.user_id];
 
     return (
-      <tr className={cn("trackItem", {isPlaying: isPlaying})} onDoubleClick={playTrackFunc}>
+      <tr className={cn("trackItem", {isPlaying: isPlaying})} onDoubleClick={playTrackFunc.bind(null, false)}>
         <td>
           {
             this.renderToggleButton()

@@ -11,6 +11,7 @@ class TogglePlayButton extends Component {
 
   togglePlay(e) {
     e.preventDefault();
+    e.stopPropagation();
 
     const {status,dispatch} = this.props;
 

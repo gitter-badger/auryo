@@ -3,14 +3,27 @@ import TrackListItem from "./trackListItemComponent";
 import {getPlayingTrackId} from "../../_Player/playerUtils";
 import {playTrack} from "../../_common/actions/index";
 import {isLiked} from "../../_common/utils/soundcloudUtils";
+import {STATUS} from "../../_common/constants/playlist";
 
 
 class trackList extends Component {
 
-  playTrack(i, e) {
-    const {playlist, dispatch} = this.props;
+  playTrack(i, dbl, e) {
+    const {playlist, dispatch, player} = this.props;
 
-    dispatch(playTrack(i, playlist));
+    if (!e) {
+      e = dbl;
+    }
+
+    if (dbl) {
+      e.preventDefault();
+      dispatch(playTrack(i, playlist));
+    } else {
+      if (e.target.tagName == "TD" && (player.currentSong != i || player.status != STATUS.PLAYING)) {
+        dispatch(playTrack(i, playlist));
+      }
+    }
+
   }
 
 
@@ -38,28 +51,28 @@ class trackList extends Component {
       <div className="table-responsive trackList">
         <table className="table">
           <thead>
-            <tr className="trackListHeader">
-              <th></th>
-              <th>
-                Title
-              </th>
-              <th className="trackArtist">
-                Artist
-              </th>
-              <th className="text-xs-center">
-                <i className="icon-timer"></i>
-              </th>
-              <th className="trackitemActions">
-                Actions
-              </th>
-            </tr>
+          <tr className="trackListHeader">
+            <th></th>
+            <th>
+              Title
+            </th>
+            <th className="trackArtist">
+              Artist
+            </th>
+            <th className="text-xs-center">
+              <i className="icon-timer"></i>
+            </th>
+            <th className="trackitemActions">
+              Actions
+            </th>
+          </tr>
           </thead>
           <tbody>
           {
             items.map(function (trackId, i) {
               if (i == 0) return;
               const track = tracks[trackId];
-              const playTrackFunc = _this.playTrack.bind(_this, i);
+              //const playTrackFunc = _this.playTrack.bind(_this, i,null);
 
               const like = likeFunc.bind(null, track.id);
               const liked = isLiked(track.id, likes);
@@ -69,7 +82,7 @@ class trackList extends Component {
                   key={trackId}
                   track={track}
                   isPlaying={playingTrackId == track.id }
-                  playTrackFunc={playTrackFunc}
+                  playTrackFunc={_this.playTrack.bind(_this,i)}
                   dispatch={dispatch}
                   users={users}
                   likeFunc={like}
