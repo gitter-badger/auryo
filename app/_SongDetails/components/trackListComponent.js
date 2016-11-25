@@ -8,105 +8,105 @@ import {STATUS} from "../../_common/constants/playlist";
 
 class trackList extends Component {
 
-  playTrack(i, dbl, e) {
-    const {playlist, dispatch, player} = this.props;
+    playTrack(i, dbl, e) {
+        const {playlist, dispatch, player} = this.props;
 
-    if (!e) {
-      e = dbl;
+        if (!e) {
+            e = dbl;
+        }
+
+        if (dbl) {
+            e.preventDefault();
+            dispatch(playTrack(i, playlist));
+        } else {
+            if (e.target.tagName == "TD" && (player.currentSong != i || player.status != STATUS.PLAYING)) {
+                dispatch(playTrack(i, playlist));
+            }
+        }
+
     }
 
-    if (dbl) {
-      e.preventDefault();
-      dispatch(playTrack(i, playlist));
-    } else {
-      if (e.target.tagName == "TD" && (player.currentSong != i || player.status != STATUS.PLAYING)) {
-        dispatch(playTrack(i, playlist));
-      }
+
+    render() {
+        const {
+            playlists,
+            playlist,
+            tracks,
+            users,
+            player,
+            dispatch,
+            likes,
+            likeFunc
+        } = this.props;
+
+        const p = playlists[playlist];
+
+        const items = (p && p.items) ? p.items : [];
+
+        const playingTrackId = getPlayingTrackId(player, playlists);
+
+        const _this = this;
+
+        return (
+            <div className="table-responsive trackList">
+                <table className="table">
+                    <thead>
+                    <tr className="trackListHeader">
+                        <th></th>
+                        <th>
+                            Title
+                        </th>
+                        <th className="trackArtist">
+                            Artist
+                        </th>
+                        <th className="text-xs-center">
+                            <i className="icon-timer"></i>
+                        </th>
+                        <th className="trackitemActions">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        items.map(function (trackId, i) {
+                            if (i == 0) return;
+                            const track = tracks[trackId];
+                            //const playTrackFunc = _this.playTrack.bind(_this, i,null);
+
+                            const like = likeFunc.bind(null, track.id);
+                            const liked = isLiked(track.id, likes);
+
+                            return (
+                                <TrackListItem
+                                    key={trackId}
+                                    track={track}
+                                    isPlaying={playingTrackId == track.id }
+                                    playTrackFunc={_this.playTrack.bind(_this, i)}
+                                    dispatch={dispatch}
+                                    users={users}
+                                    likeFunc={like}
+                                    liked={liked}
+                                />
+                            );
+                        })
+                    }
+                    </tbody>
+                </table>
+            </div>
+        );
     }
-
-  }
-
-
-  render() {
-    const {
-      playlists,
-      playlist,
-      tracks,
-      users,
-      player,
-      dispatch,
-      likes,
-      likeFunc
-    } = this.props;
-
-    const p = playlists[playlist];
-
-    const items = (p && p.items) ? p.items : [];
-
-    const playingTrackId = getPlayingTrackId(player, playlists);
-
-    const _this = this;
-
-    return (
-      <div className="table-responsive trackList">
-        <table className="table">
-          <thead>
-          <tr className="trackListHeader">
-            <th></th>
-            <th>
-              Title
-            </th>
-            <th className="trackArtist">
-              Artist
-            </th>
-            <th className="text-xs-center">
-              <i className="icon-timer"></i>
-            </th>
-            <th className="trackitemActions">
-              Actions
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            items.map(function (trackId, i) {
-              if (i == 0) return;
-              const track = tracks[trackId];
-              //const playTrackFunc = _this.playTrack.bind(_this, i,null);
-
-              const like = likeFunc.bind(null, track.id);
-              const liked = isLiked(track.id, likes);
-
-              return (
-                <TrackListItem
-                  key={trackId}
-                  track={track}
-                  isPlaying={playingTrackId == track.id }
-                  playTrackFunc={_this.playTrack.bind(_this,i)}
-                  dispatch={dispatch}
-                  users={users}
-                  likeFunc={like}
-                  liked={liked}
-                />
-              );
-            })
-          }
-          </tbody>
-        </table>
-      </div>
-    );
-  }
 }
 
 trackList.propTypes = {
-  playlists: PropTypes.object.isRequired,
-  playlist: PropTypes.string.isRequired,
-  tracks: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  player: PropTypes.object.isRequired,
-  likes: PropTypes.object.isRequired,
-  likeFunc: PropTypes.func.isRequired
+    playlists: PropTypes.object.isRequired,
+    playlist: PropTypes.string.isRequired,
+    tracks: PropTypes.object.isRequired,
+    users: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    player: PropTypes.object.isRequired,
+    likes: PropTypes.object.isRequired,
+    likeFunc: PropTypes.func.isRequired
 };
 
 

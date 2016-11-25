@@ -3,8 +3,13 @@ import * as SC from "../utils/soundcloudUtils";
 import {playlistSchema, trackSchema, trackInfoSchema} from "../schemas";
 import {arrayOf, normalize} from "normalizr";
 import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
+import {OBJECT_TYPES} from "../constants/global";
 import {STREAM_CHECK_INTERVAL} from "../constants/config";
+import {isFetching, setObject, setNewObjects} from "./objectActions";
 import _ from "lodash";
+
+const obj_type = OBJECT_TYPES.PLAYLISTS;
+
 let updaterInterval;
 
 
@@ -14,27 +19,31 @@ let updaterInterval;
  * @returns {function(*)}
  */
 export function fetchLikes() {
-  return dispatch => {
-    fetch(SC.getLikesUrl())
-      .then((response) => response.json())
-      .then(json => { // Todo filter on non-streamable or not?
-        const n = normalize(json, arrayOf(trackSchema));
+    return dispatch => {
+        dispatch(isFetching("LIKES", obj_type));
 
-        const result = _.reduce(n.result, (obj, t) => {
-          return Object.assign({}, obj, {[t]: 1})
-        }, {});
+        fetch(SC.getLikesUrl())
+            .then((response) => response.json())
+            .then(json => { // Todo filter on non-streamable or not?
+                const n = normalize(json, arrayOf(trackSchema));
 
-        dispatch(setLikes(result));
-        dispatch(setPlaylist(
-          "LIKES",
-          n.entities,
-          n.result
-        ));
-      })
-      .catch(err => {
-        throw err;
-      });
-  }
+                const result = _.reduce(n.result, (obj, t) => {
+                    return Object.assign({}, obj, {[t]: 1})
+                }, {});
+
+                dispatch(setLikes(result));
+
+                dispatch(setObject(
+                    "LIKES",
+                    obj_type,
+                    n.entities,
+                    n.result
+                ));
+            })
+            .catch(err => {
+                throw err;
+            });
+    }
 }
 
 /**
@@ -44,10 +53,10 @@ export function fetchLikes() {
  * @returns {{type, likes: *}}
  */
 function setLikes(result) {
-  return {
-    type: actionTypes.USER_SET_LIKES,
-    result,
-  };
+    return {
+        type: actionTypes.USER_SET_LIKES,
+        result,
+    };
 }
 
 
@@ -57,12 +66,12 @@ function setLikes(result) {
  * @returns {function(*)}
  */
 export function fetchFeed() {
-  return dispatch => {
-    dispatch(initFeedUpdater());
-    dispatch(_fetchPlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
-  };
+    return dispatch => {
+        dispatch(initFeedUpdater());
+        dispatch(fetchPlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
+    };
 }
-
+// TODO Generalize playlist
 /**
  * Fetch playlist with name and url
  *
@@ -71,133 +80,81 @@ export function fetchFeed() {
  * @returns {function(*)}
  * @private
  */
-function _fetchPlaylist(url, name) {
-  return dispatch => {
+export function fetchPlaylist(url, name) {
+    return dispatch => {
 
-    dispatch(isFetching(name));
+        dispatch(isFetching(name, obj_type));
 
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        const nextUrl = (json.next_href) ? SC.appendToken(json.next_href) : null;
-        const futureUrl = (json.future_href) ? SC.appendToken(json.future_href) : null;
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => {
 
-        const collection = json.collection //Todo: Also show playlists in feed?
-          .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
-          .map(info => {
-            info.info = {};
+                const collection = json.collection //Todo: Also show playlists in feed?
+                    .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
+                    .map(info => {
+                        info.info = {};
 
-            info.info.id = info.track.id;
-            info.info.from_user = info.user;
-            info.info.activity_type = info.type;
+                        info.info.id = info.track.id;
+                        info.info.from_user = info.user;
+                        info.info.activity_type = info.type;
 
-            return info;
-          });
+                        return info;
+                    });
 
-        const t = collection.map(info => info.track);
-        const i = collection.map(info => info.info);
+                const t = collection.map(info => info.track);
+                const i = collection.map(info => info.info);
 
-        const tracks = normalize(t, arrayOf(trackSchema));
+                const tracks = normalize(t, arrayOf(trackSchema));
 
-        const info = normalize(_.uniqBy(i, 'id'), arrayOf(trackInfoSchema));
+                const info = normalize(_.uniqBy(i, 'id'), arrayOf(trackInfoSchema));
 
-        function onlyUnique(value, index, self) {
-          return self.indexOf(value) === index;
-        }
+                function onlyUnique(value, index, self) {
+                    return self.indexOf(value) === index;
+                }
 
-        dispatch(setPlaylist(name, {
-          tracks: tracks.entities.tracks,
-          feedInfo: info.entities.feedInfo,
-          users: _.assign({}, tracks.entities.users, info.entities.users),
-        }, info.result.filter( onlyUnique ), nextUrl, futureUrl));
+                dispatch(setObject(name, obj_type, {
+                    tracks: tracks.entities.tracks,
+                    feedInfo: info.entities.feedInfo,
+                    users: _.assign({}, tracks.entities.users, info.entities.users),
+                }, info.result.filter(onlyUnique), json.next_href, json.future_href));
 
-      }).catch(err => {
-        throw err;
-      });
-  }
-}
-
-/**
- * set playlist isfetching property
- *
- * @param name
- * @returns {{type, name: *}}
- */
-function isFetching(name) {
-  return {
-    type: actionTypes.PLAYLIST_IS_FETCHING,
-    name
-  };
-}
-
-/**
- * Save playlist
- *
- * @param name
- * @param entities
- * @param result
- * @param nextUrl
- * @param futureUrl
- * @returns {{type: *, name: *, entities: *, result: *, nextUrl: *, futureUrl: *}}
- */
-export function setPlaylist(name, entities, result, nextUrl = null, futureUrl = null) {
-  return {
-    type: actionTypes.PLAYLIST_SET,
-    name,
-    entities,
-    result,
-    nextUrl,
-    futureUrl
-  };
+            }).catch(err => {
+                throw err;
+            });
+    }
 }
 
 /**
  * Fetch stream and process new songs
  *
+ * @param playlist
  * @param url - Future url from soundcloud API
  * @returns {function(*, *)}
  */
-function updateFeed(url) {
-  return (dispatch, getState) => {
-    const {user, playlists} = getState();
+function updateFeed(playlist, url) {
+    return (dispatch, getState) => {
+        const {user, objects} = getState();
+        const playlists = objects[obj_type] || {};
 
-    const feed = playlists[PLAYLISTS.STREAM].items
-      .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+        const feed = playlists[PLAYLISTS.STREAM].items
+            .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
 
-    const newSongs = user.newFeedItems
-      .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+        const newSongs = user.newFeedItems
+            .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
 
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        const futureUrl = (json.future_href) ? SC.appendToken(json.future_href) : null;
-        const collection = json.collection
-          .filter(song => song.kind === 'track' && !(song.id in feed) && !(song.id in newSongs) && song.streamable);
+        return fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                const collection = json.collection
+                    .filter(song => song.kind === 'track' && !(song.id in feed) && !(song.id in newSongs) && song.streamable);
 
-        const n = normalize(collection, arrayOf(trackInfoSchema));
-        dispatch(setNewFeedItems(futureUrl, n.entities, n.result));
-      })
-      .catch(err => {
-        throw err;
-      });
-  };
-}
-
-/**
- * Save new feed items
- *
- * @param futureUrl
- * @param entities
- * @param result
- * @returns {{type, entities: *, result: *, futureUrl: *}}
- */
-function setNewFeedItems(futureUrl, entities, result) {
-  return {
-    type: actionTypes.USER_SET_NEW_FEED_ITEMS,
-    entities,
-    result,
-    futureUrl
-  };
+                const n = normalize(collection, arrayOf(trackInfoSchema));
+                dispatch(setNewObjects(playlist, obj_type, json.future_href, n.entities, n.result));
+            })
+            .catch(err => {
+                throw err;
+            });
+    };
 }
 
 /**
@@ -206,19 +163,20 @@ function setNewFeedItems(futureUrl, entities, result) {
  * @returns {function(*, *)}
  */
 function initFeedUpdater() {
-  return (dispatch, getState) => {
-    updaterInterval = setInterval(() => {
-      const {playlists} = getState();
-      const streamPlaylist = playlists[PLAYLISTS.STREAM];
+    return (dispatch, getState) => {
+        updaterInterval = setInterval(() => {
+            const {objects} = getState();
+            const playlists = objects[obj_type] || {};
+            const streamPlaylist = playlists[PLAYLISTS.STREAM];
 
-      if (streamPlaylist.futureUrl) {
-        dispatch(updateFeed(streamPlaylist.futureUrl));
-      } else {
-        clearInterval(updaterInterval);
-      }
+            if (streamPlaylist.futureUrl) {
+                dispatch(updateFeed(streamPlaylist, streamPlaylist.futureUrl));
+            } else {
+                clearInterval(updaterInterval);
+            }
 
-    }, STREAM_CHECK_INTERVAL);
-  };
+        }, STREAM_CHECK_INTERVAL);
+    };
 }
 
 
@@ -228,31 +186,32 @@ function initFeedUpdater() {
  * @returns {function(*)}
  */
 export function fetchPlaylists() {
-  return dispatch =>
-    fetch(SC.getPlaylistUrl())
-      .then(response => response.json())
-      .then(json => {
+    return dispatch =>
+        fetch(SC.getPlaylistUrl())
+            .then(response => response.json())
+            .then(json => {
 
-        const n = normalize(json, arrayOf(playlistSchema));
+                const n = normalize(json, arrayOf(playlistSchema));
 
-        const result = _.reduce(n.result, (obj, t) => {
-          return Object.assign({}, obj, {[t]: 1})
-        }, {});
+                const result = _.reduce(n.result, (obj, t) => {
+                    return Object.assign({}, obj, {[t]: 1})
+                }, {});
 
-        dispatch(setPlaylists(result, n.entities));
+                dispatch(setPlaylists(result, n.entities));
 
-        n.result.forEach(playlistId => {
-          const playlist = n.entities.playlists[playlistId];
-          dispatch(setPlaylist(
-            playlist.title + USER_PLAYLIST,
-            {},
-            playlist.tracks,
-          ));
-        });
-      })
-      .catch(err => {
-        throw err;
-      });
+                n.result.forEach(playlistId => {
+                    const playlist = n.entities.playlists[playlistId];
+                    dispatch(setObject(
+                        playlist.title + USER_PLAYLIST,
+                        obj_type,
+                        {},
+                        playlist.tracks,
+                    ));
+                });
+            })
+            .catch(err => {
+                throw err;
+            });
 }
 
 /**
@@ -262,41 +221,10 @@ export function fetchPlaylists() {
  * @returns {{type: *, entities: *, playlists: *}}
  */
 function setPlaylists(playlists, entities) {
-  return {
-    type: actionTypes.USER_SET_PLAYLISTS,
-    entities,
-    playlists,
-  };
+    return {
+        type: actionTypes.USER_SET_PLAYLISTS,
+        entities,
+        playlists,
+    };
 }
 
-/**
- * Check if there is more to fetch, if so, fetch more
- *
- * @param playlist
- * @returns {function(*, *)}
- */
-export function fetchMore(playlist) {
-  return (dispatch, getState) => {
-    const {playlists} = getState();
-    if (canFetchMore(playlists, playlist)) {
-      const nextUrl = playlists[playlist].nextUrl;
-      return dispatch(_fetchPlaylist(nextUrl, playlist));
-    }
-
-    return null;
-  };
-}
-
-/**
- * Check if the current playlist isn't fetching & has a next Url
- *
- * @param playlists
- * @param playlist
- * @returns {*|boolean}
- */
-function canFetchMore(playlists, playlist) {
-  const current = playlists[playlist];
-
-  return current && (current.nextUrl !== null) && !current.isFetching;
-
-}

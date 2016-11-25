@@ -1,0 +1,4 @@
+export const OBJECT_TYPES = {
+    PLAYLISTS: "PLAYLISTS",
+    COMMENTS: "COMMENTS",
+};

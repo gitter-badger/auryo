@@ -1,8 +1,7 @@
 // @flow
-import React, {Component, PropTypes} from 'react';
-import {logout} from '../../../actions';
-
-import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import React, {Component, PropTypes} from "react";
+import {logout} from "../../../actions";
+import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap";
 
 
 class User extends Component {
@@ -29,7 +28,7 @@ class User extends Component {
             <div className="user">
                 <Dropdown className="dropdown" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                     <DropdownToggle tag="a" className="btn-link">
-                        <i className="icon-keyboard_arrow_down" />
+                        <i className="icon-keyboard_arrow_down"/>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-right">
                         <DropdownItem onClick={logout}>Logout</DropdownItem>
@@ -50,7 +49,7 @@ class User extends Component {
 }
 
 User.propTypes = {
-  me: PropTypes.object.isRequired
+    me: PropTypes.object.isRequired
 };
 
 export default User;

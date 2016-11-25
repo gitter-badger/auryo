@@ -11,33 +11,33 @@ import {ipcRenderer} from "electron";
  * @returns {function(*)}
  */
 export function initUser() {
-  return dispatch => {
+    return dispatch => {
 
-    const token = ipcRenderer.sendSync('ping');
+        const token = ipcRenderer.sendSync('ping');
 
-      if (token) {
-        SC.initialize(token);
-        dispatch(fetchUser());
-      }
+        if (token) {
+            SC.initialize(token);
+            dispatch(fetchUser());
+        }
 
 
-    return null;
-  }
+        return null;
+    }
 }
 
 export function logout() {
-  ipcRenderer.send("logout");
+    ipcRenderer.send("logout");
 }
 
 function fetchUser() {
-  return dispatch => {
-    dispatch(fetchMe());
-    dispatch(fetchFollowings());
+    return dispatch => {
+        dispatch(fetchMe());
+        dispatch(fetchFollowings());
 
-    dispatch(fetchLikes());
-    dispatch(fetchFeed());
-    dispatch(fetchPlaylists());
-  };
+        dispatch(fetchLikes());
+        dispatch(fetchFeed());
+        dispatch(fetchPlaylists());
+    };
 }
 
 
@@ -47,16 +47,16 @@ function fetchUser() {
  * @returns {function(*)}
  */
 function fetchMe() {
-  return dispatch => {
-    fetch(SC.getMeUrl())
-      .then((response) => response.json())
-      .then((json) => {
-        dispatch(setUser(json));
-      })
-      .catch(err => {
-        throw err;
-      });
-  }
+    return dispatch => {
+        fetch(SC.getMeUrl())
+            .then((response) => response.json())
+            .then((json) => {
+                dispatch(setUser(json));
+            })
+            .catch(err => {
+                throw err;
+            });
+    }
 }
 
 /**
@@ -66,10 +66,10 @@ function fetchMe() {
  * @returns {{type, user: *}}
  */
 function setUser(user) {
-  return {
-    type: actionTypes.USER_SET,
-    user
-  };
+    return {
+        type: actionTypes.USER_SET,
+        user
+    };
 }
 
 /**
@@ -78,21 +78,21 @@ function setUser(user) {
  * @returns {function(*)}
  */
 function fetchFollowings() {
-  return dispatch =>
-    fetch(SC.getFollowingsUrl())
-      .then(response => response.json())
-      .then(json => {
-        const n = normalize(json.collection, arrayOf(userSchema));
+    return dispatch =>
+        fetch(SC.getFollowingsUrl())
+            .then(response => response.json())
+            .then(json => {
+                const n = normalize(json.collection, arrayOf(userSchema));
 
-        const result = _.reduce(n.result, (obj, t) => {
-          return Object.assign({}, obj, {[t]: 1})
-        }, {});
+                const result = _.reduce(n.result, (obj, t) => {
+                    return Object.assign({}, obj, {[t]: 1})
+                }, {});
 
-        dispatch(setFollowings(n.entities, result));
-      })
-      .catch(err => {
-        throw err;
-      });
+                dispatch(setFollowings(n.entities, result));
+            })
+            .catch(err => {
+                throw err;
+            });
 }
 
 /**
@@ -103,48 +103,48 @@ function fetchFollowings() {
  * @returns {{type: *, entities: *, result: *}}
  */
 function setFollowings(entities, result) {
-  return {
-    type: actionTypes.USER_SET_FOLLOWINGS,
-    entities,
-    result,
-  };
+    return {
+        type: actionTypes.USER_SET_FOLLOWINGS,
+        entities,
+        result,
+    };
 }
 
 export function toggleFollowing(userID) {
-  return (dispatch, getState) => {
-    const {user} = getState();
-    const {followings} = user;
+    return (dispatch, getState) => {
+        const {user} = getState();
+        const {followings} = user;
 
-    const following = (userID in followings) && followings[userID] == 1;
+        const following = (userID in followings) && followings[userID] == 1;
 
-    if (!(userID in followings)) {
-      dispatch(addFollowing(userID));
-    } else {
-      dispatch(setFollowing(userID,(!following == false) ? 0 : 1));
+        if (!(userID in followings)) {
+            dispatch(addFollowing(userID));
+        } else {
+            dispatch(setFollowing(userID, (!following == false) ? 0 : 1));
+        }
+
+        updateFollowing(userID, !following);
+
     }
-
-    updateFollowing(userID,!following);
-
-  }
 }
 
-function updateFollowing(userID,following){
-  fetch(SC.updateFollowingUrl(userID),{
-    method: (following == 1) ? "PUT" : "DELETE"
-  })
+function updateFollowing(userID, following) {
+    fetch(SC.updateFollowingUrl(userID), {
+        method: (following == 1) ? "PUT" : "DELETE"
+    })
 }
 
 function setFollowing(userID, following) {
-  return {
-    type: actionTypes.USER_SET_FOLLOWING,
-    userID,
-    following
-  }
+    return {
+        type: actionTypes.USER_SET_FOLLOWING,
+        userID,
+        following
+    }
 }
 
 function addFollowing(userID) {
-  return {
-    type: actionTypes.USER_ADD_FOLLOWING,
-    userID
-  }
+    return {
+        type: actionTypes.USER_ADD_FOLLOWING,
+        userID
+    }
 }

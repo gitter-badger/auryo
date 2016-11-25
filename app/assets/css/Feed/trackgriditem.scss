@@ -1,190 +1,190 @@
 @import "../../../node_modules/bootstrap/scss/variables";
 
-$enable-flex : true;
+$enable-flex: true;
 
 @import "../../../node_modules/bootstrap/scss/mixins";
 
-
-.trackWrapper{
+.trackWrapper {
   @include make-col-ready();
   @include media-breakpoint-up(xl) {
-	@include make-col(3,15);
+    @include make-col(3, 15);
   }
   min-width: 280px;
   height: 360px;
 }
+
 .track {
   padding: 0 20px 25px 0;
   max-width: 280px;
   margin: 0 auto;
 
   &:hover, &.isPlaying {
-	.toggleButton {
-	  opacity: 1;
-	  transform: scale(1, 1);
-	  -webkit-transform: scale(1, 1);
-	  transition: 0.2s opacity ease-out, 0.2s transform ease-out;
-	  transition-delay: .1s;
-	}
-	.trackStats {
-	  transform: translateY(0);
-	  -webkit-transform: translateY(0);
-	  transition: 0.1s opacity ease-out, 0.1s transform ease-out;
-	}
+    .toggleButton {
+      opacity: 1;
+      transform: scale(1, 1);
+      -webkit-transform: scale(1, 1);
+      transition: 0.2s opacity ease-out, 0.2s transform ease-out;
+      transition-delay: .1s;
+    }
+    .trackStats {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      transition: 0.1s opacity ease-out, 0.1s transform ease-out;
+    }
   }
 
   &:hover {
-	.trackStats {
-	  transform: translateY(0);
-	  -webkit-transform: translateY(0);
-	  transition: 0.1s opacity ease-out, 0.1s transform ease-out;
-	}
+    .trackStats {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      transition: 0.1s opacity ease-out, 0.1s transform ease-out;
+    }
 
-	.imageWrapper:after {
-	  opacity: .05;
-	  transition: 0.5s ease;
-	}
+    .imageWrapper:after {
+      opacity: .05;
+      transition: 0.5s ease;
+    }
   }
 
   .toggleButton {
-	background: #fff;
-	border-radius: 50px;
-	height: 50px;
-	position: absolute;
-	width: 50px;
-	right: 0;
-	bottom: 0;
-	margin-bottom: 20px;
-	margin-right: 10px;
-	text-align: center;
-	box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-	transform: scale(0, 0);
-	-webkit-transform: scale(0, 0);
-	opacity: 0;
-	z-index: 4;
-	cursor: pointer;
+    background: #fff;
+    border-radius: 50px;
+    height: 50px;
+    position: absolute;
+    width: 50px;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    text-align: center;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    opacity: 0;
+    z-index: 4;
+    cursor: pointer;
 
-	i {
-	  color: #2980b9;
-	  font-size: 30px;
+    i {
+      color: #2980b9;
+      font-size: 30px;
 
-	  text-align: center;
-	  display: table-cell;
-	  vertical-align: middle;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
 
-	  width: 50px;
-	  height: 50px;
-	}
+      width: 50px;
+      height: 50px;
+    }
   }
 
   .trackImage {
-	position: relative;
+    position: relative;
 
-	& .imageWrapper {
-	  overflow: hidden;
-	  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-	  position: relative;
+    & .imageWrapper {
+      overflow: hidden;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+      position: relative;
 
-	  & img {
-		box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
-		transform: translateY(-5px);
-		-webkit-transform: translateY(-5px);
-		max-width: 100%;
-		min-height: 200px;
-	  }
+      & img {
+        box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+        transform: translateY(-5px);
+        -webkit-transform: translateY(-5px);
+        max-width: 100%;
+        min-height: 200px;
+      }
 
-	  &:after {
-		content: '';
-		background: black;
-		width: 100%;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		display: block;
-		position: absolute;
-		opacity: 0;
-		transition: 0.5s ease;
-	  }
-	}
+      &:after {
+        content: '';
+        background: black;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        position: absolute;
+        opacity: 0;
+        transition: 0.5s ease;
+      }
+    }
 
   }
 
   .trackInfo {
-	padding: 5px 0;
+    padding: 5px 0;
 
-	.trackTitle {
-	  font-weight: 500;
+    .trackTitle {
+      font-weight: 500;
 
-	  a {
-		color: #000;
-	  }
-	}
-	.trackArtist {
-	  font-size: 0.96em;
+      a {
+        color: #000;
+      }
+    }
+    .trackArtist {
+      font-size: 0.96em;
 
-	  a {
-		color: #6e727d;
+      a {
+        color: #6e727d;
 
-		&.repost {
-		  opacity: 0.7;
-		}
-	  }
+        &.repost {
+          opacity: 0.7;
+        }
+      }
 
-	  i {
-		padding: 5px;
-	  }
+      i {
+        padding: 5px;
+      }
 
-	  * {
-		vertical-align: middle;
-	  }
-	}
+      * {
+        vertical-align: middle;
+      }
+    }
 
   }
 
   .trackGenre {
-	position: absolute;
-	left: 0;
-	top: -5px;
-	background: #222326;
-	color: #fff !important;
-	display: inline-block;
-	padding: 6px 10px;
-	font-size: 14px;
-	font-weight: 500;
-	margin-left: -20px;
-	margin-top: 10px;
+    position: absolute;
+    left: 0;
+    top: -5px;
+    background: #222326;
+    color: #fff !important;
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: -20px;
+    margin-top: 10px;
   }
 
   .trackStats {
-	color: #6e727d;
-	font-size: 15px;
-	position: absolute;
-	bottom: 0;
-	background: #fff;
-	width: 100%;
-	z-index: 2;
-	padding: 15px 10px;
-	overflow: hidden;
-	-webkit-transform: translateY(60px);
-	transform: translateY(60px);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.105);
-	transition: 0.2s opacity ease-in, 0.2s transform ease-in;
+    color: #6e727d;
+    font-size: 15px;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    z-index: 2;
+    padding: 15px 10px;
+    overflow: hidden;
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.105);
+    transition: 0.2s opacity ease-in, 0.2s transform ease-in;
 
-	.stat {
-	  display: inline-block;
-	  padding-right: 6px;
+    .stat {
+      display: inline-block;
+      padding-right: 6px;
 
-	  i {
-		padding-right: 2px;
-		font-size: 18px;
-	  }
+      i {
+        padding-right: 2px;
+        font-size: 18px;
+      }
 
-	  span,i{
-		display: inline-block;
-		vertical-align: middle;
-	  }
-	}
+      span, i {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
 
   }
 }

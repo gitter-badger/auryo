@@ -1,7 +1,9 @@
 import * as actionTypes from "../constants/actionTypes";
-import {CHANGE_TYPES} from "../constants/playlist";
-import {STATUS} from "../constants/playlist";
-import {fetchMore} from "./playlistActions";
+import {CHANGE_TYPES, STATUS} from "../constants/playlist";
+import {fetchMore} from "./objectActions";
+import {OBJECT_TYPES} from "../constants/global";
+
+const obj_type = OBJECT_TYPES.PLAYLISTS;
 
 /**
  * Set player time to 0 and check if playlist is already in the queue and if it's selected
@@ -11,21 +13,21 @@ import {fetchMore} from "./playlistActions";
  * @returns {function(*, *)}
  */
 export function playTrack(trackIndex, playlist) {
-  return (dispatch, getState) => {
-    const {player} = getState();
-    const {queuedPlaylists} = player;
+    return (dispatch, getState) => {
+        const {player} = getState();
+        const {queuedPlaylists} = player;
 
-    dispatch(setCurrentTime(0));
+        dispatch(setCurrentTime(0));
 
-    const length = queuedPlaylists.length;
+        const length = queuedPlaylists.length;
 
-    if (length == 0 || queuedPlaylists[length - 1] !== playlist) {
-      dispatch(setCurrentPlaylist(queuedPlaylists, playlist));
+        if (length == 0 || queuedPlaylists[length - 1] !== playlist) {
+            dispatch(setCurrentPlaylist(queuedPlaylists, playlist));
+        }
+
+        dispatch(setPlayingTrack(trackIndex));
+
     }
-
-    dispatch(setPlayingTrack(trackIndex));
-
-  }
 }
 
 /**
@@ -35,10 +37,10 @@ export function playTrack(trackIndex, playlist) {
  * @returns {{type, time: *}}
  */
 export function setCurrentTime(time) {
-  return {
-    type: actionTypes.PLAYER_SET_TIME,
-    time
-  };
+    return {
+        type: actionTypes.PLAYER_SET_TIME,
+        time
+    };
 }
 
 /**
@@ -48,10 +50,10 @@ export function setCurrentTime(time) {
  * @returns {{type, playing: *}}
  */
 export function toggleStatus(status) {
-  return {
-    type: actionTypes.PLAYER_TOGGLE_PLAYING,
-    status
-  };
+    return {
+        type: actionTypes.PLAYER_TOGGLE_PLAYING,
+        status
+    };
 }
 
 /**
@@ -62,16 +64,16 @@ export function toggleStatus(status) {
  * @returns {{type, queuedPlaylists: *}}
  */
 export function setCurrentPlaylist(queuedPlaylists, playlist) {
-  const pos = queuedPlaylists.indexOf(playlist);
-  if (pos > -1) {
-    queuedPlaylists.splice(pos, 1);
-  }
-  queuedPlaylists.push(playlist);
+    const pos = queuedPlaylists.indexOf(playlist);
+    if (pos > -1) {
+        queuedPlaylists.splice(pos, 1);
+    }
+    queuedPlaylists.push(playlist);
 
-  return {
-    type: actionTypes.PLAYER_SET_PLAYLIST,
-    queuedPlaylists,
-  };
+    return {
+        type: actionTypes.PLAYER_SET_PLAYLIST,
+        queuedPlaylists,
+    };
 }
 
 /**
@@ -81,35 +83,36 @@ export function setCurrentPlaylist(queuedPlaylists, playlist) {
  * @returns {{type, index: *}}
  */
 export function changeTrack(change_type) {
-  return (dispatch, getState) => {
-    const {player, playlists} = getState();
-    const {currentSong, queuedPlaylists} = player;
-    const currentPlaylist = queuedPlaylists[queuedPlaylists.length - 1];
+    return (dispatch, getState) => {
+        const {player, objects} = getState();
+        const playlists = objects[obj_type] || {};
 
-    let index = currentSong;
+        const {currentSong, queuedPlaylists} = player;
+        const currentPlaylist = queuedPlaylists[queuedPlaylists.length - 1];
 
-    switch (change_type) {
-      case CHANGE_TYPES.NEXT:
-        index += 1;
-        break;
-      case CHANGE_TYPES.PREV:
-        index -= 1;
-        break;
-      case CHANGE_TYPES.SHUFFLE:
-        index = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1));
-        break;
+        let index = currentSong;
 
+        switch (change_type) {
+            case CHANGE_TYPES.NEXT:
+                index += 1;
+                break;
+            case CHANGE_TYPES.PREV:
+                index -= 1;
+                break;
+            case CHANGE_TYPES.SHUFFLE:
+                index = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1));
+                break;
+
+        }
+
+        if (index < 0) return null;
+
+        if (index + 5 > playlists[currentPlaylist].items.length) {
+            dispatch(fetchMore(currentPlaylist, obj_type));
+        }
+
+        return dispatch(setPlayingTrack(index));
     }
-
-    if (index < 0) {
-      return null;
-    }
-    if (index + 5 > playlists[currentPlaylist].items.length) {
-      dispatch(fetchMore(currentPlaylist));
-    }
-
-    return dispatch(setPlayingTrack(index));
-  }
 }
 
 /**
@@ -119,10 +122,10 @@ export function changeTrack(change_type) {
  * @returns {{type, index: *, status: string}}
  */
 function setPlayingTrack(index) {
-  const status = STATUS.PLAYING;
-  return {
-    type: actionTypes.PLAYER_SET_TRACK,
-    index,
-    status
-  }
+    const status = STATUS.PLAYING;
+    return {
+        type: actionTypes.PLAYER_SET_TRACK,
+        index,
+        status
+    }
 }
