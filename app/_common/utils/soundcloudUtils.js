@@ -14,41 +14,93 @@ export function initialize(token) {
 
 }
 
+function makeUrl(uri, options, v2) {
+    if (options.client_id) options.client_id = CLIENT_ID;
+    if (options.oauth_token) options.oauth_token = _token;
+
+    let url = _endpoint;
+
+    if (v2) url += _v2_endpoint;
+
+    // add uri
+    url += uri;
+
+    // Add query params
+    url += "?" + Object.keys(options).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(options[k])}`).join('&');
+
+    return url;
+}
+
+
 export function getTrackUrl(trackID) {
-    return _endpoint + "tracks/" + trackID + "?client_id=" + CLIENT_ID;
+    return makeUrl("tracks/" + trackID, {
+        client_id: true
+    });
 }
 
 export function getChartsUrl(genre, sort = "top") {
-    return _v2_endpoint + "charts?kind=" + sort + "&genre=soundcloud:genres:" + genre + "&client_id=" + CLIENT_ID
+    return makeUrl("charts/", {
+        client_id: true,
+        kind: sort,
+        genre: "soundcloud:genres:" + genre
+    }, true);
 }
 
 export function getFeedUrl(limit = 50) {
-    return _endpoint + "e1/me/stream.json?limit=" + limit + "&oauth_token=" + _token;
+    return makeUrl("e1/me/stream.json", {
+        limit: limit,
+        oauth_token: true
+    });
     //return _v2_endpoint + "stream?limit=" + limit + "&oauth_token=" + _token;
     //return _endpoint + "me/activities?limit=" + limit + "&oauth_token=" + _token
 }
 
 export function getLikesUrl() {
-    return _endpoint + "me/favorites?oauth_token=" + _token;
+    return makeUrl("me/favorites", {
+        oauth_token: true
+    });
 }
 
 export function getPlaylistUrl() {
-    return _endpoint + "me/playlists?oauth_token=" + _token;
+    return makeUrl("me/playlists", {
+        oauth_token: true
+    });
 }
 
 export function getRelatedUrl(trackID) {
-    return _endpoint + "tracks/" + trackID + "/related?client_id=" + CLIENT_ID;
+    return makeUrl("tracks/" + trackID + "/related", {
+        client_id: true
+    });
 }
-export function getCommentsUrl(trackID, limit = 50) {
-    return _endpoint + "tracks/" + trackID + "/comments?client_id=" + CLIENT_ID + "&linked_partitioning=1&limit=" + limit;
+export function getCommentsUrl(trackID, limit = 20) {
+    return makeUrl("tracks/" + trackID + "/comments", {
+        client_id: true,
+        linked_partitioning: 1,
+        limit: limit
+    });
 }
 
 export function getMeUrl() {
-    return _endpoint + "me?oauth_token=" + _token;
+    return makeUrl("me", {
+        oauth_token: true
+    });
 }
 
 export function getFollowingsUrl() {
-    return _endpoint + "me/followings?oauth_token=" + _token;
+    return makeUrl("me/followings", {
+        oauth_token: true
+    });
+}
+
+export function updateLikeUrl(trackID) {
+    return makeUrl("me/favorites/" + trackID, {
+        oauth_token: true
+    });
+}
+export function updateFollowingUrl(userID) {
+    return makeUrl("me/followings/" + userID, {
+        oauth_token: true
+    });
 }
 
 export function appendToken(url) {
@@ -57,13 +109,6 @@ export function appendToken(url) {
 
 export function appendClientId(url) {
     return url + "?client_id=" + CLIENT_ID;
-}
-
-export function updateLikeUrl(trackID) {
-    return _endpoint + "me/favorites/" + trackID + "?oauth_token=" + _token;
-}
-export function updateFollowingUrl(userID) {
-    return _endpoint + "me/followings/" + userID + "?oauth_token=" + _token;
 }
 
 export function getImageUrl(track, size = null) {
