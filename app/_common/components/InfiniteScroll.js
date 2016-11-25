@@ -20,7 +20,7 @@ class InfiniteScroll extends Component {
     }
 
     onScroll() {
-        const {scrollFunc, fastScrolling} = this.props;
+        const {dispatch, scrollFunc, fastScrolling} = this.props;
 
         const el = ReactDOM.findDOMNode(this.refs.scroll);
         const box = el.getBoundingClientRect();
@@ -32,7 +32,7 @@ class InfiniteScroll extends Component {
         }
 
         if (el.scrollTop >= (scroll_height - offset)) {
-            scrollFunc();
+            dispatch(scrollFunc());
         }
     }
 
@@ -48,6 +48,7 @@ class InfiniteScroll extends Component {
 }
 
 InfiniteScroll.propTypes = {
+    dispatch: PropTypes.func.isRequired,
     scrollFunc: PropTypes.func.isRequired,
     playing: PropTypes.bool.isRequired,
     fastScrolling: PropTypes.bool
