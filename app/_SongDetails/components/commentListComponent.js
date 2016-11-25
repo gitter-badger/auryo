@@ -3,20 +3,27 @@ import {getImageUrl, formatDescription} from "../../_common/utils/soundcloudUtil
 import {IMAGE_SIZES} from "../../_common/constants/Soundcloud";
 import {Row, Col} from "reactstrap";
 import moment from "moment";
+import Spinner from "../../_common/components/Spinner";
 
 
 class CommentList extends Component {
 
     render() {
-        const {comments} = this.props;
+        const {comments, comment_entities, user_entities} = this.props;
 
+        if (comments.isFetching) {
+            return <Spinner />
+        }
 
+        const items = comments.items || [];
         return (
             <div className="comments">
                 {
-                    comments.map(function (comment, i) {
+                    items.map(function (commentId, i) {
+                        const comment = comment_entities[commentId];
+                        const user = user_entities[comment.user_id];
 
-                        const img = getImageUrl(comment.user.avatar_url, IMAGE_SIZES.XSMALL);
+                        const img = getImageUrl(user.avatar_url, IMAGE_SIZES.XSMALL);
 
                         return (
                             <Row className="comment" key={i}>
@@ -25,7 +32,7 @@ class CommentList extends Component {
                                 </div>
                                 <Col xs="8" className="comment-main">
                                     <div className="info flex">
-                                        <div>{comment.user.username}</div>
+                                        <div>{user.username}</div>
                                         <span className="divider flex-xs-middle"></span>
                                         <div className="text-muted">
                                             { moment(comment.created_at, "YYYY-MM-DD HH:mm Z").fromNow()}
@@ -44,7 +51,9 @@ class CommentList extends Component {
 }
 
 CommentList.propTypes = {
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.object.isRequired,
+    comment_entities: PropTypes.object.isRequired,
+    user_entities: PropTypes.object.isRequired
 };
 
 export default CommentList;

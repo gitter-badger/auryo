@@ -323,11 +323,11 @@ class Player extends React.Component {
     // ====
 
     render() {
-        const {player, users, playingSongId, tracks} = this.props;
+        const {player, user_entities, playingSongId, track_entities} = this.props;
         const {status} = player;
-        const track = tracks[playingSongId];
+        const track = track_entities[playingSongId];
 
-        track.user = users[track.user_id];
+        track.user = user_entities[track.user_id];
 
         const prevFunc = this.changeSong.bind(this, CHANGE_TYPES.PREV);
         const nextFunc = this.changeSong.bind(
@@ -429,8 +429,8 @@ Player.propTypes = {
     playingSongId: PropTypes.number,
     playlists: PropTypes.object.isRequired,
     song: PropTypes.object,
-    tracks: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
+    track_entities: PropTypes.object.isRequired,
+    user_entities: PropTypes.object.isRequired,
 };
 
 export default Player;

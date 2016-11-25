@@ -31,8 +31,8 @@ class trackList extends Component {
         const {
             playlists,
             playlist,
-            tracks,
-            users,
+            track_entities,
+            user_entities,
             player,
             dispatch,
             likes,
@@ -71,8 +71,7 @@ class trackList extends Component {
                     {
                         items.map(function (trackId, i) {
                             if (i == 0) return;
-                            const track = tracks[trackId];
-                            //const playTrackFunc = _this.playTrack.bind(_this, i,null);
+                            const track = track_entities[trackId];
 
                             const like = likeFunc.bind(null, track.id);
                             const liked = isLiked(track.id, likes);
@@ -84,7 +83,7 @@ class trackList extends Component {
                                     isPlaying={playingTrackId == track.id }
                                     playTrackFunc={_this.playTrack.bind(_this, i)}
                                     dispatch={dispatch}
-                                    users={users}
+                                    user_entities={user_entities}
                                     likeFunc={like}
                                     liked={liked}
                                 />
@@ -101,8 +100,8 @@ class trackList extends Component {
 trackList.propTypes = {
     playlists: PropTypes.object.isRequired,
     playlist: PropTypes.string.isRequired,
-    tracks: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
+    track_entities: PropTypes.object.isRequired,
+    user_entities: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     player: PropTypes.object.isRequired,
     likes: PropTypes.object.isRequired,

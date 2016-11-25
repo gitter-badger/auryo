@@ -2,7 +2,7 @@ import {Schema, arrayOf} from "normalizr";
 import userSchema from "./user";
 import trackSchema from "./track";
 
-const playlistSchema = new Schema('playlists');
+const playlistSchema = new Schema('playlist_entities');
 
 playlistSchema.define({
     user: userSchema,

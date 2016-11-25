@@ -1,7 +1,7 @@
 import {Schema} from "normalizr";
 import userSchema from "./user";
 
-const trackSchema = new Schema('tracks');
+const trackSchema = new Schema('track_entities');
 
 trackSchema.define({
     user: userSchema,

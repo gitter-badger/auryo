@@ -22,7 +22,7 @@ class PlayerContainer extends Component {
 
 function mapStateToProps(state) {
     const {entities, player, objects} = state;
-    const {tracks, users} = entities;
+    const {track_entities, user_entities} = entities;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
     const playingSongId = getPlayingTrackId(player, playlists);
 
@@ -30,8 +30,8 @@ function mapStateToProps(state) {
         player,
         playingSongId,
         playlists,
-        tracks,
-        users,
+        track_entities,
+        user_entities
     };
 }
 

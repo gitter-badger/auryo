@@ -1,10 +1,11 @@
 import merge from "lodash/merge";
 
 const initialState = {
-    playlists: {},
-    tracks: {},
-    users: {},
-    feedInfo: {}
+    playlist_entities: {},
+    track_entities: {},
+    user_entities: {},
+    feedInfo_entities: {},
+    comment_entities: {}
 };
 
 export default function entities(state = initialState, action) {

@@ -29,10 +29,16 @@ class trackListItem extends Component {
     }
 
     render() {
-        const {track, users, isPlaying, liked, likeFunc, playTrackFunc} = this.props;
+        const {
+            track,
+            user_entities,
+            isPlaying,
+            liked,
+            likeFunc,
+            playTrackFunc
+        } = this.props;
 
-
-        const user = users[track.user_id];
+        const user = user_entities[track.user_id];
 
         return (
             <tr className={cn("trackItem", {isPlaying: isPlaying})} onDoubleClick={playTrackFunc.bind(null, false)}>
@@ -74,7 +80,7 @@ trackListItem.propTypes = {
     dispatch: PropTypes.func.isRequired,
     isPlaying: PropTypes.bool.isRequired,
     track: PropTypes.object.isRequired,
-    users: PropTypes.object.isRequired,
+    user_entities: PropTypes.object.isRequired,
     likeFunc: PropTypes.func.isRequired,
     liked: PropTypes.bool.isRequired
 };

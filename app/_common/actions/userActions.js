@@ -4,6 +4,7 @@ import * as actionTypes from "../constants/actionTypes";
 import {userSchema} from "../schemas/";
 import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
+import * as _ from "lodash";
 
 /**
  * Get token from config and initialize Soundcloud class

@@ -12,18 +12,18 @@ const obj_type = OBJECT_TYPES.PLAYLISTS;
 export function fetchTrackIfNeeded(trackID) {
     return (dispatch, getState) => {
         const {entities, objects} = getState();
-        const {tracks} = entities;
+        const {track_entities} = entities;
         const playlists = objects[obj_type] || {};
         const current_playlist = String(trackID + RELATED_PLAYLIST);
 
-        if (!(trackID in tracks)) {
+        if (!(trackID in track_entities)) {
             dispatch(fetchTrack(trackID));
         } else {
             if (!(current_playlist in playlists)) {
                 dispatch(fetchRelated(trackID));
             }
 
-            if (!("comments" in tracks[trackID])) {
+            if (!("comments" in track_entities[trackID])) {
                 dispatch(fetchComments(trackID));
             }
         }
@@ -61,7 +61,7 @@ function fetchRelated(trackID) {
             .then(response => response.json())
             .then(json => {
                 const n = normalize(json, arrayOf(trackSchema));
-                n.result.unshift(trackID);
+                n.result.unshift(parseInt(trackID));
 
                 dispatch(setObject(trackID + RELATED_PLAYLIST, obj_type, n.entities, n.result));
             })

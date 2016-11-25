@@ -50,15 +50,15 @@ function mapStateToProps(state) {
     const {user, entities, objects, player} = state;
     const current_playlist = PLAYLISTS.STREAM;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
-    const {tracks, users, feedInfo} = entities;
+    const {track_entities, user_entities, feedInfo_entities} = entities;
     const playingSongId = getPlayingTrackId(player, playlists);
 
     return {
         user,
-        feedInfo,
-        tracks,
+        feedInfo_entities,
+        track_entities,
         playingSongId,
-        users,
+        user_entities,
         current_playlist,
         playlists,
         scrollFunc: fetchMore.bind(this, current_playlist, OBJECT_TYPES.PLAYLISTS)

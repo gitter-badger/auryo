@@ -113,9 +113,9 @@ export function fetchPlaylist(url, name) {
                 }
 
                 dispatch(setObject(name, obj_type, {
-                    tracks: tracks.entities.tracks,
-                    feedInfo: info.entities.feedInfo,
-                    users: _.assign({}, tracks.entities.users, info.entities.users),
+                    track_entities: tracks.entities.track_entities,
+                    feedInfo_entities: info.entities.feedInfo_entities,
+                    user_entities: _.assign({}, tracks.entities.user_entities, info.entities.user_entities),
                 }, info.result.filter(onlyUnique), json.next_href, json.future_href));
 
             }).catch(err => {
@@ -200,7 +200,7 @@ export function fetchPlaylists() {
                 dispatch(setPlaylists(result, n.entities));
 
                 n.result.forEach(playlistId => {
-                    const playlist = n.entities.playlists[playlistId];
+                    const playlist = n.entities.playlist_entities[playlistId];
                     dispatch(setObject(
                         playlist.title + USER_PLAYLIST,
                         obj_type,

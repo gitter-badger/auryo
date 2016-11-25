@@ -2,7 +2,7 @@ export function getPlayingTrackId(player, playlists) {
     if (player.currentSong !== null) {
         const playingPlaylistKey = player.queuedPlaylists[player.queuedPlaylists.length - 1];
         const playlist = playlists[playingPlaylistKey];
-        if (!playlist) return null;
+        if (!playlist || (playlist && playlist.items.length == 0)) return null;
 
         return playlist.items[player.currentSong];
 

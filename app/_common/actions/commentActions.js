@@ -6,6 +6,12 @@ import {commentSchema} from "../schemas/";
 
 const obj_type = OBJECT_TYPES.COMMENTS;
 
+/**
+ * Fetch track comments and normalize them into objects
+ *
+ * @param trackID
+ * @returns {function(*)}
+ */
 export function fetchComments(trackID) {
     return dispatch => {
         dispatch(isFetching(trackID, obj_type));

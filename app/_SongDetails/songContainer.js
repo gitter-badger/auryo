@@ -60,9 +60,9 @@ class songContainer extends Component {
     }
 
     hasDescription(songId) {
-        const {tracks} = this.props;
+        const {track_entities} = this.props;
 
-        const track = tracks[songId];
+        const track = track_entities[songId];
         return track.description.length > 0;
 
     }
@@ -111,16 +111,29 @@ class songContainer extends Component {
     }
 
     render() {
-        const {tracks, params, users, likes, playlists, player, dispatch, followings} = this.props;
+        const {
+            track_entities,
+            params,
+            user_entities,
+            likes,
+            playlists,
+            player,
+            dispatch,
+            followings,
+            comments,
+            comment_entities
+        } = this.props;
 
-        const track = tracks[params.songId];
+        const {songId} = params;
+
+        const track = track_entities[songId];
 
         if (!track) {
             return <Spinner />
         }
-        const playlist = params.songId + RELATED_PLAYLIST;
+        const playlist = songId + RELATED_PLAYLIST;
 
-        const user = users[track.user_id];
+        const user = user_entities[track.user_id];
 
         const img_url = getImageUrl(track, IMAGE_SIZES.LARGE);
 
@@ -128,10 +141,9 @@ class songContainer extends Component {
         const liked = isLiked(track.id, likes);
 
         const playlist_playing = this.isCurrentPlaylist();
-        const comments = track.comments || [];
 
         const hasDesc = track.description.length > 0;
-
+        const track_comments = comments[songId] || {};
 
         return (
             <div className={cn("scroll trackDetails", {playing: player.currentSong != null})}>
@@ -241,14 +253,18 @@ class songContainer extends Component {
                                                     player={player}
                                                     playlist={playlist}
                                                     playlists={playlists}
-                                                    tracks={tracks}
+                                                    track_entities={track_entities}
                                                     dispatch={dispatch}
-                                                    users={users}
+                                                    user_entities={user_entities}
                                                     likes={likes}
                                                     likeFunc={this.toggleLike.bind(this)}/>
                                             </TabPane>
                                             <TabPane tabId="3">
-                                                <CommentList comments={comments}/>
+                                                <CommentList
+                                                    comments={track_comments}
+                                                    user_entities={user_entities}
+                                                    comment_entities={comment_entities}
+                                                />
                                             </TabPane>
                                         </TabContent>
 
@@ -265,18 +281,22 @@ class songContainer extends Component {
 
 function mapStateToProps(state) {
     const {entities, player, objects, user} = state;
-    const {tracks, users} = entities;
+    const {track_entities, user_entities, comment_entities} = entities;
     const {likes, followings} = user;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
+    const comment_objects = objects[OBJECT_TYPES.COMMENTS] || {};
     const playingSongId = getPlayingTrackId(player, playlists);
+
     return {
-        tracks,
-        users,
+        track_entities,
+        user_entities,
         player,
         playingSongId,
         likes,
         playlists,
-        followings
+        followings,
+        comments: comment_objects,
+        comment_entities
     }
 }
 

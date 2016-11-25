@@ -41,7 +41,7 @@ function canFetchMore(object_group, object_id) {
 }
 
 /**
- * set playlist isfetching property
+ * Set object fetching property
  *
  * @param object_id
  * @param object_type
