@@ -20,6 +20,8 @@ export const PLAYER_SET_PLAYLIST = "PLAYER_SET_PLAYLIST";
 // TRACKS
 
 export const TRACK_ADD = "TRACK_ADD";
+export const TRACK_UPDATE_IMAGE = "TRACK_UPDATE_IMAGE";
+
 
 // OBJECT
 

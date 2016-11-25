@@ -79,6 +79,7 @@ class TracksGrid extends Component {
                     itemsRenderer={this.renderWrapper}
                     itemRenderer={this.renderItem}
                     threshold={150}
+                    useTranslate3d={true}
                 />
                 {isFetching ? <Spinner /> : null}
             </div>

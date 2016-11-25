@@ -8,6 +8,7 @@ import {CHANGE_TYPES, STATUS} from "../../../_common/constants/playlist";
 import {toggleStatus, changeTrack, setCurrentTime} from "../../../_common/actions";
 import Audio from "../../../_common/components/Audio";
 import cn from "classnames";
+import FallbackImage from "../../../_common/components/FallbackImageComponent"
 
 class Player extends React.Component {
 
@@ -344,7 +345,7 @@ class Player extends React.Component {
         return (
             <div className="player">
                 <div className="imgOverlay">
-                    <img src={overlay_image}/>
+                    <FallbackImage src={overlay_image}/>
                 </div>
 
                 <Audio
@@ -362,7 +363,7 @@ class Player extends React.Component {
                 <div className=" flex playerInner">
                     <div className="flex">
                         <div className="playerAlbum">
-                            <img width={50} height={50} src={image}/>
+                            <FallbackImage src={overlay_image}/>
                         </div>
                         <div className="trackInfo">
                             <div className="trackTitle"

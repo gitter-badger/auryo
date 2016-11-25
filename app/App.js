@@ -17,8 +17,8 @@ class App extends Component {
             online: navigator.onLine
         };
 
-        window.addEventListener('online', this.setOnlineStatus);
-        window.addEventListener('offline', this.setOnlineStatus);
+        //window.addEventListener('online', this.setOnlineStatus);
+        //window.addEventListener('offline', this.setOnlineStatus);
 
     }
 

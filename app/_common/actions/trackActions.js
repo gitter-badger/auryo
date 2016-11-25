@@ -2,7 +2,7 @@ import * as SC from "../utils/soundcloudUtils";
 import {trackSchema} from "../schemas";
 import {normalize, arrayOf} from "normalizr";
 import * as actionTypes from "../constants/actionTypes";
-import {OBJECT_TYPES} from "../constants/global";
+import {OBJECT_TYPES, PLACEHOLDER_IMAGE} from "../constants/global";
 import {setObject} from "./objectActions";
 import {RELATED_PLAYLIST} from "../constants/playlist";
 import {fetchComments} from "./commentActions";
@@ -86,6 +86,19 @@ export function toggleLike(trackID) {
 
         updateLike(trackID, !liked);
 
+    }
+}
+
+export function updateTrackImage(track_id) {
+    return {
+        type:actionTypes.TRACK_UPDATE_IMAGE,
+        entities: {
+            track_entities: {
+                [track_id]: {
+                    artwork_url: PLACEHOLDER_IMAGE
+                }
+            }
+        }
     }
 }
 

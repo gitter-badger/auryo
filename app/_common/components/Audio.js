@@ -1,4 +1,4 @@
-import React, {PropTypes,Component} from "react";
+import React, {PropTypes, Component} from "react";
 import ReactDOM from "react-dom";
 
 const status = {
@@ -31,6 +31,7 @@ class Audio extends Component {
         };
 
         this.state = this.defaultState;
+        this.onError = this.onError.bind(this);
 
         // html audio element used for playback
         this.audio = null;
@@ -126,13 +127,20 @@ class Audio extends Component {
         });
     }
 
+    onError(e) {
+        const audio = this.audio = ReactDOM.findDOMNode(this.refs.audio);
+        console.log(audio.networkState);
+        console.log("all",e);
+        console.log("target",e.target);
+        console.log("err",e.target.error);
+        console.log("type",e.type);
+    }
+
     render() {
         const {url, muted} = this.props;
 
         return (
-            <audio ref="audio" muted={muted}>
-                <source src={url}/>
-            </audio>
+            <audio ref="audio" src={url} muted={muted} onStalled={this.onError} onAbort={this.onError} onError={this.onError} />
         );
     }
 

@@ -15,6 +15,7 @@ import UserCard from "../_common/components/User/UserCard";
 import CommentList from "./components/commentListComponent";
 import {OBJECT_TYPES} from "../_common/constants/global";
 import InfinityScroll from "../_common/components/InfiniteScroll";
+import FallbackImage from "../_common/components/FallbackImageComponent"
 
 
 class songContainer extends Component {
@@ -156,13 +157,13 @@ class songContainer extends Component {
                         <Row className="trackHeader">
 
                             <div className="overlayWrapper">
-                                <img className="overlayImg" src={img_url}/>
+                                <FallbackImage dispatch={dispatch} track_id={track.id} className="overlayImg" src={img_url}/>
                             </div>
 
                             <Col xs="12" md="4" xl="2">
                                 <div className="imageWrapper">
-                                    <img src={img_url}/>
-                                    <img className="imgShadow" src={img_url}/>
+                                    <FallbackImage dispatch={dispatch} track_id={track.id} src={img_url}/>
+                                    <FallbackImage dispatch={dispatch} track_id={track.id} className="imgShadow" src={img_url}/>
                                     <div className="row flex-items-xs-center trackStats">
                                         <div className="stat col-xs">
                                             <i className="icon-favorite_border"/>
