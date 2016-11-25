@@ -3,31 +3,32 @@
 .trackList {
 
   .trackListHeader {
-	color: #bbbbbb;
-	padding: 0 10px 10px;
-	*{
-	  font-weight: 300;}
+    color: #bbbbbb;
+    padding: 0 10px 10px;
+    * {
+      font-weight: 300;
+    }
   }
 
   .trackItem {
-	padding: 15px 0;
-	font-size: .9rem;
-	align-items: center;
+    padding: 15px 0;
+    font-size: .9rem;
+    align-items: center;
 
-	a {
+    a {
 
-	  color: #3b3e42;
-	}
-	&.isPlaying .trackTitle a, &.isPlaying .trackArtist a {
-	  color: $accent;
-	}
-	.liked i {
-	  color: $accent;
-	}
+      color: #3b3e42;
+    }
+    &.isPlaying .trackTitle a, &.isPlaying .trackArtist a {
+      color: $accent;
+    }
+    .liked i {
+      color: $accent;
+    }
 
-	i {
-	  padding-right: 10px;
-	  display: inline-block;
-	}
+    i {
+      padding-right: 10px;
+      display: inline-block;
+    }
   }
 }
