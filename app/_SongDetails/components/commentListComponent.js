@@ -11,10 +11,6 @@ class CommentList extends Component {
     render() {
         const {comments, comment_entities, user_entities} = this.props;
 
-        if (comments.isFetching) {
-            return <Spinner />
-        }
-
         const items = comments.items || [];
         return (
             <div className="comments">
@@ -45,6 +41,7 @@ class CommentList extends Component {
                         )
                     })
                 }
+                {(comments.isFetching) ? <Spinner /> : null}
             </div>
         )
     }

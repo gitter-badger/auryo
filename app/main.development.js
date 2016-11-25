@@ -103,7 +103,7 @@ function init() {
         show: false,
         width: 1190,
         height: 728,
-        frame: false,
+        //frame: false,
         webPreferences: {
             webSecurity: false
         }

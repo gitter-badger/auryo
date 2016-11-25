@@ -1,11 +1,10 @@
-// @flow
 import React, {Component} from "react";
 import PageHeader from "../_common/components/Pageheader/PageHeader";
 import {PLAYLISTS} from "../_common/constants/playlist";
 import {connect} from "react-redux";
 import {fetchMore} from "../_common/actions";
 import {getPlayingTrackId} from "../_Player/playerUtils";
-import infiniteScroll from "../_common/components/InfiniteScroll";
+import InfinityScroll from "../_common/components/InfiniteScroll";
 import cn from "classnames";
 import TracksGrid from "./components/TracksGrid/TracksGrid";
 import {OBJECT_TYPES} from "../_common/constants/global";
@@ -30,18 +29,20 @@ class FeedContainer extends Component {
     }
 
     render() {
-        const {playingSongId} = this.props;
+        const {playingSongId, scrollFunc, dispatch} = this.props;
 
-        const c = cn("main clearfix", {
-            playing: playingSongId != null
-        });
         return (
-            <div className="scroll">
+            <InfinityScroll
+                dispatch={dispatch}
+                scrollFunc={scrollFunc}
+                fastScrolling={true}
+                playing={playingSongId != null}>
                 <PageHeader title="Stream" img="./assets/img/party.jpg"/>
-                <div className={c}>
+                <div className="main clearfix">
                     <TracksGrid {...this.props} />
+
                 </div>
-            </div>
+            </InfinityScroll>
         );
     }
 }
@@ -65,4 +66,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(infiniteScroll(FeedContainer));
+export default connect(mapStateToProps)(FeedContainer);

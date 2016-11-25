@@ -18,7 +18,6 @@ class Header extends Component {
     }
 
     render() {
-
         return (
             <nav className="navbar navbar-dark navbar-fixed-top">
                 <div className="flex flex-items-xs-between">
