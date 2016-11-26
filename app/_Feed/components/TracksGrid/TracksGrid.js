@@ -28,7 +28,8 @@ class TracksGrid extends Component {
             user_entities,
             current_playlist,
             playlists,
-            dispatch
+            dispatch,
+            app
         } = this.props;
 
         const items = current_playlist in playlists ? playlists[current_playlist].items : [];
@@ -51,6 +52,7 @@ class TracksGrid extends Component {
                            dispatch={dispatch}
                            isPlaying={track.id === playingSongId}
                            scrollFunc={scrollFunc}
+                           app={app}
                            track={track}/>
 
         );
@@ -93,6 +95,7 @@ TracksGrid.propTypes = {
     user_entities: PropTypes.object.isRequired,
 
     user: PropTypes.object.isRequired,
+    app: PropTypes.object.isRequired,
     playingSongId: PropTypes.number,
     current_playlist: PropTypes.string.isRequired,
     playlists: PropTypes.object.isRequired,

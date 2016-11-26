@@ -6,6 +6,7 @@ import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
 import {OBJECT_TYPES} from "../constants/global";
 import {STREAM_CHECK_INTERVAL} from "../constants/config";
 import {isFetching, setObject, setNewObjects} from "./objectActions";
+import {addQueuedFunction} from "./offlineActions";
 import _ from "lodash";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
@@ -40,9 +41,9 @@ export function fetchLikes() {
                     n.result
                 ));
             })
-            .catch(err => {
-                throw err;
-            });
+            .catch(err =>{
+                dispatch(addQueuedFunction(fetchLikes,arguments));
+            })
     }
 }
 
@@ -118,8 +119,9 @@ export function fetchPlaylist(url, name) {
                     user_entities: _.assign({}, tracks.entities.user_entities, info.entities.user_entities),
                 }, info.result.filter(onlyUnique), json.next_href, json.future_href));
 
-            }).catch(err => {
-                throw err;
+            })
+            .catch(err => {
+                dispatch(addQueuedFunction(fetchPlaylist.bind(null,url,name),arguments));
             });
     }
 }
@@ -152,7 +154,7 @@ function updateFeed(playlist, url) {
                 dispatch(setNewObjects(playlist, obj_type, json.future_href, n.entities, n.result));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(updateFeed.bind(null,playlist,url),arguments));
             });
     };
 }
@@ -210,7 +212,7 @@ export function fetchPlaylists() {
                 });
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(fetchPlaylists,arguments));
             });
 }
 

@@ -4,6 +4,7 @@ import * as actionTypes from "../constants/actionTypes";
 import {userSchema} from "../schemas/";
 import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
+import {addQueuedFunction} from "./offlineActions";
 import * as _ from "lodash";
 
 /**
@@ -55,7 +56,7 @@ function fetchMe() {
                 dispatch(setUser(json));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(fetchMe,arguments))
             });
     }
 }
@@ -92,7 +93,7 @@ function fetchFollowings() {
                 dispatch(setFollowings(n.entities, result));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(fetchFollowings,arguments))
             });
 }
 
@@ -124,17 +125,20 @@ export function toggleFollowing(userID) {
             dispatch(setFollowing(userID, (!following == false) ? 0 : 1));
         }
 
-        updateFollowing(userID, !following);
+        dispatch(updateFollowing(userID, !following));
 
     }
 }
 
 function updateFollowing(userID, following) {
-    fetch(SC.updateFollowingUrl(userID), {
-        method: (following == 1) ? "PUT" : "DELETE"
-    })
+    return dispatch => {
+        fetch(SC.updateFollowingUrl(userID), {
+            method: (following == 1) ? "PUT" : "DELETE"
+        }).catch(err => {
+            dispatch(addQueuedFunction(updateFollowing.bind(null, userID, following),arguments))
+        });
+    }
 }
-
 function setFollowing(userID, following) {
     return {
         type: actionTypes.USER_SET_FOLLOWING,

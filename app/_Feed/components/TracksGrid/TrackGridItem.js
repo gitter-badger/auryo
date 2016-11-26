@@ -6,7 +6,7 @@ import classnames from "classnames";
 import {truncate, abbreviate_number} from "../../../_common/utils/appUtils";
 import TogglePlayButton from "../../../_common/components/togglePlay";
 import {Col} from "reactstrap";
-import FallbackImage from "../../../_common/components/FallbackImageComponent"
+import FallbackImage from "../../../_common/components/FallbackImageComponent";
 
 class TrackGridItem extends Component {
 
@@ -62,7 +62,8 @@ class TrackGridItem extends Component {
         const {
             isPlaying,
             track,
-            dispatch
+            dispatch,
+            app
         } = this.props;
 
 
@@ -81,7 +82,11 @@ class TrackGridItem extends Component {
 
                     <div className="trackImage">
                         <div className="imageWrapper">
-                            <FallbackImage dispatch={dispatch} track_id={track.id} src={image}/>
+                            <FallbackImage
+                                dispatch={dispatch}
+                                track_id={track.id}
+                                offline={app.offline}
+                                src={image}/>
                             {
                                 this.renderToggleButton()
                             }
@@ -132,6 +137,7 @@ TrackGridItem.propTypes = {
     dispatch: PropTypes.func.isRequired,
     isPlaying: PropTypes.bool.isRequired,
     track: PropTypes.object.isRequired,
+    app: PropTypes.object.isRequired,
 };
 
 export default TrackGridItem;

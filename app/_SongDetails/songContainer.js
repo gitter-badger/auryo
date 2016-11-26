@@ -15,7 +15,7 @@ import UserCard from "../_common/components/User/UserCard";
 import CommentList from "./components/commentListComponent";
 import {OBJECT_TYPES} from "../_common/constants/global";
 import InfinityScroll from "../_common/components/InfiniteScroll";
-import FallbackImage from "../_common/components/FallbackImageComponent"
+import FallbackImage from "../_common/components/FallbackImageComponent";
 
 
 class songContainer extends Component {
@@ -112,6 +112,15 @@ class songContainer extends Component {
 
     }
 
+    fetchMore() {
+        const {params, dispatch} = this.props;
+
+        if (this.state.activeTab == "3") {
+            dispatch(fetchMore(params.songId, OBJECT_TYPES.COMMENTS));
+        }
+
+    }
+
     render() {
         const {
             track_entities,
@@ -123,7 +132,8 @@ class songContainer extends Component {
             dispatch,
             followings,
             comments,
-            comment_entities
+            comment_entities,
+            app
         } = this.props;
 
         const {songId} = params;
@@ -149,21 +159,36 @@ class songContainer extends Component {
 
         return (
             <InfinityScroll
-                dispatch={dispatch}
                 playing={player.currentSong != null}
-                scrollFunc={fetchMore.bind(this, songId, OBJECT_TYPES.COMMENTS)}>
+                scrollFunc={this.fetchMore.bind(this)}>
                 <div className="trackDetails">
                     <Container fluid={true}>
                         <Row className="trackHeader">
 
                             <div className="overlayWrapper">
-                                <FallbackImage dispatch={dispatch} track_id={track.id} className="overlayImg" src={img_url}/>
+                                <FallbackImage
+                                    offline={app.offline}
+                                    dispatch={dispatch}
+                                    track_id={track.id}
+                                    className="overlayImg"
+                                    src={img_url}/>
                             </div>
 
                             <Col xs="12" md="4" xl="2">
                                 <div className="imageWrapper">
-                                    <FallbackImage dispatch={dispatch} track_id={track.id} src={img_url}/>
-                                    <FallbackImage dispatch={dispatch} track_id={track.id} className="imgShadow" src={img_url}/>
+                                    <FallbackImage
+                                        offline={app.offline}
+                                        dispatch={dispatch}
+                                        track_id={track.id}
+                                        src={img_url}/>
+
+                                    <FallbackImage
+                                        offline={app.offline}
+                                        dispatch={dispatch}
+                                        track_id={track.id}
+                                        className="imgShadow"
+                                        src={img_url}/>
+
                                     <div className="row flex-items-xs-center trackStats">
                                         <div className="stat col-xs">
                                             <i className="icon-favorite_border"/>
@@ -241,7 +266,11 @@ class songContainer extends Component {
                                 <Container fluid>
                                     <Row>
                                         <Col xs="12" className="col-lg user_card_wrap trackMain">
-                                            <UserCard user={user} dispatch={dispatch} followings={followings}/>
+                                            <UserCard
+                                              user={user}
+                                              dispatch={dispatch}
+                                              followings={followings}
+                                              offline={app.offline} />
                                         </Col>
                                         <Col xs="12" className="trackMain col-lg">
 
@@ -289,7 +318,7 @@ class songContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    const {entities, player, objects, user} = state;
+    const {entities, player, objects, user, app} = state;
     const {track_entities, user_entities, comment_entities} = entities;
     const {likes, followings} = user;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
@@ -305,7 +334,8 @@ function mapStateToProps(state) {
         playlists,
         followings,
         comments: comment_objects,
-        comment_entities
+        comment_entities,
+        app
     }
 }
 
