@@ -9,7 +9,6 @@ import App from "./App";
 import Feed from "./_Feed/feedContainer";
 import SongDetails from "./_SongDetails/songContainer";
 import HistoryTracker from "back-forward-history";
-import fetchIntercept from 'fetch-intercept';
 
 const store = configureStore();
 

@@ -10,19 +10,21 @@ class FallbackImage extends Component {
         super(props);
 
         this.state = {
-            loaded: false,
             original: null,
-            valid: true
+            valid: true,
+            has_checked: false,
+            recheck: false
         }
     }
 
     componentWillReceiveProps(nextProps) {
 
-        if ((nextProps.offline != this.props.offline ) && nextProps.offline == false) {
-            const image = ReactDOM.findDOMNode(this.refs.img);
-            if(this.state.valid){
+        const image = ReactDOM.findDOMNode(this.refs.img);
+
+        if (nextProps.offline != this.props.offline && nextProps.offline == false) {
+            if(this.state.valid && image.src == PLACEHOLDER_IMAGE || this.state.recheck){
                 image.src = this.state.original
-            } else {
+            } else if(!this.state.valid && !this.state.recheck){
                 image.src = PLACEHOLDER_IMAGE;
             }
         }
@@ -30,37 +32,56 @@ class FallbackImage extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         const image = ReactDOM.findDOMNode(this.refs.img);
-        return (nextProps.offline != this.props.offline && (nextState.valid && image.src == PLACEHOLDER_IMAGE) || ((nextProps.track_id != this.props.track_id )&& nextProps.offline == true));
 
-        return (nextProps.offline != this.props.offline ) && nextProps.offline == false || (nextProps.track_id != this.props.track_id && nextProps.offline == true)
+        // If next props changes to online
+        if ((nextProps.offline != this.props.offline && nextProps.offline == false)) {
+            if ((nextState.valid && image.src == PLACEHOLDER_IMAGE) || nextState.recheck) {
+                return true
+            }
+
+        } else if (nextProps.track_id != this.props.track_id) {
+            return true
+        }
+        return false
     }
 
     onError(e) {
         const {dispatch, track_id, offline} = this.props;
 
         if (!offline) {
-            this.setState({
-                valid: false
-            });
             if (dispatch) {
-                dispatch(isOnline());
-
-                if (track_id) dispatch(updateTrackImage(track_id));
+                let func;
+                if (track_id) {
+                    func = updateTrackImage.bind(this, track_id);
+                }
+                dispatch(isOnline(func));
             }
+
+            this.setState({
+                valid: false,
+                recheck: false,
+                has_checked: true
+            });
         } else {
 
             this.setState({
-                original: e.target.src
+                original: e.target.src,
+                recheck: true,
+                has_checked: true
             });
-            e.target.src = PLACEHOLDER_IMAGE;
         }
+        e.target.src = PLACEHOLDER_IMAGE;
     }
 
     onLoad(e) {
-        this.setState({
-            valid: true,
-            original: e.target.src
-        });
+        if(this.state.has_checked && !this.state.valid){
+            this.setState({
+                valid: true,
+                recheck: false,
+                original: e.target.src,
+                has_checked: true
+            });
+        }
     }
 
     render() {

@@ -35,10 +35,10 @@ function addFunction(func, key) {
     }
 }
 
-function removeFunction(func) {
+function removeFunction(key) {
     return {
         type: actionTypes.APP_POP_OFFLINE_QUEUE,
-        func
+        key
     }
 }
 
@@ -66,6 +66,8 @@ function checkOnline() {
     return (dispatch, getState) => {
         const {app} = getState();
 
+        console.log(app.queued_items);
+        console.log(app.queued_functions);
         if (!app.offline && app.queued_items.length == 0) {
             clearInterval(interval);
             interval = null;
@@ -81,8 +83,8 @@ function checkOnline() {
 
                         app.queued_items.forEach(function (key) {
                             const func = app.queued_functions[key];
-                            dispatch(func());
                             dispatch(removeFunction(key));
+                            dispatch(func());
                         })
                 })
                 .catch(err => {
@@ -92,11 +94,15 @@ function checkOnline() {
     }
 }
 
-export function isOnline() {
+export function isOnline(func) {
     return (dispatch) => {
         fetch("http://google.com")
             .then(res => {
+                dispatch(toggleOffline(false));
 
+                if(func){
+                    dispatch(func());
+                }
             })
             .catch(err => {
                 dispatch(toggleOffline(true));
@@ -104,6 +110,7 @@ export function isOnline() {
                 if (!interval) {
                     dispatch(initCheckOnline());
                 }
+                throw err;
             })
     }
 }
