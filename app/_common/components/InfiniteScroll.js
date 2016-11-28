@@ -32,7 +32,11 @@ class InfiniteScroll extends Component {
         }
 
         if (el.scrollTop >= (scroll_height - offset)) {
+          if(dispatch){
             dispatch(scrollFunc());
+          } else {
+            scrollFunc();
+          }
         }
     }
 
@@ -48,7 +52,7 @@ class InfiniteScroll extends Component {
 }
 
 InfiniteScroll.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func,
     scrollFunc: PropTypes.func.isRequired,
     playing: PropTypes.bool.isRequired,
     fastScrolling: PropTypes.bool

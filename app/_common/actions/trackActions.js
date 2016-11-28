@@ -6,6 +6,7 @@ import {OBJECT_TYPES, PLACEHOLDER_IMAGE} from "../constants/global";
 import {setObject} from "./objectActions";
 import {RELATED_PLAYLIST} from "../constants/playlist";
 import {fetchComments} from "./commentActions";
+import {addQueuedFunction} from "./offlineActions";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
@@ -42,7 +43,7 @@ function fetchTrack(trackID) {
                 dispatch(fetchSongData(trackID, n.entities));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(fetchTrack.bind(null, trackID),arguments))
             });
     }
 }
@@ -66,7 +67,7 @@ function fetchRelated(trackID) {
                 dispatch(setObject(trackID + RELATED_PLAYLIST, obj_type, n.entities, n.result));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(fetchRelated.bind(null, trackID),arguments))
             });
     }
 }
@@ -84,14 +85,14 @@ export function toggleLike(trackID) {
             dispatch(setLike(trackID, (!liked == false) ? 0 : 1));
         }
 
-        updateLike(trackID, !liked);
+        dispatch(updateLike(trackID, !liked));
 
     }
 }
 
 export function updateTrackImage(track_id) {
     return {
-        type:actionTypes.TRACK_UPDATE_IMAGE,
+        type: actionTypes.TRACK_UPDATE_IMAGE,
         entities: {
             track_entities: {
                 [track_id]: {
@@ -103,9 +104,13 @@ export function updateTrackImage(track_id) {
 }
 
 function updateLike(trackID, liked) {
-    fetch(SC.updateLikeUrl(trackID), {
-        method: (liked == 1) ? "PUT" : "DELETE"
-    })
+    return dispatch => {
+        fetch(SC.updateLikeUrl(trackID), {
+            method: (liked == 1) ? "PUT" : "DELETE"
+        }).catch(err => {
+            dispatch(addQueuedFunction(updateLike.bind(null, trackID, liked),arguments))
+        })
+    }
 }
 
 function setLike(trackID, liked) {

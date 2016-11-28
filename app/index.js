@@ -10,7 +10,6 @@ import Feed from "./_Feed/feedContainer";
 import SongDetails from "./_SongDetails/songContainer";
 import HistoryTracker from "back-forward-history";
 
-
 const store = configureStore();
 
 const history = syncHistoryWithStore(createMemoryHistory(), store);

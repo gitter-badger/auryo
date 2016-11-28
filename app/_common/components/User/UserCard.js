@@ -3,6 +3,7 @@ import {IMAGE_SIZES} from "../../constants/Soundcloud";
 import {getImageUrl, isFollowing} from "../../utils/soundcloudUtils";
 import {toggleFollowing} from "../../actions";
 import cn from "classnames";
+import FallbackImage from "../../../_common/components/FallbackImageComponent";
 
 export default class UserCard extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class UserCard extends Component {
     }
 
     render() {
-        const {user, followings} = this.props;
+        const {user, followings,offline} = this.props;
 
 
         const following = isFollowing(user.id, followings);
@@ -25,7 +26,11 @@ export default class UserCard extends Component {
         return (
             <div className="user_card">
                 <div className="user_img">
-                    <img src={getImageUrl(user.avatar_url, IMAGE_SIZES.MEDIUM)}/>
+                    <FallbackImage
+                        src={getImageUrl(user.avatar_url, IMAGE_SIZES.MEDIUM)}
+                        track_id={null}
+                        offline={offline}
+                    />
                 </div>
                 <div className="user_info">
                     <div className="user_username">
@@ -45,6 +50,7 @@ export default class UserCard extends Component {
 UserCard.propTypes = {
     dispatch: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    followings: PropTypes.object.isRequired
+    followings: PropTypes.object.isRequired,
+    offline: PropTypes.bool.isRequired
 };
 

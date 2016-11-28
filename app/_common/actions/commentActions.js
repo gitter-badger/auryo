@@ -3,6 +3,7 @@ import {isFetching, setObject} from "./objectActions";
 import {OBJECT_TYPES} from "../constants/global";
 import {normalize, arrayOf} from "normalizr";
 import {commentSchema} from "../schemas/";
+import {addQueuedFunction} from "./offlineActions";
 
 const obj_type = OBJECT_TYPES.COMMENTS;
 
@@ -14,14 +15,13 @@ const obj_type = OBJECT_TYPES.COMMENTS;
  */
 export function fetchComments(trackID) {
     return dispatch => {
-        dispatch(updateComments(SC.getCommentsUrl(trackID),trackID));
+        dispatch(updateComments(SC.getCommentsUrl(trackID), trackID));
     }
 }
 
-export function updateComments(nextUrl,object_id) {
+export function updateComments(nextUrl, object_id) {
     return dispatch => {
         dispatch(isFetching(object_id, obj_type));
-
         fetch(nextUrl)
             .then(response => response.json())
             .then(json => {
@@ -31,7 +31,7 @@ export function updateComments(nextUrl,object_id) {
                 dispatch(setObject(object_id, obj_type, n.entities, n.result, json.next_href));
             })
             .catch(err => {
-                throw err;
+                dispatch(addQueuedFunction(updateComments.bind(null, nextUrl, object_id),arguments));
             });
     }
 }
