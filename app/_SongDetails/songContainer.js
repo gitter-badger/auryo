@@ -1,19 +1,21 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {fetchTrackIfNeeded, playTrack, toggleLike, fetchMore} from "../_common/actions";
-import Spinner from "../_common/components/Spinner/index";
-import {IMAGE_SIZES} from "../_common/constants/Soundcloud";
-import {getImageUrl, formatDescription, isLiked} from "../_common/utils/soundcloudUtils";
-import {getPlayingTrackId, getCurrentPlaylist} from "../_Player/playerUtils";
-import {abbreviate_number} from "../_common/utils/appUtils";
-import TogglePlay from "../_common/components/togglePlay";
 import cn from "classnames";
-import {RELATED_PLAYLIST, STATUS} from "../_common/constants/playlist";
-import TrackListComponent from "./components/trackListComponent";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
-import UserCard from "../_common/components/User/UserCard";
-import CommentList from "./components/commentListComponent";
+
+import {fetchTrackIfNeeded, playTrack, toggleLike, fetchMore} from "../_common/actions";
+import {getImageUrl, formatDescription, isLiked} from "../_common/utils/soundcloudUtils";
+import {abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../_common/utils/";
+
+import {IMAGE_SIZES} from "../_common/constants/Soundcloud";
+import {RELATED_PLAYLIST, STATUS} from "../_common/constants/playlist";
 import {OBJECT_TYPES} from "../_common/constants/global";
+
+import Spinner from "../_common/components/spinnerComponent";
+import TogglePlay from "../_common/components/togglePlay";
+import TrackListComponent from "./components/trackListComponent";
+import UserCard from "../_common/components/UserCardComponent";
+import CommentList from "./components/commentListComponent";
 import InfinityScroll from "../_common/components/InfiniteScroll";
 import FallbackImage from "../_common/components/FallbackImageComponent";
 
@@ -267,10 +269,10 @@ class songContainer extends Component {
                                     <Row>
                                         <Col xs="12" className="col-lg user_card_wrap trackMain">
                                             <UserCard
-                                              user={user}
-                                              dispatch={dispatch}
-                                              followings={followings}
-                                              offline={app.offline} />
+                                                user={user}
+                                                dispatch={dispatch}
+                                                followings={followings}
+                                                offline={app.offline}/>
                                         </Col>
                                         <Col xs="12" className="trackMain col-lg">
 

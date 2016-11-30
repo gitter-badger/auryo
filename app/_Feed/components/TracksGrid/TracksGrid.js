@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import TrackGridItem from "./TrackGridItem";
 import {fetchMore, playTrack} from "../../../_common/actions";
-import Spinner from "../../../_common/components/Spinner";
+import Spinner from "../../../_common/components/spinnerComponent";
 import ReactList from "react-list";
 
 class TracksGrid extends Component {
@@ -76,7 +76,7 @@ class TracksGrid extends Component {
         return (
             <div className="songs">
                 <ReactList
-                    type="uniform"
+                    type="simple"
                     length={items.length}
                     itemsRenderer={this.renderWrapper}
                     itemRenderer={this.renderItem}

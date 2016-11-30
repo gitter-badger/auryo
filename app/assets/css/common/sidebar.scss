@@ -2,8 +2,8 @@
 
 #sidebar {
   width: 230px;
-  position: fixed;
-  top: 54px;
+  position: absolute;
+  top: 0;
   bottom: 0;
   left: 0;
   z-index: 9;
@@ -65,7 +65,7 @@
     transition: 0.5s all;
   }
 
-  main {
+  .content {
     margin-left: 50px !important;
   }
 }

@@ -44,7 +44,7 @@ class InfiniteScroll extends Component {
         const {playing} = this.props;
 
         return (
-            <div ref="scroll" className={cn("scroll", {playing: playing})}>
+            <div ref="scroll" className={cn("content scroll", {playing: playing})}>
                 {this.props.children}
             </div>
         )

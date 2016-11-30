@@ -6,7 +6,7 @@ import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
 import {OBJECT_TYPES} from "../constants/global";
 import {STREAM_CHECK_INTERVAL} from "../constants/config";
 import {isFetching, setObject, setNewObjects} from "./objectActions";
-import {addQueuedFunction} from "./offlineActions";
+import {addQueuedFunction} from "./app/offlineActions";
 import _ from "lodash";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
@@ -23,7 +23,7 @@ export function fetchLikes() {
     return dispatch => {
         dispatch(isFetching("LIKES", obj_type));
 
-        fetch(SC.getLikesUrl())
+        return fetch(SC.getLikesUrl())
             .then((response) => response.json())
             .then(json => { // Todo filter on non-streamable or not?
                 const n = normalize(json, arrayOf(trackSchema));
@@ -69,7 +69,7 @@ function setLikes(result) {
 export function fetchFeed() {
     return dispatch => {
         dispatch(initFeedUpdater());
-        dispatch(fetchPlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
+        return dispatch(fetchPlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
     };
 }
 // TODO Generalize playlist
@@ -188,8 +188,8 @@ function initFeedUpdater() {
  * @returns {function(*)}
  */
 export function fetchPlaylists() {
-    return dispatch =>
-        fetch(SC.getPlaylistUrl())
+    return dispatch => {
+        return fetch(SC.getPlaylistUrl())
             .then(response => response.json())
             .then(json => {
 
@@ -214,6 +214,8 @@ export function fetchPlaylists() {
             .catch(err => {
                 dispatch(addQueuedFunction(fetchPlaylists,arguments));
             });
+    }
+
 }
 
 /**

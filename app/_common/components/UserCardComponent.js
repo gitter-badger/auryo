@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from "react";
-import {IMAGE_SIZES} from "../../constants/Soundcloud";
-import {getImageUrl, isFollowing} from "../../utils/soundcloudUtils";
-import {toggleFollowing} from "../../actions";
 import cn from "classnames";
-import FallbackImage from "../../../_common/components/FallbackImageComponent";
+
+import {getImageUrl, isFollowing} from "../utils/soundcloudUtils";
+import {toggleFollowing} from "../actions";
+
+import {IMAGE_SIZES} from "../constants/Soundcloud";
+
+import FallbackImage from "./FallbackImageComponent";
 
 export default class UserCard extends Component {
     constructor(props) {

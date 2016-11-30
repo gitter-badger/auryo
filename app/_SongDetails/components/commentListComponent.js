@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from "react";
-import {getImageUrl, formatDescription} from "../../_common/utils/soundcloudUtils";
-import {IMAGE_SIZES} from "../../_common/constants/Soundcloud";
 import {Row, Col} from "reactstrap";
 import moment from "moment";
-import Spinner from "../../_common/components/Spinner";
+
+import {getImageUrl, formatDescription} from "../../_common/utils/soundcloudUtils";
+
+import {IMAGE_SIZES} from "../../_common/constants/Soundcloud";
+
+import Spinner from "../../_common/components/spinnerComponent";
 
 
 class CommentList extends Component {

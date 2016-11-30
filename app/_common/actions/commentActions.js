@@ -3,7 +3,7 @@ import {isFetching, setObject} from "./objectActions";
 import {OBJECT_TYPES} from "../constants/global";
 import {normalize, arrayOf} from "normalizr";
 import {commentSchema} from "../schemas/";
-import {addQueuedFunction} from "./offlineActions";
+import {addQueuedFunction} from "./app/offlineActions";
 
 const obj_type = OBJECT_TYPES.COMMENTS;
 
@@ -20,7 +20,12 @@ export function fetchComments(trackID) {
 }
 
 export function updateComments(nextUrl, object_id) {
-    return dispatch => {
+    return (dispatch,getState) => {
+        const {objects} = getState();
+        const comments = objects[obj_type];
+
+        if(comments[object_id] && comments[object_id].isFetching) return;
+
         dispatch(isFetching(object_id, obj_type));
         fetch(nextUrl)
             .then(response => response.json())

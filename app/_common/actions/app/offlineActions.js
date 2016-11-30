@@ -1,7 +1,14 @@
-import * as actionTypes from "../constants/actionTypes";
+import * as actionTypes from "../../constants/actionTypes";
 
 let interval;
 
+/**
+ * Add a function from a failed request to the queue
+ *
+ * @param func
+ * @param args
+ * @returns {function(*, *)}
+ */
 export function addQueuedFunction(func, args) {
     return (dispatch, getState) => {
         const {app} = getState();
@@ -19,7 +26,13 @@ export function addQueuedFunction(func, args) {
     }
 }
 
-function toggleOffline(offline) {
+/**
+ * Toggle the site on/offline
+ *
+ * @param offline
+ * @returns {{type, time: number, offline: *}}
+ */
+export function toggleOffline(offline) {
     return {
         type: actionTypes.APP_TOGGLE_OFFLINE,
         time: new Date().getTime(),
@@ -27,6 +40,13 @@ function toggleOffline(offline) {
     }
 }
 
+/**
+ * Add a function to the queue
+ *
+ * @param func
+ * @param key
+ * @returns {{type, func: *, key: *}}
+ */
 function addFunction(func, key) {
     return {
         type: actionTypes.APP_PUSH_OFFLINE_QUEUE,
@@ -35,6 +55,12 @@ function addFunction(func, key) {
     }
 }
 
+/**
+ * Remove a function from the queue
+ *
+ * @param key
+ * @returns {{type, key: *}}
+ */
 function removeFunction(key) {
     return {
         type: actionTypes.APP_POP_OFFLINE_QUEUE,
@@ -42,12 +68,22 @@ function removeFunction(key) {
     }
 }
 
+/**
+ * Clear the queue
+ *
+ * @returns {{type}}
+ */
 function clearFunctions() {
     return {
         type: actionTypes.APP_CLEAR_OFFLINE_QUEUE
     }
 }
 
+/**
+ * Initialize the check interval for when the site is offline
+ *
+ * @returns {function(*)}
+ */
 function initCheckOnline() {
     return dispatch => {
 
@@ -55,19 +91,21 @@ function initCheckOnline() {
 
         interval = setInterval(() => {
 
-            console.log("run")
             dispatch(checkOnline())
 
         }, 5000);
     }
 }
 
+/**
+ * Check if we can reach google.com, if so dispatch & remove the queued functions
+ *
+ * @returns {function(*=, *)}
+ */
 function checkOnline() {
     return (dispatch, getState) => {
         const {app} = getState();
 
-        console.log(app.queued_items);
-        console.log(app.queued_functions);
         if (!app.offline && app.queued_items.length == 0) {
             clearInterval(interval);
             interval = null;
@@ -94,6 +132,12 @@ function checkOnline() {
     }
 }
 
+/**
+ * Ping google.com to check if online. If not online, try and start the interval.
+ *
+ * @param func
+ * @returns {function(*)}
+ */
 export function isOnline(func) {
     return (dispatch) => {
         fetch("http://google.com")
@@ -110,7 +154,6 @@ export function isOnline(func) {
                 if (!interval) {
                     dispatch(initCheckOnline());
                 }
-                throw err;
             })
     }
 }

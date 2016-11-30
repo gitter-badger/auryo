@@ -1,7 +1,7 @@
-// @flow
 import React, {Component, PropTypes} from "react";
-import {logout} from "../../../actions";
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap";
+
+import {logout} from "../../../../actions";
 
 
 class User extends Component {

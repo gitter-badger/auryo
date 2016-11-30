@@ -1,9 +1,12 @@
 import React, {Component, PropTypes} from "react";
-import TrackListItem from "./trackListItemComponent";
-import {getPlayingTrackId} from "../../_Player/playerUtils";
-import {playTrack} from "../../_common/actions/index";
+
+import {getPlayingTrackId} from "../../_common/utils";
+import {playTrack} from "../../_common/actions";
 import {isLiked} from "../../_common/utils/soundcloudUtils";
+
 import {STATUS} from "../../_common/constants/playlist";
+
+import TrackListItem from "./trackListItemComponent";
 
 
 class trackList extends Component {

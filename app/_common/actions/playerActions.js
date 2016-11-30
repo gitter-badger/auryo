@@ -89,6 +89,7 @@ export function changeTrack(change_type) {
 
         const {currentSong, queuedPlaylists} = player;
         const currentPlaylist = queuedPlaylists[queuedPlaylists.length - 1];
+        const currentLength = playlists[currentPlaylist].items.length;
 
         let index = currentSong;
 
@@ -100,18 +101,22 @@ export function changeTrack(change_type) {
                 index -= 1;
                 break;
             case CHANGE_TYPES.SHUFFLE:
-                index = Math.floor((Math.random() * playlists[currentPlaylist].items.length - 1));
+                index = Math.floor((Math.random() * (currentLength - 1)));
                 break;
 
         }
 
-        if (index < 0) return null;
+        if (index < 0) {
+            index = 0;
+        } else if(index > (currentLength -1)) {
+            index = currentSong;
+        }
 
-        if (index + 5 > playlists[currentPlaylist].items.length) {
+        if (index + 5 > currentLength) {
             dispatch(fetchMore(currentPlaylist, obj_type));
         }
 
-        return dispatch(setPlayingTrack(index));
+        dispatch(setPlayingTrack(index));
     }
 }
 

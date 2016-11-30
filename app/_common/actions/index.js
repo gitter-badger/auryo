@@ -2,6 +2,7 @@ import {initUser, logout, toggleFollowing} from "./userActions";
 import {fetchMore} from "./objectActions";
 import {playTrack, toggleStatus, changeTrack, setCurrentTime} from "./playerActions";
 import {fetchTrackIfNeeded, toggleLike, updateTrackImage} from "./trackActions";
+import {setLoaded,toggleOffline,isOnline,addQueuedFunction} from "./app"
 
 
 export {
@@ -15,5 +16,9 @@ export {
     fetchTrackIfNeeded,
     toggleLike,
     toggleFollowing,
-    updateTrackImage
+    updateTrackImage,
+    setLoaded,
+    toggleOffline,
+    isOnline,
+    addQueuedFunction
 };

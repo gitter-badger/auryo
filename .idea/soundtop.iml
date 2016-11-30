@@ -15,5 +15,6 @@
     <orderEntry type="library" name="react-redux-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="Soundtop node_modules" level="project" />
     <orderEntry type="library" name="redux-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="redux-thunk-DefinitelyTyped" level="application" />
   </component>
 </module>
