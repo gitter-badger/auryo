@@ -4,8 +4,9 @@ import * as actionTypes from "../constants/actionTypes";
 import {userSchema} from "../schemas/";
 import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
-import {addQueuedFunction} from "./offlineActions";
+import {setLoaded} from "./";
 import * as _ from "lodash";
+
 
 /**
  * Get token from config and initialize Soundcloud class
@@ -32,13 +33,27 @@ export function logout() {
 }
 
 function fetchUser() {
-    return dispatch => {
-        dispatch(fetchMe());
-        dispatch(fetchFollowings());
+    return (dispatch,getState) => {
+        const data = Promise.all([
+            dispatch(fetchMe()),
+            dispatch(fetchFollowings()),
 
-        dispatch(fetchLikes());
-        dispatch(fetchFeed());
-        dispatch(fetchPlaylists());
+            dispatch(fetchLikes()),
+            dispatch(fetchFeed()),
+            dispatch(fetchPlaylists())
+        ]);
+
+        data.then(() => {
+            const {app} = getState();
+            const {queued_items} = app;
+
+            if(queued_items.length > 0){
+                console.log("Not everything was loaded")
+            } else {
+                dispatch(setLoaded());
+                console.log("Everything was loaded")
+            }
+        })
     };
 }
 
@@ -50,13 +65,13 @@ function fetchUser() {
  */
 function fetchMe() {
     return dispatch => {
-        fetch(SC.getMeUrl())
+        return fetch(SC.getMeUrl())
             .then((response) => response.json())
             .then((json) => {
                 dispatch(setUser(json));
             })
             .catch(err => {
-                dispatch(addQueuedFunction(fetchMe,arguments))
+                dispatch(addQueuedFunction(fetchMe, arguments))
             });
     }
 }
@@ -80,8 +95,8 @@ function setUser(user) {
  * @returns {function(*)}
  */
 function fetchFollowings() {
-    return dispatch =>
-        fetch(SC.getFollowingsUrl())
+    return dispatch => {
+        return fetch(SC.getFollowingsUrl())
             .then(response => response.json())
             .then(json => {
                 const n = normalize(json.collection, arrayOf(userSchema));
@@ -93,8 +108,10 @@ function fetchFollowings() {
                 dispatch(setFollowings(n.entities, result));
             })
             .catch(err => {
-                dispatch(addQueuedFunction(fetchFollowings,arguments))
+                dispatch(addQueuedFunction(fetchFollowings, arguments))
             });
+    }
+
 }
 
 /**
@@ -135,7 +152,7 @@ function updateFollowing(userID, following) {
         fetch(SC.updateFollowingUrl(userID), {
             method: (following == 1) ? "PUT" : "DELETE"
         }).catch(err => {
-            dispatch(addQueuedFunction(updateFollowing.bind(null, userID, following),arguments))
+            dispatch(addQueuedFunction(updateFollowing.bind(null, userID, following), arguments))
         });
     }
 }

@@ -1,6 +1,7 @@
 import * as actionTypes from "../constants/actionTypes";
 
 const initialState = {
+    loaded: false,
     offline: false,
     last_checked: 0,
     queued_functions: {},
@@ -37,6 +38,11 @@ export default function entities(state = initialState, action) {
                 ...state,
                 offline: false,
                 queued_functions: {}
+            };
+        case actionTypes.APP_SET_LOADED:
+            return {
+                ...state,
+                loaded: true
             }
     }
 

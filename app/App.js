@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from "react";
-import PlayerContainer from "./_Player/playerContainer";
-import IsOffline from "./_common/components/Offline/offlineComponent";
-import SideBar from "./_common/components/Sidebar/sidebarComponent";
-import Header from "./_common/components/Header/Header";
-import * as actions from "./_common/actions";
 import {connect} from "react-redux";
+
+import PlayerContainer from "./_Player/playerContainer";
+import IsOffline from "./_common/components/offlineComponent";
+import SideBar from "./_common/components/main/Sidebar/sidebarComponent";
+import Header from "./_common/components/main/headerComponent";
+import Spinner from "./_common/components/spinnerComponent"
+
+import {toggleOffline, initUser} from "./_common/actions";
 
 class App extends Component {
     constructor(props) {
@@ -13,71 +16,50 @@ class App extends Component {
         this.renderMain = this.renderMain.bind(this);
         this.setOnlineStatus = this.setOnlineStatus.bind(this);
 
-        this.state = {
-            online: navigator.onLine
-        };
-
-        //window.addEventListener('online', this.setOnlineStatus);
-        //window.addEventListener('offline', this.setOnlineStatus);
+        window.addEventListener('online', this.setOnlineStatus);
+        window.addEventListener('offline', this.setOnlineStatus);
 
     }
 
     setOnlineStatus() {
+        const {dispatch} = this.props;
 
-        this.setState({
-            online: navigator.onLine
-        });
-
-        if (navigator.onLine == true) {
-            // TODO refetch everything
-        }
+        dispatch(toggleOffline(!navigator.onLine));
     }
 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch(actions.initUser());
+        dispatch(initUser());
     }
 
     renderMain() {
-        const {online} = this.state;
+        const {app} = this.props;
 
-        if (!online) {
+        if (app.offline) {
             return <IsOffline />;
         }
 
         return this.props.children;
     }
 
-    renderFooter() {
-        const {online} = this.state;
-
-        if (!online) {
-            return null;
-        }
-
-        return (
-            <footer className="navbar-fixed-bottom">
-                <PlayerContainer/>
-            </footer>
-        )
-    }
-
     render() {
-        const {me} = this.props;
-
+        const {me,app} = this.props;
 
         return (
             <div>
+                {
+                    !app.loaded?  <Spinner full={true} /> : null
+                }
                 <Header />
-                <SideBar me={me}/>
                 <main>
+                <SideBar me={me}/>
                     {
                         this.renderMain()
                     }
                 </main>
-                {
-                    this.renderFooter()
-                }
+                <footer className="navbar-fixed-bottom">
+                    <PlayerContainer/>
+                </footer>
             </div>
         );
     }
@@ -90,10 +72,11 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {user} = state;
+    const {user, app} = state;
     const {me} = user;
     return {
-        me
+        me,
+        app
     }
 }
 
