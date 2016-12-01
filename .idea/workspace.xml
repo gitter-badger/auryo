@@ -5,53 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="829f322d-7539-4241-91c0-fdb22ab7ad6b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/actions/app/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/actions/app/offlineActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/PageHeader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/UserCardComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/main/Sidebar/User/userComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/main/Sidebar/sidebarComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/main/headerComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/offlineComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/components/spinnerComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/utils/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/_common/utils/playerUtils.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_Player/playerUtils.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/actions/offlineActions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Header/Header.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Offline/offlineComponent.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Pageheader/PageHeader.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Sidebar/Navigation/navigationComponent.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Sidebar/User/userComponent.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Sidebar/sidebarComponent.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/Spinner/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/_common/components/User/UserCard.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/soundtop.iml" afterPath="$PROJECT_DIR$/.idea/soundtop.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/App.js" afterPath="$PROJECT_DIR$/app/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_Feed/components/TracksGrid/TracksGrid.js" afterPath="$PROJECT_DIR$/app/_Feed/components/TracksGrid/TracksGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_Feed/feedContainer.js" afterPath="$PROJECT_DIR$/app/_Feed/feedContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_Player/components/Player/playerComponent.js" afterPath="$PROJECT_DIR$/app/_Player/components/Player/playerComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_Player/playerContainer.js" afterPath="$PROJECT_DIR$/app/_Player/playerContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_SongDetails/components/commentListComponent.js" afterPath="$PROJECT_DIR$/app/_SongDetails/components/commentListComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_SongDetails/components/trackListComponent.js" afterPath="$PROJECT_DIR$/app/_SongDetails/components/trackListComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_SongDetails/songContainer.js" afterPath="$PROJECT_DIR$/app/_SongDetails/songContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/commentActions.js" afterPath="$PROJECT_DIR$/app/_common/actions/commentActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/index.js" afterPath="$PROJECT_DIR$/app/_common/actions/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/playerActions.js" afterPath="$PROJECT_DIR$/app/_common/actions/playerActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/playlistActions.js" afterPath="$PROJECT_DIR$/app/_common/actions/playlistActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/trackActions.js" afterPath="$PROJECT_DIR$/app/_common/actions/trackActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/actions/userActions.js" afterPath="$PROJECT_DIR$/app/_common/actions/userActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/components/Audio.js" afterPath="$PROJECT_DIR$/app/_common/components/Audio.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/components/FallbackImageComponent.js" afterPath="$PROJECT_DIR$/app/_common/components/FallbackImageComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/components/InfiniteScroll.js" afterPath="$PROJECT_DIR$/app/_common/components/InfiniteScroll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/constants/actionTypes.js" afterPath="$PROJECT_DIR$/app/_common/constants/actionTypes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/_common/reducers/appReducer.js" afterPath="$PROJECT_DIR$/app/_common/reducers/appReducer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/css/app.scss" afterPath="$PROJECT_DIR$/app/assets/css/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/css/common/sidebar.scss" afterPath="$PROJECT_DIR$/app/assets/css/common/sidebar.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/css/common/spinner.scss" afterPath="$PROJECT_DIR$/app/assets/css/common/spinner.scss" />
     </list>
     <ignored path="soundtop.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,8 +54,8 @@
       <file leaf-file-name="trackActions.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/_common/actions/trackActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="46" column="14" lean-forward="false" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+            <state relative-caret-position="666">
+              <caret line="45" column="61" lean-forward="true" selection-start-line="45" selection-start-column="61" selection-end-line="45" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -428,12 +383,12 @@
       <workItem from="1479325028443" duration="1088000" />
       <workItem from="1479326180091" duration="1952000" />
       <workItem from="1480539784445" duration="258000" />
-      <workItem from="1480540054728" duration="507000" />
+      <workItem from="1480540054728" duration="981000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="331797000" />
+    <option name="totallyTimeSpent" value="332271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
@@ -766,8 +721,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/_common/actions/trackActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="46" column="14" lean-forward="false" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+        <state relative-caret-position="666">
+          <caret line="45" column="61" lean-forward="true" selection-start-line="45" selection-start-column="61" selection-end-line="45" selection-end-column="61" />
           <folding />
         </state>
       </provider>

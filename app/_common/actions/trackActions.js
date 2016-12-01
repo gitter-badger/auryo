@@ -6,7 +6,7 @@ import {OBJECT_TYPES, PLACEHOLDER_IMAGE} from "../constants/global";
 import {setObject} from "./objectActions";
 import {RELATED_PLAYLIST} from "../constants/playlist";
 import {fetchComments} from "./commentActions";
-import {addQueuedFunction} from "./offlineActions";
+import {addQueuedFunction} from "./app/offlineActions";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
@@ -15,6 +15,7 @@ export function fetchTrackIfNeeded(trackID) {
         const {entities, objects} = getState();
         const {track_entities} = entities;
         const playlists = objects[obj_type] || {};
+        const comments = objects[OBJECT_TYPES.COMMENTS] || {};
         const current_playlist = String(trackID + RELATED_PLAYLIST);
 
         if (!(trackID in track_entities)) {
@@ -24,7 +25,9 @@ export function fetchTrackIfNeeded(trackID) {
                 dispatch(fetchRelated(trackID));
             }
 
-            if (!("comments" in track_entities[trackID])) {
+            const comment = comments[trackID] || {};
+
+            if (comments && !comment.isFetching && !comment.items) {
                 dispatch(fetchComments(trackID));
             }
         }
