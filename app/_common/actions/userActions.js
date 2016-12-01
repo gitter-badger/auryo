@@ -4,7 +4,7 @@ import * as actionTypes from "../constants/actionTypes";
 import {userSchema} from "../schemas/";
 import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
-import {setLoaded} from "./";
+import {setLoaded,addQueuedFunction} from "./";
 import * as _ from "lodash";
 
 

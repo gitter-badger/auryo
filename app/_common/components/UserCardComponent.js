@@ -31,7 +31,7 @@ export default class UserCard extends Component {
                 <div className="user_img">
                     <FallbackImage
                         src={getImageUrl(user.avatar_url, IMAGE_SIZES.MEDIUM)}
-                        track_id={null}
+                        track_id={user.id}
                         offline={offline}
                     />
                 </div>

@@ -8,7 +8,7 @@ import {PLAYLISTS} from "../_common/constants/playlist";
 import {OBJECT_TYPES} from "../_common/constants/global";
 
 import PageHeader from "../_common/components/PageHeader";
-import InfinityScroll from "../_common/components/InfiniteScroll";
+import InfinityScroll from "../_common/components/infinityScrollComponent";
 import TracksGrid from "./components/TracksGrid/TracksGrid";
 
 

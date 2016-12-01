@@ -16,7 +16,7 @@ import TogglePlay from "../_common/components/togglePlay";
 import TrackListComponent from "./components/trackListComponent";
 import UserCard from "../_common/components/UserCardComponent";
 import CommentList from "./components/commentListComponent";
-import InfinityScroll from "../_common/components/InfiniteScroll";
+import InfinityScroll from "../_common/components/infinityScrollComponent";
 import FallbackImage from "../_common/components/FallbackImageComponent";
 
 

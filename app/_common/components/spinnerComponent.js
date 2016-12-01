@@ -1,6 +1,8 @@
 import React, {PropTypes} from "react";
 import cn from "classnames"
 
+import "../../assets/css/common/spinner.scss"
+
 class Spinner extends React.Component {
     render() {
         const {full} = this.props;
