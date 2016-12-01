@@ -1,5 +1,5 @@
 import * as actionTypes from "../../constants/actionTypes";
-
+import {setLoaded} from "./index"
 let interval;
 
 /**
@@ -110,6 +110,9 @@ function checkOnline() {
             clearInterval(interval);
             interval = null;
             dispatch(clearFunctions);
+            if(!app.loaded){
+                dispatch(setLoaded());
+            }
         }
 
         const cur_time = (new Date()).getTime();
@@ -143,13 +146,13 @@ export function isOnline(func) {
         fetch("http://google.com")
             .then(res => {
                 dispatch(toggleOffline(false));
+            })
+            .catch(err => {
+                dispatch(toggleOffline(true));
 
                 if(func){
                     dispatch(func());
                 }
-            })
-            .catch(err => {
-                dispatch(toggleOffline(true));
 
                 if (!interval) {
                     dispatch(initCheckOnline());

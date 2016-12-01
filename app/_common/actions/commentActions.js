@@ -1,10 +1,9 @@
 import * as SC from "../utils/soundcloudUtils";
-import {isFetching, setObject} from "./objectActions";
+import {setFetching, setObject} from "./objectActions";
 import {OBJECT_TYPES} from "../constants/global";
 import {normalize, arrayOf} from "normalizr";
 import {commentSchema} from "../schemas/";
 import {addQueuedFunction} from "./app/offlineActions";
-
 const obj_type = OBJECT_TYPES.COMMENTS;
 
 /**
@@ -26,7 +25,7 @@ export function updateComments(nextUrl, object_id) {
 
         if(comments[object_id] && comments[object_id].isFetching) return;
 
-        dispatch(isFetching(object_id, obj_type));
+        dispatch(setFetching(object_id, obj_type,true));
         fetch(nextUrl)
             .then(response => response.json())
             .then(json => {
@@ -36,6 +35,7 @@ export function updateComments(nextUrl, object_id) {
                 dispatch(setObject(object_id, obj_type, n.entities, n.result, json.next_href));
             })
             .catch(err => {
+                dispatch(setFetching(object_id, obj_type,false));
                 dispatch(addQueuedFunction(updateComments.bind(null, nextUrl, object_id),arguments));
             });
     }

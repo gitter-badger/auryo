@@ -19,7 +19,7 @@ export function fetchMore(object_id, type) {
         if (canFetchMore(objectgroup, object_id)) {
             const nextUrl = objectgroup[object_id].nextUrl;
 
-            switch (type){
+            switch (type) {
                 case OBJECT_TYPES.PLAYLISTS:
                     return dispatch(fetchPlaylist(nextUrl, object_id));
                 case OBJECT_TYPES.COMMENTS:
@@ -50,13 +50,15 @@ function canFetchMore(object_group, object_id) {
  *
  * @param object_id
  * @param object_type
+ * @param fetching
  * @returns {{type, name: *}}
  */
-export function isFetching(object_id, object_type) {
+export function setFetching(object_id, object_type, fetching) {
     return {
         type: actionTypes.OBJECT_IS_FETCHING,
         object_type,
-        object_id
+        object_id,
+        fetching
     };
 }
 

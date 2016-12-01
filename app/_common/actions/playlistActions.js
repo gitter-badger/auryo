@@ -5,7 +5,7 @@ import {arrayOf, normalize} from "normalizr";
 import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
 import {OBJECT_TYPES} from "../constants/global";
 import {STREAM_CHECK_INTERVAL} from "../constants/config";
-import {isFetching, setObject, setNewObjects} from "./objectActions";
+import {setFetching, setObject, setNewObjects} from "./objectActions";
 import {addQueuedFunction} from "./app/offlineActions";
 import _ from "lodash";
 
@@ -20,8 +20,10 @@ let updaterInterval;
  * @returns {function(*)}
  */
 export function fetchLikes() {
+    const playlist = PLAYLISTS.LIKES;
+
     return dispatch => {
-        dispatch(isFetching("LIKES", obj_type));
+        dispatch(setFetching(playlist, obj_type,true));
 
         return fetch(SC.getLikesUrl())
             .then((response) => response.json())
@@ -42,6 +44,7 @@ export function fetchLikes() {
                 ));
             })
             .catch(err =>{
+                dispatch(setFetching(playlist, obj_type,false));
                 dispatch(addQueuedFunction(fetchLikes,arguments));
             })
     }
@@ -84,7 +87,7 @@ export function fetchFeed() {
 export function fetchPlaylist(url, name) {
     return dispatch => {
 
-        dispatch(isFetching(name, obj_type));
+        dispatch(setFetching(name, obj_type,true));
 
         return fetch(url)
             .then(response => response.json())
@@ -121,6 +124,7 @@ export function fetchPlaylist(url, name) {
 
             })
             .catch(err => {
+                dispatch(setFetching(name, obj_type,false));
                 dispatch(addQueuedFunction(fetchPlaylist.bind(null,url,name),arguments));
             });
     }
@@ -138,11 +142,13 @@ function updateFeed(playlist, url) {
         const {user, objects} = getState();
         const playlists = objects[obj_type] || {};
 
-        const feed = playlists[PLAYLISTS.STREAM].items
+        const feed = playlists[playlist].items
             .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
 
         const newSongs = user.newFeedItems
             .reduce((obj, songId) => Object.assign({}, obj, {[songId]: 1}), {});
+
+        dispatch(setFetching(playlist, obj_type,true));
 
         return fetch(url)
             .then(response => response.json())
@@ -154,6 +160,7 @@ function updateFeed(playlist, url) {
                 dispatch(setNewObjects(playlist, obj_type, json.future_href, n.entities, n.result));
             })
             .catch(err => {
+                dispatch(setFetching(playlist, obj_type,false));
                 dispatch(addQueuedFunction(updateFeed.bind(null,playlist,url),arguments));
             });
     };
