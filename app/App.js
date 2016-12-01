@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 
-import PlayerContainer from "./_Player/playerContainer";
-import IsOffline from "./_common/components/offlineComponent";
-import SideBar from "./_common/components/main/Sidebar/sidebarComponent";
-import Header from "./_common/components/main/headerComponent";
-import Spinner from "./_common/components/spinnerComponent"
+import PlayerContainer from "./player/playerContainer";
+import IsOffline from "./_shared/components/offlineComponent";
+import SideBar from "./_shared/components/main/Sidebar/sidebarComponent";
+import Header from "./_shared/components/main/headerComponent";
+import Spinner from "./_shared/components/spinnerComponent"
 
-import {toggleOffline, initUser} from "./_common/actions";
+import {toggleOffline, initUser} from "./_shared/actions";
 
 class App extends Component {
     constructor(props) {
@@ -77,8 +77,8 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const {user, app} = state;
-    const {me} = user;
+    const {auth, app} = state;
+    const {me} = auth;
     return {
         me,
         app
