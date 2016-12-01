@@ -15,7 +15,7 @@ function objects(state = initialObjectsState, action) {
         case actionTypes.OBJECT_IS_FETCHING:
             return {
                 ...state,
-                isFetching: true,
+                isFetching: action.fetching,
                 nextUrl: null
             };
         case actionTypes.OBJECT_SET:

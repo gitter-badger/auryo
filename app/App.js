@@ -35,8 +35,8 @@ class App extends Component {
     renderMain() {
         const {app} = this.props;
 
-        if (app.offline) {
-            return <IsOffline />;
+        if (!app.loaded && app.offline) {
+            return <IsOffline full={true} />;
         }
 
         return this.props.children;
@@ -48,14 +48,19 @@ class App extends Component {
         return (
             <div>
                 {
-                    !app.loaded?  <Spinner full={true} /> : null
+                    !app.loaded && !app.offline?  <Spinner full={true} /> : null
                 }
                 <Header />
                 <main>
                 <SideBar me={me}/>
-                    {
-                        this.renderMain()
-                    }
+                    <section className="content">
+                        {
+                            app.loaded && app.offline?  <IsOffline full={false} /> : null
+                        }
+                        {
+                            this.renderMain()
+                        }
+                    </section>
                 </main>
                 <footer className="navbar-fixed-bottom">
                     <PlayerContainer/>
