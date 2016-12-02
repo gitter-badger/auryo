@@ -18,6 +18,7 @@ $enable-flex: true;
 @import "./common/header";
 @import "./common/user_card";
 @import "./songDetails/commentList";
+@import "./Artist/artistpage.scss";
 
 body {
   font-family: 'Roboto', sans-serif;
