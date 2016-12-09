@@ -81,7 +81,9 @@ class Audio extends Component {
             const time = this.audio.currentTime;
             this.audio.load();
             this.audio.currentTime = time;
-            this.audio.play();
+            if(nextProps.playStatus == status.PLAYING){
+                this.audio.play();
+            }
         }
 
 
