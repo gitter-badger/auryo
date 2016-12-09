@@ -55,7 +55,8 @@ function fetchUserTracks(artistID) {
         fetch(SC.getUserTracksUrl(artistID))
             .then(response => response.json())
             .then(json => {
-                const collection = json.collection;
+                const collection = json.collection
+                    .filter(track => (track.kind === 'track') && track.streamable);
 
                 const n = normalize(collection, arrayOf(trackSchema));
 
