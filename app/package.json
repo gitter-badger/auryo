@@ -10,6 +10,7 @@
     "url": "https://github.com/Superjo149"
   },
   "dependencies": {
+    "@exponent/electron-cookies": "^2.0.0",
     "back-forward-history": "^1.1.5",
     "bootstrap": "^4.0.0-alpha.5",
     "classnames": "^2.2.5",
@@ -29,6 +30,7 @@
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-addons-transition-group": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-ga": "^2.1.2",
     "react-lazy": "^0.1.0",
     "react-list": "^0.8.0",
     "react-redux": "^4.4.5",
