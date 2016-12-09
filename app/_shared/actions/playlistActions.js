@@ -93,34 +93,46 @@ export function fetchPlaylist(url, name) {
             .then(response => response.json())
             .then(json => {
 
-                const collection = json.collection //Todo: Also show playlists in feed?
-                    .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
-                    .map(info => {
-                        info.info = {};
+                if(name == PLAYLISTS.STREAM){
 
-                        info.info.id = info.track.id;
-                        info.info.from_user = info.user;
-                        info.info.activity_type = info.type;
+                    const collection = json.collection //Todo: Also show playlists in feed?
+                        .filter(info => (info.track && info.track.kind === 'track') && info.track.streamable)
+                        .map(info => {
+                            info.info = {};
 
-                        return info;
-                    });
+                            info.info.id = info.track.id;
+                            info.info.from_user = info.user;
+                            info.info.activity_type = info.type;
 
-                const t = collection.map(info => info.track);
-                const i = collection.map(info => info.info);
+                            return info;
+                        });
 
-                const tracks = normalize(t, arrayOf(trackSchema));
+                    const t = collection.map(info => info.track);
+                    const i = collection.map(info => info.info);
 
-                const info = normalize(_.uniqBy(i, 'id'), arrayOf(trackInfoSchema));
+                    const tracks = normalize(t, arrayOf(trackSchema));
 
-                function onlyUnique(value, index, self) {
-                    return self.indexOf(value) === index;
+                    const info = normalize(_.uniqBy(i, 'id'), arrayOf(trackInfoSchema));
+
+                    function onlyUnique(value, index, self) {
+                        return self.indexOf(value) === index;
+                    }
+
+                    dispatch(setObject(name, obj_type, {
+                        track_entities: tracks.entities.track_entities,
+                        feedInfo_entities: info.entities.feedInfo_entities,
+                        user_entities: _.assign({}, tracks.entities.user_entities, info.entities.user_entities),
+                    }, info.result.filter(onlyUnique), json.next_href, json.future_href));
+
+                } else {
+                    //Todo: Also show playlists in feed?
+                    const collection = json.collection
+                        .filter(track => (track.kind === 'track') && track.streamable);
+
+                    const n = normalize(collection, arrayOf(trackSchema));
+
+                    dispatch(setObject(name, obj_type, n.entities, n.result, json.next_href, json.future_href));
                 }
-
-                dispatch(setObject(name, obj_type, {
-                    track_entities: tracks.entities.track_entities,
-                    feedInfo_entities: info.entities.feedInfo_entities,
-                    user_entities: _.assign({}, tracks.entities.user_entities, info.entities.user_entities),
-                }, info.result.filter(onlyUnique), json.next_href, json.future_href));
 
             })
             .catch(err => {
