@@ -41,10 +41,10 @@ class InfiniteScroll extends Component {
     }
 
     render() {
-        const {playing} = this.props;
+        const {playing,className} = this.props;
 
         return (
-            <div ref="scroll" className={cn("scroll", {playing: playing})}>
+            <div ref="scroll" className={cn("scroll",className, {playing: playing})}>
                 {this.props.children}
             </div>
         )
@@ -55,7 +55,8 @@ InfiniteScroll.propTypes = {
     dispatch: PropTypes.func,
     scrollFunc: PropTypes.func.isRequired,
     playing: PropTypes.bool.isRequired,
-    fastScrolling: PropTypes.bool
+    fastScrolling: PropTypes.bool,
+    className: PropTypes.string
 };
 
 export default InfiniteScroll;

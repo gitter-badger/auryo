@@ -1,0 +1,60 @@
+@import "../vars";
+
+.artistPage {
+  .trackDetails .imageWrapper {
+    max-width: 220px;
+  }
+}
+
+.artistSide {
+  background: #F5F5F5;
+  padding: 30px 50px;
+  font-size: .9rem;
+}
+
+.artistContainer {
+  .userHeader {
+    align-items: center;
+    padding: 20px;
+  }
+  .userInfo {
+    padding: 10px;
+    .userName {
+      font-size: 1.8rem;
+    }
+  }
+
+  .userImage {
+    position: relative;
+  }
+  .userImage:after {
+    /*content:'';
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, 1));*/
+  }
+}
+
+.artistStats {
+  list-style-type: none;
+  padding: 0 0 20px 0;
+  color: #fff;
+
+  li {
+    padding: 0 10px;
+  }
+
+  span {
+    display: block;
+    &:first-child {
+      font-size: 1.5rem;
+    }
+    &:last-child {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+  }
+}
