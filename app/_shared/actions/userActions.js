@@ -6,6 +6,7 @@ import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
 import {setLoaded,addQueuedFunction} from "./";
 import * as _ from "lodash";
+import ReactGA from "react-ga"
 
 
 /**
@@ -69,6 +70,11 @@ function fetchMe() {
             .then((response) => response.json())
             .then((json) => {
                 dispatch(setUser(json));
+
+
+                ReactGA.set({
+                    userId: json.id
+                });
             })
             .catch(err => {
                 dispatch(addQueuedFunction(fetchMe, arguments))
