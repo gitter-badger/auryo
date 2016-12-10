@@ -26,18 +26,18 @@ HistoryTracker.listenTo(history);
 let ElectronCookies = require('@exponent/electron-cookies');
 ElectronCookies.enable({origin: 'https://example.com'});
 
-ReactGA.initialize(GOOGLE_GA, {
-    debug: true
-});
+if (process.env.NODE_ENV === 'production') {
+    ReactGA.initialize(GOOGLE_GA);
 
-ReactGA.set({
-    location: 'https://example.com/',
-    checkProtocolTask: null
-});
+    ReactGA.set({
+        location: 'https://example.com/',
+        checkProtocolTask: null
+    });
 
-history.listen(function (location) {
-    ReactGA.pageview(location.pathname)
-});
+    history.listen(function (location) {
+        ReactGA.pageview(location.pathname)
+    });
+}
 
 render(
     <Provider store={store}>

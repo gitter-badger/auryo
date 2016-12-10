@@ -1,12 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.3.0] -
+## [1.3.0] - 2016-12-09
 ### Added 
 - user card to song details page
 - ability to (un)follow other users
 - list of comments
-- artist details page
+- basic artist details page
 
 ### Changed
 - replaced react-list with npm package

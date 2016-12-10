@@ -54,6 +54,7 @@ export default validate(merge(baseConfig, {
     },
 
     externals: [
+        "@exponent/electron-cookies",
         "back-forward-history",
         "bootstrap",
         "classnames",
@@ -73,6 +74,7 @@ export default validate(merge(baseConfig, {
         "react-addons-pure-render-mixin",
         "react-addons-transition-group",
         "react-dom",
+        "react-ga",
         "react-lazy",
         "react-list",
         "react-redux",
@@ -82,6 +84,7 @@ export default validate(merge(baseConfig, {
         "redux",
         "redux-logger",
         "redux-thunk",
+        "sass-resources-loader",
         "source-map-support"
     ]
 }));

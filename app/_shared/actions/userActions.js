@@ -4,7 +4,7 @@ import * as actionTypes from "../constants/actionTypes";
 import {userSchema} from "../schemas/";
 import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
-import {setLoaded,addQueuedFunction} from "./";
+import {setLoaded, addQueuedFunction} from "./";
 import * as _ from "lodash";
 import ReactGA from "react-ga"
 
@@ -34,7 +34,7 @@ export function logout() {
 }
 
 function fetchUser() {
-    return (dispatch,getState) => {
+    return (dispatch, getState) => {
         const data = Promise.all([
             dispatch(fetchMe()),
             dispatch(fetchFollowings()),
@@ -48,7 +48,7 @@ function fetchUser() {
             const {app} = getState();
             const {queued_items} = app;
 
-            if(queued_items.length > 0){
+            if (queued_items.length > 0) {
                 console.log("Not everything was loaded")
             } else {
                 dispatch(setLoaded());
@@ -71,10 +71,11 @@ function fetchMe() {
             .then((json) => {
                 dispatch(setUser(json));
 
-
-                ReactGA.set({
-                    userId: json.id
-                });
+                if (process.env.NODE_ENV === 'production') {
+                    ReactGA.set({
+                        userId: json.id
+                    });
+                }
             })
             .catch(err => {
                 dispatch(addQueuedFunction(fetchMe, arguments))
