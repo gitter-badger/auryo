@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {close, maximize, minimize} from "../../actions/windowActions";
+import {close, maximize, minimize} from "../../actions/app/windowActions";
 import HistoryTracker from "back-forward-history";
 
 

@@ -5,6 +5,7 @@ import entities from "./entitiesReducer";
 import player from "../../player/reducers/playerReducer";
 import objects from "./objectReducer";
 import app from "./appReducer";
+import {reducer as notifications} from 'react-notification-system-redux';
 
 export default combineReducers({
   auth,
@@ -12,5 +13,6 @@ export default combineReducers({
   player,
   objects,
   app,
+  notifications,
   routing
 });

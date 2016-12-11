@@ -3,6 +3,10 @@ import * as actionTypes from "../constants/actionTypes";
 const initialState = {
     loaded: false,
     offline: false,
+    update: {
+        available: false,
+        version: null
+    },
     last_checked: 0,
     queued_functions: {},
     queued_items: []
@@ -43,6 +47,15 @@ export default function entities(state = initialState, action) {
             return {
                 ...state,
                 loaded: true
+            };
+        case actionTypes.APP_SET_UPDATE_AVAILABLE:
+            return {
+                ...state,
+                update: {
+                    ...state.update,
+                    available: true,
+                    version: action.version
+                }
             }
     }
 

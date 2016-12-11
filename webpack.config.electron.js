@@ -86,6 +86,8 @@ export default validate(merge(baseConfig, {
         "redux-thunk",
         "sass-resources-loader",
         "source-map-support",
-        "electron-auto-updater"
+        "electron-auto-updater",
+        "react-notification-system",
+        "react-notification-system-redux"
     ]
 }));

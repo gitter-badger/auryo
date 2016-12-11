@@ -18,18 +18,19 @@
     "postinstall": "concurrently \"install-app-deps\" \"node node_modules/fbjs-scripts/node/check-dev-engines.js package.json\"",
     "dev": "npm run hot-server -- --start-hot",
     "package": "npm run build && build --publish never",
-    "package-win": "npm run build && build --win --x64",
+    "package-win": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build --win --x64 --publish always",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "release": "npm run build && GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb build -wl --publish always",
+    "release": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build -wl --publish always",
     "cleanup": "mop -v"
   },
   "build": {
     "appId": "be.sneljo.auryo",
-    "copyright":"Copyright © 2016 Jonas Snellinckx",
     "category": "public.app-category.music",
     "homepage": "https://github.com/Superjo149/auryo",
-    "publish": ["github"],
+    "publish": [
+      "github"
+    ],
     "repo": "Superjo149/auryo",
     "dmg": {
       "contents": [
@@ -145,7 +146,8 @@
     "webpack-merge": "^0.15.0",
     "webpack-validator": "^2.2.9"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devEngines": {
     "node": ">=6.x",
     "npm": ">=3.x"
