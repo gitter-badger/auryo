@@ -5,6 +5,8 @@ const settings = require('electron-settings');
 const url = require('url');
 const querystring = require('querystring');
 
+import AppUpdater from "./updater"
+
 let menu;
 let loginWindow = null;
 let mainWindow = null;
@@ -114,6 +116,8 @@ function init() {
     mainWindow = new BrowserWindow(options);
     mainWindow.maximize();
     mainWindow.setMenu(null);
+
+    new AppUpdater(mainWindow);
 
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.show();

@@ -85,6 +85,7 @@ export default validate(merge(baseConfig, {
         "redux-logger",
         "redux-thunk",
         "sass-resources-loader",
-        "source-map-support"
+        "source-map-support",
+        "electron-auto-updater"
     ]
 }));
