@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cloud_download:before {
+  content: "\e2c0";
+}
 .icon-error_outline:before {
   content: "\e001";
 }
