@@ -21,7 +21,7 @@
     "package-win": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build --win --x64 --publish always",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "release": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build -wl --publish always",
+    "release": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build -wl --ia32 --x64 --publish always ",
     "cleanup": "mop -v"
   },
   "build": {
@@ -106,7 +106,7 @@
     "css-loader": "^0.25.0",
     "devtron": "^1.4.0",
     "electron": "^1.4.4",
-    "electron-builder": "^7.15.2",
+    "electron-builder": "^10.6.1",
     "electron-devtools-installer": "^2.0.1",
     "electron-settings": "^2.2.2",
     "enzyme": "^2.5.1",

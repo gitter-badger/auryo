@@ -1,0 +1,208 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "../vars";
+
+$width: 340px;
+
+@mixin dismiss-hover($color) {
+
+  .notification-dismiss:hover {
+    background: lighten($color, 15%);
+  }
+}
+@mixin btn-hover($color) {
+
+  outline: none;
+  border: 0;
+  padding: 4px 10px;
+  background: $color;
+  margin: 0 2px;
+  color: #fff !important;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  &:hover {
+    background: darken($color, 5%) !important;
+  }
+}
+
+.notifications-wrapper {
+
+  .notification-action-button {
+    @include btn-hover($accent);
+  }
+
+  .notifications {
+
+    position: fixed;
+    width: $width;
+    padding: 0 10px 10px 10px;
+    z-index: 9998;
+    box-sizing: border-box;
+    height: auto;
+    margin-top: 54px;
+    margin-right: 10px;
+    font-size: 14px;
+
+    &-tl {
+      @extend .notifications;
+
+      top: 0;
+      bottom: auto;
+      left: 0;
+      right: auto;
+    }
+    &-tr {
+      @extend .notifications;
+      top: 0;
+      bottom: auto;
+      left: auto;
+      right: 0
+    }
+    &-tc {
+      @extend .notifications;
+      top: 0;
+      bottom: auto;
+      left: 50%;
+      margin: 0 auto 0 - ($width / 2);
+    }
+
+    &-bl {
+      @extend .notifications;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: auto
+    }
+
+    &-br {
+      @extend .notifications;
+      top: auto;
+      bottom: 0;
+      left: auto;
+      right: 0
+    }
+
+    &-bc {
+      @extend .notifications;
+      top: auto;
+      bottom: 0;
+      left: 50%;
+      margin: 0 auto 0 -($width / 2);
+    }
+  }
+
+  .notification {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 10px 0 0;
+    padding: 10px;
+    display: block;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: 0.3s ease-in-out transform, 0.3s ease-in-out opacity;
+    transform: translate3d(0, 0, 0);
+
+    &.notification {
+
+      border-left: 4px solid red;
+      background: #fff;
+      color: #41555d;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.03), 0 6px 50px rgba(0, 0, 0, 0.13);
+
+      &-hidden {
+        opacity: 0
+      }
+      &-visible {
+        opacity: 1
+      }
+
+      &-info {
+        @extend .notification;
+        border-color: $accent;
+        @include dismiss-hover($accent);
+
+        .notification-action-button {
+          @include btn-hover($accent);
+        }
+      }
+      &-success {
+        @extend .notification;
+        border-color: $brand-success;
+        @include dismiss-hover($brand-success);
+
+        .notification-action-button {
+          @include btn-hover($brand-success);
+        }
+      }
+      &-warning {
+        @extend .notification;
+        border-color: $brand-warning;
+        @include dismiss-hover($brand-warning);
+
+        .notification-action-button {
+          @include btn-hover($brand-warning);
+        }
+      }
+      &-error {
+        @extend .notification;
+        border-color: $brand-danger;
+        @include dismiss-hover($brand-danger);
+
+        .notification-action-button {
+          @include btn-hover($brand-danger);
+        }
+      }
+    }
+
+    .notification {
+      &-title {
+        font-size: 16px;
+        margin: 0 0 8px 0;
+        padding: 0;
+        font-weight: 500;
+        font-family: "Roboto";
+      }
+      &-message {
+        font-size: 14px;
+        padding: 5px 0;
+      }
+      &-dismiss {
+        font-family: 'Arial';
+        font-size: 17px;
+        position: absolute;
+        top: 4px;
+        right: 5px;
+        background: #dededf;
+        color: #ffffff;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 14px;
+        transition: 0.3s background;
+      }
+      &-action {
+
+      }
+    }
+  }
+  .notification-children, .notification-action-wrapper {
+    padding-top: 8px;
+
+  }
+}
+
+.notification-children {
+  border-top: 1px solid #ccc;
+  margin-top: 8px;
+  span, a {
+    display: inline-block;
+  }
+  span {
+    margin-right: 5px;
+  }
+}

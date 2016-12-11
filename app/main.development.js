@@ -119,6 +119,16 @@ function init() {
 
     new AppUpdater(mainWindow);
 
+    const handleRedirect = (e, url) => {
+        if(url != mainWindow.webContents.getURL()) {
+            e.preventDefault();
+            require('electron').shell.openExternal(url)
+        }
+    };
+
+    mainWindow.webContents.on('will-navigate', handleRedirect);
+    mainWindow.webContents.on('new-window', handleRedirect);
+
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.show();
         mainWindow.focus();

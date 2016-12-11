@@ -1,4 +1,5 @@
 import {ipcRenderer} from "electron";
+import React from "react"
 import * as actionTypes from "../../constants/actionTypes";
 import Notifications from 'react-notification-system-redux';
 
@@ -12,7 +13,7 @@ export function close() {
     ipcRenderer.send('close');
 }
 
-export function initWatchers(){
+export function initWatchers() {
     return dispatch => {
         dispatch(listenUpdate());
     }
@@ -20,23 +21,37 @@ export function initWatchers(){
 
 export function listenUpdate() {
     return dispatch => {
-        ipcRenderer.once('update-status',function(event,obj){
+        ipcRenderer.once('update-status', function (event, obj) {
             dispatch(setUpdateAvailable(obj.version));
 
-            dispatch(Notifications.success({
+            let notification = {
                 title: "Update available v" + obj.version,
+                message: "Current version: " + obj.current_version,
                 level: 'success',
-                autoDismiss:0,
-                action: {
+                autoDismiss: 0,
+            };
+
+            if (obj.status == "update-available-linux") {
+                notification.children = (
+                    <div className="notification-children">
+                        <span>Download</span>
+                        {(obj.deb_url) ? <a href={obj.deb_url} className="notification-action-button">.deb</a> : null}
+                        {(obj.rpm_url) ? <a href={obj.rpm_url} className="notification-action-button">.rpm</a> : null}
+                    </div>
+                )
+            } else {
+                notification.action = {
                     label: 'Update now',
                     callback: () => ipcRenderer.send("do-update")
                 }
-            }));
+            }
+
+            dispatch(Notifications.success(notification));
         });
     }
 }
 
-function setUpdateAvailable(version){
+function setUpdateAvailable(version) {
     return {
         type: actionTypes.APP_SET_UPDATE_AVAILABLE,
         version

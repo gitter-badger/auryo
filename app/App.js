@@ -58,6 +58,7 @@ class App extends Component {
                     <section className="content">
                         <Notifications
                             notifications={notifications}
+                            style={false}
                         />
                         {
                             app.loaded && app.offline ? <IsOffline full={false}/> : null
