@@ -34,6 +34,22 @@ class App extends Component {
         dispatch(initWatchers());
     }
 
+    componentWillReceiveProps(nextprops){
+        const {dispatch,app} = this.props;
+
+        if(app.offline != nextprops.app.offline && nextprops.app.offline == true){
+            dispatch(Notifications.info({
+                uid: "offline",
+                title: "You are currently offline",
+                message:"Please reconnect!",
+                autoDismiss: 0,
+                dismissible: false
+            }));
+        } else if(app.offline != nextprops.app.offline && nextprops.app.offline == false){
+            dispatch(Notifications.hide("offline"));
+        }
+    }
+
     renderMain() {
         const {app} = this.props;
 
@@ -60,9 +76,6 @@ class App extends Component {
                             notifications={notifications}
                             style={false}
                         />
-                        {
-                            app.loaded && app.offline ? <IsOffline full={false}/> : null
-                        }
                         {
                             this.renderMain()
                         }

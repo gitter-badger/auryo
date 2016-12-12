@@ -28,10 +28,7 @@ ReactGA.initialize(GOOGLE_GA);
 if (process.env.NODE_ENV === 'production') {
     ReactGA.initialize(GOOGLE_GA);
 
-    ReactGA.set({
-        location: 'https://example.com/',
-        checkProtocolTask: null
-    });
+    ReactGA.set();
 
     history.listen(function (location) {
         ReactGA.pageview(location.pathname)

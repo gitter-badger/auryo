@@ -85,8 +85,6 @@
   ],
   "homepage": "https://github.com/Superjo149/auryo",
   "devDependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
     "asar": "^0.12.3",
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.0",
@@ -109,7 +107,7 @@
     "css-loader": "^0.25.0",
     "devtron": "^1.4.0",
     "electron": "^1.4.4",
-    "electron-builder": "^10.6.1",
+    "electron-builder": "^10.7.0",
     "electron-devtools-installer": "^2.0.1",
     "electron-settings": "^2.2.2",
     "enzyme": "^2.5.1",
@@ -135,7 +133,9 @@
     "minimist": "^1.2.0",
     "mocha": "^3.1.2",
     "node-sass": "^3.12.5",
+    "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
     "redux-logger": "^2.7.4",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
@@ -149,8 +149,7 @@
     "webpack-merge": "^0.15.0",
     "webpack-validator": "^2.2.9"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devEngines": {
     "node": ">=6.x",
     "npm": ">=3.x"

@@ -27,7 +27,6 @@ export function listenUpdate() {
             let notification = {
                 title: "Update available v" + obj.version,
                 message: "Current version: " + obj.current_version,
-                level: 'success',
                 autoDismiss: 0,
             };
 

@@ -1,7 +1,7 @@
 {
   "name": "Auryo",
   "productName": "Auryo",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A beautiful soundcloud desktop app",
   "main": "./main.js",
   "author": {
