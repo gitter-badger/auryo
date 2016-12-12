@@ -11,7 +11,6 @@
   },
   "repo": "Superjo149/auryo",
   "dependencies": {
-    "@exponent/electron-cookies": "^2.0.0",
     "back-forward-history": "^1.1.5",
     "bootstrap": "^4.0.0-alpha.5",
     "classnames": "^2.2.5",

@@ -23,8 +23,7 @@ const history = syncHistoryWithStore(createMemoryHistory(), store);
 
 HistoryTracker.listenTo(history);
 
-let ElectronCookies = require('@exponent/electron-cookies');
-ElectronCookies.enable({origin: 'https://example.com'});
+ReactGA.initialize(GOOGLE_GA);
 
 if (process.env.NODE_ENV === 'production') {
     ReactGA.initialize(GOOGLE_GA);
