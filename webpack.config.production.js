@@ -62,7 +62,6 @@ const config = validate(merge(baseConfig, {
         }),
 
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
 
         // Minify without warning messages and IE8 support
         new webpack.optimize.UglifyJsPlugin({
