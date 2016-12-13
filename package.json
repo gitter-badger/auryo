@@ -21,31 +21,20 @@
     "package-win": "npm run build && SET GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb && build --win --x64 --publish always",
     "package-linux": "npm run build && build --linux",
     "package-all": "npm run build && build -mwl",
-    "release":"npm run build && GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb build -wl --ia32 --x64 --publish always",
+    "release": "npm run build && GH_TOKEN=57ee5faf32bbf3a7e2e4923fb43dc3e02842cccb build -wl --ia32 --x64 --publish always",
     "cleanup": "mop -v"
   },
   "build": {
     "appId": "be.sneljo.auryo",
-    "category": "public.app-category.music",
     "homepage": "https://github.com/Superjo149/auryo",
     "publish": [
       "github"
     ],
     "repo": "Superjo149/auryo",
-    "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
+
+    "mac": {
+      "category": "public.app-category.music",
+      "target": "zip"
     },
     "win": {
       "target": "nsis"
@@ -58,7 +47,6 @@
     }
   },
   "directories": {
-    "buildResources": "resources",
     "output": "release"
   },
   "bin": {
