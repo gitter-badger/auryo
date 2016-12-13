@@ -28,8 +28,6 @@ ReactGA.initialize(GOOGLE_GA);
 if (process.env.NODE_ENV === 'production') {
     ReactGA.initialize(GOOGLE_GA);
 
-    ReactGA.set();
-
     history.listen(function (location) {
         ReactGA.pageview(location.pathname)
     });
@@ -42,14 +40,13 @@ render(
                 <IndexRoute name="feed" component={Feed}/>
                 <Route path="/song/:songId" component={SongDetails}/>
                 <Route path="/artist/:artistId" component={ArtistContainer}/>
-
+                {/*
+                 <Route path="/chart" component={}/>
+                 <Route path="/likes" component={}/>
+                 <Route path="/playlists" component={}/>*/}
             </Route>
         </Router>
     </Provider>,
     document.getElementById('root')
 );
 
-/*
- <Route path="/chart" component={}/>
- <Route path="/likes" component={}/>
- <Route path="/playlists" component={}/>*/
