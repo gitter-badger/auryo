@@ -1,9 +1,9 @@
-@import "../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css";
-@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css";
+@import "../../../node_modules/bootstrap/scss/mixins";
 
 $enable-flex: true;
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../fonts/iconmoon/style.css";
 @import "vars";
 @import "responsive";
