@@ -16,7 +16,7 @@ import url from "url"
 import querystring from "querystring"
 
 function init() {
-
+    let m = false;
 
     installExtensions();
 
@@ -41,9 +41,6 @@ function init() {
         });
     }
 
-    main.win.webContents.emit("change");
-
-    let m = false;
 
     if (settings.hasSync("access_token")) {
         showMain();
@@ -51,22 +48,6 @@ function init() {
     } else {
         showLogin();
     }
-
-
-    main.win.webContents.on('did-finish-load', () => {
-        main.win.show();
-        main.win.focus();
-        if (m && process.env.NODE_ENV != 'development') {
-            new AppUpdater(main.win);
-        }
-    });
-
-    main.win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
-        if (errorDescription === 'ERR_INTERNET_DISCONNECTED' && !m) {
-            main.win.loadURL(`file://${__dirname}/no_internet.html`)
-
-        }
-    });
 
     const handleRedirect = (e, newUrl) => {
         if (newUrl.indexOf("http://localhost:3716/oauth/callback") > -1) {
@@ -88,11 +69,24 @@ function init() {
     main.win.webContents.on('will-navigate', handleRedirect);
     main.win.webContents.on('new-window', handleRedirect);
 
+    main.win.webContents.on('did-finish-load', () => {
+        main.win.show();
+        main.win.focus();
+        if (m && process.env.NODE_ENV != 'development') {
+            new AppUpdater(main.win);
+        }
+    });
+
+    main.win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+        if (errorDescription === 'ERR_INTERNET_DISCONNECTED' && !m) {
+            main.win.loadURL(`file://${__dirname}/no_internet.html`)
+
+        }
+    });
+
     main.win.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
         const url_parts = url.parse(newUrl, true);
         const query = url_parts.query;
-        console.log(query);
-        console.log(newUrl);
 
         if (newUrl.indexOf("http://localhost:3716/oauth/callback") > -1) {
             handleCallback(newUrl);
