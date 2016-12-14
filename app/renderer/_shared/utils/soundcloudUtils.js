@@ -1,4 +1,4 @@
-import {CLIENT_ID} from "../constants/config";
+import {CLIENT_ID} from "../../../config";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 import React from "react";
 import linkifyHtml from "linkifyjs/html";

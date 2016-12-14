@@ -4,7 +4,7 @@ import {playlistSchema, trackSchema, trackInfoSchema} from "../schemas";
 import {arrayOf, normalize} from "normalizr";
 import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
 import {OBJECT_TYPES} from "../constants/global";
-import {STREAM_CHECK_INTERVAL} from "../constants/config";
+import {STREAM_CHECK_INTERVAL} from "../../../config";
 import {setFetching, setObject, setNewObjects} from "./objectActions";
 import {addQueuedFunction} from "./app/offlineActions";
 import _ from "lodash";

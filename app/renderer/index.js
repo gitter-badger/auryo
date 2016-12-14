@@ -5,7 +5,7 @@ import {syncHistoryWithStore} from "react-router-redux";
 import HistoryTracker from "back-forward-history";
 import {Router, Route, IndexRoute, hashHistory, createMemoryHistory} from "react-router";
 import ReactGA from 'react-ga'
-import {GOOGLE_GA} from "./_shared/constants/config";
+import {GOOGLE_GA} from "../config";
 
 import configureStore from "./_shared/store/configureStore";
 
