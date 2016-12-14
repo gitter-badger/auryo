@@ -56,7 +56,7 @@ function init() {
     main.win.webContents.on('did-finish-load', () => {
         main.win.show();
         main.win.focus();
-        if (m) {
+        if (m && process.env.NODE_ENV != 'development') {
             new AppUpdater(main.win);
         }
     });
