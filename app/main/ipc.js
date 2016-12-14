@@ -6,7 +6,7 @@ export default {
     init
 }
 
-function init(main,login){
+function init(main){
 
     ipcMain.on('ping', (event, arg) => {
         event.returnValue = settings.getSync("access_token");
@@ -14,10 +14,7 @@ function init(main,login){
 
     ipcMain.on('logout', (event, arg) => {
         settings.deleteSync("access_token");
-        if (main.win) {
-            main.win.hide();
-        }
-        login.init(main);
+        main.init();
     });
 
     ipcMain.on('minimize', (event, arg) => {

@@ -1,53 +1,111 @@
 const main = module.exports = {
     init,
-    win: null
+    showLogin,
+    win: null,
+
 };
 
 export default main;
 
-import {BrowserWindow,shell} from "electron"
+import {BrowserWindow, shell} from "electron"
 import {posCenter} from "../utils"
-import {MAIN_WINDOW} from "../../config"
+import {CLIENT_ID, CALLBACK, MAIN_WINDOW} from "../../config"
 import AppUpdater from "../updater"
+import settings from "electron-settings"
+import url from "url"
+import querystring from "querystring"
 
 function init() {
+
+
     installExtensions();
 
-    let options = {
-        show: false,
-        width: 1190,
-        height: 728,
-        //frame: false,
-        webPreferences: {
-            webSecurity: false
+    if (!main.win) {
+        let options = {
+            show: false,
+            width: 1190,
+            height: 728,
+            webPreferences: {
+                webSecurity: false
+            }
+        };
+
+        options = posCenter(options);
+
+        main.win = new BrowserWindow(options);
+
+        main.win.setMenu(null);
+
+        main.win.on('closed', () => {
+            main.win = null;
+        });
+    }
+
+    main.win.webContents.emit("change");
+
+    let m = false;
+
+    if (settings.hasSync("access_token")) {
+        showMain();
+        m = true;
+    } else {
+        showLogin();
+    }
+
+
+    main.win.webContents.on('did-finish-load', () => {
+        main.win.show();
+        main.win.focus();
+        if (m) {
+            new AppUpdater(main.win);
         }
-    };
+    });
 
-    options = posCenter(options);
+    main.win.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+        if (errorDescription === 'ERR_INTERNET_DISCONNECTED' && !m) {
+            main.win.loadURL(`file://${__dirname}/no_internet.html`)
 
-    main.win = new BrowserWindow(options);
-    main.win.maximize();
-    main.win.setMenu(null);
+        }
+    });
 
-    const handleRedirect = (e, url) => {
-        if (url != main.win.webContents.getURL()) {
+    const handleRedirect = (e, newUrl) => {
+        if (newUrl.indexOf("http://localhost:3716/oauth/callback") > -1) {
+            const url_parts = url.parse(newUrl, true);
+            const query = url_parts.query;
+
+            if(query.error == "access_denied"){
+                e.preventDefault();
+                showLogin();
+            }
+        }
+
+        if (newUrl != main.win.webContents.getURL() && m) {
             e.preventDefault();
-            shell.openExternal(url)
+            shell.openExternal(newUrl)
         }
     };
 
     main.win.webContents.on('will-navigate', handleRedirect);
     main.win.webContents.on('new-window', handleRedirect);
 
-    main.win.webContents.on('did-finish-load', () => {
-        main.win.show();
-        main.win.focus();
-        new AppUpdater(main.win);
+    main.win.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+        const url_parts = url.parse(newUrl, true);
+        const query = url_parts.query;
+        console.log(query);
+        console.log(newUrl);
+
+        if (newUrl.indexOf("http://localhost:3716/oauth/callback") > -1) {
+            handleCallback(newUrl);
+        }
     });
 
-    main.win.on('closed', () => {
-        main.win = null;
-    });
+}
+
+function showLogin() {
+    main.win.loadURL('https://soundcloud.com/connect?client_id=' + CLIENT_ID + '&response_type=token&scope=non-expiring&display=next&redirect_uri=' + CALLBACK);
+}
+
+function showMain() {
 
     main.win.loadURL(MAIN_WINDOW);
 
@@ -64,14 +122,13 @@ function init() {
             }]).popup(main.win);
         });
     }
-
 }
 
-function hide () {
+function hide() {
     if (!main.win) return;
     main.win.hide()
 }
-function show () {
+function show() {
     if (!main.win) return;
     main.win.show()
 }
@@ -93,3 +150,24 @@ const installExtensions = async() => {
         }
     }
 };
+
+function handleCallback(u) {
+    const uri = url.parse(u);
+
+    const raw_code = /access_token=([^&]*)/.exec(u) || null;
+    const code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
+
+    if (uri.hash && code) {
+
+        const hash = uri.hash.substr(1);
+        const token = querystring.parse(hash).access_token;
+
+        settings.setSync("access_token", token);
+
+        if (main.win) {
+
+        }
+        showMain();
+
+    }
+}

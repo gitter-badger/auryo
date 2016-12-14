@@ -12,4 +12,5 @@ export const GOOGLE_GA = "UA-45896150-8";
 // App
 export const MAIN_WINDOW = 'file://' + __dirname + "/renderer/app.html";
 export const STREAM_CHECK_INTERVAL = 60000;
+export const UPDATE_SERVER_HOST = "auryo-updater.herokuapp.com";
 

@@ -2,10 +2,11 @@ import {app, BrowserWindow as BrowserWindowElectron, ipcMain} from "electron";
 import http from "http"
 import { gt as isVersionGreaterThan, valid as parseVersion } from "semver"
 
+import {UPDATE_SERVER_HOST} from "../config"
+
 import * as os from "os";
 import {autoUpdater} from "electron-auto-updater";
 
-const UPDATE_SERVER_HOST = "auryo-updater.herokuapp.com";
 
 export default class AppUpdater {
     constructor(window) {
