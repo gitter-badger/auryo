@@ -12,7 +12,7 @@ import TrackListItem from "./trackListItemComponent";
 class trackList extends Component {
 
     playTrack(i, dbl, e) {
-        const {playlist, dispatch, player} = this.props;
+        const {playlist_name, dispatch, player} = this.props;
 
         if (!e) {
             e = dbl;
@@ -20,10 +20,10 @@ class trackList extends Component {
 
         if (dbl) {
             e.preventDefault();
-            dispatch(playTrack(i, playlist));
+            dispatch(playTrack(i, playlist_name));
         } else {
             if (e.target.tagName == "TD" && (player.currentSong != i || player.status != STATUS.PLAYING)) {
-                dispatch(playTrack(i, playlist));
+                dispatch(playTrack(i, playlist_name));
             }
         }
 
@@ -32,21 +32,18 @@ class trackList extends Component {
 
     render() {
         const {
-            playlists,
             playlist,
             track_entities,
             user_entities,
             player,
             dispatch,
             likes,
+            playingTrackId,
             likeFunc
         } = this.props;
 
-        const p = playlists[playlist];
+        const items = (playlist && playlist.items) ? playlist.items : [];
 
-        const items = (p && p.items) ? p.items : [];
-
-        const playingTrackId = getPlayingTrackId(player, playlists);
 
         const _this = this;
 
@@ -101,8 +98,9 @@ class trackList extends Component {
 }
 
 trackList.propTypes = {
-    playlists: PropTypes.object.isRequired,
-    playlist: PropTypes.string.isRequired,
+    playingTrackId:PropTypes.number,
+    playlist_name: PropTypes.string.isRequired,
+    playlist: PropTypes.object.isRequired,
     track_entities: PropTypes.object.isRequired,
     user_entities: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,

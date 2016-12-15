@@ -147,7 +147,6 @@ class songContainer extends Component {
         if (!track) {
             return <Spinner />
         }
-        const playlist = songId + RELATED_PLAYLIST;
 
         const user = user_entities[track.user_id];
 
@@ -160,7 +159,6 @@ class songContainer extends Component {
 
         const hasDesc = track.description.length > 0;
         const track_comments = comments[songId] || {};
-
         return (
             <InfinityScroll
                 playing={player.currentSong != null}
@@ -293,8 +291,9 @@ class songContainer extends Component {
                                                 <TabPane tabId="2">
                                                     <TrackListComponent
                                                         player={player}
-                                                        playlist={playlist}
-                                                        playlists={playlists}
+                                                        playlist={playlists[songId + RELATED_PLAYLIST] || {}}
+                                                        playlist_name={songId + RELATED_PLAYLIST}
+                                                        playingTrackId={getPlayingTrackId(player, playlists)}
                                                         track_entities={track_entities}
                                                         dispatch={dispatch}
                                                         user_entities={user_entities}
@@ -327,13 +326,11 @@ function mapStateToProps(state) {
     const {likes, followings} = auth;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
     const comment_objects = objects[OBJECT_TYPES.COMMENTS] || {};
-    const playingSongId = getPlayingTrackId(player, playlists);
 
     return {
         track_entities,
         user_entities,
         player,
-        playingSongId,
         likes,
         playlists,
         followings,
