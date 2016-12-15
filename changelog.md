@@ -1,7 +1,20 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.3.0] - 2016-12-09
+## [0.6.0] - 2016-12-09
+### Added 
+- likes to artist page
+
+### Changed
+- project structuring (internal)
+- offline bar with same as update notification
+
+## [0.5.0] - 2016-12-11
+### Added 
+- auto update for windows
+- update notification for linux
+
+## [0.4.0] - 2016-12-09
 ### Added 
 - user card to song details page
 - ability to (un)follow other users
@@ -12,7 +25,7 @@ All notable changes to this project will be documented in this file.
 - replaced react-list with npm package
 - made related tracks a bit nicer
 
-## [1.2.0] - 2016-11-19
+## [0.3.0] - 2016-11-19
 ### Added
 - Title and artist to player
 - Song details page
@@ -33,7 +46,7 @@ All notable changes to this project will be documented in this file.
 - fixed issue with infinity scroll not adapting when resizing
 - added custom version of react-list with bug fix untill they accept my pull request
 
-## [1.1.0] - 2016-11-14
+## [0.2.0] - 2016-11-14
 ### Added
 - volume adjustment for player
 - infinity scroll for stream with lazy loading
@@ -49,7 +62,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - enhanced the performance for seeking through a song
 
-## [1.0.0] - 2016-11-13
+## [0.1.0] - 2016-11-13
 ### Added
 - Music player
 - Ability to scroll through stream (50 items only)
