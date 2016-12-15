@@ -19,6 +19,8 @@ import CommentList from "./components/commentListComponent";
 import InfinityScroll from "../_shared/components/infinityScrollComponent";
 import FallbackImage from "../_shared/components/FallbackImageComponent";
 
+import "../assets/css/songDetails/songDetails.scss"
+
 
 class songContainer extends Component {
 

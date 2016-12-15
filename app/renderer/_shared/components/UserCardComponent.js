@@ -7,6 +7,7 @@ import {toggleFollowing} from "../actions";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 
 import FallbackImage from "./FallbackImageComponent";
+import "../../assets/css/common/user_card.scss"
 
 export default class UserCard extends Component {
     constructor(props) {

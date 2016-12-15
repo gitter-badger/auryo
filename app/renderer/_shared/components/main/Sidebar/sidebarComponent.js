@@ -3,6 +3,8 @@ import {IndexLink} from "react-router"
 
 import User from "./User/userComponent";
 
+import "../../../../assets/css/common/sidebar.scss"
+
 class SideBar extends Component {
     render() {
         const {me} = this.props;

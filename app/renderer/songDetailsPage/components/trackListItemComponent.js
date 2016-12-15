@@ -4,6 +4,7 @@ import {Link} from "react-router";
 import {truncate, getReadableTime} from "../../_shared/utils/appUtils";
 import cn from "classnames";
 
+import "../../assets/css/songDetails/trackListItem.scss"
 
 class trackListItem extends Component {
     constructor(props) {

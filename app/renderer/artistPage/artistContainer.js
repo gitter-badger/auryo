@@ -18,6 +18,7 @@ import Spinner from "../_shared/components/spinnerComponent"
 import FallbackImage from "../_shared/components/FallbackImageComponent"
 import ToggleMoreComponent from "../_shared/components/toggleMoreComponent"
 
+import "../assets/css/Artist/artistpage.scss"
 
 class artistContainer extends Component {
 

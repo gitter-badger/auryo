@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {getPlayingTrackId} from "../_shared/utils/playerUtils";
 import {OBJECT_TYPES} from "../_shared/constants/global";
 
+import "../assets/css/Player/player.scss"
+
 class PlayerContainer extends Component {
     render() {
         const {playingSongId} = this.props;

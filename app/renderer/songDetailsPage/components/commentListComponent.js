@@ -9,6 +9,8 @@ import {IMAGE_SIZES} from "../../_shared/constants/Soundcloud";
 import Spinner from "../../_shared/components/spinnerComponent";
 
 
+import "../../assets/css/songDetails/commentList.scss"
+
 class CommentList extends Component {
 
     render() {

@@ -1,24 +1,10 @@
-@import "../../../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css";
-@import "../../../node_modules/bootstrap/scss/mixins";
+@import "~bootstrap/dist/css/bootstrap-reboot.min.css";
+@import "~bootstrap/scss/bootstrap-flex";
 
-$enable-flex: true;
-
-@import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../fonts/iconmoon/style.css";
 @import "vars";
 @import "responsive";
-@import "./common/navigation";
-@import "./common/sidebar";
-@import "./common/spinner";
-@import "./common/user";
-@import "./Feed/trackgriditem";
-@import "./Player/player";
-@import "./songDetails/songDetails";
-@import "./songDetails/trackListItem";
-@import "./common/header";
-@import "./common/user_card";
-@import "./songDetails/commentList";
-@import "./Artist/artistpage.scss";
+
 @import "./common/notification.scss";
 
 body {

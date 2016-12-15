@@ -7,6 +7,7 @@ import {truncate, abbreviate_number} from "../../../_shared/utils/appUtils";
 import TogglePlayButton from "../../../_shared/components/togglePlay";
 import {Col} from "reactstrap";
 import FallbackImage from "../../../_shared/components/FallbackImageComponent";
+import "../../../assets/css/Feed/trackgriditem.scss"
 
 class TrackGridItem extends Component {
 
