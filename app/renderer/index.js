@@ -7,13 +7,13 @@ import {Router, Route, IndexRoute, hashHistory, createMemoryHistory} from "react
 import ReactGA from 'react-ga'
 import {GOOGLE_GA} from "../config";
 
-import configureStore from "./store/configureStore";
+import configureStore from "./store/configureStore"
 
-import App from "./App";
-import Feed from "./container/feedContainer";
-import SongDetails from "./container/songContainer";
-import ArtistContainer from "./container/artistContainer"
-import {ipcRenderer} from "electron";
+import App from "./App"
+import Feed from "./container/feedContainer"
+import Song from "./container/songContainer"
+import Artist from "./container/artistContainer"
+import Likes from "./container/likesContainer"
 
 import "./assets/css/app.scss";
 
@@ -38,8 +38,9 @@ render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute name="feed" component={Feed}/>
-                <Route path="/song/:songId" component={SongDetails}/>
-                <Route path="/artist/:artistId" component={ArtistContainer}/>
+                <Route path="/song/:songId" component={Song}/>
+                <Route path="/artist/:artistId" component={Artist}/>
+                <Route path="/likes" component={Likes}/>
                 {/*
                  <Route path="/chart" component={}/>
                  <Route path="/likes" component={}/>

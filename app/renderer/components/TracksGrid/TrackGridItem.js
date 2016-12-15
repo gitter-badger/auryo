@@ -59,6 +59,26 @@ class TrackGridItem extends Component {
             </a>
         );
     }
+    renderStats() {
+        const {track} = this.props;
+
+        if(!track.likes_count && !track.reposts_count){
+            return null;
+        }
+
+        return (
+            <div className="trackStats">
+                <div className="stat">
+                    <i className="icon-favorite_border"/>
+                    <span>{abbreviate_number(track.likes_count)}</span>
+                </div>
+                <div className="stat">
+                    <i className="icon-retweet"/>
+                    <span>{abbreviate_number(track.reposts_count)}</span>
+                </div>
+            </div>
+        );
+    }
 
 
     render() {
@@ -94,16 +114,9 @@ class TrackGridItem extends Component {
                             {
                                 this.renderToggleButton()
                             }
-                            <div className="trackStats">
-                                <div className="stat">
-                                    <i className="icon-favorite_border"/>
-                                    <span>{abbreviate_number(track.likes_count)}</span>
-                                </div>
-                                <div className="stat">
-                                    <i className="icon-retweet"/>
-                                    <span>{abbreviate_number(track.reposts_count)}</span>
-                                </div>
-                            </div>
+                            {
+                                this.renderStats()
+                            }
                         </div>
                         {
                             track.genre ? <a className="trackGenre">{track.genre}</a> : null

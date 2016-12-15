@@ -29,7 +29,8 @@ class TracksGrid extends Component {
             current_playlist,
             playlists,
             dispatch,
-            app
+            app,
+            showInfo
         } = this.props;
 
         const items = current_playlist in playlists ? playlists[current_playlist].items : [];
@@ -39,21 +40,26 @@ class TracksGrid extends Component {
         const info = feedInfo_entities[id];
         const track = track_entities[id];
         track.user = user_entities[track.user_id];
-        track.from_user = user_entities[info.from_user];
-        track.activity_type = info.activity_type;
+
+        if (showInfo) {
+            track.from_user = user_entities[info.from_user];
+            track.activity_type = info.activity_type;
+        }
 
         const playTrackFunc = this.playTrack.bind(this, index);
 
         return (
 
-            <TrackGridItem key={key}
-                           playTrackFunc={playTrackFunc}
-                           auth={auth}
-                           dispatch={dispatch}
-                           isPlaying={track.id === playingSongId}
-                           scrollFunc={scrollFunc}
-                           app={app}
-                           track={track}/>
+            <TrackGridItem
+                showInfo={showInfo}
+                key={key}
+                playTrackFunc={playTrackFunc}
+                auth={auth}
+                dispatch={dispatch}
+                isPlaying={track.id === playingSongId}
+                scrollFunc={scrollFunc}
+                app={app}
+                track={track}/>
 
         );
     }
@@ -90,7 +96,8 @@ class TracksGrid extends Component {
 }
 
 TracksGrid.propTypes = {
-    feedInfo_entities: PropTypes.object.isRequired,
+    showInfo: PropTypes.bool,
+    feedInfo_entities: PropTypes.object,
     track_entities: PropTypes.object.isRequired,
     user_entities: PropTypes.object.isRequired,
 
