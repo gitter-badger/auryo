@@ -14,7 +14,6 @@ class toggleMoreComponent extends Component {
 
     componentDidMount() {
         const height = ReactDOM.findDOMNode(this.refs.overflow).clientHeight;
-        console.log(height);
         const {overflow} = this.state;
 
         if (height > 200 && !overflow) {

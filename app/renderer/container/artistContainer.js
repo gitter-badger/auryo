@@ -7,10 +7,10 @@ import cn from "classnames"
 import {fetchMore, toggleLike, toggleFollowing} from "../actions/"
 import {fetchArtistIfNeeded} from "../actions/artistActions"
 import {getImageUrl, isFollowing, formatDescription} from "../utils/soundcloudUtils"
-import {abbreviate_number} from "../utils"
+import {abbreviate_number, getPlayingTrackId} from "../utils"
 import {IMAGE_SIZES} from "../constants/Soundcloud"
 import TrackList from "../components/trackList/trackListComponent"
-import {USER_TRACKS_PLAYLIST} from "../constants/playlist"
+import {USER_TRACKS_PLAYLIST, USER_LIKES} from "../constants/playlist"
 import {OBJECT_TYPES} from "../constants/global"
 import InfinityScroll from "../components/infinityScrollComponent"
 import Spinner from "../components/spinnerComponent"
@@ -25,6 +25,8 @@ class artistContainer extends Component {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.renderPlaylist = this.renderPlaylist.bind(this);
+
         this.state = {
             activeTab: '1'
         };
@@ -58,8 +60,37 @@ class artistContainer extends Component {
         dispatch(toggleFollowing(artistId));
     }
 
+    renderPlaylist(playlist_name) {
+        const {playlists, auth, player, entities, params, dispatch} = this.props;
+        const {artistId} = params;
+        const {likes} = auth;
+        const {user_entities, track_entities} = entities;
+
+        playlist_name = artistId + playlist_name;
+        const playlist = playlists[playlist_name] || {};
+
+        return (
+            <div>
+                <TrackList
+                    dispatch={dispatch}
+                    likes={likes}
+                    player={player}
+                    user_entities={user_entities}
+                    track_entities={track_entities}
+                    playlist_name={playlist_name}
+                    playlist={playlist}
+                    playingTrackId={getPlayingTrackId(player, playlists)}
+                    likeFunc={this.toggleLike.bind(this)}
+
+                />
+                {playlist.isFetching ? <Spinner/> : null}
+            </div>
+
+        )
+    }
+
     render() {
-        const {entities, params, auth, player, playlists, app, dispatch} = this.props;
+        const {entities, params, auth, player, playlists, app, dispatch, playingTrackId} = this.props;
         const {user_entities, track_entities} = entities;
         const {followings, likes} = auth;
         const {artistId} = params;
@@ -74,11 +105,10 @@ class artistContainer extends Component {
         const following = isFollowing(user.id, followings);
         const playlist_name = artistId + USER_TRACKS_PLAYLIST;
 
-        const playlist = playlists[playlist_name] || {};
 
         return (
             <InfinityScroll
-                playing={false}
+                playing={player.currentSong != null}
                 scrollFunc={fetchMore.bind(this, playlist_name, OBJECT_TYPES.PLAYLISTS)}
                 dispatch={dispatch}
                 className="artistPage container-fluid">
@@ -152,25 +182,24 @@ class artistContainer extends Component {
                        }}>
                         <span className="text">Tracks</span>
                     </a>
+                    <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '2'})}
+                       onClick={() => {
+                           this.toggle('2');
+                       }}>
+                        <span className="text">Likes</span>
+                    </a>
                 </div>
                 <Row>
                     <Col xs="9">
 
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <TrackList
-                                    dispatch={dispatch}
-                                    likes={likes}
-                                    player={player}
-                                    user_entities={user_entities}
-                                    track_entities={track_entities}
-                                    playlist={playlist_name}
-                                    playlists={playlists}
-                                    likeFunc={this.toggleLike.bind(this)}
 
-                                />
+                                {this.renderPlaylist(USER_TRACKS_PLAYLIST)}
 
-                                {playlist.isFetching ? <Spinner/> : null}
+                            </TabPane>
+                            <TabPane tabId="2">
+                                {this.renderPlaylist(USER_LIKES)}
 
                             </TabPane>
                         </TabContent>
