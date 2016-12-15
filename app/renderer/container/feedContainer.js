@@ -43,7 +43,7 @@ class FeedContainer extends Component {
                 <PageHeader title="Stream" img="./assets/img/party.jpg"/>
 
                 <div className="main clearfix">
-                    <TracksGrid {...this.props} />
+                    <TracksGrid showInfo {...this.props} />
                 </div>
 
             </InfinityScroll>
