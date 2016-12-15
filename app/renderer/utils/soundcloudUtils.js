@@ -1,4 +1,4 @@
-import {CLIENT_ID} from "../../../config";
+import {CLIENT_ID} from "../../config";
 import {IMAGE_SIZES} from "../constants/Soundcloud";
 import React from "react";
 import linkifyHtml from "linkifyjs/html";
@@ -54,6 +54,14 @@ export function getUserUrl(artistID){
 
 export function getUserTracksUrl(artistID,limit = 50) {
     return makeUrl("users/" + artistID + "/tracks", {
+        client_id: true,
+        linked_partitioning: 1,
+        limit: limit
+    });
+}
+
+export function getUserLikesUrl(artistID,limit = 50) {
+    return makeUrl("users/" + artistID + "/favorites", {
         client_id: true,
         linked_partitioning: 1,
         limit: limit

@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-import {fetchMore} from "../../actions";
-import {getPlayingTrackId} from "../../utils";
+import {fetchMore} from "../actions";
+import {getPlayingTrackId} from "../utils";
 
-import {PLAYLISTS} from "../../constants/playlist";
-import {OBJECT_TYPES} from "../../constants/global";
+import {PLAYLISTS} from "../constants/playlist";
+import {OBJECT_TYPES} from "../constants/global";
 
-import PageHeader from "../../components/PageHeader";
-import InfinityScroll from "../../components/infinityScrollComponent";
-import TracksGrid from "./components/TracksGrid/TracksGrid";
+import PageHeader from "../components/PageHeader";
+import InfinityScroll from "../components/infinityScrollComponent";
+import TracksGrid from "../components/TracksGrid/TracksGrid";
 
 
 class FeedContainer extends Component {

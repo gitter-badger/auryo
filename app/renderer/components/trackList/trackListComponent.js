@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from "react";
 
-import {getPlayingTrackId} from "../../_shared/utils";
-import {playTrack} from "../../_shared/actions";
-import {isLiked} from "../../_shared/utils/soundcloudUtils";
+import {getPlayingTrackId} from "../../utils";
+import {playTrack} from "../../actions";
+import {isLiked} from "../../utils/soundcloudUtils";
 
-import {STATUS} from "../../_shared/constants/playlist";
+import {STATUS} from "../../constants/playlist";
 
 import TrackListItem from "./trackListItemComponent";
 

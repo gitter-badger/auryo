@@ -1,14 +1,14 @@
 import React, {PropTypes} from "react";
 import ReactDOM from "react-dom";
-import {appendClientId, getImageUrl} from "../../../_shared/utils/soundcloudUtils";
-import {getReadableTime, getPos, truncate} from "../../../_shared/utils/appUtils";
-import {IMAGE_SIZES} from "../../../_shared/constants/Soundcloud";
-import {CHANGE_TYPES, STATUS} from "../../../_shared/constants/playlist";
-import {toggleStatus, changeTrack, setCurrentTime} from "../../../_shared/actions";
-import Audio from "../../../_shared/components/Audio";
+import {appendClientId, getImageUrl} from "../../utils/soundcloudUtils";
+import {getReadableTime, getPos, truncate} from "../../utils/appUtils";
+import {IMAGE_SIZES} from "../../constants/Soundcloud";
+import {CHANGE_TYPES, STATUS} from "../../constants/playlist";
+import {toggleStatus, changeTrack, setCurrentTime} from "../../actions";
+import Audio from "../../components/Audio";
 import cn from "classnames";
-import FallbackImage from "../../../_shared/components/FallbackImageComponent"
-import {isOnline} from "../../../_shared/actions/app/offlineActions";
+import FallbackImage from "../../components/FallbackImageComponent"
+import {isOnline} from "../../actions/app/offlineActions";
 
 class Player extends React.Component {
 

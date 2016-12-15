@@ -3,7 +3,7 @@ import {close, maximize, minimize} from "../../actions/app/windowActions";
 import HistoryTracker from "back-forward-history";
 
 
-import "../../../assets/css/common/header.scss"
+import "../../assets/css/common/header.scss"
 
 class Header extends Component {
 

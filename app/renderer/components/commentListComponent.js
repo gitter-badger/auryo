@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from "react";
 import {Row, Col} from "reactstrap";
 import moment from "moment";
 
-import {getImageUrl, formatDescription} from "../../_shared/utils/soundcloudUtils";
+import {getImageUrl, formatDescription} from "../utils/soundcloudUtils";
 
-import {IMAGE_SIZES} from "../../_shared/constants/Soundcloud";
+import {IMAGE_SIZES} from "../constants/Soundcloud";
 
-import Spinner from "../../_shared/components/spinnerComponent";
+import Spinner from "./spinnerComponent";
 
 
-import "../../assets/css/songDetails/commentList.scss"
+import "../assets/css/songDetails/commentList.scss"
 
 class CommentList extends Component {
 

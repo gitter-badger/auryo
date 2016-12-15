@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from "react";
 import {Link} from "react-router";
-import {IMAGE_SIZES} from "../../../_shared/constants/Soundcloud";
-import {getImageUrl} from "../../../_shared/utils/soundcloudUtils";
+import {IMAGE_SIZES} from "../../constants/Soundcloud";
+import {getImageUrl} from "../../utils/soundcloudUtils";
 import classnames from "classnames";
-import {truncate, abbreviate_number} from "../../../_shared/utils/appUtils";
-import TogglePlayButton from "../../../_shared/components/togglePlay";
+import {truncate, abbreviate_number} from "../../utils/appUtils";
+import TogglePlayButton from "../togglePlay";
 import {Col} from "reactstrap";
-import FallbackImage from "../../../_shared/components/FallbackImageComponent";
-import "../../../assets/css/Feed/trackgriditem.scss"
+import FallbackImage from "../FallbackImageComponent";
+
+import "../../assets/css/Feed/trackgriditem.scss"
 
 class TrackGridItem extends Component {
 

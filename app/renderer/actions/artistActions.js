@@ -2,7 +2,7 @@ import * as SC from "../utils/soundcloudUtils"
 import {setObject, setFetching} from "./objectActions"
 import {OBJECT_TYPES} from "../constants/global"
 import * as actionTypes from "../constants/actionTypes"
-import {USER_TRACKS_PLAYLIST} from "../constants/playlist"
+import {USER_TRACKS_PLAYLIST,USER_LIKES} from "../constants/playlist"
 import {trackSchema} from "../schemas";
 import {normalize, arrayOf} from "normalizr";
 
@@ -29,6 +29,11 @@ export function fetchArtistIfNeeded(artistID) {
 
         if (playlists && !playlists[tracks_playlist]) {
             dispatch(fetchUserTracks(artistID));
+        }
+        const likes_playlist = artistID + USER_LIKES;
+
+        if (playlists && !playlists[likes_playlist]) {
+            dispatch(fetchUserLikes(artistID));
         }
 
     }
@@ -85,7 +90,32 @@ function fetchUserTracks(artistID) {
 
                 const n = normalize(collection, arrayOf(trackSchema));
 
-                dispatch(setObject(artistID + USER_TRACKS_PLAYLIST, obj_type, n.entities, n.result, json.next_href, json.future_href));
+                dispatch(setObject(playlist, obj_type, n.entities, n.result, json.next_href, json.future_href));
+            });
+    }
+}
+
+/**
+ * Get user owned tracks
+ *
+ * @param artistID
+ * @returns {function(*)}
+ */
+function fetchUserLikes(artistID) {
+    const playlist = artistID + USER_LIKES;
+
+    return dispatch => {
+        dispatch(setFetching(playlist, obj_type, true));
+
+        fetch(SC.getUserLikesUrl(artistID))
+            .then(response => response.json())
+            .then(json => {
+                const collection = json.collection
+                    .filter(track => (track.kind === 'track') && track.streamable);
+
+                const n = normalize(collection, arrayOf(trackSchema));
+
+                dispatch(setObject(playlist, obj_type, n.entities, n.result, json.next_href, json.future_href));
             });
     }
 }

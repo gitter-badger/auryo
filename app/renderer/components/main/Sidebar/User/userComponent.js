@@ -3,7 +3,7 @@ import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap";
 
 import {logout} from "../../../../actions";
 
-import "../../../../../assets/css/common/user.scss"
+import "../../../../assets/css/common/user.scss"
 
 
 class User extends Component {

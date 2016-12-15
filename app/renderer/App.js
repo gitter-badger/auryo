@@ -1,14 +1,14 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 
-import PlayerContainer from "./player/playerContainer";
-import IsOffline from "./_shared/components/offlineComponent";
-import SideBar from "./_shared/components/main/Sidebar/sidebarComponent";
-import Header from "./_shared/components/main/headerComponent";
-import Spinner from "./_shared/components/spinnerComponent"
+import PlayerContainer from "./container/playerContainer";
+import IsOffline from "./components/offlineComponent";
+import SideBar from "./components/main/Sidebar/sidebarComponent";
+import Header from "./components/main/headerComponent";
+import Spinner from "./components/spinnerComponent"
 import Notifications from 'react-notification-system-redux';
 
-import {toggleOffline, initUser, initWatchers} from "./_shared/actions";
+import {toggleOffline, initUser, initWatchers} from "./actions";
 
 class App extends Component {
     constructor(props) {

@@ -3,21 +3,21 @@ import {connect} from "react-redux";
 import cn from "classnames";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
 
-import {fetchTrackIfNeeded, playTrack, toggleLike, fetchMore} from "../_shared/actions";
-import {getImageUrl, formatDescription, isLiked} from "../_shared/utils/soundcloudUtils";
-import {abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../_shared/utils/";
+import {fetchTrackIfNeeded, playTrack, toggleLike, fetchMore} from "../actions";
+import {getImageUrl, formatDescription, isLiked} from "../utils/soundcloudUtils";
+import {abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../utils/";
 
-import {IMAGE_SIZES} from "../_shared/constants/Soundcloud";
-import {RELATED_PLAYLIST, STATUS} from "../_shared/constants/playlist";
-import {OBJECT_TYPES} from "../_shared/constants/global";
+import {IMAGE_SIZES} from "../constants/Soundcloud";
+import {RELATED_PLAYLIST, STATUS} from "../constants/playlist";
+import {OBJECT_TYPES} from "../constants/global";
 
-import Spinner from "../_shared/components/spinnerComponent";
-import TogglePlay from "../_shared/components/togglePlay";
-import TrackListComponent from "./components/trackListComponent";
-import UserCard from "../_shared/components/UserCardComponent";
-import CommentList from "./components/commentListComponent";
-import InfinityScroll from "../_shared/components/infinityScrollComponent";
-import FallbackImage from "../_shared/components/FallbackImageComponent";
+import Spinner from "../components/spinnerComponent";
+import TogglePlay from "../components/togglePlay";
+import TrackListComponent from "../components/trackList/trackListComponent";
+import UserCard from "../components/userCardComponent";
+import CommentList from "../components/commentListComponent";
+import InfinityScroll from "../components/infinityScrollComponent";
+import FallbackImage from "../components/FallbackImageComponent";
 
 import "../assets/css/songDetails/songDetails.scss"
 

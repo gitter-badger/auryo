@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import TrackGridItem from "./TrackGridItem";
-import {fetchMore, playTrack} from "../../../_shared/actions";
-import Spinner from "../../../_shared/components/spinnerComponent";
+import {fetchMore, playTrack} from "../../actions";
+import Spinner from "../spinnerComponent";
 import ReactList from "react-list";
 
 class TracksGrid extends Component {

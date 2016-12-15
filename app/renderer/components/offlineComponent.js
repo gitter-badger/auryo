@@ -4,7 +4,7 @@ import { Alert } from 'reactstrap';
 
 import Spinner from "./spinnerComponent"
 
-import "../../assets/css/common/offline.scss"
+import "../assets/css/common/offline.scss"
 
 class offlineContainer extends Component {
     render() {

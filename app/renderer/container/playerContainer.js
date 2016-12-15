@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from "react";
-import Player from "./components/Player/playerComponent";
+import Player from "../components/Player/playerComponent";
 import {connect} from "react-redux";
-import {getPlayingTrackId} from "../_shared/utils/playerUtils";
-import {OBJECT_TYPES} from "../_shared/constants/global";
+import {getPlayingTrackId} from "../utils/playerUtils";
+import {OBJECT_TYPES} from "../constants/global";
 
 import "../assets/css/Player/player.scss"
 

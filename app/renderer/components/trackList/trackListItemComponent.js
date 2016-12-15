@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
-import TogglePlayButton from "../../_shared/components/togglePlay";
+import TogglePlayButton from "../togglePlay";
 import {Link} from "react-router";
-import {truncate, getReadableTime} from "../../_shared/utils/appUtils";
+import {truncate, getReadableTime} from "../../utils/appUtils";
 import cn from "classnames";
 
 import "../../assets/css/songDetails/trackListItem.scss"

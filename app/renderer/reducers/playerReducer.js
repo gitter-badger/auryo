@@ -1,5 +1,5 @@
-import * as actionTypes from "../../_shared/constants/actionTypes";
-import {STATUS} from "../../_shared/constants/playlist";
+import * as actionTypes from "../constants/actionTypes";
+import {STATUS} from "../constants/playlist";
 
 const initialState = {
     status: STATUS.STOPPED,

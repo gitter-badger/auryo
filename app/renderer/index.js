@@ -7,12 +7,12 @@ import {Router, Route, IndexRoute, hashHistory, createMemoryHistory} from "react
 import ReactGA from 'react-ga'
 import {GOOGLE_GA} from "../config";
 
-import configureStore from "./_shared/store/configureStore";
+import configureStore from "./store/configureStore";
 
 import App from "./App";
-import Feed from "./streamPage/feedContainer";
-import SongDetails from "./songDetailsPage/songContainer";
-import ArtistContainer from "./artistPage/artistContainer"
+import Feed from "./container/feedContainer";
+import SongDetails from "./container/songContainer";
+import ArtistContainer from "./container/artistContainer"
 import {ipcRenderer} from "electron";
 
 import "./assets/css/app.scss";
