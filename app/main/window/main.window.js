@@ -7,7 +7,7 @@ const main = module.exports = {
 
 export default main;
 
-import {BrowserWindow, shell} from "electron"
+import {BrowserWindow, shell,Menu} from "electron"
 import {posCenter} from "../utils"
 import {CLIENT_ID, CALLBACK, MAIN_WINDOW} from "../../config"
 import AppUpdater from "../updater"
@@ -23,6 +23,7 @@ function init() {
     if (!main.win) {
         let options = {
             show: false,
+            minWidth:500,
             width: 1190,
             height: 728,
             webPreferences: {
@@ -85,9 +86,6 @@ function init() {
     });
 
     main.win.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-        const url_parts = url.parse(newUrl, true);
-        const query = url_parts.query;
-
         if (newUrl.indexOf("http://localhost:3716/oauth/callback") > -1) {
             handleCallback(newUrl);
         }
