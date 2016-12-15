@@ -20,12 +20,10 @@ export function filter(str) {
 }
 
 export function abbreviate_number(num, fixed) {
-    if (num === null) {
-        return null;
-    } // terminate early
-    if (num === 0) {
+    if (num === null || !num || num == 0) {
         return '0';
     } // terminate early
+
     fixed = (!fixed || fixed < 0) ? 0 : fixed; // number of decimal places to show
     let b = (num).toPrecision(2).split("e"), // get power
         k = b.length === 1 ? 0 : Math.floor(Math.min(b[1].slice(1), 14) / 3), // floor at decimals, ceiling at trillions

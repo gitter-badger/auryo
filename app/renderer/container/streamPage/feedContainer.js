@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-import {fetchMore} from "../_shared/actions";
-import {getPlayingTrackId} from "../_shared/utils";
+import {fetchMore} from "../../actions";
+import {getPlayingTrackId} from "../../utils";
 
-import {PLAYLISTS} from "../_shared/constants/playlist";
-import {OBJECT_TYPES} from "../_shared/constants/global";
+import {PLAYLISTS} from "../../constants/playlist";
+import {OBJECT_TYPES} from "../../constants/global";
 
-import PageHeader from "../_shared/components/PageHeader";
-import InfinityScroll from "../_shared/components/infinityScrollComponent";
+import PageHeader from "../../components/PageHeader";
+import InfinityScroll from "../../components/infinityScrollComponent";
 import TracksGrid from "./components/TracksGrid/TracksGrid";
 
 

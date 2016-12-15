@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap-flex";
 
 
-.trackWrapper {
+.songs .trackWrapper {
   @include make-col-ready();
   @include media-breakpoint-up(xl) {
     @include make-col(3, 15);

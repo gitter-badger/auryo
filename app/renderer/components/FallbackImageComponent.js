@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
-import {updateTrackImage} from "..//actions";
-import {isOnline} from "..//actions/";
-import {PLACEHOLDER_IMAGE} from "..//constants/global";
+import {updateTrackImage} from "../actions";
+import {isOnline} from "../actions/";
+import {PLACEHOLDER_IMAGE} from "../constants/global";
 import ReactDOM from "react-dom";
 import cn from "classnames";
 
