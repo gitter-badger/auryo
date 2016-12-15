@@ -8,6 +8,12 @@ import {normalize, arrayOf} from "normalizr";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
+/**
+ * Fetch user if limited info is available. Also check if user tracks or likes have been fetched.
+ *
+ * @param artistID
+ * @returns {function(*, *)}
+ */
 export function fetchArtistIfNeeded(artistID) {
     return (dispatch, getState) => {
         const {entities, objects} = getState();
@@ -27,6 +33,13 @@ export function fetchArtistIfNeeded(artistID) {
 
     }
 }
+
+/**
+ * Fetch user info
+ *
+ * @param artistsID
+ * @returns {function(*)}
+ */
 function fetchUser(artistsID) {
     return dispatch => {
         fetch(SC.getUserUrl(artistsID))
@@ -35,6 +48,12 @@ function fetchUser(artistsID) {
     }
 }
 
+/**
+ * Set user entity
+ *
+ * @param user
+ * @returns {{type, entities: {user_entities: {}}}}
+ */
 function setUser(user) {
     return {
         type: actionTypes.USER_SET,
@@ -46,6 +65,12 @@ function setUser(user) {
     }
 }
 
+/**
+ * Get user owned tracks
+ *
+ * @param artistID
+ * @returns {function(*)}
+ */
 function fetchUserTracks(artistID) {
     const playlist = artistID + USER_TRACKS_PLAYLIST;
 
