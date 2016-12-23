@@ -31,7 +31,7 @@ export default function player(state = initialState, action) {
                 ...state,
                 currentTime: action.time,
             };
-
+        default:
+            return state
     }
-    return state;
 }

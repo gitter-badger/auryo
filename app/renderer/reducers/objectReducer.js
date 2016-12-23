@@ -1,4 +1,4 @@
-import {actionTypes, OBJECT_TYPES} from "../constants";
+import {actionTypes, OBJECT_TYPES, PLAYLISTS} from "../constants";
 
 const initialObjectsState = {
     isFetching: false,
@@ -30,6 +30,18 @@ function objects(state = initialObjectsState, action) {
                 ...state,
                 futureUrl: action.futureUrl
             };
+        case actionTypes.AUTH_SET_LIKE:
+            if (action.liked) {
+                return {
+                    ...state,
+                    items: [action.trackID, ...state.items],
+                };
+            }
+            return {
+                ...state,
+                items: state.items.filter((key) => action.trackID != key)
+            };
+
     }
     return state;
 }
@@ -44,6 +56,11 @@ function objectgroup(state = initialObjectGroupState, action) {
             return {
                 ...state,
                 [action.object_id]: objects(state[action.object_id], action),
+            };
+        case actionTypes.AUTH_SET_LIKE:
+            return {
+                ...state,
+                [PLAYLISTS.LIKES]: objects(state[PLAYLISTS.LIKES], action),
             };
 
     }
@@ -65,7 +82,12 @@ export default function objectsgroups(state = initialState, action) {
                 ...state,
                 [action.object_type]: objectgroup(state[action.object_type], action),
             };
-
+        case actionTypes.AUTH_SET_LIKE:
+            return {
+                ...state,
+                [OBJECT_TYPES.PLAYLISTS]: objectgroup(state[OBJECT_TYPES.PLAYLISTS], action),
+            };
+        default:
+            return state
     }
-    return state;
 }

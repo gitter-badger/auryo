@@ -24,8 +24,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-cloud_download:before {
-  content: "\e2c0";
+.icon-snapchat:before {
+  content: "\e90a";
 }
 .icon-error_outline:before {
   content: "\e001";
@@ -117,6 +117,9 @@
 .icon-volume_up:before {
   content: "\e050";
 }
+.icon-keyboard_arrow_up:before {
+  content: "\e316";
+}
 .icon-retweet:before {
   content: "\e900";
 }
@@ -128,5 +131,56 @@
 }
 .icon-reload:before {
   content: "\e900";
+}
+.icon-soundcloud:before {
+  content: "\e905";
+}
+.icon-spotify:before {
+  content: "\e907";
+}
+.icon-facebook:before {
+  content: "\e901";
+}
+.icon-instagram:before {
+  content: "\e906";
+}
+.icon-pinterest:before {
+  content: "\e909";
+}
+.icon-tumblr:before {
+  content: "\e908";
+}
+.icon-twitter:before {
+  content: "\e902";
+}
+.icon-youtube:before {
+  content: "\e903";
+}
+.icon-globe:before {
+  content: "\e904";
+}
+.icon-soundcloud:before {
+  content: "\e905";
+}
+.icon-spotify:before {
+  content: "\e907";
+}
+.icon-facebook:before {
+  content: "\e901";
+}
+.icon-instagram:before {
+  content: "\e906";
+}
+.icon-pinterest:before {
+  content: "\e909";
+}
+.icon-tumblr:before {
+  content: "\e908";
+}
+.icon-twitter:before {
+  content: "\e902";
+}
+.icon-youtube:before {
+  content: "\e903";
 }
 

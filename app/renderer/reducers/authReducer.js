@@ -54,7 +54,8 @@ export default function (state = initialState, action) {
                     ...state.followings,
                     [action.userID]: 1
                 }
-            }
+            };
+        default:
+            return state
     }
-    return state;
 }

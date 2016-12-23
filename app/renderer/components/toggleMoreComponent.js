@@ -1,4 +1,4 @@
-import React,{Component, PropTypes} from "react"
+import React, {Component, PropTypes} from "react"
 import ReactDOM from "react-dom"
 import cn from "classnames"
 
@@ -46,10 +46,14 @@ class ToggleMore extends Component {
 
         return (
             <div className={cn("overflow-container", {open: open})}>
-                <div ref="overflow">
+                <div className="overflow-div" ref="overflow">
                     {this.props.children}
                 </div>
-                <a href="javascript:void(0)" onClick={this.toggleOpen.bind(this)}>{open ? "Show less" : "Show more"}</a>
+                <div className="overflow-bottom">
+                    <a className="overflow-button" href="javascript:void(0)" onClick={this.toggleOpen.bind(this)}>
+                        <i className={"icon-" + (open ? "keyboard_arrow_up" : "keyboard_arrow_down")}/>
+                    </a>
+                </div>
             </div>
         )
     }

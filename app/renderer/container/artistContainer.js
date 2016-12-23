@@ -13,6 +13,7 @@ import InfinityScroll from "../components/infinityScrollComponent"
 import Spinner from "../components/spinnerComponent"
 import FallbackImage from "../components/FallbackImageComponent"
 import ToggleMoreComponent from "../components/toggleMoreComponent"
+import ArtistProfiles from "../components/artistProfilesComponent"
 
 import "../assets/css/Artist/artistpage.scss"
 
@@ -161,7 +162,7 @@ class artistContainer extends Component {
                                 <a href="javascript:void(0)"
                                    className={cn("c_btn", {following: following})}
                                    onClick={this.toggleFollow.bind(this)}>
-                                    {following ? <i className="icon-check"></i> : <i className="icon-add"></i>}
+                                    {following ? <i className="icon-check"/> : <i className="icon-add"/>}
                                     <span>{following ? "Following" : "Follow"}</span>
                                 </a>
                             </Col>
@@ -201,8 +202,10 @@ class artistContainer extends Component {
 
                     </Col>
                     <Col xs="3" className="artistSide">
+                        <ArtistProfiles profiles={user.profiles}/>
+
                         <ToggleMoreComponent>
-                            <div dangerouslySetInnerHTML={SC.formatDescription(user.description)}></div>
+                            <div className="artistInfo" dangerouslySetInnerHTML={SC.formatDescription(user.description)}></div>
                         </ToggleMoreComponent>
 
                     </Col>

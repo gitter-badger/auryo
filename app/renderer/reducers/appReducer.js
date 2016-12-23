@@ -56,8 +56,9 @@ export default function entities(state = initialState, action) {
                     available: true,
                     version: action.version
                 }
-            }
+            };
+        default:
+            return state
     }
 
-    return state;
 }

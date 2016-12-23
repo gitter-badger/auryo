@@ -44,3 +44,18 @@ export const IMAGE_SIZES = {
     LARGE: 't300x300',
     XLARGE: 't500x500',
 };
+
+export const PROFILE_SERVICES = {
+    SOUNDCLOUD: "soundcloud",
+    INSTAGRAM: "instagram",
+    FACEBOOK: "facebook",
+    TWITTER: "twitter",
+    YOUTUBE: "youtube",
+    SPOTIFY: "spotify",
+    TUMBLR: "tumblr",
+    PINTEREST: "pinterest",
+    SNAPCHAT: "snapchat",
+    PERSONAL: null,
+    SONGKICK: null,
+    BEATPORT: null,
+};

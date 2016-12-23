@@ -59,6 +59,11 @@ export function getUserTracksUrl(artistID,limit = 50) {
         limit: limit
     });
 }
+export function getUserWebProfilesUrl(artistID) {
+    return makeUrl("users/" + artistID + "/web-profiles", {
+        client_id: true
+    });
+}
 
 export function getUserLikesUrl(artistID,limit = 50) {
     return makeUrl("users/" + artistID + "/favorites", {

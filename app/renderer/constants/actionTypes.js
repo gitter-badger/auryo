@@ -12,6 +12,7 @@ export const AUTH_ADD_FOLLOWING = "AUTH_ADD_FOLLOWING";
 // USER
 
 export const USER_SET = "USER_SET";
+export const USER_SET_PROFILES = "USER_SET_PROFILES";
 
 // PLAYER
 

@@ -24,6 +24,10 @@ export function fetchArtistIfNeeded(artistID) {
             dispatch(fetchUser(artistID));
         }
 
+        if (!(artistID in user_entities) || !user_entities[artistID].profiles) {
+            dispatch(fetchUserProfiles(artistID));
+        }
+
         const tracks_playlist = artistID + USER_TRACKS_PLAYLIST_SUFFIX;
 
         if (playlists && !playlists[tracks_playlist]) {
@@ -35,18 +39,19 @@ export function fetchArtistIfNeeded(artistID) {
             dispatch(fetchUserLikes(artistID));
         }
 
+
     }
 }
 
 /**
  * Fetch user info
  *
- * @param artistsID
+ * @param artistID
  * @returns {function(*)}
  */
-function fetchUser(artistsID) {
+function fetchUser(artistID) {
     return dispatch => {
-        fetch(SC.getUserUrl(artistsID))
+        fetch(SC.getUserUrl(artistID))
             .then(response => response.json())
             .then(json => dispatch(setUser(json)));
     }
@@ -116,5 +121,36 @@ function fetchUserLikes(artistID) {
 
                 dispatch(setObject(playlist, obj_type, n.entities, n.result, json.next_href, json.future_href));
             });
+    }
+}
+
+function fetchUserProfiles(artistID) {
+    return dispatch => {
+        fetch(SC.getUserWebProfilesUrl(artistID))
+            .then(response => response.json())
+            .then(json => {
+                dispatch(setUserProfiles(artistID, json));
+            })
+    }
+}
+
+
+/**
+ * Set user entity
+ *
+ * @param artistID
+ * @param profiles
+ * @returns {{type, entities: {user_entities: {}}}}
+ */
+function setUserProfiles(artistID, profiles) {
+    return {
+        type: actionTypes.USER_SET_PROFILES,
+        entities: {
+            user_entities: {
+                [artistID]: {
+                    profiles: profiles
+                }
+            }
+        }
     }
 }
