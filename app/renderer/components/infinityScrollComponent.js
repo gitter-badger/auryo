@@ -31,7 +31,7 @@ class InfiniteScroll extends Component {
         let offset = 50;
 
         if (fastScrolling) {
-            offset += 200;
+            offset += 300;
         }
 
         if (el.scrollTop >= (scroll_height - offset)) {

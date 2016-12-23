@@ -83,7 +83,7 @@ class TracksGrid extends Component {
         return (
             <div className="songs">
                 <ReactList
-                    type="uniform"
+                    type="simple"
                     length={items.length}
                     itemsRenderer={this.renderWrapper}
                     itemRenderer={this.renderItem}
