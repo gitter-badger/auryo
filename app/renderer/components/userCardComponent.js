@@ -1,11 +1,12 @@
-import React, {Component, PropTypes} from "react";
-import cn from "classnames";
+import React, {Component, PropTypes} from "react"
+import {Link} from "react-router"
+import cn from "classnames"
 
-import {SC} from "../utils";
-import {toggleFollowing} from "../actions";
-import {IMAGE_SIZES} from "../constants";
+import {SC} from "../utils"
+import {toggleFollowing} from "../actions"
+import {IMAGE_SIZES} from "../constants"
 
-import FallbackImage from "./FallbackImageComponent";
+import FallbackImage from "./FallbackImageComponent"
 
 import "../assets/css/common/user_card.scss"
 
@@ -33,7 +34,9 @@ export default class UserCard extends Component {
                 </div>
                 <div className="user_info">
                     <div className="user_username">
-                        {user.username}
+                        <Link to={`/artist/${user.id}`}>
+                            {user.username}
+                        </Link>
                     </div>
                     <a href="javascript:void(0)" className={cn("c_btn outline", {following: following})}
                        onClick={followFunc}>

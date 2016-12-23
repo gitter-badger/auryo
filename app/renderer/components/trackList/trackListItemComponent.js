@@ -62,7 +62,9 @@ class trackListItem extends Component {
                 </td>
 
                 <td className="trackArtist">
-                    {user.username}
+                    <Link to={`/artist/${track.user_id}`}>
+                        {user.username}
+                    </Link>
                 </td>
                 <td className="text-xs-center">
                     {getReadableTime(track.duration, true)}

@@ -1,13 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.6.0] - 2016-12-09
+## [0.6.0] - 
 ### Added 
 - likes to artist page
+- social user profiles on artist page
+- your likes page
+- links to song and artist page from several location that were not connected yet
 
 ### Changed
-- project structuring (internal)
+- project restructuring (internal)
 - offline bar with same as update notification
+- made the description toggler on the artist page nicer
 
 ## [0.5.0] - 2016-12-11
 ### Added 

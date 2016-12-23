@@ -1,12 +1,13 @@
-import React, {Component,PropTypes} from "react";
-import ReactDOM from "react-dom";
-import cn from "classnames";
+import React, {Component, PropTypes} from "react"
+import ReactDOM from "react-dom"
+import cn from "classnames"
+import {Link} from "react-router"
 
-import {getReadableTime, getPos, truncate, SC} from "../../utils";
-import {CHANGE_TYPES, PLAYER_STATUS, IMAGE_SIZES} from "../../constants";
-import {toggleStatus, changeTrack, setCurrentTime, isOnline} from "../../actions";
+import {getReadableTime, getPos, truncate, SC} from "../../utils"
+import {CHANGE_TYPES, PLAYER_STATUS, IMAGE_SIZES} from "../../constants"
+import {toggleStatus, changeTrack, setCurrentTime, isOnline} from "../../actions"
 
-import Audio from "../../components/Audio";
+import Audio from "../../components/Audio"
 import FallbackImage from "../../components/FallbackImageComponent"
 
 class Player extends Component {
@@ -389,8 +390,16 @@ class Player extends Component {
                         </div>
                         <div className="trackInfo">
                             <div className="trackTitle"
-                                 title={track.title}>{truncate(track.title, 40, "...", true)}</div>
-                            <div className="trackArtist">{truncate(track.user.username, 50)}</div>
+                                 title={track.title}>
+                                <Link to={`/song/${track.id}`}>
+                                    {truncate(track.title, 40, "...", true)}
+                                </Link>
+                            </div>
+                            <div className="trackArtist">
+                                <Link to={`/artist/${track.user.id}`}>
+                                    {truncate(track.user.username, 50)}
+                                </Link>
+                            </div>
                         </div>
 
                         <div className="flex flex-xs-middle playerControls">

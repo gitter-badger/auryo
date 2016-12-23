@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {Row, Col} from "reactstrap";
 import moment from "moment";
+import {Link} from "react-router"
 
 import {SC} from "../utils";
 import {IMAGE_SIZES} from "../constants";
@@ -31,8 +32,10 @@ class CommentList extends Component {
                                 </div>
                                 <Col xs="8" className="comment-main">
                                     <div className="info flex">
-                                        <div>{user.username}</div>
-                                        <span className="divider flex-xs-middle"></span>
+                                        <Link to={`/artist/${comment.user_id}`}>
+                                            {user.username}
+                                        </Link>
+                                        <span className="divider flex-xs-middle" />
                                         <div className="text-muted">
                                             { moment(comment.created_at, "YYYY-MM-DD HH:mm Z").fromNow()}
                                         </div>
