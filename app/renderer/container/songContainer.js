@@ -8,7 +8,7 @@ import {getImageUrl, formatDescription, isLiked} from "../utils/soundcloudUtils"
 import {abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../utils/";
 
 import {IMAGE_SIZES} from "../constants/Soundcloud";
-import {RELATED_PLAYLIST, STATUS} from "../constants/playlist";
+import {RELATED_PLAYLIST_SUFFIX, STATUS} from "../constants/playlist";
 import {OBJECT_TYPES} from "../constants/global";
 
 import Spinner from "../components/spinnerComponent";
@@ -77,7 +77,7 @@ class songContainer extends Component {
     playTrack(i, e) {
         e.preventDefault();
         const {dispatch, params} = this.props;
-        const current_playlist = params.songId + RELATED_PLAYLIST;
+        const current_playlist = params.songId + RELATED_PLAYLIST_SUFFIX;
         dispatch(playTrack(i, current_playlist));
     }
 
@@ -110,7 +110,7 @@ class songContainer extends Component {
 
     isCurrentPlaylist() {
         const {params, player} = this.props;
-        const current_playlist = params.songId + RELATED_PLAYLIST;
+        const current_playlist = params.songId + RELATED_PLAYLIST_SUFFIX;
 
         return getCurrentPlaylist(player) == current_playlist && (player.status == STATUS.PLAYING);
 
@@ -162,159 +162,150 @@ class songContainer extends Component {
         return (
             <InfinityScroll
                 playing={player.currentSong != null}
-                scrollFunc={this.fetchMore.bind(this)}>
-                <div className="trackDetails">
-                    <Container fluid={true}>
-                        <Row className="trackHeader">
+                scrollFunc={this.fetchMore.bind(this)}
+                className="trackDetails container-fluid">
+                <Row className="trackHeader">
 
-                            <div className="overlayWrapper">
-                                <FallbackImage
-                                    offline={app.offline}
-                                    dispatch={dispatch}
-                                    track_id={track.id}
-                                    className="overlayImg"
-                                    src={img_url}/>
+                    <div className="overlayWrapper">
+                        <FallbackImage
+                            offline={app.offline}
+                            dispatch={dispatch}
+                            track_id={track.id}
+                            className="overlayImg"
+                            src={img_url}/>
+                    </div>
+
+                    <Col xs="12" md="4" xl="2">
+                        <div className="imageWrapper">
+                            <FallbackImage
+                                offline={app.offline}
+                                dispatch={dispatch}
+                                track_id={track.id}
+                                src={img_url}/>
+
+                            <FallbackImage
+                                offline={app.offline}
+                                dispatch={dispatch}
+                                track_id={track.id}
+                                className="imgShadow"
+                                src={img_url}/>
+
+                            <div className="row flex-items-xs-center trackStats">
+                                <div className="stat col-xs">
+                                    <i className="icon-favorite_border"/>
+                                    <span>{abbreviate_number(track.favoritings_count)}</span>
+                                </div>
+                                <div className="stat col-xs">
+                                    <i className="icon-play_arrow"/>
+                                    <span>{abbreviate_number(track.playback_count)}</span>
+                                </div>
+                                <div className="stat col-xs">
+                                    <i className="icon-retweet"/>
+                                    <span>{abbreviate_number(track.reposts_count)}</span>
+                                </div>
                             </div>
+                        </div>
+                    </Col>
 
-                            <Col xs="12" md="4" xl="2">
-                                <div className="imageWrapper">
-                                    <FallbackImage
-                                        offline={app.offline}
-                                        dispatch={dispatch}
-                                        track_id={track.id}
-                                        src={img_url}/>
+                    <Col xs="12" md="8" xl="" className="trackInfo text-md-left text-xs-center">
+                        <h1 className="trackTitle">{track.title}</h1>
+                        <h2 className="trackArtist">{user.username}</h2>
 
-                                    <FallbackImage
-                                        offline={app.offline}
-                                        dispatch={dispatch}
-                                        track_id={track.id}
-                                        className="imgShadow"
-                                        src={img_url}/>
+                        <div className="flex trackActions flex-wrap flex-items-xs-center flex-items-md-left">
+                            {
+                                this.renderToggleButton()
+                            }
+                            <a href="javascript:void(0)" className={cn("c_btn", {liked: liked})}
+                               onClick={likeFunc}>
+                                <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
+                                <span>Like</span>
+                            </a>
+                            {/*<a href="javascript:void(0)" className="c_btn">
+                             <i className="icon-retweet"/>
+                             <span>Repost</span>
+                             </a>
+                             <a href="javascript:void(0)" className="c_btn">
+                             <i className="icon-add"/>
+                             <span>Add to playlist</span>
+                             </a>*/
+                            }
+                        </div>
+                    </Col>
 
-                                    <div className="row flex-items-xs-center trackStats">
-                                        <div className="stat col-xs">
-                                            <i className="icon-favorite_border"/>
-                                            <span>{abbreviate_number(track.favoritings_count)}</span>
-                                        </div>
-                                        <div className="stat col-xs">
-                                            <i className="icon-play_arrow"/>
-                                            <span>{abbreviate_number(track.playback_count)}</span>
-                                        </div>
-                                        <div className="stat col-xs">
-                                            <i className="icon-retweet"/>
-                                            <span>{abbreviate_number(track.reposts_count)}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Col>
+                </Row>
+                <div className="flex tracktabs row">
+                    {
+                        hasDesc ?
+                            <a href="javascript:void(0)"
+                               className={cn({active: this.state.activeTab === '1'})} onClick={() => {
+                                this.toggle('1');
+                            }}>
+                                Info
+                            </a> : null
+                    }
 
-                            <Col xs="12" md="8" xl="" className="trackInfo text-md-left text-xs-center">
-                                <h1 className="trackTitle">{track.title}</h1>
-                                <h2 className="trackArtist">{user.username}</h2>
+                    <a href="javascript:void(0)"
+                       className={cn({active: this.state.activeTab === '2', playing: playlist_playing})}
+                       onClick={() => {
+                           this.toggle('2');
+                       }}>
+                        Related tracks
+                        { playlist_playing ? <span className="icon-volume_up up blink"></span> : null}
 
-                                <div className="flex trackActions flex-wrap flex-items-xs-center flex-items-md-left">
-                                    {
-                                        this.renderToggleButton()
-                                    }
-                                    <a href="javascript:void(0)" className={cn("c_btn", {liked: liked})}
-                                       onClick={likeFunc}>
-                                        <i className={liked ? "icon-favorite" : "icon-favorite_border"}/>
-                                        <span>Like</span>
-                                    </a>
-                                    {/*<a href="javascript:void(0)" className="c_btn">
-                                     <i className="icon-retweet"/>
-                                     <span>Repost</span>
-                                     </a>
-                                     <a href="javascript:void(0)" className="c_btn">
-                                     <i className="icon-add"/>
-                                     <span>Add to playlist</span>
-                                     </a>*/
-                                    }
-                                </div>
-                            </Col>
-
-                        </Row>
-                        <Row>
-                            <Col xs="12" className="p-a-0">
-                                <div className="flex tracktabs">
-                                    {
-                                        hasDesc ?
-                                            <a href="javascript:void(0)"
-                                               className={cn({active: this.state.activeTab === '1'})} onClick={() => {
-                                                this.toggle('1');
-                                            }}>
-                                                Info
-                                            </a> : null
-                                    }
-
-                                    <a href="javascript:void(0)"
-                                       className={cn({active: this.state.activeTab === '2', playing: playlist_playing})}
-                                       onClick={() => {
-                                           this.toggle('2');
-                                       }}>
-                                        Related tracks
-                                        { playlist_playing ? <span className="icon-volume_up up blink"></span> : null}
-
-                                    </a>
-                                    <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})}
-                                       onClick={() => {
-                                           this.toggle('3');
-                                       }}>
-                                        <span className="text">Comments</span>
-                                        <span className="tag tag-pill tag-default">{track.comment_count}</span>
-                                    </a>
-                                </div>
-
-                                <Container fluid>
-                                    <Row>
-                                        <Col xs="12" className="col-lg user_card_wrap trackMain">
-                                            <UserCard
-                                                user={user}
-                                                dispatch={dispatch}
-                                                followings={followings}
-                                                offline={app.offline}/>
-                                        </Col>
-                                        <Col xs="12" className="trackMain col-lg">
-
-                                            <TabContent activeTab={this.state.activeTab}>
-                                                {
-                                                    hasDesc ? <TabPane tabId="1">
-                                                        <div
-                                                            className={cn("trackDescription", {isOpen: this.state.open})}>
-                                                            <div
-                                                                className={cn("descriptionInner", {cut: this.state.cut})}
-                                                                ref="descr"
-                                                                dangerouslySetInnerHTML={formatDescription(track.description)}></div>
-                                                        </div>
-                                                    </TabPane> : null
-                                                }
-                                                <TabPane tabId="2">
-                                                    <TrackListComponent
-                                                        player={player}
-                                                        playlist={playlists[songId + RELATED_PLAYLIST] || {}}
-                                                        playlist_name={songId + RELATED_PLAYLIST}
-                                                        playingTrackId={getPlayingTrackId(player, playlists)}
-                                                        track_entities={track_entities}
-                                                        dispatch={dispatch}
-                                                        user_entities={user_entities}
-                                                        likes={likes}
-                                                        likeFunc={this.toggleLike.bind(this)}/>
-                                                </TabPane>
-                                                <TabPane tabId="3">
-                                                    <CommentList
-                                                        comments={track_comments}
-                                                        user_entities={user_entities}
-                                                        comment_entities={comment_entities}/>
-                                                </TabPane>
-                                            </TabContent>
-
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </Col>
-                        </Row>
-                    </Container>
+                    </a>
+                    <a href="javascript:void(0)" className={cn({active: this.state.activeTab === '3'})}
+                       onClick={() => {
+                           this.toggle('3');
+                       }}>
+                        <span className="text">Comments</span>
+                        <span className="tag tag-pill tag-default">{track.comment_count}</span>
+                    </a>
                 </div>
+
+                <Row>
+                    <Col xs="12" className="col-lg user_card_wrap trackMain">
+                        <UserCard
+                            user={user}
+                            dispatch={dispatch}
+                            followings={followings}
+                            offline={app.offline}/>
+                    </Col>
+                    <Col xs="12" className="trackMain col-lg">
+
+                        <TabContent activeTab={this.state.activeTab}>
+                            {
+                                hasDesc ? <TabPane tabId="1">
+                                    <div
+                                        className={cn("trackDescription", {isOpen: this.state.open})}>
+                                        <div
+                                            className={cn("descriptionInner", {cut: this.state.cut})}
+                                            ref="descr"
+                                            dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                                    </div>
+                                </TabPane> : null
+                            }
+                            <TabPane tabId="2">
+                                <TrackListComponent
+                                    player={player}
+                                    playlist={playlists[songId + RELATED_PLAYLIST_SUFFIX] || {}}
+                                    playlist_name={songId + RELATED_PLAYLIST_SUFFIX}
+                                    playingTrackId={getPlayingTrackId(player, playlists)}
+                                    track_entities={track_entities}
+                                    dispatch={dispatch}
+                                    user_entities={user_entities}
+                                    likes={likes}
+                                    likeFunc={this.toggleLike.bind(this)}/>
+                            </TabPane>
+                            <TabPane tabId="3">
+                                <CommentList
+                                    comments={track_comments}
+                                    user_entities={user_entities}
+                                    comment_entities={comment_entities}/>
+                            </TabPane>
+                        </TabContent>
+
+                    </Col>
+                </Row>
             </InfinityScroll>
         );
     }

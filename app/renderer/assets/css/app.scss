@@ -69,6 +69,15 @@ main {
   position: relative;
   overflow-y: overlay;
   height: calc(100vh - 54px);
+  display: flex;
+  flex-flow: column;
+  flex-wrap: nowrap;
+  &>div{
+    flex-shrink: 0;
+    &:last-child{
+      flex-grow: 1;
+    }
+  }
 
   &.playing {
     height: calc(100vh - 120px);
