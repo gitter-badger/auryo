@@ -24,13 +24,13 @@ class TogglePlay extends Component {
     }
 
     render() {
-        const {status, classname} = this.props;
+        const {status, className} = this.props;
 
         const icon = (status == PLAYER_STATUS.PLAYING) ? 'pause' : 'play_arrow';
 
         return (
 
-            <a href="javascript:void(0)" className={classname} onClick={this.togglePlay}>
+            <a href="javascript:void(0)" className={className} onClick={this.togglePlay}>
                 <i className={`icon-${icon}`}/>
             </a>
         );
@@ -40,7 +40,7 @@ class TogglePlay extends Component {
 TogglePlay.propTypes = {
     status: PropTypes.string,
     dispatch: PropTypes.func,
-    classname: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

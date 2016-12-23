@@ -13,6 +13,14 @@ import "../../assets/css/Feed/trackgriditem.scss"
 
 class TrackGridItem extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            minimal: !(props.track.likes_count && props.track.reposts_count)
+        }
+    }
+
     renderArtist(track) {
 
         if (track.activity_type && track.activity_type == "track-repost") {
@@ -45,16 +53,17 @@ class TrackGridItem extends Component {
 
     renderToggleButton() {
         const {isPlaying, playTrackFunc} = this.props;
+        const {minimal} = this.state;
 
         if (isPlaying) {
-            return <TogglePlayButton classname={"toggleButton"}/>;
+            return <TogglePlayButton className={cn("toggleButton", {minimal: minimal})} />;
         }
 
         const icon = isPlaying ? 'pause' : 'play_arrow';
 
         return (
 
-            <a className="toggleButton" onClick={playTrackFunc}>
+            <a className={cn("toggleButton", {minimal: minimal})} onClick={playTrackFunc}>
                 <i className={`icon-${icon}`}/>
             </a>
         );
@@ -62,8 +71,9 @@ class TrackGridItem extends Component {
 
     renderStats() {
         const {track} = this.props;
+        const {minimal} = this.state;
 
-        if (!track.likes_count && !track.reposts_count) {
+        if (minimal) {
             return null;
         }
 
