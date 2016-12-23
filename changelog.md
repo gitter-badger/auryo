@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.6.0] - 
+## [0.6.0] - 2016-12-23
 ### Added 
 - likes to artist page
 - social user profiles on artist page

@@ -124,6 +124,7 @@ class TrackGridItem extends Component {
                             {
                                 this.renderToggleButton()
                             }
+
                             {
                                 this.renderStats()
                             }
@@ -138,7 +139,7 @@ class TrackGridItem extends Component {
                         <div className="trackTitle">
                             <Link to={`/song/${(track.track_id) ? track.track_id : track.id}`}>
                                 {
-                                    truncate(track.title, 35)
+                                    truncate(track.title, 35,"...",true)
                                 }
                             </Link>
                         </div>
