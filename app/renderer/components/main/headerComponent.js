@@ -6,14 +6,14 @@ import "../../assets/css/common/header.scss"
 class Header extends Component {
 
     static goBack() {
-        if (HistoryTracker.canGoBack()) {
-            Header.goBack();
+        if (HistoryTracker.browserHistory.canGo(-1)) {
+            HistoryTracker.browserHistory.goBack();
         }
     }
 
     static goForward() {
-        if (HistoryTracker.canGoForward()) {
-            Header.goForward();
+        if (HistoryTracker.browserHistory.canGo(1)) {
+            HistoryTracker.browserHistory.goForward();
         }
     }
 
@@ -23,11 +23,11 @@ class Header extends Component {
                 <div className="flex flex-items-xs-between">
                     <div className="control-nav">
                         <div className="control-nav-inner flex">
-                            <a className={!HistoryTracker.canGoBack() ? "disabled" : null} href="javascrip:void(0)"
+                            <a className={!HistoryTracker.browserHistory.canGo(-1) ? "disabled" : null} href="javascrip:void(0)"
                                onClick={Header.goBack}>
                                 <i className="icon-keyboard_arrow_left"/>
                             </a>
-                            <a className={!HistoryTracker.canGoForward() ? "disabled" : null} href="javascrip:void(0)"
+                            <a className={!HistoryTracker.browserHistory.canGo(1) ? "disabled" : null} href="javascrip:void(0)"
                                onClick={Header.goForward}>
                                 <i className="icon-keyboard_arrow_right"/>
                             </a>
