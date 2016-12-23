@@ -1,12 +1,13 @@
-import * as SC from "../utils/soundcloudUtils";
 import {arrayOf, normalize} from "normalizr";
-import * as actionTypes from "../constants/actionTypes";
-import {userSchema} from "../schemas/";
-import {fetchLikes, fetchFeed, fetchPlaylists} from "./playlistActions";
 import {ipcRenderer} from "electron";
-import {setLoaded, addQueuedFunction} from "./";
 import * as _ from "lodash";
 import ReactGA from "react-ga"
+
+import {SC} from "../../utils";
+import {actionTypes}  from "../../constants"
+import {userSchema} from "../../schemas";
+import {fetchLikes, fetchFeed, fetchPlaylists} from "../playlistActions";
+import {setLoaded, addQueuedFunction} from "../";
 
 
 /**
@@ -33,6 +34,11 @@ export function logout() {
     ipcRenderer.send("logout");
 }
 
+/**
+ * Fetch all user data. Set app loaded if all has been fetched.
+ *
+ * @returns {function(*, *)}
+ */
 function fetchUser() {
     return (dispatch, getState) => {
         const data = Promise.all([
@@ -48,11 +54,8 @@ function fetchUser() {
             const {app} = getState();
             const {queued_items} = app;
 
-            if (queued_items.length > 0) {
-                console.log("Not everything was loaded")
-            } else {
-                dispatch(setLoaded());
-                console.log("Everything was loaded")
+            if (queued_items.length == 0) {
+                dispatch(setLoaded()); // Everything was loaded
             }
         })
     };
@@ -60,7 +63,7 @@ function fetchUser() {
 
 
 /**
- * Fetch user data
+ * Fetch user data. Set userId for analytics if in production.
  *
  * @returns {function(*)}
  */
@@ -134,46 +137,4 @@ function setFollowings(entities, result) {
         entities,
         result,
     };
-}
-
-export function toggleFollowing(userID) {
-    return (dispatch, getState) => {
-        const {auth} = getState();
-        const {followings} = auth;
-
-        const following = (userID in followings) && followings[userID] == 1;
-
-        if (!(userID in followings)) {
-            dispatch(addFollowing(userID));
-        } else {
-            dispatch(setFollowing(userID, (!following == false) ? 0 : 1));
-        }
-
-        dispatch(updateFollowing(userID, !following));
-
-    }
-}
-
-function updateFollowing(userID, following) {
-    return dispatch => {
-        fetch(SC.updateFollowingUrl(userID), {
-            method: (following == 1) ? "PUT" : "DELETE"
-        }).catch(err => {
-            dispatch(addQueuedFunction(updateFollowing.bind(null, userID, following), arguments))
-        });
-    }
-}
-function setFollowing(userID, following) {
-    return {
-        type: actionTypes.AUTH_SET_FOLLOWING,
-        userID,
-        following
-    }
-}
-
-function addFollowing(userID) {
-    return {
-        type: actionTypes.AUTH_ADD_FOLLOWING,
-        userID
-    }
 }

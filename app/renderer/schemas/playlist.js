@@ -1,4 +1,5 @@
 import {Schema, arrayOf} from "normalizr";
+
 import userSchema from "./user";
 import trackSchema from "./track";
 

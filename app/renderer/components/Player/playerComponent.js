@@ -1,16 +1,15 @@
-import React, {PropTypes} from "react";
+import React, {Component,PropTypes} from "react";
 import ReactDOM from "react-dom";
-import {appendClientId, getImageUrl} from "../../utils/soundcloudUtils";
-import {getReadableTime, getPos, truncate} from "../../utils/appUtils";
-import {IMAGE_SIZES} from "../../constants/Soundcloud";
-import {CHANGE_TYPES, STATUS} from "../../constants/playlist";
-import {toggleStatus, changeTrack, setCurrentTime} from "../../actions";
-import Audio from "../../components/Audio";
 import cn from "classnames";
-import FallbackImage from "../../components/FallbackImageComponent"
-import {isOnline} from "../../actions/app/offlineActions";
 
-class Player extends React.Component {
+import {getReadableTime, getPos, truncate, SC} from "../../utils";
+import {CHANGE_TYPES, PLAYER_STATUS, IMAGE_SIZES} from "../../constants";
+import {toggleStatus, changeTrack, setCurrentTime, isOnline} from "../../actions";
+
+import Audio from "../../components/Audio";
+import FallbackImage from "../../components/FallbackImageComponent"
+
+class Player extends Component {
 
     constructor(props) {
         super(props);
@@ -70,7 +69,7 @@ class Player extends React.Component {
 
     changeSong(changeType) {
         const {dispatch} = this.props;
-        dispatch(toggleStatus(STATUS.STOPPED));
+        dispatch(toggleStatus(PLAYER_STATUS.STOPPED));
         dispatch(changeTrack(changeType));
     }
 
@@ -98,10 +97,10 @@ class Player extends React.Component {
         const {player, dispatch} = this.props;
         const {status} = player;
 
-        if (status !== STATUS.PLAYING) {
-            dispatch(toggleStatus(STATUS.PLAYING));
-        } else if (status == STATUS.PLAYING) {
-            dispatch(toggleStatus(STATUS.PAUSED));
+        if (status !== PLAYER_STATUS.PLAYING) {
+            dispatch(toggleStatus(PLAYER_STATUS.PLAYING));
+        } else if (status == PLAYER_STATUS.PLAYING) {
+            dispatch(toggleStatus(PLAYER_STATUS.PAUSED));
         }
     }
 
@@ -349,9 +348,9 @@ class Player extends React.Component {
             this.state.shuffle ? CHANGE_TYPES.SHUFFLE : CHANGE_TYPES.NEXT
         );
 
-        let overlay_image = getImageUrl(track, IMAGE_SIZES.XLARGE);
+        let overlay_image = SC.getImageUrl(track, IMAGE_SIZES.XLARGE);
 
-        const toggle_play_icon = status == STATUS.PLAYING ? 'pause' : 'play_arrow';
+        const toggle_play_icon = status == PLAYER_STATUS.PLAYING ? 'pause' : 'play_arrow';
         const volume_icon = this.state.muted || this.state.volume == 0 ? "volume_off" : (this.state.volume == 1) ? "volume_up" : "volume_down";
 
         return (
@@ -365,7 +364,7 @@ class Player extends React.Component {
                 </div>
 
                 <Audio
-                    url={appendClientId(track.stream_url)}
+                    url={SC.appendClientId(track.stream_url)}
                     playStatus={status}
                     volume={this.state.volume * 100}
                     playFromPosition={this.state.updateTime}

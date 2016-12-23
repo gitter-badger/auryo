@@ -1,12 +1,15 @@
 import React, {Component, PropTypes} from "react";
-import TogglePlayButton from "../togglePlay";
-import {Link} from "react-router";
-import {truncate, getReadableTime} from "../../utils/appUtils";
 import cn from "classnames";
+import {Link} from "react-router";
+
+import {truncate, getReadableTime} from "../../utils";
+
+import TogglePlayButton from "../togglePlayComponent";
 
 import "../../assets/css/songDetails/trackListItem.scss"
 
 class trackListItem extends Component {
+
     constructor(props) {
         super(props);
 

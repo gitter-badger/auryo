@@ -1,19 +1,15 @@
 import React, {Component, PropTypes} from "react";
 import cn from "classnames";
 
-import {getImageUrl, isFollowing} from "../utils/soundcloudUtils";
+import {SC} from "../utils";
 import {toggleFollowing} from "../actions";
-
-import {IMAGE_SIZES} from "../constants/Soundcloud";
+import {IMAGE_SIZES} from "../constants";
 
 import FallbackImage from "./FallbackImageComponent";
+
 import "../assets/css/common/user_card.scss"
 
 export default class UserCard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     toggleFollow() {
         const {dispatch, user} = this.props;
 
@@ -21,17 +17,16 @@ export default class UserCard extends Component {
     }
 
     render() {
-        const {user, followings,offline} = this.props;
+        const {user, followings, offline} = this.props;
 
-
-        const following = isFollowing(user.id, followings);
+        const following = SC.isFollowing(user.id, followings);
         const followFunc = this.toggleFollow.bind(this);
 
         return (
             <div className="user_card">
                 <div className="user_img">
                     <FallbackImage
-                        src={getImageUrl(user.avatar_url, IMAGE_SIZES.MEDIUM)}
+                        src={SC.getImageUrl(user.avatar_url, IMAGE_SIZES.MEDIUM)}
                         track_id={user.id}
                         offline={offline}
                     />

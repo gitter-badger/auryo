@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from "react";
-import TrackGridItem from "./TrackGridItem";
-import {fetchMore, playTrack} from "../../actions";
-import Spinner from "../spinnerComponent";
 import ReactList from "react-list";
+import {fetchMore, playTrack} from "../../actions";
+
+import TrackGridItem from "./TrackGridItem";
+import Spinner from "../spinnerComponent";
 
 class TracksGrid extends Component {
     constructor(props) {
@@ -82,11 +83,11 @@ class TracksGrid extends Component {
         return (
             <div className="songs">
                 <ReactList
-                    type="simple"
+                    type="uniform"
                     length={items.length}
                     itemsRenderer={this.renderWrapper}
                     itemRenderer={this.renderItem}
-                    threshold={150}
+                    threshold={400}
                     useTranslate3d={true}
                 />
                 {isFetching ? <Spinner /> : null}
@@ -109,4 +110,5 @@ TracksGrid.propTypes = {
     scrollFunc: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
 };
+
 export default TracksGrid;

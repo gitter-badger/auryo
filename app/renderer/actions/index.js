@@ -1,9 +1,9 @@
-import {initUser, logout, toggleFollowing} from "./userActions";
+import {initUser, logout, toggleFollowing} from "./user";
 import {fetchMore} from "./objectActions";
+import {fetchArtistIfNeeded} from "./artistActions";
 import {playTrack, toggleStatus, changeTrack, setCurrentTime} from "./playerActions";
-import {fetchTrackIfNeeded, toggleLike, updateTrackImage} from "./trackActions";
+import {fetchTrackIfNeeded, toggleLike, updateTrackImage} from "./track";
 import {setLoaded,toggleOffline,isOnline,addQueuedFunction,initWatchers} from "./app"
-
 
 export {
     initUser,
@@ -21,5 +21,6 @@ export {
     toggleOffline,
     isOnline,
     addQueuedFunction,
-    initWatchers
+    initWatchers,
+    fetchArtistIfNeeded
 };

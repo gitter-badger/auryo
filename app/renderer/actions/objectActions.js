@@ -1,8 +1,7 @@
-import * as actionTypes from "../constants/actionTypes";
-import * as SC from "../utils/soundcloudUtils";
-import {OBJECT_TYPES} from "../constants/global";
-import {fetchPlaylist} from "./playlistActions";
-import {updateComments} from "./commentActions";
+import {actionTypes,OBJECT_TYPES}  from "../constants"
+import {SC} from "../utils";
+import {updatePlaylist} from "./playlistActions";
+import {updateComments} from "./track";
 
 /**
  * Check if there is more to fetch, if so, fetch more
@@ -21,7 +20,7 @@ export function fetchMore(object_id, type) {
 
             switch (type) {
                 case OBJECT_TYPES.PLAYLISTS:
-                    return dispatch(fetchPlaylist(nextUrl, object_id));
+                    return dispatch(updatePlaylist(nextUrl, object_id));
                 case OBJECT_TYPES.COMMENTS:
                     return dispatch(updateComments(nextUrl, object_id));
             }

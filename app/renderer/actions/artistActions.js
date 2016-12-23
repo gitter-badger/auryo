@@ -1,10 +1,9 @@
-import * as SC from "../utils/soundcloudUtils"
-import {setObject, setFetching} from "./objectActions"
-import {OBJECT_TYPES} from "../constants/global"
-import * as actionTypes from "../constants/actionTypes"
-import {USER_TRACKS_PLAYLIST,USER_LIKES} from "../constants/playlist"
-import {trackSchema} from "../schemas";
 import {normalize, arrayOf} from "normalizr";
+
+import {SC} from "../utils"
+import {setObject, setFetching} from "./objectActions"
+import {actionTypes, OBJECT_TYPES, USER_TRACKS_PLAYLIST_SUFFIX, USER_LIKES_SUFFIX}  from "../constants"
+import {trackSchema} from "../schemas";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
@@ -25,12 +24,12 @@ export function fetchArtistIfNeeded(artistID) {
             dispatch(fetchUser(artistID));
         }
 
-        const tracks_playlist = artistID + USER_TRACKS_PLAYLIST;
+        const tracks_playlist = artistID + USER_TRACKS_PLAYLIST_SUFFIX;
 
         if (playlists && !playlists[tracks_playlist]) {
             dispatch(fetchUserTracks(artistID));
         }
-        const likes_playlist = artistID + USER_LIKES;
+        const likes_playlist = artistID + USER_LIKES_SUFFIX;
 
         if (playlists && !playlists[likes_playlist]) {
             dispatch(fetchUserLikes(artistID));
@@ -77,7 +76,7 @@ function setUser(user) {
  * @returns {function(*)}
  */
 function fetchUserTracks(artistID) {
-    const playlist = artistID + USER_TRACKS_PLAYLIST;
+    const playlist = artistID + USER_TRACKS_PLAYLIST_SUFFIX;
 
     return dispatch => {
         dispatch(setFetching(playlist, obj_type, true));
@@ -96,13 +95,13 @@ function fetchUserTracks(artistID) {
 }
 
 /**
- * Get user owned tracks
+ * Get user owned likes
  *
  * @param artistID
  * @returns {function(*)}
  */
 function fetchUserLikes(artistID) {
-    const playlist = artistID + USER_LIKES;
+    const playlist = artistID + USER_LIKES_SUFFIX;
 
     return dispatch => {
         dispatch(setFetching(playlist, obj_type, true));

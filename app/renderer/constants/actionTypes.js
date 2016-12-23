@@ -6,13 +6,12 @@ export const AUTH_SET_LIKES = "AUTH_SET_LIKES";
 export const USER_SET_NEW_FEED_ITEMS = "USER_SET_NEW_FEED_ITEMS";
 export const AUTH_SET_PLAYLISTS = "AUTH_SET_PLAYLISTS";
 export const AUTH_SET_LIKE = "AUTH_SET_LIKE";
-export const AUTH_ADD_LIKE = "AUTH_ADD_LIKE";
 export const AUTH_SET_FOLLOWING = "AUTH_SET_FOLLOWING";
 export const AUTH_ADD_FOLLOWING = "AUTH_ADD_FOLLOWING";
 
 // USER
 
-export const USER_SET = "USER_SET"
+export const USER_SET = "USER_SET";
 
 // PLAYER
 

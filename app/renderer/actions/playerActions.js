@@ -1,7 +1,5 @@
-import * as actionTypes from "../constants/actionTypes";
-import {CHANGE_TYPES, STATUS} from "../constants/playlist";
+import {actionTypes, CHANGE_TYPES, PLAYER_STATUS, OBJECT_TYPES} from "../constants";
 import {fetchMore} from "./objectActions";
-import {OBJECT_TYPES} from "../constants/global";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
@@ -108,7 +106,7 @@ export function changeTrack(change_type) {
 
         if (index < 0) {
             index = 0;
-        } else if(index > (currentLength -1)) {
+        } else if (index > (currentLength - 1)) {
             index = currentSong;
         }
 
@@ -127,7 +125,7 @@ export function changeTrack(change_type) {
  * @returns {{type, index: *, status: string}}
  */
 function setPlayingTrack(index) {
-    const status = STATUS.PLAYING;
+    const status = PLAYER_STATUS.PLAYING;
     return {
         type: actionTypes.PLAYER_SET_TRACK,
         index,

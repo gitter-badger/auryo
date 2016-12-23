@@ -4,15 +4,12 @@ import cn from "classnames";
 import {TabContent, TabPane, Row, Col, Container} from "reactstrap";
 
 import {fetchTrackIfNeeded, playTrack, toggleLike, fetchMore} from "../actions";
-import {getImageUrl, formatDescription, isLiked} from "../utils/soundcloudUtils";
-import {abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../utils/";
+import {SC, abbreviate_number, getPlayingTrackId, getCurrentPlaylist} from "../utils";
 
-import {IMAGE_SIZES} from "../constants/Soundcloud";
-import {RELATED_PLAYLIST_SUFFIX, STATUS} from "../constants/playlist";
-import {OBJECT_TYPES} from "../constants/global";
+import {IMAGE_SIZES, RELATED_PLAYLIST_SUFFIX, PLAYER_STATUS, OBJECT_TYPES} from "../constants";
 
 import Spinner from "../components/spinnerComponent";
-import TogglePlay from "../components/togglePlay";
+import TogglePlay from "../components/togglePlayComponent";
 import TrackListComponent from "../components/trackList/trackListComponent";
 import UserCard from "../components/userCardComponent";
 import CommentList from "../components/commentListComponent";
@@ -44,20 +41,23 @@ class songContainer extends Component {
     }
 
     componentWillMount() {
-        const {dispatch, params} = this.props;
-        dispatch(fetchTrackIfNeeded(params.songId));
+        const {dispatch, params:{songId}} = this.props;
+
+        dispatch(fetchTrackIfNeeded(songId));
     }
 
     componentDidMount() {
-        const {params} = this.props;
-        if (!this.hasDescription(params.songId)) {
+        const {params:{songId}} = this.props;
+
+        if (!this.hasDescription(songId)) {
             this.toggle('2');
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        const {dispatch, params} = this.props;
-        if (params.songId != nextProps.params.songId) {
+        const {dispatch, params:{songId}} = this.props;
+
+        if (songId != nextProps.params.songId) {
             dispatch(fetchTrackIfNeeded(nextProps.params.songId));
             this.setState({
                 activeTab: this.hasDescription(nextProps.params.songId) ? "1" : "2"
@@ -73,24 +73,24 @@ class songContainer extends Component {
 
     }
 
-
     playTrack(i, e) {
+        const {dispatch, params:{songId}} = this.props;
+        const current_playlist = songId + RELATED_PLAYLIST_SUFFIX;
+
         e.preventDefault();
-        const {dispatch, params} = this.props;
-        const current_playlist = params.songId + RELATED_PLAYLIST_SUFFIX;
         dispatch(playTrack(i, current_playlist));
     }
 
     renderToggleButton() {
-        const {params, playingSongId} = this.props;
+        const {params:{songId}, playingSongId} = this.props;
 
-        if (playingSongId != null && (playingSongId == params.songId)) {
+        if (playingSongId != null && (playingSongId == songId)) {
             return <TogglePlay classname="playButton"/>;
         }
 
         const playTrackFunc = this.playTrack.bind(this, 0);
 
-        const icon = (playingSongId == params.songId) ? 'pause' : 'play_arrow';
+        const icon = (playingSongId == songId) ? 'pause' : 'play_arrow';
 
         return (
 
@@ -109,18 +109,18 @@ class songContainer extends Component {
 
 
     isCurrentPlaylist() {
-        const {params, player} = this.props;
-        const current_playlist = params.songId + RELATED_PLAYLIST_SUFFIX;
+        const {params:{songId}, player} = this.props;
+        const current_playlist = songId + RELATED_PLAYLIST_SUFFIX;
 
-        return getCurrentPlaylist(player) == current_playlist && (player.status == STATUS.PLAYING);
+        return getCurrentPlaylist(player) == current_playlist && (player.status == PLAYER_STATUS.PLAYING);
 
     }
 
     fetchMore() {
-        const {params, dispatch} = this.props;
+        const {params:{songId}, dispatch} = this.props;
 
         if (this.state.activeTab == "3") {
-            dispatch(fetchMore(params.songId, OBJECT_TYPES.COMMENTS));
+            dispatch(fetchMore(songId, OBJECT_TYPES.COMMENTS));
         }
 
     }
@@ -128,7 +128,7 @@ class songContainer extends Component {
     render() {
         const {
             track_entities,
-            params,
+            params:{songId},
             user_entities,
             likes,
             playlists,
@@ -140,8 +140,6 @@ class songContainer extends Component {
             app
         } = this.props;
 
-        const {songId} = params;
-
         const track = track_entities[songId];
 
         if (!track) {
@@ -150,10 +148,10 @@ class songContainer extends Component {
 
         const user = user_entities[track.user_id];
 
-        const img_url = getImageUrl(track, IMAGE_SIZES.LARGE);
+        const img_url = SC.getImageUrl(track, IMAGE_SIZES.LARGE);
 
         const likeFunc = this.toggleLike.bind(this, track.id);
-        const liked = isLiked(track.id, likes);
+        const liked = SC.isLiked(track.id, likes);
 
         const playlist_playing = this.isCurrentPlaylist();
 
@@ -280,7 +278,7 @@ class songContainer extends Component {
                                         <div
                                             className={cn("descriptionInner", {cut: this.state.cut})}
                                             ref="descr"
-                                            dangerouslySetInnerHTML={formatDescription(track.description)}></div>
+                                            dangerouslySetInnerHTML={SC.formatDescription(track.description)}></div>
                                     </div>
                                 </TabPane> : null
                             }

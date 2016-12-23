@@ -1,8 +1,7 @@
-import * as actionTypes from "../constants/actionTypes";
-import {STATUS} from "../constants/playlist";
+import {actionTypes, PLAYER_STATUS} from "../constants";
 
 const initialState = {
-    status: STATUS.STOPPED,
+    status: PLAYER_STATUS.STOPPED,
     queuedPlaylists: [],
     currentSong: null,
     currentTime: 0,

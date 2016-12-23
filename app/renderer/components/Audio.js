@@ -1,11 +1,7 @@
 import React, {PropTypes, Component} from "react";
 import ReactDOM from "react-dom";
 
-const status = {
-    PLAYING: 'PLAYING',
-    STOPPED: 'STOPPED',
-    PAUSED: 'PAUSED'
-};
+import {PLAYER_STATUS} from "../constants"
 
 class Audio extends Component {
 
@@ -13,10 +9,8 @@ class Audio extends Component {
         super(props);
 
         this.state = {
-            status: status.STOPPED,
+            status: PLAYER_STATUS.STOPPED,
         };
-
-        this.onError = this.onError.bind(this);
 
         // html audio element used for playback
         this.audio = null;
@@ -39,9 +33,9 @@ class Audio extends Component {
             }
         });
 
-        audio.addEventListener('play', () => this.toggleStatus(status.PLAYING));
+        audio.addEventListener('play', () => this.toggleStatus(PLAYER_STATUS.PLAYING));
 
-        audio.addEventListener('stalled', () => this.toggleStatus(status.PAUSED));
+        audio.addEventListener('stalled', () => this.toggleStatus(PLAYER_STATUS.PAUSED));
 
         this.toggleStatus(this.props.playStatus);
     }
@@ -56,15 +50,17 @@ class Audio extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.playStatus != nextProps.playStatus) {
+        const {playStatus, playFromPosition, url, id, volume, offline} = this.props;
+
+        if (playStatus != nextProps.playStatus) {
             this.toggleStatus(nextProps.playStatus);
         }
 
-        if (this.props.playFromPosition !== nextProps.playFromPosition) {
+        if (playFromPosition !== nextProps.playFromPosition) {
             this.audio.currentTime = nextProps.playFromPosition;
         }
 
-        if (this.props.url != nextProps.url || this.props.id != nextProps.id) {
+        if (url != nextProps.url || id != nextProps.id) {
 
             this.audio.pause();
             this.audio.currentTime = 0;
@@ -73,15 +69,15 @@ class Audio extends Component {
             this.audio.play();
         }
 
-        if (this.props.volume != nextProps.volume) {
+        if (volume != nextProps.volume) {
             this.audio.volume = nextProps.volume / 100;
         }
 
-        if(this.props.offline != nextProps.offline){
+        if (offline != nextProps.offline) {
             const time = this.audio.currentTime;
             this.audio.load();
             this.audio.currentTime = time;
-            if(nextProps.playStatus == status.PLAYING){
+            if (nextProps.playStatus == PLAYER_STATUS.PLAYING) {
                 this.audio.play();
             }
         }
@@ -89,27 +85,25 @@ class Audio extends Component {
 
     }
 
-    componentDidUpdate() {
-
-    }
-
     toggleStatus(value) {
+        const {status} = this.state;
+
         if (!this.audio) {
             return;
         }
 
-        if (this.state.status == value) {
+        if (status == value) {
             return;
         }
 
         try {
-            if (value == status.PLAYING) {
-                if(this.state.status !== status.PLAYING){
+            if (value == PLAYER_STATUS.PLAYING) {
+                if (status !== PLAYER_STATUS.PLAYING) {
                     this.audio.play();
                 }
-            } else if (value == status.PAUSED) {
+            } else if (value == PLAYER_STATUS.PAUSED) {
                 this.audio.pause();
-            } else if (value == status.STOPPED) {
+            } else if (value == PLAYER_STATUS.STOPPED) {
                 this.audio.pause();
                 this.audio.currentTime = 0;
             }
@@ -122,19 +116,13 @@ class Audio extends Component {
         });
     }
 
-    onError(e) {
-        const {onError} = this.props;
-
-        onError(e, this.audio);
-    }
-
     render() {
-        const {url, muted} = this.props;
+        const {url, muted, onError} = this.props;
 
         return (
             <audio ref="audio"
                    muted={muted}
-                   onError={this.onError}>
+                   onError={(e) => onError(e, this.audio)}>
                 <source src={url}/>
             </audio>
         );

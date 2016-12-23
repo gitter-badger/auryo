@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from "react";
-import {updateTrackImage} from "../actions";
-import {isOnline} from "../actions/";
-import {PLACEHOLDER_IMAGE} from "../constants/global";
 import ReactDOM from "react-dom";
 import cn from "classnames";
+
+import {updateTrackImage, isOnline} from "../actions";
+import {PLACEHOLDER_IMAGE} from "../constants";
 
 class FallbackImage extends Component {
     constructor(props) {
@@ -22,9 +22,9 @@ class FallbackImage extends Component {
         const image = ReactDOM.findDOMNode(this.refs.img);
 
         if (nextProps.offline != this.props.offline && nextProps.offline == false) {
-            if(this.state.valid && image.src == PLACEHOLDER_IMAGE || this.state.recheck){
+            if (this.state.valid && image.src == PLACEHOLDER_IMAGE || this.state.recheck) {
                 image.src = this.state.original
-            } else if(!this.state.valid && !this.state.recheck){
+            } else if (!this.state.valid && !this.state.recheck) {
                 image.src = PLACEHOLDER_IMAGE;
             }
         }
@@ -77,7 +77,7 @@ class FallbackImage extends Component {
         const image = ReactDOM.findDOMNode(this.refs.img);
 
 
-        if(this.state.has_checked && !this.state.valid && image.src.indexOf(PLACEHOLDER_IMAGE) == -1){
+        if (this.state.has_checked && !this.state.valid && image.src.indexOf(PLACEHOLDER_IMAGE) == -1) {
             this.setState({
                 valid: true,
                 recheck: false,
@@ -88,7 +88,7 @@ class FallbackImage extends Component {
     }
 
     render() {
-        const {src, className,offline} = this.props;
+        const {src, className, offline} = this.props;
 
         return (
             <img ref="img" src={src}

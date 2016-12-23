@@ -2,12 +2,10 @@ import React, {Component, PropTypes} from "react";
 import {Row, Col} from "reactstrap";
 import moment from "moment";
 
-import {getImageUrl, formatDescription} from "../utils/soundcloudUtils";
-
-import {IMAGE_SIZES} from "../constants/Soundcloud";
+import {SC} from "../utils";
+import {IMAGE_SIZES} from "../constants";
 
 import Spinner from "./spinnerComponent";
-
 
 import "../assets/css/songDetails/commentList.scss"
 
@@ -24,7 +22,7 @@ class CommentList extends Component {
                         const comment = comment_entities[commentId];
                         const user = user_entities[comment.user_id];
 
-                        const img = getImageUrl(user.avatar_url, IMAGE_SIZES.XSMALL);
+                        const img = SC.getImageUrl(user.avatar_url, IMAGE_SIZES.XSMALL);
 
                         return (
                             <Row className="comment" key={i}>
@@ -40,7 +38,7 @@ class CommentList extends Component {
                                         </div>
                                     </div>
                                     <div className="comment-body"
-                                         dangerouslySetInnerHTML={formatDescription(comment.body)}></div>
+                                         dangerouslySetInnerHTML={SC.formatDescription(comment.body)}></div>
                                 </Col>
                             </Row>
                         )

@@ -1,22 +1,23 @@
-import React, {Component, PropTypes} from "react"
+import React,{Component, PropTypes} from "react"
 import ReactDOM from "react-dom"
 import cn from "classnames"
 
-class toggleMoreComponent extends Component {
+class ToggleMore extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             open: false,
-            overflow: false
+            overflow: false,
+            check_height: props.height || 200
         }
     }
 
     componentDidMount() {
         const height = ReactDOM.findDOMNode(this.refs.overflow).clientHeight;
-        const {overflow} = this.state;
+        const {overflow, check_height} = this.state;
 
-        if (height > 200 && !overflow) {
+        if (height > check_height && !overflow) {
             this.setState({
                 overflow: true
             })
@@ -44,7 +45,7 @@ class toggleMoreComponent extends Component {
         }
 
         return (
-            <div className={cn("overflow-container", {open: open})} >
+            <div className={cn("overflow-container", {open: open})}>
                 <div ref="overflow">
                     {this.props.children}
                 </div>
@@ -54,6 +55,8 @@ class toggleMoreComponent extends Component {
     }
 
 }
-toggleMoreComponent.propTypes = {};
+ToggleMore.propTypes = {
+    height: PropTypes.number
+};
 
-export default toggleMoreComponent;
+export default ToggleMore;

@@ -3,21 +3,9 @@ export const PLAYLISTS = {
     STREAM: "STREAM",
 };
 
-export const USER_PLAYLIST = "_USER";
-export const RELATED_PLAYLIST = "_RELATED";
-export const USER_TRACKS_PLAYLIST = "_TRACKS";
-export const USER_LIKES = "_LIKED";
-
-export const CHANGE_TYPES = {
-    NEXT: 'NEXT',
-    SHUFFLE: 'SHUFFLE',
-    REPEAT: 'REPEAT',
-    PREV: 'PREV'
-};
+export const USER_PLAYLIST_SUFFIX = "_USER";
+export const RELATED_PLAYLIST_SUFFIX = "_RELATED";
+export const USER_TRACKS_PLAYLIST_SUFFIX = "_TRACKS";
+export const USER_LIKES_SUFFIX = "_LIKED";
 
 
-export const STATUS = {
-    PLAYING: 'PLAYING',
-    STOPPED: 'STOPPED',
-    PAUSED: 'PAUSED'
-};

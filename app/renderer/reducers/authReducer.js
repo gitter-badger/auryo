@@ -1,4 +1,4 @@
-import * as actionTypes from "../constants/actionTypes";
+import {actionTypes} from "../constants";
 
 const initialState = {
     me: {},
@@ -37,14 +37,6 @@ export default function (state = initialState, action) {
                 likes: {
                     ...state.likes,
                     [action.trackID]: action.liked
-                }
-            };
-        case actionTypes.AUTH_ADD_LIKE:
-            return {
-                ...state,
-                likes: {
-                    ...state.likes,
-                    [action.trackID]: 1
                 }
             };
         case actionTypes.AUTH_SET_FOLLOWING:

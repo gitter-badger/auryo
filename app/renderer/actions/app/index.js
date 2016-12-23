@@ -1,16 +1,15 @@
-import {toggleOffline, addQueuedFunction, isOnline} from "./offlineActions"
-import {initWatchers} from "./windowActions"
-import * as actionTypes from "../../constants/actionTypes"
+import {actionTypes}  from "../../constants"
 
-export {
-    toggleOffline,
-    addQueuedFunction,
-    isOnline,
-    initWatchers
-}
+export * from "./offlineActions"
+export * from "./windowActions"
 
+/**
+ * Set app app loaded to true
+ *
+ * @returns {{type}}
+ */
 export function setLoaded() {
     return {
-        type:actionTypes.APP_SET_LOADED
+        type: actionTypes.APP_SET_LOADED
     }
 }

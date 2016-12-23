@@ -1,13 +1,12 @@
-import * as actionTypes from "../constants/actionTypes";
-import * as SC from "../utils/soundcloudUtils";
-import {playlistSchema, trackSchema, trackInfoSchema} from "../schemas";
 import {arrayOf, normalize} from "normalizr";
-import {PLAYLISTS, USER_PLAYLIST} from "../constants/playlist";
-import {OBJECT_TYPES} from "../constants/global";
+import _ from "lodash";
+
+import {SC} from "../utils";
+import {playlistSchema, trackSchema, trackInfoSchema} from "../schemas";
+import {PLAYLISTS, USER_PLAYLIST_SUFFIX,actionTypes,OBJECT_TYPES} from "../constants";
 import {STREAM_CHECK_INTERVAL} from "../../config";
 import {setFetching, setObject, setNewObjects} from "./objectActions";
-import {addQueuedFunction} from "./app/offlineActions";
-import _ from "lodash";
+import {addQueuedFunction} from "./";
 
 const obj_type = OBJECT_TYPES.PLAYLISTS;
 
@@ -72,7 +71,7 @@ function setLikes(result) {
 export function fetchFeed() {
     return dispatch => {
         dispatch(initFeedUpdater());
-        return dispatch(fetchPlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
+        return dispatch(updatePlaylist(SC.getFeedUrl(), PLAYLISTS.STREAM));
     };
 }
 // TODO Generalize playlist
@@ -84,7 +83,7 @@ export function fetchFeed() {
  * @returns {function(*)}
  * @private
  */
-export function fetchPlaylist(url, name) {
+export function updatePlaylist(url, name) {
     return dispatch => {
 
         dispatch(setFetching(name, obj_type,true));
@@ -137,7 +136,7 @@ export function fetchPlaylist(url, name) {
             })
             .catch(err => {
                 dispatch(setFetching(name, obj_type,false));
-                dispatch(addQueuedFunction(fetchPlaylist.bind(null,url,name),arguments));
+                dispatch(addQueuedFunction(updatePlaylist.bind(null,url,name),arguments));
             });
     }
 }
@@ -222,7 +221,7 @@ export function fetchPlaylists() {
                 n.result.forEach(playlistId => {
                     const playlist = n.entities.playlist_entities[playlistId];
                     dispatch(setObject(
-                        playlist.title + USER_PLAYLIST,
+                        playlist.title + USER_PLAYLIST_SUFFIX,
                         obj_type,
                         {},
                         playlist.tracks,

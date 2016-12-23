@@ -1,21 +1,19 @@
 import React, {Component} from "react";
-import {close, maximize, minimize} from "../../actions/app/windowActions";
 import HistoryTracker from "back-forward-history";
-
 
 import "../../assets/css/common/header.scss"
 
 class Header extends Component {
 
-    goBack() {
+    static goBack() {
         if (HistoryTracker.canGoBack()) {
-            HistoryTracker.browserHistory.goBack();
+            Header.goBack();
         }
     }
 
-    goForward() {
+    static goForward() {
         if (HistoryTracker.canGoForward()) {
-            HistoryTracker.browserHistory.goForward();
+            Header.goForward();
         }
     }
 
@@ -26,12 +24,12 @@ class Header extends Component {
                     <div className="control-nav">
                         <div className="control-nav-inner flex">
                             <a className={!HistoryTracker.canGoBack() ? "disabled" : null} href="javascrip:void(0)"
-                               onClick={this.goBack}>
-                                <i className="icon-keyboard_arrow_left"></i>
+                               onClick={Header.goBack}>
+                                <i className="icon-keyboard_arrow_left"/>
                             </a>
                             <a className={!HistoryTracker.canGoForward() ? "disabled" : null} href="javascrip:void(0)"
-                               onClick={this.goForward}>
-                                <i className="icon-keyboard_arrow_right"></i>
+                               onClick={Header.goForward}>
+                                <i className="icon-keyboard_arrow_right"/>
                             </a>
                         </div>
                     </div>

@@ -1,24 +1,24 @@
 import React, {Component, PropTypes} from "react";
-import {STATUS} from "../constants/playlist";
-import {toggleStatus} from "../actions";
 import {connect} from "react-redux";
 
-class TogglePlayButton extends Component {
-    constructor() {
-        super();
+import {PLAYER_STATUS} from "../constants";
+import {toggleStatus} from "../actions";
+
+class TogglePlay extends Component {
+    constructor(props) {
+        super(props);
         this.togglePlay = this.togglePlay.bind(this);
     }
 
     togglePlay(e) {
         e.preventDefault();
-        e.stopPropagation();
 
         const {status, dispatch} = this.props;
 
-        if (status !== STATUS.PLAYING) {
-            dispatch(toggleStatus(STATUS.PLAYING));
-        } else if (status == STATUS.PLAYING) {
-            dispatch(toggleStatus(STATUS.PAUSED));
+        if (status !== PLAYER_STATUS.PLAYING) {
+            dispatch(toggleStatus(PLAYER_STATUS.PLAYING));
+        } else if (status == PLAYER_STATUS.PLAYING) {
+            dispatch(toggleStatus(PLAYER_STATUS.PAUSED));
         }
 
     }
@@ -26,7 +26,7 @@ class TogglePlayButton extends Component {
     render() {
         const {status, classname} = this.props;
 
-        const icon = (status == STATUS.PLAYING) ? 'pause' : 'play_arrow';
+        const icon = (status == PLAYER_STATUS.PLAYING) ? 'pause' : 'play_arrow';
 
         return (
 
@@ -37,7 +37,7 @@ class TogglePlayButton extends Component {
     }
 }
 
-TogglePlayButton.propTypes = {
+TogglePlay.propTypes = {
     status: PropTypes.string,
     dispatch: PropTypes.func,
     classname: PropTypes.string.isRequired
@@ -52,4 +52,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(TogglePlayButton);
+export default connect(mapStateToProps)(TogglePlay);

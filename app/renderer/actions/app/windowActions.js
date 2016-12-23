@@ -1,7 +1,7 @@
-import {ipcRenderer} from "electron";
-import React from "react"
-import * as actionTypes from "../../constants/actionTypes";
-import Notifications from 'react-notification-system-redux';
+import {ipcRenderer} from "electron"
+import Notifications from 'react-notification-system-redux'
+
+import * as actionTypes from "../../constants/actionTypes"
 
 export function minimize() {
     ipcRenderer.send('minimize');
@@ -13,12 +13,22 @@ export function close() {
     ipcRenderer.send('close');
 }
 
+/**
+ * Wrapper for listener functions from electron
+ *
+ * @returns {function(*)}
+ */
 export function initWatchers() {
     return dispatch => {
         dispatch(listenUpdate());
     }
 }
 
+/**
+ * Check if electron pings us the update. If so, show a notification.
+ *
+ * @returns {function(*)}
+ */
 export function listenUpdate() {
     return dispatch => {
         ipcRenderer.once('update-status', function (event, obj) {
@@ -50,6 +60,12 @@ export function listenUpdate() {
     }
 }
 
+/**
+ * Set app update available
+ *
+ * @param version
+ * @returns {{type, version: *}}
+ */
 function setUpdateAvailable(version) {
     return {
         type: actionTypes.APP_SET_UPDATE_AVAILABLE,

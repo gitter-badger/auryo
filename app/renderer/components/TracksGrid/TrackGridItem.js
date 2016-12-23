@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from "react";
-import {Link} from "react-router";
-import {IMAGE_SIZES} from "../../constants/Soundcloud";
-import {getImageUrl} from "../../utils/soundcloudUtils";
-import classnames from "classnames";
-import {truncate, abbreviate_number} from "../../utils/appUtils";
-import TogglePlayButton from "../togglePlay";
 import {Col} from "reactstrap";
+import {Link} from "react-router";
+import cn from "classnames";
+
+import {IMAGE_SIZES} from "../../constants";
+import {SC, truncate, abbreviate_number} from "../../utils";
+
+import TogglePlayButton from "../togglePlayComponent";
 import FallbackImage from "../FallbackImageComponent";
 
 import "../../assets/css/Feed/trackgriditem.scss"
@@ -13,7 +14,6 @@ import "../../assets/css/Feed/trackgriditem.scss"
 class TrackGridItem extends Component {
 
     renderArtist(track) {
-
 
         if (track.activity_type && track.activity_type == "track-repost") {
             return (
@@ -59,10 +59,11 @@ class TrackGridItem extends Component {
             </a>
         );
     }
+
     renderStats() {
         const {track} = this.props;
 
-        if(!track.likes_count && !track.reposts_count){
+        if (!track.likes_count && !track.reposts_count) {
             return null;
         }
 
@@ -90,10 +91,9 @@ class TrackGridItem extends Component {
             app
         } = this.props;
 
+        const image = SC.getImageUrl(track, IMAGE_SIZES.LARGE);
 
-        const image = getImageUrl(track, IMAGE_SIZES.LARGE);
-
-        const playing = classnames(
+        const playing = cn(
             "track", track.id,
             {
                 "isPlaying": isPlaying

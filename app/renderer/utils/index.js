@@ -1,6 +1,6 @@
 import {abbreviate_number,filter,getPos,getReadableTime,truncate} from "./appUtils";
 import {getCurrentPlaylist,getPlayingTrackId} from "./playerUtils";
-import {} from "./soundcloudUtils";
+import * as SC from "./soundcloudUtils";
 
 export {
     abbreviate_number,
@@ -10,6 +10,5 @@ export {
     truncate,
     getCurrentPlaylist,
     getPlayingTrackId,
-
-
+    SC
 }

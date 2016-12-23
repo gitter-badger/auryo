@@ -3,9 +3,12 @@ import ReactDOM from "react-dom";
 import cn from "classnames";
 
 class InfiniteScroll extends Component {
+
     constructor(props) {
         super(props);
+
         this.onScroll = this.onScroll.bind(this);
+
         this.state = {
             el: null
         }
@@ -28,23 +31,23 @@ class InfiniteScroll extends Component {
         let offset = 50;
 
         if (fastScrolling) {
-            offset += 400;
+            offset += 200;
         }
 
         if (el.scrollTop >= (scroll_height - offset)) {
-          if(dispatch){
-            dispatch(scrollFunc());
-          } else {
-            scrollFunc();
-          }
+            if (dispatch) {
+                dispatch(scrollFunc());
+            } else {
+                scrollFunc();
+            }
         }
     }
 
     render() {
-        const {playing,className} = this.props;
+        const {playing, className} = this.props;
 
         return (
-            <div ref="scroll" className={cn("scroll",className, {playing: playing})}>
+            <div ref="scroll" className={cn("scroll", className, {playing: playing})}>
                 {this.props.children}
             </div>
         )

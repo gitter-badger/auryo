@@ -1,8 +1,8 @@
-import {CLIENT_ID} from "../../config";
-import {IMAGE_SIZES} from "../constants/Soundcloud";
-import React from "react";
 import linkifyHtml from "linkifyjs/html";
 import escape from "escape-html";
+
+import {CLIENT_ID} from "../../config";
+import {IMAGE_SIZES} from "../constants";
 
 const _endpoint = 'http://api.soundcloud.com/';
 const _v2_endpoint = "https://api-v2.soundcloud.com/";
@@ -178,6 +178,7 @@ export function getImageUrl(track, size = null) {
  */
 // TODO link usernames with @
 export function formatDescription(input) {
+    if(!input) return input;
     return {
         __html: linkifyHtml(escape(input).replace(/(\r\n|\n|\r)/gm, "<br>"))
     };

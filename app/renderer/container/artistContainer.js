@@ -4,14 +4,11 @@ import {connect} from "react-redux";
 import {Row, Container, Col, TabContent, TabPane} from "reactstrap"
 import cn from "classnames"
 
-import {fetchMore, toggleLike, toggleFollowing} from "../actions/"
-import {fetchArtistIfNeeded} from "../actions/artistActions"
-import {getImageUrl, isFollowing, formatDescription} from "../utils/soundcloudUtils"
-import {abbreviate_number, getPlayingTrackId} from "../utils"
-import {IMAGE_SIZES} from "../constants/Soundcloud"
+import {fetchMore, toggleLike, toggleFollowing, fetchArtistIfNeeded} from "../actions/"
+import {SC, abbreviate_number, getPlayingTrackId} from "../utils"
+import {IMAGE_SIZES, USER_TRACKS_PLAYLIST_SUFFIX, USER_LIKES_SUFFIX, OBJECT_TYPES} from "../constants"
+
 import TrackList from "../components/trackList/trackListComponent"
-import {USER_TRACKS_PLAYLIST, USER_LIKES} from "../constants/playlist"
-import {OBJECT_TYPES} from "../constants/global"
 import InfinityScroll from "../components/infinityScrollComponent"
 import Spinner from "../components/spinnerComponent"
 import FallbackImage from "../components/FallbackImageComponent"
@@ -41,21 +38,20 @@ class artistContainer extends Component {
     }
 
     componentWillMount() {
-        const {dispatch, params} = this.props;
-        const {artistId} = params;
+        const {dispatch, params:{artistId}} = this.props;
+
         dispatch(fetchArtistIfNeeded(artistId));
     }
 
     toggleLike(trackID, e) {
-        e.preventDefault();
         const {dispatch} = this.props;
 
+        e.preventDefault();
         dispatch(toggleLike(trackID));
     }
 
     toggleFollow() {
-        const {dispatch, auth, params} = this.props;
-        const {artistId} = params;
+        const {dispatch, params:{artistId}} = this.props;
 
         dispatch(toggleFollowing(artistId));
     }
@@ -90,10 +86,9 @@ class artistContainer extends Component {
     }
 
     render() {
-        const {entities, params, auth, player, playlists, app, dispatch, playingTrackId} = this.props;
+        const {entities, params:{artistId}, auth, player, playlists, app, dispatch, playingTrackId} = this.props;
         const {user_entities, track_entities} = entities;
         const {followings, likes} = auth;
-        const {artistId} = params;
 
         const user = user_entities[artistId];
 
@@ -101,9 +96,9 @@ class artistContainer extends Component {
             <Spinner />
         );
 
-        const user_img = getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE);
-        const following = isFollowing(user.id, followings);
-        const playlist_name = artistId + USER_TRACKS_PLAYLIST;
+        const user_img = SC.getImageUrl(user.avatar_url, IMAGE_SIZES.LARGE);
+        const following = SC.isFollowing(user.id, followings);
+        const playlist_name = artistId + USER_TRACKS_PLAYLIST_SUFFIX;
 
 
         return (
@@ -195,11 +190,11 @@ class artistContainer extends Component {
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
 
-                                {this.renderPlaylist(USER_TRACKS_PLAYLIST)}
+                                {this.renderPlaylist(USER_TRACKS_PLAYLIST_SUFFIX)}
 
                             </TabPane>
                             <TabPane tabId="2">
-                                {this.renderPlaylist(USER_LIKES)}
+                                {this.renderPlaylist(USER_LIKES_SUFFIX)}
 
                             </TabPane>
                         </TabContent>
@@ -207,7 +202,7 @@ class artistContainer extends Component {
                     </Col>
                     <Col xs="3" className="artistSide">
                         <ToggleMoreComponent>
-                            <div dangerouslySetInnerHTML={formatDescription(user.description)}></div>
+                            <div dangerouslySetInnerHTML={SC.formatDescription(user.description)}></div>
                         </ToggleMoreComponent>
 
                     </Col>

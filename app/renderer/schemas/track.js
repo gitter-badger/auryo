@@ -1,4 +1,5 @@
 import {Schema} from "normalizr";
+
 import userSchema from "./user";
 
 const trackSchema = new Schema('track_entities');

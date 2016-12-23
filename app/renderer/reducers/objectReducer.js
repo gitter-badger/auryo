@@ -1,5 +1,4 @@
-import * as actionTypes from "../constants/actionTypes";
-import {OBJECT_TYPES} from "../constants/global";
+import {actionTypes, OBJECT_TYPES} from "../constants";
 
 const initialObjectsState = {
     isFetching: false,

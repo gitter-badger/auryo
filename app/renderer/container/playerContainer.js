@@ -1,8 +1,10 @@
 import React, {Component, PropTypes} from "react";
-import Player from "../components/Player/playerComponent";
 import {connect} from "react-redux";
-import {getPlayingTrackId} from "../utils/playerUtils";
-import {OBJECT_TYPES} from "../constants/global";
+
+import {getPlayingTrackId} from "../utils";
+import {OBJECT_TYPES} from "../constants";
+
+import Player from "../components/Player/playerComponent";
 
 import "../assets/css/Player/player.scss"
 
@@ -22,8 +24,7 @@ class PlayerContainer extends Component {
 
 
 function mapStateToProps(state) {
-    const {entities, player, objects,app} = state;
-    const {track_entities, user_entities} = entities;
+    const {entities:{track_entities, user_entities}, player, objects, app} = state;
     const playlists = objects[OBJECT_TYPES.PLAYLISTS] || {};
     const playingSongId = getPlayingTrackId(player, playlists);
 

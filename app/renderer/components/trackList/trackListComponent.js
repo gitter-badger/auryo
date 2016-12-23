@@ -1,13 +1,10 @@
 import React, {Component, PropTypes} from "react";
 
-import {getPlayingTrackId} from "../../utils";
 import {playTrack} from "../../actions";
-import {isLiked} from "../../utils/soundcloudUtils";
-
-import {STATUS} from "../../constants/playlist";
+import {SC} from "../../utils";
+import {PLAYER_STATUS} from "../../constants";
 
 import TrackListItem from "./trackListItemComponent";
-
 
 class trackList extends Component {
 
@@ -22,7 +19,7 @@ class trackList extends Component {
             e.preventDefault();
             dispatch(playTrack(i, playlist_name));
         } else {
-            if (e.target.tagName == "TD" && (player.currentSong != i || player.status != STATUS.PLAYING)) {
+            if (e.target.tagName == "TD" && (player.currentSong != i || player.status != PLAYER_STATUS.PLAYING)) {
                 dispatch(playTrack(i, playlist_name));
             }
         }
@@ -52,7 +49,7 @@ class trackList extends Component {
                 <table className="table">
                     <thead>
                     <tr className="trackListHeader">
-                        <th></th>
+                        <th/>
                         <th>
                             Title
                         </th>
@@ -60,7 +57,7 @@ class trackList extends Component {
                             Artist
                         </th>
                         <th className="text-xs-center">
-                            <i className="icon-timer"></i>
+                            <i className="icon-timer"/>
                         </th>
                         <th className="trackitemActions">
                             Actions
@@ -74,7 +71,7 @@ class trackList extends Component {
                             const track = track_entities[trackId];
 
                             const like = likeFunc.bind(null, track.id);
-                            const liked = isLiked(track.id, likes);
+                            const liked = SC.isLiked(track.id, likes);
 
                             return (
                                 <TrackListItem
@@ -98,7 +95,7 @@ class trackList extends Component {
 }
 
 trackList.propTypes = {
-    playingTrackId:PropTypes.number,
+    playingTrackId: PropTypes.number,
     playlist_name: PropTypes.string.isRequired,
     playlist: PropTypes.object.isRequired,
     track_entities: PropTypes.object.isRequired,
@@ -108,6 +105,5 @@ trackList.propTypes = {
     likes: PropTypes.object.isRequired,
     likeFunc: PropTypes.func.isRequired
 };
-
 
 export default trackList;

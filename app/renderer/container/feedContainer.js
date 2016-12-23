@@ -3,11 +3,9 @@ import {connect} from "react-redux";
 
 import {fetchMore} from "../actions";
 import {getPlayingTrackId} from "../utils";
+import {PLAYLISTS, OBJECT_TYPES} from "../constants";
 
-import {PLAYLISTS} from "../constants/playlist";
-import {OBJECT_TYPES} from "../constants/global";
-
-import PageHeader from "../components/PageHeader";
+import PageHeader from "../components/pageHeaderComponent";
 import InfinityScroll from "../components/infinityScrollComponent";
 import TracksGrid from "../components/TracksGrid/TracksGrid";
 
@@ -16,6 +14,7 @@ class FeedContainer extends Component {
 
     componentWillMount() {
         const {dispatch, playlist, playlists} = this.props;
+
         if (!(playlist in playlists) || playlists[playlist].items.length === 0) {
             dispatch(fetchMore(playlist, OBJECT_TYPES.PLAYLISTS));
         }
@@ -23,6 +22,7 @@ class FeedContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         const {dispatch, playlist, playlists} = this.props;
+
         if (playlist !== nextProps.playlist) {
             if (!(nextProps.playlist in playlists) || playlists[nextProps.playlist].items.length === 0) {
                 dispatch(fetchMore(nextProps.playlist, OBJECT_TYPES.PLAYLISTS));

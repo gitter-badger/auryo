@@ -1,12 +1,11 @@
 import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import { Alert } from 'reactstrap';
+import {Alert} from 'reactstrap';
 
 import Spinner from "./spinnerComponent"
 
 import "../assets/css/common/offline.scss"
 
-class offlineContainer extends Component {
+class Offline extends Component {
     render() {
         const {full} = this.props;
 
@@ -14,7 +13,7 @@ class offlineContainer extends Component {
             return (
                 <div className="offline">
                     <Alert color="info" className="m-a-0">
-                        <i className="icon-error_outline"></i> You are currently offline, please reconnect!
+                        <i className="icon-error_outline"/> You are currently offline, please reconnect!
                     </Alert>
 
                 </div>
@@ -34,8 +33,8 @@ class offlineContainer extends Component {
     }
 }
 
-offlineContainer.propTypes = {
+Offline.propTypes = {
     full: PropTypes.bool
 };
 
-export default connect()(offlineContainer);
+export default Offline;
